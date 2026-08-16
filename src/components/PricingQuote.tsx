@@ -1,0 +1,69 @@
+import { ButtonLink } from "@/components/Button";
+import { CalendarIcon } from "@/components/icons";
+import { RichTextContent } from "@/components/PendingData";
+import { Reveal } from "@/components/Reveal";
+import { quotePanel, quoteSteps } from "@/content/pricing";
+import { consultationMessage, whatsAppUrl } from "@/content/site";
+
+/**
+ * Stands in for a price table. The source this page's structure follows puts
+ * pricing behind a sign-in; there's no account system here, so the equivalent
+ * is a written quote that comes out of the consultation.
+ */
+export function PricingQuote() {
+  return (
+    <section id="how-pricing-works" className="px-md pt-section tablet:px-lg">
+      <div className="mx-auto max-w-content">
+        <div className="grid gap-lg desktop:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] desktop:gap-xl">
+          <Reveal>
+            <div className="flex h-full flex-col justify-between rounded-2xl border border-hairline bg-surface-1 p-xl shadow-card tablet:p-xxl">
+              <div>
+                <p className="text-eyebrow uppercase text-primary">
+                  How pricing works
+                </p>
+                <h2 className="mt-sm text-headline-sm text-ink">
+                  {quotePanel.heading}
+                </h2>
+                <p className="mt-md text-body text-ink-muted">
+                  {quotePanel.body}
+                </p>
+              </div>
+
+              <ButtonLink
+                href={whatsAppUrl(consultationMessage)}
+                className="mt-xl self-start"
+              >
+                <CalendarIcon className="h-md w-md" />
+                Book free consultation
+              </ButtonLink>
+            </div>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <ol className="flex h-full flex-col gap-sm">
+              {quoteSteps.map((step, index) => (
+                <li
+                  key={step.title}
+                  className="flex flex-1 items-start gap-md rounded-xl border border-hairline bg-canvas p-lg shadow-sm transition-[box-shadow,border-color] duration-300 hover:border-primary/40 hover:shadow-card"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-brand-gradient text-body-emphasis text-on-primary shadow-primary"
+                  >
+                    {index + 1}
+                  </span>
+                  <div>
+                    <p className="text-card-title text-ink">{step.title}</p>
+                    <p className="mt-xxs text-body-sm text-ink-muted">
+                      <RichTextContent value={step.body} />
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}

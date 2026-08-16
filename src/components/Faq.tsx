@@ -6,8 +6,23 @@ import { ChevronDownIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
 import { SectionHeading } from "@/components/SectionHeading";
 import { faqs } from "@/content/sections";
+import type { FaqItem } from "@/content/types";
 
-export function Faq() {
+/**
+ * The shared accordion. Defaults to the site-wide questions; the pricing page
+ * passes its own set rather than standing up a second accordion.
+ */
+export function Faq({
+  items = faqs,
+  eyebrow = "FAQ",
+  title = "Frequently asked questions",
+  lead = "Still unsure about something? The consultation call is free and there's no script.",
+}: {
+  items?: readonly FaqItem[];
+  eyebrow?: string;
+  title?: string;
+  lead?: string;
+} = {}) {
   // One panel open at a time; the first starts expanded.
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const baseId = useId();
@@ -16,14 +31,14 @@ export function Faq() {
     <section id="faq" className="px-md pt-section tablet:px-lg">
       <div className="mx-auto max-w-content">
         <SectionHeading
-          eyebrow="FAQ"
-          title="Frequently asked questions"
-          lead="Still unsure about something? The consultation call is free and there's no script."
+          eyebrow={eyebrow}
+          title={title}
+          lead={lead}
           align="center"
         />
 
         <div className="mx-auto mt-xxl flex max-w-3xl flex-col gap-sm">
-          {faqs.map((faq, index) => {
+          {items.map((faq, index) => {
             const isOpen = index === openIndex;
             const panelId = `${baseId}-panel-${index}`;
 

@@ -46,7 +46,8 @@ src/
     layout.tsx              root layout, font, metadata
     globals.css             the entire design system (see below)
     page.tsx                landing page — composes the sections in order
-    pricing/                pricing page — tiers and what every pathway includes
+    pricing/                pricing page — what a pathway includes, and how it
+                            gets quoted; publishes no figures by design
     programs/[slug]/        curriculum page, statically generated per program
   components/               one component per landing-page section
     SectionHeading.tsx      shared eyebrow + headline + lead for every section
