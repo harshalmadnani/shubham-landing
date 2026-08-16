@@ -1,0 +1,18 @@
+# Render Blueprint.
+#
+# Deploy from the repository root: Render reads this file, then builds from the
+# `shubham-landing` directory.
+#
+# Every page is prerendered, so the app exports to plain files and is served
+# from Render's CDN as a static site — no Node process at runtime.
+services:
+  - type: web
+    runtime: static
+    name: shubham-landing
+    rootDir: shubham-landing
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./out
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
