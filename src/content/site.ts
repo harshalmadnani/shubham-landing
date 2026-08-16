@@ -39,6 +39,7 @@ export function programEnquiryMessage(programTitle: string): string {
 
 export const navLinks = [
   { label: "Programs", href: "/#programs" },
+  { label: "Pricing", href: "/pricing" },
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Who We Help", href: "/#who-we-help" },
   { label: "FAQ", href: "/#faq" },
