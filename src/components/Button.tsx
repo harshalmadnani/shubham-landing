@@ -1,16 +1,26 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-export type ButtonVariant = "primary" | "outline" | "ghost";
+export type ButtonVariant =
+  | "primary"
+  | "outline"
+  | "ghost"
+  | "inverse"
+  | "glass";
 
+/* Pills, not rectangles — and a 1px lift on hover so the CTA feels pressable. */
 const base =
-  "inline-flex items-center justify-center gap-xs rounded-none px-md py-sm text-button transition-colors";
+  "group/btn inline-flex items-center justify-center gap-xs rounded-full px-lg py-sm text-button transition-[transform,box-shadow,background-color,border-color,color] duration-200 hover:-translate-y-px active:translate-y-0";
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "border border-transparent bg-primary text-on-primary hover:bg-violet-hover active:bg-violet-80",
-  outline: "border border-primary bg-canvas text-primary hover:bg-surface-1",
-  ghost: "border border-transparent bg-canvas text-primary hover:bg-surface-1",
+    "border border-transparent bg-brand-gradient text-on-primary shadow-primary hover:shadow-lift",
+  outline:
+    "border border-hairline bg-canvas text-ink shadow-sm hover:border-primary hover:text-primary hover:shadow-card",
+  ghost: "border border-transparent bg-transparent text-primary hover:bg-primary-soft",
+  inverse:
+    "border border-transparent bg-canvas text-ink shadow-card hover:shadow-lift",
+  glass: "glass rounded-full text-inverse-ink hover:bg-white/15",
 };
 
 function classesFor(variant: ButtonVariant, className?: string) {
@@ -61,11 +71,7 @@ export function Button({
   ...props
 }: ComponentPropsWithoutRef<"button"> & { variant?: ButtonVariant }) {
   return (
-    <button
-      type="button"
-      className={classesFor(variant, className)}
-      {...props}
-    >
+    <button type="button" className={classesFor(variant, className)} {...props}>
       {children}
     </button>
   );

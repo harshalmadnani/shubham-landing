@@ -17,12 +17,12 @@ export function PendingChip({
 }) {
   const toneClasses =
     tone === "dark"
-      ? "border-inverse-surface-1 text-inverse-ink-muted"
+      ? "border-inverse-hairline text-inverse-ink-muted"
       : "border-hairline text-ink-muted";
 
   return (
     <span
-      className={`inline-flex items-center rounded-none border border-dashed px-sm py-xxs text-caption ${toneClasses}`}
+      className={`inline-flex items-center rounded-full border border-dashed px-sm py-xxs text-caption ${toneClasses}`}
     >
       [{token} — pending real data]
     </span>
