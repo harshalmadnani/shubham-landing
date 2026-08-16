@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 
 import { ChevronDownIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
+import { SectionHeading } from "@/components/SectionHeading";
 import { faqs } from "@/content/sections";
 
 export function Faq() {
@@ -14,9 +15,14 @@ export function Faq() {
   return (
     <section id="faq" className="px-md pt-section tablet:px-lg">
       <div className="mx-auto max-w-content">
-        <h2 className="text-headline text-ink">Frequently asked questions</h2>
+        <SectionHeading
+          eyebrow="FAQ"
+          title="Frequently asked questions"
+          lead="Still unsure about something? The consultation call is free and there's no script."
+          align="center"
+        />
 
-        <div className="mt-xl max-w-2xl border border-hairline bg-canvas">
+        <div className="mx-auto mt-xxl flex max-w-3xl flex-col gap-sm">
           {faqs.map((faq, index) => {
             const isOpen = index === openIndex;
             const panelId = `${baseId}-panel-${index}`;
@@ -24,27 +30,35 @@ export function Faq() {
             return (
               <div
                 key={faq.question}
-                className={`border-l-4 pl-lg transition-colors duration-300 ${
+                className={`overflow-hidden rounded-xl border transition-[background-color,border-color,box-shadow] duration-300 ${
                   isOpen
-                    ? "border-l-primary bg-surface-1"
-                    : "border-l-transparent"
-                }${index === 0 ? "" : " border-t border-hairline"}`}
+                    ? "border-primary/40 bg-canvas shadow-card"
+                    : "border-hairline bg-canvas hover:border-primary/30"
+                }`}
               >
                 <button
                   type="button"
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="flex w-full items-center justify-between gap-md py-lg pr-lg text-left"
+                  className="flex w-full items-center justify-between gap-md p-lg text-left"
                 >
                   <span className="text-card-title text-ink">
                     {faq.question}
                   </span>
-                  <ChevronDownIcon
-                    className={`h-lg w-lg shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-180 text-primary" : "text-ink-muted"
+                  <span
+                    className={`flex h-xl w-xl shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
+                      isOpen
+                        ? "bg-brand-gradient text-on-primary"
+                        : "bg-surface-1 text-ink-muted"
                     }`}
-                  />
+                  >
+                    <ChevronDownIcon
+                      className={`h-md w-md transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </span>
                 </button>
 
                 {/* Grid-rows trick: animates to the panel's natural height
@@ -58,7 +72,7 @@ export function Faq() {
                     <p
                       id={panelId}
                       aria-hidden={!isOpen}
-                      className="pb-lg pr-lg text-body text-ink-muted"
+                      className="px-lg pb-lg text-body text-ink-muted"
                     >
                       <RichTextContent value={faq.answer} />
                     </p>

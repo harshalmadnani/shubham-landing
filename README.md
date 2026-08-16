@@ -46,8 +46,11 @@ src/
     layout.tsx              root layout, font, metadata
     globals.css             the entire design system (see below)
     page.tsx                landing page — composes the sections in order
+    pricing/                pricing page — tiers and what every pathway includes
     programs/[slug]/        curriculum page, statically generated per program
   components/               one component per landing-page section
+    SectionHeading.tsx      shared eyebrow + headline + lead for every section
+    Reveal.tsx              fade-up on scroll; no-JS and reduced-motion safe
   content/
     types.ts                shared content types
     site.ts                 brand, nav, hero, footer, WhatsApp links
@@ -71,12 +74,23 @@ and layout. Components reference tokens (`bg-surface-1`, `text-card-title`,
 `gap-lg`, `px-tab-x`) and never raw values, so a rebrand is a change to that one
 block.
 
-Two things worth knowing before editing:
+Four things worth knowing before editing:
 
 - **Breakpoints are named, not numbered.** `tablet:` is 768px and `desktop:` is
   1180px. There are no other responsive prefixes in the codebase.
 - **Type steps carry their own line-height, tracking and weight.** `text-headline`
-  is a complete typographic decision, not just a font size.
+  is a complete typographic decision, not just a font size. Display steps carry
+  negative tracking; at those sizes default spacing reads loose.
+- **Spacing steps avoid the container names.** They are spelled `xxs`/`xxl`/
+  `xxxl`, never `2xl`/`3xl`, because Tailwind resolves `max-w-<name>` against
+  the spacing namespace *before* the container scale. A `--spacing-3xl` would
+  silently turn `max-w-3xl` into a 72px clamp. Same trap applies to `xs`, `sm`,
+  `md`, `lg` and `xl` — those steps exist, so `max-w-xl` is 32px, not 36rem.
+  Use `max-w-2xl`/`max-w-3xl` or an arbitrary `max-w-[…]`.
+- **A few effects live as `@utility` rules**, not tokens, because they can't be
+  expressed as a single value: `text-gradient` and `bg-brand-gradient` (the
+  brand ramp as text fill and surface), `bg-grid` / `bg-grid-light` (texture),
+  `bg-mesh` (the dark-section colour wash) and `glass` (frosted panels).
 
 ## Pending data
 

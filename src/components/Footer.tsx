@@ -6,10 +6,19 @@ import { footerColumns, footerContactTokens, site } from "@/content/site";
 
 export function Footer() {
   return (
-    <footer id="footer" className="bg-inverse-canvas px-md py-footer tablet:px-lg">
-      <div className="mx-auto max-w-content">
+    <footer
+      id="footer"
+      className="relative mt-section overflow-hidden bg-inverse-canvas px-md py-footer tablet:px-lg"
+    >
+      <div aria-hidden="true" className="absolute inset-0 bg-grid" />
+      <div
+        aria-hidden="true"
+        className="absolute -bottom-40 left-1/4 h-96 w-96 rounded-full bg-primary/20 blur-3xl"
+      />
+
+      <div className="relative mx-auto max-w-content">
         <div className="grid grid-cols-1 gap-xl tablet:grid-cols-2 desktop:grid-cols-5">
-          <div>
+          <div className="desktop:col-span-2">
             <Image
               src={site.logo.reversed}
               alt={site.name}
@@ -17,11 +26,14 @@ export function Footer() {
               height={site.logo.height}
               className="h-xl w-auto"
             />
+            <p className="mt-lg max-w-[22rem] text-body-sm text-inverse-ink-muted">
+              {site.description}
+            </p>
           </div>
 
           {footerColumns.map((column) => (
             <div key={column.heading}>
-              <p className="text-body-emphasis text-inverse-ink">
+              <p className="text-eyebrow uppercase text-inverse-ink">
                 {column.heading}
               </p>
               <ul className="mt-md flex flex-col gap-sm">
@@ -29,7 +41,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-body-sm text-inverse-ink-muted hover:text-inverse-ink"
+                      className="text-body-sm text-inverse-ink-muted transition-colors hover:text-inverse-ink"
                     >
                       {link.label}
                     </Link>
@@ -38,21 +50,23 @@ export function Footer() {
               </ul>
             </div>
           ))}
+        </div>
 
-          <div>
-            <p className="text-body-emphasis text-inverse-ink">Contact</p>
-            <ul className="mt-md flex flex-col gap-sm">
+        <div className="mt-xxxl border-t border-inverse-hairline pt-lg">
+          <div className="flex flex-col gap-md tablet:flex-row tablet:items-center tablet:justify-between">
+            <ul className="flex flex-wrap gap-sm">
               {footerContactTokens.map((token) => (
                 <li key={token}>
                   <PendingChip token={token} tone="dark" />
                 </li>
               ))}
             </ul>
+            <PendingChip token="social links" tone="dark" />
           </div>
-        </div>
 
-        <div className="mt-xxl border-t border-inverse-surface-1 pt-lg">
-          <PendingChip token="social links" tone="dark" />
+          <p className="mt-lg text-caption text-inverse-ink-muted">
+            © {site.name}. {site.tagline}.
+          </p>
         </div>
       </div>
     </footer>

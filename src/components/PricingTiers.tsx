@@ -1,6 +1,8 @@
-import { CheckIcon } from "@/components/CheckIcon";
 import { ButtonLink } from "@/components/Button";
+import { CheckIcon } from "@/components/CheckIcon";
 import { CalendarIcon } from "@/components/icons";
+import { Reveal } from "@/components/Reveal";
+import { SectionHeading } from "@/components/SectionHeading";
 import { consultationMessage, whatsAppUrl } from "@/content/site";
 
 interface PricingTier {
@@ -58,105 +60,135 @@ const pricingTiers: PricingTier[] = [
   },
 ];
 
+const everyPathway = [
+  {
+    heading: "Training",
+    items: [
+      "Choice of regular or AI-focused programs",
+      "Evening-scheduled online sessions",
+      "Hands-on bootcamp component",
+    ],
+  },
+  {
+    heading: "Placement support",
+    items: [
+      "Resume marketing and review",
+      "Interview preparation",
+      "Sponsorship-focused role guidance",
+    ],
+  },
+];
+
 export function PricingTiers() {
   return (
-    <section className="px-md py-section tablet:px-lg">
+    <section className="px-md pt-section tablet:px-lg">
       <div className="mx-auto max-w-content">
-        <h2 className="text-headline text-ink">Training pathways</h2>
-        <p className="mt-md max-w-2xl text-body-lg text-ink-muted">
-          Select the tier that matches your experience level and goals. Pricing is in GBP and includes applicable VAT. Sign in to your account to view current pricing and payment options.
-        </p>
+        <SectionHeading
+          eyebrow="Training pathways"
+          title="Pick the tier that matches where you are"
+          lead="Pricing is in GBP and includes applicable VAT. Book a consultation to see current pricing and payment options."
+          align="center"
+        />
 
+        {/* No `items-start`: the columns stretch so the three CTAs line up
+            even though the feature lists differ in length. */}
         <div className="mt-xxl grid gap-lg tablet:grid-cols-3">
-          {pricingTiers.map((tier) => (
-            <div
-              key={tier.name}
-              className={`flex flex-col border rounded-none p-lg transition-colors ${
-                tier.highlighted
-                  ? "border-primary bg-surface-1"
-                  : "border-hairline bg-canvas"
-              }`}
-            >
-              <div className="flex-1">
-                <h3 className="text-card-title text-ink">{tier.name}</h3>
-                <p className="mt-md text-body text-ink-muted">{tier.description}</p>
-
-                <div className="mt-lg space-y-sm">
-                  {tier.features.map((feature) => (
+          {pricingTiers.map((tier, index) => (
+            <Reveal key={tier.name} delay={index * 90}>
+              <div
+                className={`relative flex h-full flex-col rounded-2xl p-xl transition-[box-shadow,transform] duration-300 hover:-translate-y-1 ${
+                  tier.highlighted
+                    ? "bg-inverse-canvas text-inverse-ink shadow-lift"
+                    : "border border-hairline bg-canvas shadow-card hover:shadow-lift"
+                }`}
+              >
+                {tier.highlighted && (
+                  <>
                     <div
-                      key={feature}
-                      className="flex items-start gap-md"
-                    >
-                      <CheckIcon className="h-md w-md shrink-0 text-primary" />
-                      <span className="text-body text-ink">{feature}</span>
-                    </div>
-                  ))}
+                      aria-hidden="true"
+                      className="absolute inset-0 rounded-2xl bg-mesh opacity-70"
+                    />
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-gradient px-md py-xxs text-caption uppercase text-on-primary shadow-primary">
+                      Most popular
+                    </span>
+                  </>
+                )}
+
+                <div className="relative flex flex-1 flex-col">
+                  <h3
+                    className={`text-card-title ${
+                      tier.highlighted ? "text-inverse-ink" : "text-ink"
+                    }`}
+                  >
+                    {tier.name}
+                  </h3>
+                  <p
+                    className={`mt-sm text-body-sm ${
+                      tier.highlighted
+                        ? "text-inverse-ink-muted"
+                        : "text-ink-muted"
+                    }`}
+                  >
+                    {tier.description}
+                  </p>
+
+                  <ul className="mt-lg flex flex-1 flex-col gap-sm">
+                    {tier.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-sm">
+                        <CheckIcon
+                          className={`mt-1 h-md w-md shrink-0 ${
+                            tier.highlighted ? "text-accent" : "text-primary"
+                          }`}
+                        />
+                        <span
+                          className={`text-body-sm ${
+                            tier.highlighted ? "text-inverse-ink" : "text-ink"
+                          }`}
+                        >
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <ButtonLink
+                    href={whatsAppUrl(consultationMessage)}
+                    variant={tier.highlighted ? "primary" : "outline"}
+                    className="mt-xl w-full"
+                  >
+                    <CalendarIcon className="h-md w-md" />
+                    Get started
+                  </ButtonLink>
                 </div>
               </div>
-
-              <ButtonLink
-                href={whatsAppUrl(consultationMessage)}
-                className="mt-lg justify-center"
-                variant={tier.highlighted ? "primary" : "outline"}
-              >
-                <CalendarIcon className="h-md w-md" />
-                Get started
-              </ButtonLink>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-xxl rounded-none border border-hairline bg-surface-1 p-lg tablet:p-xl">
-          <h3 className="text-card-title text-ink">What&apos;s included in every pathway</h3>
-          <div className="mt-lg grid gap-lg tablet:grid-cols-2">
-            <div>
-              <h4 className="text-body-emphasis text-ink">Training</h4>
-              <ul className="mt-md space-y-sm">
-                <li className="flex items-start gap-md">
-                  <CheckIcon className="h-md w-md shrink-0 text-primary" />
-                  <span className="text-body text-ink-muted">
-                    {`Choice of regular or AI-focused programs`}
-                  </span>
-                </li>
-                <li className="flex items-start gap-md">
-                  <CheckIcon className="h-md w-md shrink-0 text-primary" />
-                  <span className="text-body text-ink-muted">
-                    Evening-scheduled online sessions
-                  </span>
-                </li>
-                <li className="flex items-start gap-md">
-                  <CheckIcon className="h-md w-md shrink-0 text-primary" />
-                  <span className="text-body text-ink-muted">
-                    Hands-on bootcamp component
-                  </span>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-body-emphasis text-ink">Placement Support</h4>
-              <ul className="mt-md space-y-sm">
-                <li className="flex items-start gap-md">
-                  <CheckIcon className="h-md w-md shrink-0 text-primary" />
-                  <span className="text-body text-ink-muted">
-                    Resume marketing and review
-                  </span>
-                </li>
-                <li className="flex items-start gap-md">
-                  <CheckIcon className="h-md w-md shrink-0 text-primary" />
-                  <span className="text-body text-ink-muted">
-                    Interview preparation
-                  </span>
-                </li>
-                <li className="flex items-start gap-md">
-                  <CheckIcon className="h-md w-md shrink-0 text-primary" />
-                  <span className="text-body text-ink-muted">
-                    Sponsorship-focused role guidance
-                  </span>
-                </li>
-              </ul>
+        <Reveal>
+          <div className="mt-xxl rounded-2xl border border-hairline bg-surface-1 p-xl shadow-card tablet:p-xxl">
+            <h3 className="text-headline-sm text-ink">
+              Included in every pathway
+            </h3>
+            <div className="mt-xl grid gap-xl tablet:grid-cols-2">
+              {everyPathway.map((group) => (
+                <div key={group.heading}>
+                  <p className="text-eyebrow uppercase text-primary">
+                    {group.heading}
+                  </p>
+                  <ul className="mt-md flex flex-col gap-sm">
+                    {group.items.map((item) => (
+                      <li key={item} className="flex items-start gap-sm">
+                        <CheckIcon className="mt-1 h-md w-md shrink-0 text-primary" />
+                        <span className="text-body text-ink-muted">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

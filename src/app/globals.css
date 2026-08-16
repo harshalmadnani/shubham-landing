@@ -3,7 +3,7 @@
 /*
  * Design tokens.
  *
- * Everything the UI renders — colour, type, spacing, layout — resolves through
+ * Everything the UI renders — colour, type, depth, motion — resolves through
  * one of the custom properties below. Components never hard-code a hex value or
  * a raw pixel size, so a rebrand is a change to this block and nothing else.
  */
@@ -18,100 +18,121 @@
   --color-primary: #5e29f8;
   --color-violet-80: #4a1ecb;
   --color-violet-hover: #4f20e0;
+  --color-primary-soft: #efe9ff;
 
-  --color-canvas: #fdfdfd;
-  --color-surface-1: #f5f4fb;
-  --color-surface-2: #eceaf7;
+  /* Accents. Used only at gradient ends and for glow — never as flat fills. */
+  --color-accent: #00c8ff;
+  --color-accent-warm: #b845ff;
 
-  --color-hairline: #e4e2ed;
+  --color-canvas: #ffffff;
+  --color-surface-1: #f7f6fc;
+  --color-surface-2: #efedf9;
+
+  --color-hairline: #e7e5f0;
   --color-hairline-strong: #0a0b10;
 
-  --color-inverse-canvas: #0a0b10;
-  --color-inverse-surface-1: #16151d;
+  --color-inverse-canvas: #08080d;
+  --color-inverse-surface-1: #14131c;
+  --color-inverse-hairline: #23212f;
 
   --color-ink: #0a0b10;
-  --color-ink-muted: #53525c;
+  --color-ink-muted: #56555f;
   --color-ink-subtle: #8b8a94;
   --color-inverse-ink: #fdfdfd;
-  --color-inverse-ink-muted: #b7b6c0;
+  --color-inverse-ink-muted: #a5a3b4;
   --color-on-primary: #fdfdfd;
 
   --color-semantic-error: #e5484d;
 
   /* Type scale. Each step carries its own line-height, tracking and weight so
-     `text-headline` is a complete typographic decision, not just a size. */
-  --text-display-xl: 4.5rem;
-  --text-display-xl--line-height: 1.08;
-  --text-display-xl--letter-spacing: 0px;
+     `text-headline` is a complete typographic decision, not just a size.
+     Large steps carry negative tracking — at display sizes, default spacing
+     reads loose and cheap. */
+  --text-display-xl: 4.75rem;
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -2.4px;
   --text-display-xl--font-weight: 300;
 
-  --text-display-xl-tablet: 3.25rem;
-  --text-display-xl-tablet--line-height: 1.08;
-  --text-display-xl-tablet--letter-spacing: 0px;
+  --text-display-xl-tablet: 3.5rem;
+  --text-display-xl-tablet--line-height: 1.04;
+  --text-display-xl-tablet--letter-spacing: -1.6px;
   --text-display-xl-tablet--font-weight: 300;
 
-  --text-display-xl-mobile: 2.125rem;
-  --text-display-xl-mobile--line-height: 1.08;
-  --text-display-xl-mobile--letter-spacing: 0px;
+  --text-display-xl-mobile: 2.5rem;
+  --text-display-xl-mobile--line-height: 1.06;
+  --text-display-xl-mobile--letter-spacing: -1px;
   --text-display-xl-mobile--font-weight: 300;
 
   --text-display-lg: 3.5rem;
-  --text-display-lg--line-height: 1.1;
-  --text-display-lg--letter-spacing: 0px;
+  --text-display-lg--line-height: 1.06;
+  --text-display-lg--letter-spacing: -1.6px;
   --text-display-lg--font-weight: 300;
 
   --text-display-md: 2.5rem;
-  --text-display-md--line-height: 1.15;
-  --text-display-md--letter-spacing: 0px;
+  --text-display-md--line-height: 1.12;
+  --text-display-md--letter-spacing: -1px;
   --text-display-md--font-weight: 300;
 
-  --text-headline: 1.875rem;
-  --text-headline--line-height: 1.2;
-  --text-headline--letter-spacing: 0px;
+  --text-headline: 2.25rem;
+  --text-headline--line-height: 1.14;
+  --text-headline--letter-spacing: -0.8px;
   --text-headline--font-weight: 400;
 
+  --text-headline-sm: 1.75rem;
+  --text-headline-sm--line-height: 1.2;
+  --text-headline-sm--letter-spacing: -0.5px;
+  --text-headline-sm--font-weight: 400;
+
   --text-card-title: 1.375rem;
-  --text-card-title--line-height: 1.3;
-  --text-card-title--letter-spacing: 0px;
-  --text-card-title--font-weight: 400;
+  --text-card-title--line-height: 1.28;
+  --text-card-title--letter-spacing: -0.3px;
+  --text-card-title--font-weight: 500;
 
   --text-body-lg: 1.125rem;
-  --text-body-lg--line-height: 1.55;
-  --text-body-lg--letter-spacing: 0.16px;
+  --text-body-lg--line-height: 1.6;
+  --text-body-lg--letter-spacing: -0.1px;
   --text-body-lg--font-weight: 400;
 
   --text-body: 1rem;
-  --text-body--line-height: 1.5;
-  --text-body--letter-spacing: 0.16px;
+  --text-body--line-height: 1.6;
+  --text-body--letter-spacing: -0.05px;
   --text-body--font-weight: 400;
 
   --text-body-sm: 0.875rem;
-  --text-body-sm--line-height: 1.45;
-  --text-body-sm--letter-spacing: 0.16px;
+  --text-body-sm--line-height: 1.55;
+  --text-body-sm--letter-spacing: 0px;
   --text-body-sm--font-weight: 400;
 
-  --text-body-emphasis: 0.875rem;
+  --text-body-emphasis: 0.9375rem;
   --text-body-emphasis--line-height: 1.45;
-  --text-body-emphasis--letter-spacing: 0.16px;
+  --text-body-emphasis--letter-spacing: -0.1px;
   --text-body-emphasis--font-weight: 600;
 
   --text-caption: 0.75rem;
   --text-caption--line-height: 1.35;
-  --text-caption--letter-spacing: 0.32px;
-  --text-caption--font-weight: 400;
+  --text-caption--letter-spacing: 0.3px;
+  --text-caption--font-weight: 500;
 
   --text-button: 0.9375rem;
   --text-button--line-height: 1.3;
-  --text-button--letter-spacing: 0.16px;
+  --text-button--letter-spacing: -0.1px;
   --text-button--font-weight: 600;
 
-  --text-eyebrow: 0.875rem;
+  /* Eyebrows are set in small caps with wide tracking — they read as a label
+     rather than as an undersized paragraph. */
+  --text-eyebrow: 0.75rem;
   --text-eyebrow--line-height: 1.3;
-  --text-eyebrow--letter-spacing: 0.16px;
-  --text-eyebrow--font-weight: 400;
+  --text-eyebrow--letter-spacing: 1.4px;
+  --text-eyebrow--font-weight: 600;
 
   /* Spacing. Named steps rather than a numeric ramp, so `gap-lg` means the same
-     distance in every section. */
+     distance in every section.
+
+     Steps are spelled `xxs`/`xxl`/`xxxl` rather than `2xl`/`3xl` on purpose:
+     Tailwind resolves `max-w-<name>` against this namespace before the
+     container scale, so a `--spacing-3xl` here would silently turn
+     `max-w-3xl` into a 72px clamp. Keep new steps off the container names
+     (`xs`, `sm`, `md`, `lg`, `xl`, `2xl`, …) or use `max-w-[…]` instead. */
   --spacing-xxs: 4px;
   --spacing-xs: 8px;
   --spacing-sm: 12px;
@@ -119,24 +140,165 @@
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   --spacing-xxl: 48px;
-  --spacing-section: 96px;
+  --spacing-xxxl: 72px;
+  --spacing-section: 112px;
   --spacing-service-card: 28px;
   --spacing-tab-y: 10px;
   --spacing-tab-x: 18px;
-  --spacing-footer: 64px;
-  --spacing-header: 64px;
+  --spacing-footer: 80px;
+  --spacing-header: 68px;
 
-  --container-content: 1440px;
+  --container-content: 1280px;
 
-  /* Square corners everywhere — the look depends on it. */
+  /* Corners. The old look was square throughout; softened radii do more of the
+     work of separating cards from the page than borders ever did. */
   --radius-none: 0px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-2xl: 30px;
+  --radius-full: 9999px;
+
+  /* Elevation. Two-layer shadows — a tight contact shadow plus a wide ambient
+     one — read as depth; a single blurred drop reads as a smudge. */
+  --shadow-sm: 0 1px 2px rgb(10 11 16 / 0.04), 0 1px 3px rgb(10 11 16 / 0.05);
+  --shadow-card: 0 1px 2px rgb(10 11 16 / 0.03), 0 6px 20px rgb(10 11 16 / 0.05);
+  --shadow-lift: 0 2px 6px rgb(10 11 16 / 0.05), 0 16px 40px rgb(10 11 16 / 0.11);
+  --shadow-primary: 0 2px 8px rgb(94 41 248 / 0.24), 0 10px 28px rgb(94 41 248 / 0.22);
+  --shadow-glow: 0 0 60px rgb(94 41 248 / 0.4);
 
   --font-sans: var(--font-ibm-plex-sans), "Helvetica Neue", Arial, sans-serif;
+
+  /* Motion */
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-marquee: marquee 38s linear infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/*
+ * Custom utilities.
+ *
+ * These are the handful of effects that can't be expressed as a single token —
+ * each one is used in more than one place, which is why it lives here rather
+ * than inline in a component.
+ */
+
+/* Brand gradient, clipped to the glyphs. */
+@utility text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-primary) 0%,
+    var(--color-accent-warm) 52%,
+    var(--color-accent) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Same gradient as a fill, for buttons and banner surfaces. */
+@utility bg-brand-gradient {
+  background-image: linear-gradient(
+    120deg,
+    var(--color-primary) 0%,
+    #7b3ff2 45%,
+    var(--color-accent-warm) 100%
+  );
+}
+
+/* Faint engineering grid — reads as texture on dark sections, not as a table. */
+@utility bg-grid {
+  background-image: linear-gradient(
+      to right,
+      rgb(255 255 255 / 0.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility bg-grid-light {
+  background-image: linear-gradient(
+      to right,
+      rgb(10 11 16 / 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgb(10 11 16 / 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Soft colour wash behind dark hero content. */
+@utility bg-mesh {
+  background-image: radial-gradient(
+      60% 55% at 12% 8%,
+      rgb(94 41 248 / 0.5) 0%,
+      transparent 62%
+    ),
+    radial-gradient(48% 48% at 88% 12%, rgb(0 200 255 / 0.22) 0%, transparent 60%),
+    radial-gradient(65% 60% at 72% 96%, rgb(184 69 255 / 0.3) 0%, transparent 65%);
+}
+
+/* Frosted panel over the mesh. */
+@utility glass {
+  background-color: rgb(255 255 255 / 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgb(255 255 255 / 0.12);
+}
+
+/* Fades a scrolling row out at both edges instead of cutting it off. */
+@utility mask-fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
@@ -147,7 +309,20 @@
 
   /* Anchored sections sit under the sticky header without this. */
   :target {
-    scroll-margin-top: var(--spacing-header);
+    scroll-margin-top: calc(var(--spacing-header) + var(--spacing-lg));
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  /* Visible, on-brand focus ring — the default outline disappears against
+     dark sections. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
   }
 
   @media (prefers-reduced-motion: reduce) {

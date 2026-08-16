@@ -47,7 +47,9 @@ export const navLinks = [
 
 export const hero = {
   eyebrow: "IT training & placement support",
-  headline: "Structured training. Real placement support.",
+  /** Split so the second half can carry the brand gradient. */
+  headline: "Structured training.",
+  headlineAccent: "Real placement support.",
   body: "Shubham trains people for IT careers in web development, data, and cloud, including the AI skills employers now expect — and stays with you through placement, not just through the syllabus.",
   image: "/images/hero-training-session.webp",
   imageAlt:
