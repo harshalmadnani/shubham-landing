@@ -6,6 +6,12 @@
  * currency attached is the classic way a pricing page misleads someone, so
  * `formatPrice` always renders the symbol and the switcher always states the
  * currency in words alongside it.
+ *
+ * Every figure here is tax inclusive: the number on the card is what the
+ * candidate pays, with nothing added later. UK consumer rules require prices
+ * shown to consumers to include VAT, so this is not a presentation choice —
+ * if the underlying prices ever change to ex-tax, the notes below have to
+ * change with them in the same commit.
  */
 
 export type RegionId = "uk" | "ca";
@@ -30,7 +36,7 @@ export const regions: readonly Region[] = [
     currencyCode: "GBP",
     currencyName: "pounds sterling",
     symbol: "£",
-    taxNote: "VAT added where it applies, under UK rules.",
+    taxNote: "VAT included — the price shown is the price you pay.",
   },
   {
     id: "ca",
@@ -39,7 +45,7 @@ export const regions: readonly Region[] = [
     currencyCode: "CAD",
     currencyName: "Canadian dollars",
     symbol: "$",
-    taxNote: "GST or HST added on top, in line with Canadian rules.",
+    taxNote: "Tax included — the price shown is the price you pay.",
   },
 ];
 

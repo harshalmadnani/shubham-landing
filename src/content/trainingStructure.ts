@@ -158,7 +158,7 @@ export const structureFaqs: readonly FaqItem[] = [
   {
     question: "What currency are prices shown in, and is tax included?",
     answer:
-      "Use the region switch above the prices to see the market you are in. UK prices are in pounds sterling, with VAT added where it applies under UK rules. Canadian prices are in Canadian dollars, with GST or HST added on top in line with Canadian rules. Tax is shown separately rather than folded into the figure, so the amount on the card is the fee itself.",
+      "Use the region switch above the prices to see the market you are in — UK prices are in pounds sterling, Canadian prices in Canadian dollars. Tax is included either way: the figure on the card is the amount you pay, with nothing added at the end.",
   },
   {
     question: "Do you support people who need visa sponsorship?",
