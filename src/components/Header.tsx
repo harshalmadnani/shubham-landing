@@ -59,7 +59,7 @@ export function Header() {
             alt={site.name}
             width={site.logo.width}
             height={site.logo.height}
-            className="h-xl w-auto"
+            className="h-xxl w-auto"
             priority
           />
         </Link>
