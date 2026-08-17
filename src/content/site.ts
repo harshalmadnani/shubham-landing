@@ -1,3 +1,5 @@
+import type { RichText } from "./types";
+
 /**
  * Site-wide identity and contact configuration.
  *
@@ -19,11 +21,8 @@ export const site = {
   },
 } as const;
 
-/**
- * The WhatsApp number is deliberately left as a placeholder — a wrong number
- * silently drops enquiries, so it fails loudly at the destination instead.
- */
-export const whatsAppNumber = "[WHATSAPP_NUMBER_PENDING]";
+/** Digits only, with country code and no separators — wa.me rejects the rest. */
+export const whatsAppNumber = "447491270610";
 
 /** Builds a wa.me deep link with the message pre-filled. */
 export function whatsAppUrl(message: string): string {
@@ -87,5 +86,12 @@ export const footerColumns = [
   },
 ] as const;
 
-/** Contact details still to be supplied by the business. */
-export const footerContactTokens = ["email", "phone", "address"] as const;
+/**
+ * Footer contact details. The phone number is live; the rest still need to come
+ * from the business, so they stay as chips rather than plausible inventions.
+ */
+export const footerContacts: readonly RichText[] = [
+  [{ token: "email" }],
+  "+44 7491 270610",
+  [{ token: "address" }],
+];

@@ -132,13 +132,8 @@ export const structureFaqs: readonly FaqItem[] = [
   },
   {
     question: "What currency are quotes issued in, and is tax included?",
-    answer: [
-      "We work with candidates in the UK and Canada, and quote in ",
-      { token: "currency" },
-      " accordingly, with tax shown separately where it applies — ",
-      { token: "VAT/GST treatment" },
-      ".",
-    ],
+    answer:
+      "We work with candidates in the UK and Canada. UK quotes are in pounds sterling, with VAT added where it applies under UK rules. Canadian quotes are in Canadian dollars, with GST or HST added on top in line with Canadian rules. Tax is always shown separately, never folded into the headline figure.",
   },
   {
     question: "Do you support people who need visa sponsorship?",

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { PendingChip } from "@/components/PendingData";
-import { footerColumns, footerContactTokens, site } from "@/content/site";
+import { PendingChip, RichTextContent } from "@/components/PendingData";
+import { footerColumns, footerContacts, site } from "@/content/site";
 
 export function Footer() {
   return (
@@ -55,9 +55,9 @@ export function Footer() {
         <div className="mt-xxxl border-t border-inverse-hairline pt-lg">
           <div className="flex flex-col gap-md tablet:flex-row tablet:items-center tablet:justify-between">
             <ul className="flex flex-wrap gap-sm">
-              {footerContactTokens.map((token) => (
-                <li key={token}>
-                  <PendingChip token={token} tone="dark" />
+              {footerContacts.map((contact, index) => (
+                <li key={index} className="text-body-sm text-inverse-ink-muted">
+                  <RichTextContent value={contact} tone="dark" />
                 </li>
               ))}
             </ul>
