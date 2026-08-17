@@ -26,11 +26,14 @@ export const metadata: Metadata = {
     title: `${site.name} — IT Training & Placement Support`,
     description: site.description,
     url: "/",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
-    card: "summary",
+    // summary_large_image, since there is now an image worth showing at size.
+    card: "summary_large_image",
     title: `${site.name} — IT Training & Placement Support`,
     description: site.description,
+    images: ["/og.png"],
   },
 };
 
