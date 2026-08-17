@@ -9,17 +9,13 @@ import type {
   Step,
   Struggle,
 } from "./types";
+import { totalProgramCount } from "./programs";
 
 /** Headline figures for the strip under the hero. */
 export const proofPoints: readonly RichText[] = [
-  [
-    { token: "X" },
-    " industry-aligned programs",
-  ],
-  [
-    { token: "X+" },
-    " hours instructor-led per program",
-  ],
+  // Counted from the catalogue, so adding a program cannot leave this stale.
+  `${totalProgramCount} industry-aligned programs`,
+  "50 hours of instructor-led training per program",
   [
     "Mentors with ",
     { token: "X+" },
@@ -137,10 +133,7 @@ export const howItWorks: readonly Step[] = [
   },
   {
     title: "Train",
-    body: [
-      { token: "X" },
-      " weeks of instructor-led, project-based learning, including the AI tools your field actually uses — not pre-recorded videos alone.",
-    ]
+    body: "50 hours of instructor-led, project-based learning delivered as daily one-hour sessions, including the AI tools your field actually uses — not pre-recorded videos alone."
   },
   {
     title: "Build a portfolio",
@@ -163,12 +156,7 @@ export const pathways: readonly Pathway[] = [
       },
       {
         title: "Structured training",
-        body: [
-          { token: "X" },
-          "-hour instructor-led courses or ",
-          { token: "X" },
-          "-hour intensive bootcamps.",
-        ]
+        body: "50-hour instructor-led courses, with morning and evening batches to choose from."
       },
       {
         title: "Mentoring",
@@ -242,12 +230,7 @@ export const pathways: readonly Pathway[] = [
       },
       {
         title: "Intensive bootcamp",
-        body: [
-          { token: "X" },
-          " hours of hands-on project work across ",
-          { token: "X" },
-          " real projects.",
-        ]
+        body: "20 hours of hands-on project work across five real projects, from fundamentals to a full capstone."
       },
       {
         title: "Portfolio building",
@@ -272,18 +255,12 @@ export const includedGroups: readonly IncludedGroup[] = [
       {
         icon: "icon-structured-training",
         title: "Structured Training",
-        body: [
-          { token: "X" },
-          "-hour comprehensive courses built around real job requirements, including the AI tools those roles now expect.",
-        ]
+        body: "50-hour comprehensive courses built around real job requirements, including the AI tools those roles now expect."
       },
       {
         icon: "icon-intensive-bootcamps",
         title: "Intensive Bootcamps",
-        body: [
-          { token: "X" },
-          "-hour hands-on bootcamps for rapid, project-based skill-building.",
-        ]
+        body: "20-hour hands-on bootcamps for rapid, project-based skill-building."
       },
       {
         icon: "icon-self-paced-guidance",
@@ -402,14 +379,14 @@ export const faqs: readonly FaqItem[] = [
   },
   {
     question: "Can I attend part-time alongside a job?",
-    answer: [
-      { token: "schedule options" },
-    ]
+    answer: "Yes — that is what the format is designed for. Sessions are an hour a day, with morning and evening batches, delivered online and recorded so you can catch up on anything you miss."
   },
   {
     question: "What happens if I don't finish the program?",
     answer: [
+      "Breaks of up to 30 days are fine — tell your mentor and we will hold your place. Beyond that a rejoining fee applies, and ",
       { token: "refund/pause policy" },
+      ".",
     ]
   },
 ];

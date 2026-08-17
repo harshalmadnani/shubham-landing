@@ -378,11 +378,11 @@ export const programDetails: readonly ProgramDetail[] = [
     category: "AI Careers",
     title: "AI Consultant",
     description: "Structured training in advising organizations on where and how AI actually fits their operations — grounded in practical implementation, not hype.",
-    hours: 50,
+    hours: 70,
     modules: [
       {
         title: "AI & Machine Learning Foundations",
-        hours: 12,
+        hours: 17,
         summary: "Understand core concepts of artificial intelligence",
         topics: [
           "Intro to AI & ML",
@@ -395,7 +395,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "Deep Learning & Generative AI",
-        hours: 15,
+        hours: 21,
         summary: "Build and tune advanced AI models",
         topics: [
           "Deep Learning Frameworks (PyTorch/TensorFlow)",
@@ -408,7 +408,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "AI Ethics & Governance",
-        hours: 8,
+        hours: 11,
         summary: "Ensure responsible and secure AI deployment",
         topics: [
           "Bias and Fairness in AI",
@@ -421,7 +421,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "AI Deployment & MLOps",
-        hours: 15,
+        hours: 21,
         summary: "Scale and manage AI solutions in production",
         topics: [
           "Model Deployment Strategies",
@@ -1293,11 +1293,11 @@ export const programDetails: readonly ProgramDetail[] = [
     category: "Cloud",
     title: "AWS Cloud Engineer",
     description: "Structured training across the core AWS services — compute, storage, networking, and identity — through to automation and monitoring, aligned to AWS certification paths.",
-    hours: 50,
+    hours: 70,
     modules: [
       {
         title: "Cloud Fundamentals & Identity",
-        hours: 12,
+        hours: 17,
         summary: "Master core cloud services and access management",
         topics: [
           "AWS Architecture Basics",
@@ -1310,7 +1310,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "Compute & Containerization",
-        hours: 15,
+        hours: 21,
         summary: "Deploy applications using VMs and managed containers",
         topics: [
           "Virtual Machines Setup",
@@ -1323,7 +1323,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "Databases & Migration",
-        hours: 8,
+        hours: 11,
         summary: "Manage relational and NoSQL databases in the cloud",
         topics: [
           "Managed Relational Databases",
@@ -1336,7 +1336,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "Automation & Monitoring",
-        hours: 15,
+        hours: 21,
         summary: "Implement CI/CD and monitor cloud resources",
         topics: [
           "Infrastructure as Code (IaC)",
@@ -1354,11 +1354,11 @@ export const programDetails: readonly ProgramDetail[] = [
     category: "Cloud",
     title: "Azure Cloud Engineer",
     description: "Structured training across the core Microsoft Azure services — compute, storage, networking, and identity — through to automation and monitoring, aligned to Azure certification paths.",
-    hours: 50,
+    hours: 70,
     modules: [
       {
         title: "Cloud Fundamentals & Identity",
-        hours: 12,
+        hours: 17,
         summary: "Master core cloud services and access management",
         topics: [
           "Microsoft Azure Architecture Basics",
@@ -1371,7 +1371,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "Compute & Containerization",
-        hours: 15,
+        hours: 21,
         summary: "Deploy applications using VMs and managed containers",
         topics: [
           "Virtual Machines Setup",
@@ -1384,7 +1384,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "Databases & Migration",
-        hours: 8,
+        hours: 11,
         summary: "Manage relational and NoSQL databases in the cloud",
         topics: [
           "Managed Relational Databases",
@@ -1397,7 +1397,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "Automation & Monitoring",
-        hours: 15,
+        hours: 21,
         summary: "Implement CI/CD and monitor cloud resources",
         topics: [
           "Infrastructure as Code (IaC)",
@@ -1903,11 +1903,11 @@ export const programDetails: readonly ProgramDetail[] = [
     category: "IT Support",
     title: "IT Support Analyst",
     description: "Structured training in diagnosing hardware, network, and systems issues, and delivering the day-to-day technical support that keeps a business running.",
-    hours: 50,
+    hours: 60,
     modules: [
       {
         title: "Hardware & OS Fundamentals",
-        hours: 12,
+        hours: 14,
         summary: "Troubleshoot and manage end-user devices",
         topics: [
           "Computer Hardware Components",
@@ -1920,7 +1920,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "Networking & Infrastructure",
-        hours: 15,
+        hours: 18,
         summary: "Manage local networks and connectivity",
         topics: [
           "TCP/IP Protocols",
@@ -1933,7 +1933,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "Systems Administration",
-        hours: 8,
+        hours: 10,
         summary: "Administer user accounts and directory services",
         topics: [
           "Active Directory Management",
@@ -1946,7 +1946,7 @@ export const programDetails: readonly ProgramDetail[] = [
       },
       {
         title: "IT Service Management",
-        hours: 15,
+        hours: 18,
         summary: "Deliver excellent technical support and manage tickets",
         topics: [
           "Help Desk Ticketing Systems",
@@ -2016,6 +2016,250 @@ export const programDetails: readonly ProgramDetail[] = [
           "Remote Support Tools",
           "IT Documentation",
           "Incident Escalation Procedures",
+        ]
+      },
+    ]
+  },
+  {
+    slug: "dotnet-full-stack-developer",
+    category: "Web Development",
+    title: ".NET Full Stack Developer",
+    description: "Structured, project-based training in the Microsoft stack — C# and ASP.NET Core on the server, a modern JavaScript framework on the client, and Azure for deployment.",
+    hours: 50,
+    modules: [
+      {
+        title: "Frontend Development Stack",
+        hours: 12,
+        summary: "Build the interfaces that sit in front of a .NET service",
+        topics: [
+          "HTML5 & CSS3 Layout",
+          "JavaScript ES6+ & TypeScript",
+          "Angular or React Components",
+          "Blazor & Razor Pages",
+          "State Management",
+          "Responsive Design Patterns",
+        ]
+      },
+      {
+        title: "C# & ASP.NET Core",
+        hours: 15,
+        summary: "Write the server-side application and its APIs",
+        topics: [
+          "C# Language & OOP Fundamentals",
+          "LINQ & Collections",
+          "ASP.NET Core MVC & Minimal APIs",
+          "Dependency Injection & Middleware",
+          "Authentication with Identity & JWT",
+          "Validation & Error Handling",
+        ]
+      },
+      {
+        title: "Data Access & Architecture",
+        hours: 13,
+        summary: "Persist, query and structure application data",
+        topics: [
+          "SQL Server Schema Design",
+          "Entity Framework Core & Migrations",
+          "Repository & Unit of Work Patterns",
+          "Query Performance & Indexing",
+          "Caching with Redis",
+          "Unit & Integration Testing",
+        ]
+      },
+      {
+        title: "Azure Deployment & DevOps",
+        hours: 10,
+        summary: "Ship the application and keep it running",
+        topics: [
+          "Azure App Service & SQL Database",
+          "Docker Containerization",
+          "Azure DevOps Pipelines",
+          "Configuration & Secrets Management",
+          "Application Insights Monitoring",
+          "Scaling & Security Hardening",
+        ]
+      },
+    ]
+  },
+  {
+    slug: "quality-analyst",
+    category: "Analyst Roles",
+    title: "Quality Analyst",
+    description: "Structured training in software testing and QA automation — building the test suites and defect workflows that catch problems before your users do.",
+    hours: 50,
+    modules: [
+      {
+        title: "Testing Foundations",
+        hours: 10,
+        summary: "Understand how quality work fits a delivery team",
+        topics: [
+          "Software Development Life Cycle",
+          "Test Levels & Test Types",
+          "Agile & Scrum Testing Practices",
+          "Test Planning & Estimation",
+          "Requirement Analysis",
+          "Entry & Exit Criteria",
+        ]
+      },
+      {
+        title: "Manual Testing & Defect Management",
+        hours: 12,
+        summary: "Design cases, run them, and track what they find",
+        topics: [
+          "Test Case Design Techniques",
+          "Exploratory & Regression Testing",
+          "JIRA Workflows & Issue Tracking",
+          "Defect Life Cycle & Triage",
+          "Test Data Preparation",
+          "Traceability Matrices",
+        ]
+      },
+      {
+        title: "Test Automation with Selenium",
+        hours: 16,
+        summary: "Replace repetitive manual runs with maintainable code",
+        topics: [
+          "Selenium WebDriver Fundamentals",
+          "Locators & Waits",
+          "Page Object Model Design",
+          "TestNG & JUnit Frameworks",
+          "Data-Driven & Keyword-Driven Suites",
+          "Reporting & Failure Analysis",
+        ]
+      },
+      {
+        title: "API, Performance & CI Integration",
+        hours: 12,
+        summary: "Test below the interface and run suites automatically",
+        topics: [
+          "REST API Testing with Postman",
+          "Rest Assured Automation",
+          "Performance Testing with JMeter",
+          "Load & Stress Test Design",
+          "CI Pipelines with Jenkins",
+          "Test Environments & Version Control",
+        ]
+      },
+    ]
+  },
+  {
+    slug: "salesforce-administrator-developer",
+    category: "Enterprise Platforms",
+    title: "Salesforce Administrator & Developer",
+    description: "Structured training across both Salesforce tracks — configuring and administering an org, then extending it with Apex, Lightning components and integrations.",
+    hours: 50,
+    modules: [
+      {
+        title: "Platform Fundamentals & Org Setup",
+        hours: 12,
+        summary: "Configure the org an admin is responsible for",
+        topics: [
+          "Salesforce Data Model & Objects",
+          "Custom Fields & Relationships",
+          "Page Layouts & Record Types",
+          "Users, Profiles & Permission Sets",
+          "Org-Wide Defaults & Sharing Rules",
+          "Data Import & Export Tools",
+        ]
+      },
+      {
+        title: "Declarative Automation & Analytics",
+        hours: 13,
+        summary: "Build business logic without writing code",
+        topics: [
+          "Flow Builder & Record-Triggered Flows",
+          "Validation & Formula Fields",
+          "Approval Processes",
+          "Reports & Report Types",
+          "Dashboards & Dynamic Filters",
+          "Sales & Service Cloud Basics",
+        ]
+      },
+      {
+        title: "Apex & Lightning Development",
+        hours: 15,
+        summary: "Extend the platform where configuration runs out",
+        topics: [
+          "Apex Language Fundamentals",
+          "SOQL & SOSL Queries",
+          "Triggers & Trigger Frameworks",
+          "Governor Limits & Bulkification",
+          "Lightning Web Components",
+          "Apex Test Classes & Coverage",
+        ]
+      },
+      {
+        title: "Integration, Deployment & Certification",
+        hours: 10,
+        summary: "Connect the org to other systems and release safely",
+        topics: [
+          "REST & SOAP API Integration",
+          "Platform Events & Outbound Messaging",
+          "Sandboxes & Change Sets",
+          "Salesforce DX & Version Control",
+          "Security Review Best Practices",
+          "Administrator & Platform Developer I Prep",
+        ]
+      },
+    ]
+  },
+  {
+    slug: "sap-consultant",
+    category: "Enterprise Platforms",
+    title: "SAP Consultant",
+    description: "Structured training across the functional, technical and Basis sides of SAP S/4HANA — the platform that runs finance, supply chain and operations at enterprise scale.",
+    hours: 50,
+    modules: [
+      {
+        title: "S/4HANA Foundations",
+        hours: 12,
+        summary: "Learn the platform and how enterprises run on it",
+        topics: [
+          "SAP Architecture & Landscape",
+          "S/4HANA vs ECC Differences",
+          "Navigation & SAP Fiori Launchpad",
+          "Organisational Structures",
+          "Master Data Concepts",
+          "End-to-End Business Processes",
+        ]
+      },
+      {
+        title: "Functional Configuration",
+        hours: 14,
+        summary: "Configure the modules a functional consultant owns",
+        topics: [
+          "Financial Accounting (FI) Configuration",
+          "Controlling (CO) Cost Objects",
+          "Materials Management (MM) Procurement",
+          "Sales & Distribution (SD) Order Cycle",
+          "Integration Points Between Modules",
+          "Customising with IMG",
+        ]
+      },
+      {
+        title: "Technical Track: ABAP & Fiori",
+        hours: 14,
+        summary: "Build and extend where standard configuration stops",
+        topics: [
+          "ABAP Programming Fundamentals",
+          "Data Dictionary & Internal Tables",
+          "Reports, ALV & Module Pool",
+          "Enhancements, BAdIs & User Exits",
+          "OData Services & CDS Views",
+          "Fiori Elements & UI5 Basics",
+        ]
+      },
+      {
+        title: "Basis, Migration & Delivery",
+        hours: 10,
+        summary: "Administer the system and run a real implementation",
+        topics: [
+          "System Administration & Monitoring",
+          "Transport Management System",
+          "User Roles & Authorisations",
+          "Data Migration with Migration Cockpit",
+          "SAP Activate Implementation Methodology",
+          "Cutover & Go-Live Support",
         ]
       },
     ]

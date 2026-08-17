@@ -2,24 +2,24 @@ import { ButtonLink } from "@/components/Button";
 import { CalendarIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
-import { quotePanel, quoteSteps } from "@/content/pricing";
 import { consultationMessage, whatsAppUrl } from "@/content/site";
+import { quotePanel, quoteSteps } from "@/content/trainingStructure";
 
 /**
- * Stands in for a price table. The source this page's structure follows puts
- * pricing behind a sign-in; there's no account system here, so the equivalent
- * is a written quote that comes out of the consultation.
+ * Stands in for a price table. Each stage is quoted separately and a pathway
+ * is assembled per candidate, so what the page can publish is the route to a
+ * firm number rather than the number itself.
  */
-export function PricingQuote() {
+export function QuoteProcess() {
   return (
-    <section id="how-pricing-works" className="px-md pt-section tablet:px-lg">
+    <section id="what-it-costs" className="px-md pt-section tablet:px-lg">
       <div className="mx-auto max-w-content">
         <div className="grid gap-lg desktop:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] desktop:gap-xl">
           <Reveal>
             <div className="flex h-full flex-col justify-between rounded-2xl border border-hairline bg-surface-1 p-xl shadow-card tablet:p-xxl">
               <div>
                 <p className="text-eyebrow uppercase text-primary">
-                  How pricing works
+                  What it costs
                 </p>
                 <h2 className="mt-sm text-headline-sm text-ink">
                   {quotePanel.heading}

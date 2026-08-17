@@ -1,11 +1,11 @@
 import { ButtonLink } from "@/components/Button";
 import { ArrowRightIcon, CalendarIcon } from "@/components/icons";
-import { pricingHero } from "@/content/pricing";
 import { consultationMessage, whatsAppUrl } from "@/content/site";
+import { structureHero } from "@/content/trainingStructure";
 
-export function PricingHero() {
+export function StructureHero() {
   return (
-    <section id="pricing" className="px-md pt-md tablet:px-lg tablet:pt-lg">
+    <section id="training-structure" className="px-md pt-md tablet:px-lg tablet:pt-lg">
       <div className="relative mx-auto max-w-content overflow-hidden rounded-2xl bg-inverse-canvas px-lg py-xxxl tablet:px-xxl">
         <div aria-hidden="true" className="absolute inset-0 bg-mesh" />
         <div aria-hidden="true" className="absolute inset-0 bg-grid" />
@@ -16,22 +16,22 @@ export function PricingHero() {
               aria-hidden="true"
               className="h-1.5 w-1.5 rounded-full bg-accent"
             />
-            {pricingHero.eyebrow}
+            {structureHero.eyebrow}
           </p>
 
           <h1 className="mt-lg text-display-xl-mobile tablet:text-display-xl-tablet text-inverse-ink">
-            {pricingHero.headline}{" "}
-            <span className="text-gradient">{pricingHero.headlineAccent}</span>
+            {structureHero.headline}{" "}
+            <span className="text-gradient">{structureHero.headlineAccent}</span>
           </h1>
 
           <p className="mt-lg max-w-2xl text-body-lg text-inverse-ink-muted">
-            {pricingHero.body}
+            {structureHero.body}
           </p>
 
           <div className="mt-xl flex flex-wrap gap-sm">
             <ButtonLink href={whatsAppUrl(consultationMessage)}>
               <CalendarIcon className="h-md w-md" />
-              Get a written quote
+              Book free consultation
             </ButtonLink>
             <ButtonLink href="/#programs" variant="glass">
               Browse programs

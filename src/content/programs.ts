@@ -11,48 +11,6 @@ export const programCategories: readonly ProgramCategory[] = [
     name: "Web Development",
     programs: [
       {
-        title: "Full-Stack Web Development",
-        image: "program-full-stack-web-development",
-        description: [
-          "A ",
-          { token: "X" },
-          "-week, project-based curriculum covering front-end, back-end, deployment, and AI-assisted development workflows — built around the tools hiring partners actually use.",
-        ],
-        meta: [
-          { token: "X" },
-          " hours · Beginner-friendly · Certificate on completion",
-        ],
-        ctaLabel: "Chat with an advisor"
-      },
-      {
-        title: "Front End Developer",
-        image: "program-front-end-developer",
-        description: [
-          "Structured training in the interfaces users actually interact with — layout, styling, and interactivity — built around real projects instead of isolated exercises over ",
-          { token: "X" },
-          " weeks.",
-        ],
-        meta: [
-          { token: "X" },
-          " hours · Beginner-friendly",
-        ],
-        ctaLabel: "Ask about this program"
-      },
-      {
-        title: "Backend Developer",
-        image: "program-backend-developer",
-        description: [
-          "Structured training in servers, APIs, and databases — the systems that power what users see on the front end — over ",
-          { token: "X" },
-          " weeks.",
-        ],
-        meta: [
-          { token: "X" },
-          " hours · Some technical background helpful",
-        ],
-        ctaLabel: "Get program details"
-      },
-      {
         title: "Python Full Stack Developer",
         image: "program-python-full-stack-developer",
         description: "Structured, project-based training in Python-based full-stack development — front-end frameworks through to backend APIs, databases, and cloud deployment.",
@@ -67,6 +25,14 @@ export const programCategories: readonly ProgramCategory[] = [
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
         href: "/programs/java-full-stack-developer"
+      },
+      {
+        title: ".NET Full Stack Developer",
+        image: "program-dotnet-full-stack-developer",
+        description: "Structured, project-based training in the Microsoft stack — C# and ASP.NET Core on the server, a modern JavaScript framework on the client, and Azure for deployment.",
+        meta: "50 hours · Beginner-friendly · Certificate on completion",
+        ctaLabel: "View full curriculum",
+        href: "/programs/dotnet-full-stack-developer"
       },
     ]
   },
@@ -114,7 +80,7 @@ export const programCategories: readonly ProgramCategory[] = [
         title: "AI Consultant",
         image: "program-ai-consultant",
         description: "Structured training in advising organizations on where and how AI actually fits their operations — grounded in practical implementation, not hype.",
-        meta: "50 hours · Some professional background helpful · Certificate on completion",
+        meta: "70 hours · Some professional background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
         href: "/programs/ai-consultant"
       },
@@ -249,16 +215,6 @@ export const programCategories: readonly ProgramCategory[] = [
     name: "Cloud",
     programs: [
       {
-        title: "Cloud Fundamentals (AWS / Azure / GCP)",
-        image: "program-cloud-fundamentals",
-        description: "Hands-on training on the cloud platforms most in demand locally, including their AI and machine learning services, aligned to entry-level certification paths.",
-        meta: [
-          { token: "X" },
-          " hours · Beginner-friendly",
-        ],
-        ctaLabel: "Speak with an advisor"
-      },
-      {
         title: "Google Cloud Engineer",
         image: "program-google-cloud-engineer",
         brand: {
@@ -284,7 +240,7 @@ export const programCategories: readonly ProgramCategory[] = [
           ]
         },
         description: "Structured training across the core AWS services — compute, storage, networking, and identity — through to automation and monitoring, aligned to AWS certification paths.",
-        meta: "50 hours · Beginner-friendly · Certificate on completion",
+        meta: "70 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
         href: "/programs/aws-cloud-engineer"
       },
@@ -299,7 +255,7 @@ export const programCategories: readonly ProgramCategory[] = [
           ]
         },
         description: "Structured training across the core Microsoft Azure services — compute, storage, networking, and identity — through to automation and monitoring, aligned to Azure certification paths.",
-        meta: "50 hours · Beginner-friendly · Certificate on completion",
+        meta: "70 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
         href: "/programs/azure-cloud-engineer"
       },
@@ -406,12 +362,10 @@ export const programCategories: readonly ProgramCategory[] = [
       {
         title: "Quality Analyst",
         image: "program-quality-analyst",
-        description: "Structured training in testing and quality assurance — finding what's broken before your users do.",
-        meta: [
-          { token: "X" },
-          " hours · Beginner-friendly",
-        ],
-        ctaLabel: "Ask a quick question"
+        description: "Structured training in software testing and QA automation — building the test suites and defect workflows that catch problems before your users do.",
+        meta: "50 hours · Beginner-friendly · Certificate on completion",
+        ctaLabel: "View full curriculum",
+        href: "/programs/quality-analyst"
       },
     ]
   },
@@ -419,60 +373,10 @@ export const programCategories: readonly ProgramCategory[] = [
     name: "IT Support",
     programs: [
       {
-        title: "IT Support",
-        image: "program-it-support",
-        description: "Structured training in diagnosing and resolving the everyday technical issues that keep a business running.",
-        meta: [
-          { token: "X" },
-          " hours · Beginner-friendly",
-        ],
-        ctaLabel: "Message us about this role"
-      },
-      {
-        title: "Incident Management",
-        image: "program-incident-management",
-        description: "Structured training in coordinating the response when systems go down — combining technical judgment with clear communication under pressure.",
-        meta: [
-          { token: "X" },
-          " hours · Some technical background helpful",
-        ],
-        ctaLabel: "Learn if this is right for you"
-      },
-      {
-        title: "Application Support",
-        image: "program-application-support",
-        description: "Structured training in keeping business-critical applications running and resolving issues before they affect users.",
-        meta: [
-          { token: "X" },
-          " hours · Some technical background helpful",
-        ],
-        ctaLabel: "Get started"
-      },
-      {
-        title: "Production Support",
-        image: "program-production-support",
-        description: "Structured training in monitoring and maintaining live systems — the frontline role between a working system and a broken one.",
-        meta: [
-          { token: "X" },
-          " hours · Some technical background helpful",
-        ],
-        ctaLabel: "Reserve your spot"
-      },
-      {
-        title: "System Administrator",
-        image: "program-system-administrator",
-        description: "Structured training in managing the servers, networks, and systems that everything else runs on.",
-        meta: [
-          { token: "X" },
-          " hours · Some technical background helpful",
-        ],
-        ctaLabel: "Book a quick chat"
-      },
-      {
         title: "IT Support Analyst",
         image: "program-it-support-analyst",
         description: "Structured training in diagnosing hardware, network, and systems issues, and delivering the day-to-day technical support that keeps a business running.",
-        meta: "50 hours · Beginner-friendly · Certificate on completion",
+        meta: "60 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
         href: "/programs/it-support-analyst"
       },
@@ -483,6 +387,27 @@ export const programCategories: readonly ProgramCategory[] = [
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
         href: "/programs/microsoft-365-it-support"
+      },
+    ]
+  },
+  {
+    name: "Enterprise Platforms",
+    programs: [
+      {
+        title: "Salesforce Administrator & Developer",
+        image: "program-salesforce-administrator-developer",
+        description: "Structured training across both Salesforce tracks — configuring and administering an org, then extending it with Apex, Lightning components and integrations.",
+        meta: "50 hours · Beginner-friendly · Certificate on completion",
+        ctaLabel: "View full curriculum",
+        href: "/programs/salesforce-administrator-developer"
+      },
+      {
+        title: "SAP Consultant",
+        image: "program-sap-consultant",
+        description: "Structured training across the functional, technical and Basis sides of SAP S/4HANA — the platform that runs finance, supply chain and operations at enterprise scale.",
+        meta: "50 hours · Some professional background helpful · Certificate on completion",
+        ctaLabel: "View full curriculum",
+        href: "/programs/sap-consultant"
       },
     ]
   },

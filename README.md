@@ -1,20 +1,21 @@
-# Shubham landing
+# Aviro Work
 
-Marketing site for an IT training and placement business: a long-form landing
-page plus a curriculum page for each program in the catalogue.
+Marketing site for Aviro Work, an IT training and placement business serving
+the UK and Canada: a long-form landing page, a training-structure page, and a
+curriculum page for each program in the catalogue.
 
-Built as a copy of [avirowork.vercel.app](https://avirowork.vercel.app/), which
-is itself a copy of [ncplconsulting.net/uk](https://www.ncplconsulting.net/uk).
-Copy, layout, design tokens and imagery were reproduced from the source; the
-rendered text of the landing page and of all 33 curriculum pages matches the
-original exactly.
+The programme model — instructor-led training, a project bootcamp, and resume
+marketing that runs until placement — follows the pattern established by
+NCPL Consulting. The catalogue covers the same 37 subjects. Copy, curricula,
+imagery and design are Aviro Work's own and are not reproduced from any other
+provider; keep it that way when editing.
 
 ## Stack
 
 - Next.js 15 (App Router, React 19), built with `output: "export"`
 - Tailwind CSS v4, configured entirely through `@theme` tokens
 - TypeScript
-- No UI or icon dependencies — the six icons the site uses are inlined
+- No UI or icon dependencies — the icons the site uses are inlined
 
 Every page is prerendered, so `npm run build` emits a complete static site to
 `out/` — plain HTML, CSS, JS and images with no server or database behind it.
@@ -46,8 +47,9 @@ src/
     layout.tsx              root layout, font, metadata
     globals.css             the entire design system (see below)
     page.tsx                landing page — composes the sections in order
-    pricing/                pricing page — what a pathway includes, and how it
-                            gets quoted; publishes no figures by design
+    training-structure/     how a programme runs: the three pathway stages,
+                            what we ask in return, and how a place is quoted.
+                            Publishes no figures for cost by design
     programs/[slug]/        curriculum page, statically generated per program
   components/               one component per landing-page section
     SectionHeading.tsx      shared eyebrow + headline + lead for every section
@@ -56,8 +58,9 @@ src/
     types.ts                shared content types
     site.ts                 brand, nav, hero, footer, WhatsApp links
     sections.ts             copy for every landing-page section
-    programs.ts             the 43-program catalogue
-    programDetails.ts       curricula for the 33 programs with detail pages
+    trainingStructure.ts    copy for the training-structure page
+    programs.ts             the 37-program catalogue
+    programDetails.ts       the curriculum behind each of the 37 programs
 public/
   images/                   section, audience, service and program photography
   images/icons/             "What's Included" icons
@@ -67,6 +70,20 @@ public/
 Content and presentation are kept apart: components hold no copy, and the files
 under `src/content` hold no markup. Editing the site's words does not mean
 touching a component.
+
+## The catalogue
+
+`programs.ts` (the cards) and `programDetails.ts` (the curricula) are joined by
+slug, and every program has a detail page. Three invariants are worth keeping,
+because nothing enforces them at build time:
+
+- every `href` in `programs.ts` resolves to a `slug` in `programDetails.ts`
+- a program's `meta` hours match its detail page's `hours`
+- a detail page's module hours sum to its stated `hours`
+
+Program hour counts follow the published programme: 50 hours as standard, 70
+for AI Consultant and the AWS and Azure Cloud Engineer tracks, 60 for IT
+Support Analyst.
 
 ## Design system
 
@@ -95,26 +112,22 @@ Four things worth knowing before editing:
 
 ## Pending data
 
-The source site deliberately publishes no invented statistics, and this copy
-keeps that behaviour. Figures the business has not supplied render as a visible
-dashed chip — `[X — pending real data]` — via `PendingChip`, rather than as a
-plausible-looking number.
+The site publishes no invented statistics. Figures the business has not
+supplied render as a visible dashed chip — `[X — pending real data]` — via
+`PendingChip`, rather than as a plausible-looking number.
 
 To fill one in, replace the `{ token: "X" }` entry in the relevant
 `src/content` file with the real text.
 
 ## Before going live
 
-Three things are placeholders inherited from the source and need real values:
-
 1. **WhatsApp number.** `whatsAppNumber` in `src/content/site.ts` is
    `[WHATSAPP_NUMBER_PENDING]`. Every consultation and program-enquiry CTA on
    the site routes through it, so nothing reaches a real inbox until it is set.
-2. **Logo.** `public/logo/logo-primary.webp` and `logo-reversed.webp` are still
-   the source site's wordmark. Swap both files; the dimensions are declared in
-   `site.ts`.
-3. **Pending-data chips.** Every remaining chip is a figure someone needs to
-   confirm — including the contact details in the footer.
-
-Imagery under `public/images` also comes from the source site and should be
-replaced with owned or licensed assets before a public launch.
+2. **Pending-data chips.** Every remaining chip is a figure someone needs to
+   confirm — placement-support duration, payment terms, currency and tax
+   treatment per region, the visa-sponsorship policy, and the contact details
+   in the footer.
+3. **Photography.** The imagery under `public/images` predates this build and
+   its provenance has not been confirmed. Verify each file is owned or
+   licensed, and replace anything that is not, before a public launch.

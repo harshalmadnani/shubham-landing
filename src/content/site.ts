@@ -7,7 +7,7 @@
  */
 
 export const site = {
-  name: "Shubham",
+  name: "Aviro Work",
   tagline: "IT training & placement support",
   description:
     "Structured IT training in web development, data, cloud and more, with placement support until you're hired.",
@@ -39,7 +39,7 @@ export function programEnquiryMessage(programTitle: string): string {
 
 export const navLinks = [
   { label: "Programs", href: "/#programs" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Training Structure", href: "/training-structure" },
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Who We Help", href: "/#who-we-help" },
   { label: "FAQ", href: "/#faq" },
@@ -50,7 +50,7 @@ export const hero = {
   /** Split so the second half can carry the brand gradient. */
   headline: "Structured training.",
   headlineAccent: "Real placement support.",
-  body: "Shubham trains people for IT careers in web development, data, and cloud, including the AI skills employers now expect — and stays with you through placement, not just through the syllabus.",
+  body: "Aviro Work trains people for IT careers in web development, data, and cloud, including the AI skills employers now expect — and stays with you through placement, not just through the syllabus.",
   image: "/images/hero-training-session.webp",
   imageAlt:
     "An instructor and learners reviewing work together on a laptop",
