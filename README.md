@@ -47,9 +47,9 @@ src/
     layout.tsx              root layout, font, metadata
     globals.css             the entire design system (see below)
     page.tsx                landing page — composes the sections in order
-    training-structure/     how a programme runs: the three pathway stages,
-                            what we ask in return, and how a place is quoted.
-                            Publishes no figures for cost by design
+    training-structure/     how a programme runs: the pathway stages, their
+                            prices per region, what we ask in return, and how
+                            to enrol
     programs/                the catalogue: all 37 cards, filterable by
                             specialization
     programs/[slug]/        curriculum page, statically generated per program
@@ -61,6 +61,7 @@ src/
     site.ts                 brand, nav, hero, footer, WhatsApp links
     sections.ts             copy for every landing-page section
     trainingStructure.ts    copy for the training-structure page
+    regions.ts              the UK and Canada price lists, and currency rules
     programs.ts             the 37-program catalogue
     programDetails.ts       the curriculum behind each of the 37 programs
 public/
@@ -125,6 +126,22 @@ Four things worth knowing before editing:
 - **The primary button is the accent, not ink.** On a white canvas a blue CTA
   is the clearest "click this" signal the page has; keep it that way rather
   than making every action equally loud.
+
+## Pricing
+
+`regions.ts` holds a price list per market. Three things to keep true:
+
+- **The two lists are independent.** Canada is that market's own pricing, not
+  a conversion of the UK figures — do not "correct" one against an exchange
+  rate.
+- **Stages link to prices by key**, never by display title, so renaming a
+  stage on the page cannot silently detach its price.
+- **The region switch sits above the prices**, never below them. A control
+  placed after the figures lets someone read a whole price list in the wrong
+  currency before discovering it was switchable.
+
+The choice persists in `localStorage` and is read after mount rather than
+during render, so the prerendered HTML and the first client render agree.
 
 ## Photography
 

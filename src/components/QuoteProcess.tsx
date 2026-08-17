@@ -6,9 +6,11 @@ import { consultationMessage, whatsAppUrl } from "@/content/site";
 import { quotePanel, quoteSteps } from "@/content/trainingStructure";
 
 /**
- * Stands in for a price table. Each stage is quoted separately and a pathway
- * is assembled per candidate, so what the page can publish is the route to a
- * firm number rather than the number itself.
+ * How someone goes from a published price to a place on a batch.
+ *
+ * This section used to stand in for a price table; the prices are on the page
+ * now, so it explains the arrangement behind them — stage-by-stage rather than
+ * a bundle — and the three steps to enrolling.
  */
 export function QuoteProcess() {
   return (
@@ -19,7 +21,7 @@ export function QuoteProcess() {
             <div className="flex h-full flex-col justify-between rounded-lg border border-hairline bg-surface-1 p-xl tablet:p-xxl">
               <div>
                 <p className="text-eyebrow uppercase text-ink-muted">
-                  What it costs
+                  How pricing works
                 </p>
                 <h2 className="mt-sm font-serif text-headline-sm text-ink">
                   {quotePanel.heading}

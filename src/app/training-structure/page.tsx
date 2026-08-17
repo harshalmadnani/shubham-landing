@@ -14,7 +14,7 @@ import { structureFaqs } from "@/content/trainingStructure";
 export const metadata: Metadata = {
   title: `Training Structure — ${site.name}`,
   description:
-    "How an AVIROwork Consultancy programme runs: instructor-led training — regular or AI-focused — a hands-on project bootcamp, and resume marketing that continues until you are hired.",
+    "How an AVIROwork Consultancy programme runs, and what each stage costs in the UK and Canada: instructor-led training — regular or AI-focused — a hands-on project bootcamp, and resume marketing that continues until you are hired.",
 };
 
 export default function TrainingStructurePage() {
@@ -29,7 +29,7 @@ export default function TrainingStructurePage() {
           items={structureFaqs}
           eyebrow="Structure FAQ"
           title="Questions about how it runs"
-          lead="Scheduling, attendance and what a place actually costs."
+          lead="Scheduling, attendance, payment and what each stage covers."
         />
         <CtaBanner />
       </main>

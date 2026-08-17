@@ -1,31 +1,56 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
+import { RegionSwitch, readStoredRegion, storeRegion } from "@/components/RegionSwitch";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TiltCard } from "@/components/TiltCard";
+import { DEFAULT_REGION, formatPrice } from "@/content/regions";
+import type { RegionId } from "@/content/regions";
 import { commitments, pathwayStages } from "@/content/trainingStructure";
 
 /**
- * The stages of a pathway, laid out as a sequence rather than a tier grid.
- * Each stage is quoted on its own, so these are steps you move through in
- * order — a price table would frame them as alternatives, which is the
- * opposite of how the programme runs.
+ * The stages of a pathway, each with its own price for the chosen market.
  *
- * The first two cards are the exception: they are the two training options, so
- * they carry `option A` / `option B` labels instead of a step number of their
- * own. Arrow connectors were dropped when the second option arrived — an arrow
- * between two alternatives would read as a sequence, which is wrong.
+ * The first two cards are the two training options, so they carry
+ * `option A` / `option B` labels rather than step numbers of their own. There
+ * are no arrow connectors: an arrow between two alternatives would read as a
+ * sequence, which is wrong.
+ *
+ * Region lives here rather than in a context because this is the only section
+ * that prices anything. It is read from storage after mount, not during
+ * render, so the prerendered HTML and the first client render agree — reading
+ * localStorage during render is the standard way this pattern hydration-errors.
  */
 export function PathwayStages() {
+  const [region, setRegion] = useState<RegionId>(DEFAULT_REGION);
+
+  useEffect(() => {
+    setRegion(readStoredRegion());
+  }, []);
+
+  const chooseRegion = (id: RegionId) => {
+    setRegion(id);
+    storeRegion(id);
+  };
+
   return (
     <section id="stages" className="px-md pt-section tablet:px-lg">
       <div className="mx-auto max-w-content">
         <SectionHeading
           eyebrow="The pathway"
-          title="What each stage involves"
+          title="What each stage involves, and what it costs"
           lead="Most providers deliver the training and stop there. A pathway carries you from your first session through to an offer — starting with whichever training track fits, then the stages you need."
         />
 
-        <div className="mt-xxl grid gap-lg tablet:grid-cols-2 desktop:grid-cols-4">
+        {/* The switch sits above the figures, never below them. */}
+        <div className="mt-xl">
+          <RegionSwitch value={region} onChange={chooseRegion} />
+        </div>
+
+        <div className="mt-xl grid gap-lg tablet:grid-cols-2 desktop:grid-cols-4">
           {pathwayStages.map((stage, index) => (
             <Reveal key={stage.title} delay={index * 80} className="h-full">
               <TiltCard className="h-full">
@@ -42,12 +67,16 @@ export function PathwayStages() {
                     <RichTextContent value={stage.body} />
                   </p>
 
+                  <p className="mt-lg font-serif text-display-md text-ink">
+                    {formatPrice(region, stage.priceKey)}
+                  </p>
+
                   {/* The two training options publish no hour count, so this
                       row holds its height rather than leaving a hole. */}
-                  <p className="mt-lg flex min-h-[1.6em] items-baseline gap-xs">
+                  <p className="mt-xs flex min-h-[1.6em] items-baseline gap-xs">
                     {stage.stat && (
                       <>
-                        <span className="font-serif text-headline-sm text-primary">
+                        <span className="text-body-emphasis text-primary">
                           {stage.stat}
                         </span>
                         <span className="text-body-sm text-ink-muted">

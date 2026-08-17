@@ -1,14 +1,14 @@
+import type { PriceKey } from "./regions";
 import type { FaqItem, RichText } from "./types";
 
 /**
  * Training Structure page copy.
  *
  * The page describes how a programme actually runs — hours, batches,
- * attendance, projects — and deliberately publishes no figures for cost. The
- * three stages are quoted separately, so a single headline price would be
- * wrong however it was written. Anything the business has not confirmed stays
- * a pending chip rather than a plausible invention, same as the rest of the
- * site.
+ * attendance, projects — and what each stage costs. Prices live in
+ * `regions.ts` keyed by market, because the UK and Canada have their own
+ * price lists rather than one converted into the other. A stage links to a
+ * price by key, never by its display title.
  */
 
 export const structureHero = {
@@ -26,6 +26,8 @@ export type PathwayStage = {
   /** Omitted for the two training options, which publish no hour count. */
   readonly stat?: string;
   readonly statLabel?: string;
+  /** Looks the stage's price up per region. */
+  readonly priceKey: PriceKey;
   readonly points: readonly RichText[];
 };
 
@@ -43,6 +45,7 @@ export const pathwayStages: readonly PathwayStage[] = [
   {
     step: "Stage 01 · option A",
     label: "Regular training",
+    priceKey: "regular-training",
     title: "Regular Training Program",
     body: "Live instructor-led teaching in your chosen subject, on a fixed schedule rather than a shelf of recordings.",
     points: [
@@ -57,6 +60,7 @@ export const pathwayStages: readonly PathwayStage[] = [
   {
     step: "Stage 01 · option B",
     label: "AI training",
+    priceKey: "ai-training",
     title: "AI Training Program",
     body: "The same structure, built around the AI skills employers now screen for — for anyone targeting an AI-titled role.",
     points: [
@@ -71,6 +75,7 @@ export const pathwayStages: readonly PathwayStage[] = [
   {
     step: "Stage 02",
     label: "Bootcamp",
+    priceKey: "bootcamp",
     title: "Hands-on project intensive",
     body: "The applied half of the pathway — building and shipping real work under deadline, rather than following along.",
     stat: "20",
@@ -86,6 +91,7 @@ export const pathwayStages: readonly PathwayStage[] = [
   {
     step: "Stage 03",
     label: "Resume marketing",
+    priceKey: "resume-marketing",
     title: "Positioning and placement support",
     body: "The part that usually stops the day a course ends. Here it runs until you have an offer.",
     stat: "1:1",
@@ -107,7 +113,7 @@ export const commitments: readonly { value: string; label: string }[] = [
   { value: "30 days", label: "maximum break before a rejoining fee applies" },
 ];
 
-/** What replaces a published price list. */
+/** How someone moves from a published price to a place on a batch. */
 export const quoteSteps: readonly { title: string; body: RichText }[] = [
   {
     title: "Book a consultation",
@@ -118,21 +124,21 @@ export const quoteSteps: readonly { title: string; body: RichText }[] = [
     body: "Which programme, whether the AI-focused track is the better fit, and how the bootcamp slots around your week.",
   },
   {
-    title: "Get it in writing",
-    body: "A written quote covering each stage you take, with flexible payment options discussed on the call so the schedule fits your circumstances.",
+    title: "Confirm and enrol",
+    body: "Written confirmation of the stages you are taking and the total, with flexible payment options discussed on the call so the schedule fits your circumstances.",
   },
 ];
 
 export const quotePanel = {
-  heading: "Why there are no prices on this page",
-  body: "The three stages are quoted separately, and a pathway is assembled around where you are starting from — so any single figure published here would be wrong for most people reading it. You get a firm number in writing before you commit to anything. It just comes from a conversation rather than a table.",
+  heading: "Priced by the stage, not by the bundle",
+  body: "Each stage is priced on its own, so you pay for the ones you take rather than a package built around someone else. Most people run all three in order — training, then the bootcamp, then resume marketing — but the training stage alone is a perfectly normal place to start, and you can add the rest later.",
 } as const;
 
 export const structureFaqs: readonly FaqItem[] = [
   {
     question: "Do I have to take all three stages?",
     answer:
-      "No. Each stage is quoted on its own, so you can take training alone, add the bootcamp when you want project experience, or come to us for resume marketing with skills you already have. Most people run all three in order, because that is the route that ends in an offer.",
+      "No. Each stage is priced on its own, so you can take training alone, add the bootcamp when you want project experience, or come to us for resume marketing with skills you already have. Most people run all three in order, because that is the route that ends in an offer.",
   },
   {
     question: "When do sessions run, and can I keep working?",
@@ -150,9 +156,9 @@ export const structureFaqs: readonly FaqItem[] = [
       "Recordings go up after every class, so you can catch up in your own time. We do ask for 90% attendance across live sessions and 75% overall compliance once self-study and labs are counted, because the people who hit those numbers are the ones who finish job-ready.",
   },
   {
-    question: "What currency are quotes issued in, and is tax included?",
+    question: "What currency are prices shown in, and is tax included?",
     answer:
-      "We work with candidates in the UK and Canada. UK quotes are in pounds sterling, with VAT added where it applies under UK rules. Canadian quotes are in Canadian dollars, with GST or HST added on top in line with Canadian rules. Tax is always shown separately, never folded into the headline figure.",
+      "Use the region switch above the prices to see the market you are in. UK prices are in pounds sterling, with VAT added where it applies under UK rules. Canadian prices are in Canadian dollars, with GST or HST added on top in line with Canadian rules. Tax is shown separately rather than folded into the figure, so the amount on the card is the fee itself.",
   },
   {
     question: "Do you support people who need visa sponsorship?",
