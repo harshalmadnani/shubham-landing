@@ -11,6 +11,14 @@ import { technologyMarks } from "@/content/logos";
  * a glance. `currentColor` on the paths plus `color` on the wrapper means a
  * multi-path mark stays one colour rather than needing per-path fills.
  *
+ * Two marks use an accurate darker variant instead of the value Simple Icons
+ * lists: React's own light-background blue, and a charcoal Tux, whose body is
+ * black rather than the beak-yellow the data file records. Both were far
+ * fainter on white than anything else here. The rest are exact — several sit
+ * under the 3:1 non-text ratio, but this strip is decorative and hidden from
+ * assistive tech, and muting a brand to chase a threshold that does not apply
+ * would make the marks wrong instead of readable.
+ *
  * The track renders the list twice and slides -50%, so the loop is seamless.
  * `prefers-reduced-motion` freezes it through the global media rule, leaving a
  * static strip that still reads.
