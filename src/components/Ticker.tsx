@@ -7,6 +7,10 @@ import { technologyMarks } from "@/content/logos";
  * programmes teach, and nothing here claims a partnership, an accreditation or
  * a hiring relationship with any of these companies. Keep it that way.
  *
+ * Marks render in their own brand colours, which is how each is recognised at
+ * a glance. `currentColor` on the paths plus `color` on the wrapper means a
+ * multi-path mark stays one colour rather than needing per-path fills.
+ *
  * The track renders the list twice and slides -50%, so the loop is seamless.
  * `prefers-reduced-motion` freezes it through the global media rule, leaving a
  * static strip that still reads.
@@ -32,7 +36,8 @@ export function Ticker() {
                     aria-label={mark.label}
                     viewBox={mark.viewBox}
                     fill="currentColor"
-                    className="h-xxl w-xxl text-ink-muted transition-colors duration-300 hover:text-ink"
+                    style={{ color: mark.color }}
+                    className="h-xxl w-xxl"
                   >
                     {mark.paths.map((d, index) => (
                       <path key={index} d={d} />

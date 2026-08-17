@@ -59,11 +59,14 @@ export type FaqItem = {
   readonly answer: RichText;
 };
 
-/** A vendor mark overlaid on a program card (AWS, Azure, Google Cloud). */
+/** A vendor mark: on a program card, or in the ticker under the hero. */
 export type Brand = {
   readonly label: string;
   readonly viewBox: string;
   readonly paths: readonly string[];
+  /** Official brand colour, `#rrggbb`. Set for the ticker, where the marks
+   *  render in their own colours; program cards ignore it and stay neutral. */
+  readonly color?: string;
 };
 
 export type Program = {
