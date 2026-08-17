@@ -77,7 +77,7 @@ export const pathwayStages: readonly PathwayStage[] = [
       "Profile positioning so recruiters can see your fit in one pass",
       "Your profile marketed directly to employers and recruitment partners",
       "Mock interviews and technical preparation before you start applying",
-      ["Support continues for ", { token: "duration" }, " — support, not a guaranteed offer"],
+      "Support continues until you are hired — support throughout, not a guaranteed offer",
     ],
   },
 ];
@@ -101,11 +101,7 @@ export const quoteSteps: readonly { title: string; body: RichText }[] = [
   },
   {
     title: "Get it in writing",
-    body: [
-      "A written quote covering each stage you take, with payment options — ",
-      { token: "payment terms" },
-      ".",
-    ],
+    body: "A written quote covering each stage you take, with flexible payment options discussed on the call so the schedule fits your circumstances.",
   },
 ];
 
@@ -123,7 +119,12 @@ export const structureFaqs: readonly FaqItem[] = [
   {
     question: "When do sessions run, and can I keep working?",
     answer:
-      "Sessions are an hour a day, with morning and evening batches to choose from. Everything is delivered online and recorded, so the programme is designed to sit alongside a full-time job.",
+      "Sessions are an hour a day, with morning and evening batches to choose from — the evening batch runs in UK hours specifically so it sits after a working day. Everything is delivered online and recorded, so the programme is built to fit around a full-time job.",
+  },
+  {
+    question: "Can I join from outside London?",
+    answer:
+      "Yes. Training is delivered online, so you can take part from anywhere the batch times work for you — that covers the UK and Canada alike. We also run in-person meetups and one-to-one sessions in London for anyone who wants them, but nothing on the programme depends on attending in person.",
   },
   {
     question: "What happens if I miss a session?",
@@ -137,14 +138,12 @@ export const structureFaqs: readonly FaqItem[] = [
   },
   {
     question: "Do you support people who need visa sponsorship?",
-    answer: [{ token: "sponsorship support policy" }],
+    answer:
+      "Yes — sponsorship-focused placement is a core part of what we do, and a large share of the people we work with are international candidates targeting UK tech roles. We help you identify licensed sponsoring employers, position your profile for them, and prepare for their process. We are a training and placement provider, not an immigration adviser, so we support the job search rather than the visa application itself.",
   },
   {
     question: "What happens if I need to pause partway through?",
-    answer: [
-      "Breaks of up to 30 days are fine — tell your mentor and we will hold your place. Beyond that a rejoining fee applies, and ",
-      { token: "refund/pause policy" },
-      ".",
-    ],
+    answer:
+      "Breaks of up to 30 days are fine — tell your mentor and we will hold your place. Beyond 30 days a rejoining fee applies, because your batch will have moved on and you will need to pick up with a later one. Talk to us early either way; pausing is far easier to arrange before you fall behind than after.",
   },
 ];

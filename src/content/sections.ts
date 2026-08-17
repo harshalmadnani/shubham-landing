@@ -16,11 +16,10 @@ export const proofPoints: readonly RichText[] = [
   // Counted from the catalogue, so adding a program cannot leave this stale.
   `${totalProgramCount} industry-aligned programs`,
   "50 hours of instructor-led training per program",
-  [
-    "Mentors with ",
-    { token: "X+" },
-    " years combined industry experience",
-  ],
+  // Replaced the "years of combined experience" figure: the strip is a
+  // three-column grid, and an unverifiable headline number is the weakest of
+  // the four things we could put here.
+  "Placement support that runs until you're hired",
 ];
 
 export const struggles: readonly Struggle[] = [
@@ -371,11 +370,7 @@ export const faqs: readonly FaqItem[] = [
   },
   {
     question: "What does \"placement support\" actually include?",
-    answer: [
-      "Resume review, interview preparation, and introductions to hiring partners, continuing for ",
-      { token: "X months" },
-      " after you complete the program. It is support, not a guarantee of a job offer.",
-    ]
+    answer: "An ATS-ready resume built around your target role, profile positioning, your profile marketed to employers and recruitment partners, mock interviews, and technical and behavioural preparation — continuing until you are hired rather than stopping the day the syllabus ends. It is support throughout the search, not a guarantee of a job offer."
   },
   {
     question: "Can I attend part-time alongside a job?",
@@ -383,10 +378,6 @@ export const faqs: readonly FaqItem[] = [
   },
   {
     question: "What happens if I don't finish the program?",
-    answer: [
-      "Breaks of up to 30 days are fine — tell your mentor and we will hold your place. Beyond that a rejoining fee applies, and ",
-      { token: "refund/pause policy" },
-      ".",
-    ]
+    answer: "Breaks of up to 30 days are fine — tell your mentor and we will hold your place. Beyond 30 days a rejoining fee applies, since your batch will have moved on and you would pick up with a later one. Either way, talk to us early: pausing is much easier to arrange before you fall behind."
   },
 ];

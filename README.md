@@ -119,15 +119,25 @@ supplied render as a visible dashed chip — `[X — pending real data]` — via
 To fill one in, replace the `{ token: "X" }` entry in the relevant
 `src/content` file with the real text.
 
-## Before going live
+## Enquiry routes
 
-1. **WhatsApp number.** `whatsAppNumber` in `src/content/site.ts` is
-   `[WHATSAPP_NUMBER_PENDING]`. Every consultation and program-enquiry CTA on
-   the site routes through it, so nothing reaches a real inbox until it is set.
-2. **Pending-data chips.** Every remaining chip is a figure someone needs to
-   confirm — placement-support duration, payment terms, currency and tax
-   treatment per region, the visa-sponsorship policy, and the contact details
-   in the footer.
-3. **Photography.** The imagery under `public/images` predates this build and
+Everything funnels to WhatsApp on `whatsAppNumber` in `src/content/site.ts`:
+
+- `ChatWithUs` — the floating button, pinned bottom-right on every page from
+  `layout.tsx`. Deliberately stateless so it is in the HTML at first paint;
+  `ScrollToTop` offsets itself above it.
+- Every hero, section and program CTA, via `whatsAppUrl(message)`.
+
+Changing that one constant repoints every route on the site.
+
+## Outstanding
+
+1. **Photography.** The imagery under `public/images` predates this build and
    its provenance has not been confirmed. Verify each file is owned or
-   licensed, and replace anything that is not, before a public launch.
+   licensed, and replace anything that is not.
+2. **Curriculum depth.** The 33 curricula that predate this build are
+   genericised — the Java page never names Spring, for instance. They are
+   accurate but vaguer than they should be, and thinner than what competitors
+   publish. Worth a pass to name the actual frameworks per module.
+3. **Outcome claims.** The site publishes no placement statistics, by choice.
+   Add them only once they are measured and can be defined precisely.

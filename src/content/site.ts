@@ -1,5 +1,3 @@
-import type { RichText } from "./types";
-
 /**
  * Site-wide identity and contact configuration.
  *
@@ -32,6 +30,10 @@ export function whatsAppUrl(message: string): string {
 export const consultationMessage =
   "Hi! I'd like to book a free consultation.";
 
+/** Opening line for the floating chat button, which carries no page context. */
+export const chatMessage =
+  "Hi! I'd like to know more about your training and placement support.";
+
 export function programEnquiryMessage(programTitle: string): string {
   return `Hi! I'm interested in the ${programTitle} program. Can you share more details?`;
 }
@@ -60,38 +62,44 @@ export const ctaBanner = {
   body: "No pressure, no commitment — just a real conversation about your goals, the right program, and what to expect.",
 } as const;
 
+/**
+ * Every link here resolves to a page that exists. Nothing points at "#", and
+ * no program is listed that is not in the catalogue.
+ */
 export const footerColumns = [
   {
     heading: "Programs",
     links: [
-      { label: "Full-Stack Web Development", href: "/#programs" },
-      { label: "Data Science & Analytics", href: "/#programs" },
-      { label: "Cloud Fundamentals", href: "/#programs" },
+      { label: "Java Full Stack Developer", href: "/programs/java-full-stack-developer" },
+      { label: "Data Analyst", href: "/programs/data-analyst" },
+      { label: "AWS Cloud Engineer", href: "/programs/aws-cloud-engineer" },
+      { label: "All 37 programs", href: "/#programs" },
     ],
   },
   {
-    heading: "Company",
+    heading: "Programme",
     links: [
-      { label: "About", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Contact", href: "#" },
+      { label: "Training Structure", href: "/training-structure" },
+      { label: "How It Works", href: "/#how-it-works" },
+      { label: "Who We Help", href: "/#who-we-help" },
     ],
   },
   {
-    heading: "Resources",
+    heading: "Get in touch",
     links: [
-      { label: "Blog", href: "#" },
+      { label: "Book a consultation", href: "/training-structure#what-it-costs" },
+      { label: "info@avirowork.com", href: "mailto:info@avirowork.com" },
       { label: "FAQ", href: "/#faq" },
     ],
   },
 ] as const;
 
-/**
- * Footer contact details. The phone number is live; the rest still need to come
- * from the business, so they stay as chips rather than plausible inventions.
- */
-export const footerContacts: readonly RichText[] = [
-  [{ token: "email" }],
-  "+44 7491 270610",
-  [{ token: "address" }],
+/** Footer contact details. `href` set where the detail is actionable. */
+export const footerContacts: readonly {
+  readonly label: string;
+  readonly href?: string;
+}[] = [
+  { label: "info@avirowork.com", href: "mailto:info@avirowork.com" },
+  { label: "+44 7491 270610", href: "tel:+447491270610" },
+  { label: "128 City Rd, London EC1V 2NX, United Kingdom" },
 ];

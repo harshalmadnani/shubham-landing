@@ -24,6 +24,11 @@
   --color-accent: #00c8ff;
   --color-accent-warm: #b845ff;
 
+  /* WhatsApp brand green. Deliberately outside the palette: the floating chat
+     button reads as "this opens WhatsApp" only if it looks like WhatsApp. */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #1eb959;
+
   --color-canvas: #ffffff;
   --color-surface-1: #f7f6fc;
   --color-surface-2: #efedf9;

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { PendingChip, RichTextContent } from "@/components/PendingData";
 import { footerColumns, footerContacts, site } from "@/content/site";
 
 export function Footer() {
@@ -54,14 +53,25 @@ export function Footer() {
 
         <div className="mt-xxxl border-t border-inverse-hairline pt-lg">
           <div className="flex flex-col gap-md tablet:flex-row tablet:items-center tablet:justify-between">
-            <ul className="flex flex-wrap gap-sm">
-              {footerContacts.map((contact, index) => (
-                <li key={index} className="text-body-sm text-inverse-ink-muted">
-                  <RichTextContent value={contact} tone="dark" />
+            <ul className="flex flex-wrap gap-x-lg gap-y-xs">
+              {footerContacts.map((contact) => (
+                <li
+                  key={contact.label}
+                  className="text-body-sm text-inverse-ink-muted"
+                >
+                  {contact.href ? (
+                    <a
+                      href={contact.href}
+                      className="transition-colors hover:text-inverse-ink"
+                    >
+                      {contact.label}
+                    </a>
+                  ) : (
+                    contact.label
+                  )}
                 </li>
               ))}
             </ul>
-            <PendingChip token="social links" tone="dark" />
           </div>
 
           <p className="mt-lg text-caption text-inverse-ink-muted">
