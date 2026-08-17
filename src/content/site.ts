@@ -38,7 +38,15 @@ export function programEnquiryMessage(programTitle: string): string {
   return `Hi! I'm interested in the ${programTitle} program. Can you share more details?`;
 }
 
+/**
+ * Primary navigation. "Home" earns its place now that the site is more than
+ * one page — from a curriculum page the logo was the only way back.
+ *
+ * Entries whose href carries a `#` are sections of the home page; the rest are
+ * pages in their own right, and the header highlights whichever one you are on.
+ */
 export const navLinks = [
+  { label: "Home", href: "/" },
   { label: "Programs", href: "/programs" },
   { label: "Training Structure", href: "/training-structure" },
   { label: "How It Works", href: "/#how-it-works" },
@@ -79,6 +87,7 @@ export const footerColumns = [
   {
     heading: "Programme",
     links: [
+      { label: "Home", href: "/" },
       { label: "Training Structure", href: "/training-structure" },
       { label: "How It Works", href: "/#how-it-works" },
       { label: "Who We Help", href: "/#who-we-help" },

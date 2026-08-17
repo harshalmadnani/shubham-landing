@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ButtonLink } from "@/components/Button";
@@ -13,9 +14,25 @@ import {
   whatsAppUrl,
 } from "@/content/site";
 
+/**
+ * Which nav entry, if any, describes the page you are on.
+ *
+ * Anchor links point at sections of the home page rather than pages, so they
+ * never light up. "/" matches only itself — otherwise it would be active
+ * everywhere — while a section root like "/programs" stays lit on the
+ * curriculum pages beneath it.
+ */
+function isCurrentPage(href: string, pathname: string): boolean {
+  if (href.includes("#")) return false;
+  const path = pathname.replace(/\/+$/, "") || "/";
+  if (href === "/") return path === "/";
+  return path === href || path.startsWith(`${href}/`);
+}
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
   const closeMenu = () => setIsMenuOpen(false);
 
   // The header is flush with the page at rest and only earns its border and
@@ -51,15 +68,23 @@ export function Header() {
           aria-label="Primary"
           className="hidden items-center gap-xxs desktop:flex"
         >
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-full px-md py-xs text-body-sm text-ink-muted transition-colors hover:bg-surface-1 hover:text-ink"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isCurrent = isCurrentPage(link.href, pathname);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={isCurrent ? "page" : undefined}
+                className={`rounded-full px-md py-xs text-body-sm transition-colors ${
+                  isCurrent
+                    ? "bg-surface-1 text-ink"
+                    : "text-ink-muted hover:bg-surface-1 hover:text-ink"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden desktop:block">
@@ -87,16 +112,24 @@ export function Header() {
       {isMenuOpen && (
         <div className="border-t border-hairline bg-canvas px-md py-lg desktop:hidden">
           <nav aria-label="Mobile" className="flex flex-col gap-xxs">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                className="rounded-md px-sm py-sm text-body text-ink-muted transition-colors hover:bg-surface-1 hover:text-ink"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isCurrent = isCurrentPage(link.href, pathname);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMenu}
+                  aria-current={isCurrent ? "page" : undefined}
+                  className={`rounded-md px-sm py-sm text-body transition-colors ${
+                    isCurrent
+                      ? "bg-surface-1 text-ink"
+                      : "text-ink-muted hover:bg-surface-1 hover:text-ink"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
           <ButtonLink
             href={whatsAppUrl(consultationMessage)}
