@@ -42,7 +42,7 @@ export function Hero() {
                 <CalendarIcon className="h-md w-md" />
                 Book free consultation
               </ButtonLink>
-              <ButtonLink href="/#programs" variant="glass">
+              <ButtonLink href="/programs" variant="glass">
                 Explore programs
                 <ArrowRightIcon className="h-md w-md transition-transform duration-200 group-hover/btn:translate-x-1" />
               </ButtonLink>

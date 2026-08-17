@@ -50,6 +50,8 @@ src/
     training-structure/     how a programme runs: the three pathway stages,
                             what we ask in return, and how a place is quoted.
                             Publishes no figures for cost by design
+    programs/                the catalogue: all 37 cards, filterable by
+                            specialization
     programs/[slug]/        curriculum page, statically generated per program
   components/               one component per landing-page section
     SectionHeading.tsx      shared eyebrow + headline + lead for every section
@@ -72,6 +74,12 @@ under `src/content` hold no markup. Editing the site's words does not mean
 touching a component.
 
 ## The catalogue
+
+The full grid lives on `/programs`, not on the landing page — with 37 cards on
+it the home page was mostly catalogue, and roughly twice the length it needed to
+be. `ProgramsTeaser` stands in for it there: the specializations and their
+counts, then a hand-off. Both derive from the same array, so adding a program
+updates the teaser, the tabs and the counts together.
 
 `programs.ts` (the cards) and `programDetails.ts` (the curricula) are joined by
 slug, and every program has a detail page. Three invariants are worth keeping,

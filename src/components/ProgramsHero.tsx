@@ -1,11 +1,11 @@
 import { ButtonLink } from "@/components/Button";
-import { ArrowRightIcon, CalendarIcon } from "@/components/icons";
+import { CalendarIcon } from "@/components/icons";
+import { programCategories, totalProgramCount } from "@/content/programs";
 import { consultationMessage, whatsAppUrl } from "@/content/site";
-import { structureHero } from "@/content/trainingStructure";
 
-export function StructureHero() {
+export function ProgramsHero() {
   return (
-    <section id="training-structure" className="px-md pt-md tablet:px-lg tablet:pt-lg">
+    <section className="px-md pt-md tablet:px-lg tablet:pt-lg">
       <div className="relative mx-auto max-w-content overflow-hidden rounded-2xl bg-inverse-canvas px-lg py-xxxl tablet:px-xxl">
         <div aria-hidden="true" className="absolute inset-0 bg-mesh" />
         <div aria-hidden="true" className="absolute inset-0 bg-grid" />
@@ -16,16 +16,18 @@ export function StructureHero() {
               aria-hidden="true"
               className="h-1.5 w-1.5 rounded-full bg-accent"
             />
-            {structureHero.eyebrow}
+            Programs
           </p>
 
           <h1 className="mt-lg text-display-xl-mobile tablet:text-display-xl-tablet text-inverse-ink">
-            {structureHero.headline}{" "}
-            <span className="text-gradient">{structureHero.headlineAccent}</span>
+            {totalProgramCount} programs,{" "}
+            <span className="text-gradient">one route into work.</span>
           </h1>
 
           <p className="mt-lg max-w-2xl text-body-lg text-inverse-ink-muted">
-            {structureHero.body}
+            Every program runs the same three stages — instructor-led training, a
+            hands-on bootcamp, then resume marketing until you are hired. Pick
+            the subject; the route through it is the same.
           </p>
 
           <div className="mt-xl flex flex-wrap gap-sm">
@@ -33,11 +35,15 @@ export function StructureHero() {
               <CalendarIcon className="h-md w-md" />
               Book free consultation
             </ButtonLink>
-            <ButtonLink href="/programs" variant="glass">
-              Browse programs
-              <ArrowRightIcon className="h-md w-md transition-transform duration-200 group-hover/btn:translate-x-1" />
+            <ButtonLink href="/training-structure" variant="glass">
+              How the training works
             </ButtonLink>
           </div>
+
+          <p className="mt-xl text-body-sm text-inverse-ink-muted">
+            {programCategories.length} specializations ·{" "}
+            {totalProgramCount} programs · every one with a full curriculum
+          </p>
         </div>
       </div>
     </section>

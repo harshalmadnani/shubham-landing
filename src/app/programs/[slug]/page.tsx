@@ -61,7 +61,7 @@ export default async function ProgramPage({ params }: PageProps) {
 
             <div className="relative">
               <Link
-                href="/#programs"
+                href="/programs"
                 className="inline-flex items-center gap-xs text-body-sm text-inverse-ink-muted transition-colors hover:text-inverse-ink"
               >
                 <ArrowRightIcon className="h-md w-md rotate-180" />

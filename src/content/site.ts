@@ -39,7 +39,7 @@ export function programEnquiryMessage(programTitle: string): string {
 }
 
 export const navLinks = [
-  { label: "Programs", href: "/#programs" },
+  { label: "Programs", href: "/programs" },
   { label: "Training Structure", href: "/training-structure" },
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Who We Help", href: "/#who-we-help" },
@@ -73,7 +73,7 @@ export const footerColumns = [
       { label: "Java Full Stack Developer", href: "/programs/java-full-stack-developer" },
       { label: "Data Analyst", href: "/programs/data-analyst" },
       { label: "AWS Cloud Engineer", href: "/programs/aws-cloud-engineer" },
-      { label: "All 37 programs", href: "/#programs" },
+      { label: "All 37 programs", href: "/programs" },
     ],
   },
   {

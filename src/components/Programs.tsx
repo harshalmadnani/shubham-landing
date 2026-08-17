@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { RichTextContent } from "@/components/PendingData";
-import { SectionHeading } from "@/components/SectionHeading";
 import { programCategories, totalProgramCount } from "@/content/programs";
 import { programEnquiryMessage, whatsAppUrl } from "@/content/site";
 import type { Program } from "@/content/types";
@@ -109,18 +108,12 @@ export function Programs() {
   ];
 
   return (
-    <section id="programs" className="px-md pt-section tablet:px-lg">
+    <section className="px-md pt-section tablet:px-lg">
       <div className="mx-auto max-w-content">
-        <SectionHeading
-          eyebrow="Programs"
-          title={`${totalProgramCount} programs across ${programCategories.length} specializations`}
-          lead="From hands-on technical roles to the analyst and support paths around them."
-        />
-
         <div
           role="tablist"
           aria-label="Program categories"
-          className="mt-xl flex flex-wrap gap-xs"
+          className="flex flex-wrap gap-xs"
         >
           {tabs.map((tab) => {
             const isSelected = tab.name === activeCategory;
