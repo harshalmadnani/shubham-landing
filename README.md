@@ -140,6 +140,11 @@ Two rules, both deliberate:
   some are Unsplash photographs, some are generated. An image nobody can
   account for is how the previous asset folder became a liability. If you add
   one, add its row.
+- **They are graded to match.** Raw, the nine spanned a 4.5x brightness range
+  and a 6.7x saturation range and read as nine unrelated pictures. All are
+  graded to roughly L70 with a common cool cast. A new banner needs the same
+  treatment or it will stand out; the grading pass is a short script, not a
+  hand edit.
 
 ## Pending data
 
