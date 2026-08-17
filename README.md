@@ -65,7 +65,9 @@ src/
     programDetails.ts       the curriculum behind each of the 37 programs
 public/
   logo/                     wordmark, light and reversed
-  og.png                    share image: wordmark on paper, one cobalt rule
+  images/                   one banner per specialization
+  images/CREDITS.json       where every image came from — read before adding one
+  og.png                    share image: wordmark, one accent rule
 ```
 
 Content and presentation are kept apart: components hold no copy, and the files
@@ -112,12 +114,32 @@ Four things worth knowing before editing:
   silently turn `max-w-3xl` into a 72px clamp. Same trap applies to `xs`, `sm`,
   `md`, `lg` and `xl` — those steps exist, so `max-w-xl` is 32px, not 36rem.
   Use `max-w-2xl`/`max-w-3xl` or an arbitrary `max-w-[…]`.
-- **The look is editorial, not decorative.** Warm paper canvas, warm
-  near-black ink, one cobalt accent, Fraunces for display type, hairlines for
-  structure — and no photography or generated artwork anywhere. The legacy
-  utility names (`text-gradient`, `bg-brand-gradient`, `bg-mesh`, `bg-grid`,
-  `glass`) still exist but resolve to flat, on-palette styles, so a straggler
-  cannot reintroduce neon.
+- **The look is a hybrid.** White canvas, near-black ink and one azure accent
+  give the clarity of a large course platform; Fraunces is held back for `h1`
+  and section `h2` only, which is what keeps the site from looking like every
+  other education template. Card titles, numerals and UI chrome are all sans.
+  If you add a heading, ask whether it is a page-level moment — if not, it is
+  sans. The legacy utility names (`text-gradient`, `bg-brand-gradient`,
+  `bg-mesh`, `bg-grid`, `glass`) still exist but resolve to flat, on-palette
+  styles, so a straggler cannot reintroduce the old neon.
+- **The primary button is the accent, not ink.** On a white canvas a blue CTA
+  is the clearest "click this" signal the page has; keep it that way rather
+  than making every action equally loud.
+
+## Photography
+
+`public/images` holds one banner per specialization, wired up through
+`categoryImage()` in `programs.ts` and keyed on the category name, so a new
+category with no image fails visibly rather than rendering a broken `src`.
+
+Two rules, both deliberate:
+
+- **No people.** Stock faces beside a training business imply students we
+  cannot vouch for. Objects, screens and spaces only.
+- **Provenance is recorded.** `CREDITS.json` names the source of every file —
+  some are Unsplash photographs, some are generated. An image nobody can
+  account for is how the previous asset folder became a liability. If you add
+  one, add its row.
 
 ## Pending data
 
@@ -141,9 +163,10 @@ Changing that one constant repoints every route on the site.
 
 ## Outstanding
 
-1. ~~Photography~~ — resolved. The redesign removed `public/images`
-   entirely; the site ships no photography or generated artwork, so the
-   unverified-provenance risk went with it.
+1. **Replace the stand-in photography.** The nine category banners are
+   licensed or generated stand-ins with their provenance recorded. Real
+   photographs of your own sessions and workspaces would beat all of them,
+   and swapping them is a same-named file drop with no code change.
 2. **Curriculum review by a practitioner.** All 37 curricula are now distinct
    and name real tooling, but nobody who teaches these subjects has signed
    them off. Have each track's trainer read their own page and correct it —

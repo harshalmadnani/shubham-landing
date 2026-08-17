@@ -36,7 +36,7 @@ export function OurApproach() {
                   onClick={() => setSelectedIndex(index)}
                   className={`flex items-center gap-md rounded-xl border p-lg text-left transition-[background-color,border-color,box-shadow,transform] duration-300 ${
                     isSelected
-                      ? "border-transparent bg-ink"
+                      ? "border-transparent bg-primary"
                       : "border-hairline bg-canvas hover:border-ink/40"
                   }`}
                 >
@@ -82,7 +82,7 @@ export function OurApproach() {
                 return (
                   <li key={step.title} className="flex gap-md">
                     <div className="flex flex-col items-center">
-                      <span className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-ink font-serif text-body text-inverse-ink">
+                      <span className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-primary text-body-emphasis text-on-primary">
                         {index + 1}
                       </span>
                       {/* Connector down to the next step. */}

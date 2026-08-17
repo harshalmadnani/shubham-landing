@@ -25,12 +25,12 @@ export function WhoWeHelp() {
               <TiltCard className="h-full">
                 <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-ink/40">
                 <div className="flex items-baseline justify-between gap-md">
-                  <p className="font-serif text-headline-sm text-ink">
+                  <p className="text-card-title font-semibold text-ink">
                     {audience.title}
                   </p>
                   <span
                     aria-hidden="true"
-                    className="font-serif text-headline-sm text-ink-subtle"
+                    className="text-card-title font-semibold text-ink-subtle"
                   >
                     {String(index + 1).padStart(2, "0")}
                   </span>

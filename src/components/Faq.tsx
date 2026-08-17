@@ -64,7 +64,7 @@ export function Faq({
                   <span
                     className={`flex h-xl w-xl shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
                       isOpen
-                        ? "bg-ink text-inverse-ink"
+                        ? "bg-primary text-on-primary"
                         : "bg-surface-1 text-ink-muted"
                     }`}
                   >

@@ -123,10 +123,10 @@ export function HeroScene() {
               <p className="text-eyebrow uppercase text-ink-subtle">
                 {card.stage}
               </p>
-              <p className="mt-xs font-serif text-headline-sm text-ink">
+              <p className="mt-xs text-card-title font-semibold text-ink">
                 {card.title}
               </p>
-              <p className="mt-md font-serif text-display-md text-primary">
+              <p className="mt-md text-display-md font-semibold text-primary">
                 {card.stat}
               </p>
               <p className="mt-xs text-body-sm text-ink-muted">{card.note}</p>

@@ -35,7 +35,7 @@ export function WhatYouCanExpect() {
                 <div
                   className={`h-full rounded-lg p-xl ${cardTone[expectation.tone]}`}
                 >
-                <p className="font-serif text-headline-sm">
+                <p className="text-card-title font-semibold">
                   {expectation.title}
                 </p>
                   <p

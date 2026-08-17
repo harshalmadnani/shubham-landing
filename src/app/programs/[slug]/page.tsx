@@ -120,11 +120,11 @@ export default async function ProgramPage({ params }: PageProps) {
                       <div className="flex items-baseline gap-md">
                         <span
                           aria-hidden="true"
-                          className="font-serif text-headline-sm text-ink-subtle"
+                          className="text-headline-sm font-semibold text-ink-subtle"
                         >
                           {String(index + 1).padStart(2, "0")}
                         </span>
-                        <h3 className="font-serif text-headline-sm text-ink">
+                        <h3 className="text-headline-sm font-semibold text-ink">
                           {module.title}
                         </h3>
                       </div>

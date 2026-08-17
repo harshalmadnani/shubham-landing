@@ -27,7 +27,7 @@ export function Struggles() {
               <div className="border-t border-inverse-hairline pt-lg">
                 <span
                   aria-hidden="true"
-                  className="font-serif text-headline-sm text-inverse-ink-muted"
+                  className="text-headline-sm font-semibold text-inverse-ink-muted"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>

@@ -22,12 +22,12 @@ export function WhatsIncluded() {
               <Reveal delay={(index % 3) * 60}>
                 <div className="rounded-lg border border-hairline bg-canvas p-xl">
                   <div className="flex items-baseline justify-between gap-md border-b-2 border-ink pb-md">
-                    <h3 className="font-serif text-headline-sm text-ink">
+                    <h3 className="text-card-title font-semibold text-ink">
                       {group.name}
                     </h3>
                     <span
                       aria-hidden="true"
-                      className="font-serif text-body text-ink-subtle"
+                      className="text-body font-semibold text-ink-subtle"
                     >
                       {group.items.length}
                     </span>

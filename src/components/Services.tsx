@@ -22,11 +22,11 @@ export function Services() {
               <div className="group h-full border-t-2 border-ink pt-lg transition-colors duration-300">
                 <span
                   aria-hidden="true"
-                  className="font-serif text-body text-ink-subtle"
+                  className="text-body font-semibold text-ink-subtle"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <p className="mt-sm font-serif text-headline-sm text-ink">
+                <p className="mt-sm text-card-title font-semibold text-ink">
                   {service.title}
                 </p>
                 <p className="mt-sm text-body-sm text-ink-muted">

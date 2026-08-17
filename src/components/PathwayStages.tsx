@@ -35,7 +35,7 @@ export function PathwayStages() {
                   </p>
                   {/* Titles run to one or two lines and bodies to two or three;
                       reserving the taller of each keeps the four lists aligned. */}
-                  <h3 className="mt-sm min-h-[2.4em] font-serif text-headline-sm text-ink">
+                  <h3 className="mt-sm min-h-[2.4em] text-card-title font-semibold text-ink">
                     {stage.title}
                   </h3>
                   <p className="mt-xs min-h-[5.5em] text-body-sm text-ink-muted">

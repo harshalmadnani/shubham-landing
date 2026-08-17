@@ -1,10 +1,15 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 import { RichTextContent } from "@/components/PendingData";
-import { programCategories, totalProgramCount } from "@/content/programs";
+import {
+  categoryImage,
+  programCategories,
+  totalProgramCount,
+} from "@/content/programs";
 import { programEnquiryMessage, whatsAppUrl } from "@/content/site";
 import type { Program } from "@/content/types";
 
@@ -40,7 +45,7 @@ function ProgramCard({ program }: { program: Program }) {
   return (
     <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-ink/40">
       <div className="flex items-start justify-between gap-md">
-        <h4 className="font-serif text-headline-sm text-ink">
+        <h4 className="text-card-title font-semibold text-ink">
           {program.title}
         </h4>
         {program.brand && (
@@ -121,7 +126,7 @@ export function Programs() {
                 onClick={() => setActiveCategory(tab.name)}
                 className={`flex shrink-0 items-center gap-xs whitespace-nowrap rounded-full border px-tab-x py-tab-y text-button transition-[background-color,border-color,color] duration-200 ${
                   isSelected
-                    ? "border-transparent bg-ink text-inverse-ink"
+                    ? "border-transparent bg-primary text-on-primary"
                     : "border-hairline bg-canvas text-ink-muted hover:border-ink/40 hover:text-ink"
                 }`}
               >
@@ -129,7 +134,7 @@ export function Programs() {
                 <span
                   className={`rounded-full px-xs text-caption ${
                     isSelected
-                      ? "bg-inverse-surface-1 text-inverse-ink-muted"
+                      ? "bg-white/20 text-on-primary"
                       : "bg-surface-1 text-ink-subtle"
                   }`}
                 >
@@ -143,14 +148,32 @@ export function Programs() {
         <div className="mt-xxl flex flex-col gap-xxxl">
           {visibleCategories.map((category) => (
             <div key={category.name}>
-              <div className="flex items-baseline justify-between gap-md border-b-2 border-ink pb-md">
-                <h3 className="font-serif text-headline-sm text-ink">
-                  {category.name}
-                </h3>
-                <span className="shrink-0 whitespace-nowrap text-caption text-ink-subtle">
-                  {category.programs.length}{" "}
-                  {category.programs.length === 1 ? "program" : "programs"}
-                </span>
+              {/* A banner per specialization: the image carries the section,
+                  the label sits on a scrim so it stays legible over any of
+                  them. Decorative, so the alt text is empty. */}
+              <div className="relative overflow-hidden rounded-lg bg-inverse-canvas">
+                {categoryImage(category.name) && (
+                  <Image
+                    src={categoryImage(category.name) as string}
+                    alt=""
+                    width={1200}
+                    height={800}
+                    className="absolute inset-0 h-full w-full object-cover opacity-70"
+                  />
+                )}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-linear-to-r from-inverse-canvas via-inverse-canvas/80 to-inverse-canvas/55"
+                />
+                <div className="relative flex items-baseline justify-between gap-md px-lg py-xl tablet:px-xl">
+                  <h3 className="text-headline-sm font-semibold text-inverse-ink">
+                    {category.name}
+                  </h3>
+                  <span className="shrink-0 whitespace-nowrap text-caption text-inverse-ink-muted">
+                    {category.programs.length}{" "}
+                    {category.programs.length === 1 ? "program" : "programs"}
+                  </span>
+                </div>
               </div>
 
               <div className="mt-xl grid grid-cols-1 gap-xl tablet:grid-cols-2 desktop:grid-cols-3">

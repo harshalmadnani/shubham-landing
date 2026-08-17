@@ -48,7 +48,7 @@ export function QuoteProcess() {
                 >
                   <span
                     aria-hidden="true"
-                    className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-ink font-serif text-body text-inverse-ink"
+                    className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-primary text-body-emphasis text-on-primary"
                   >
                     {index + 1}
                   </span>
