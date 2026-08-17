@@ -16,7 +16,7 @@ export function Services() {
           lead="Training is the first half. The rest is positioning, applications and interview readiness — and none of it is left to you alone."
         />
 
-        <div className="mt-xxl grid grid-cols-1 gap-x-xxl gap-y-xl tablet:grid-cols-2 desktop:grid-cols-3">
+        <div className="mt-xxl grid grid-cols-1 gap-x-xxl gap-y-xxl tablet:grid-cols-2 desktop:grid-cols-3">
           {services.map((service, index) => (
             <Reveal key={service.title} delay={(index % 3) * 60}>
               <div className="group h-full border-t-2 border-ink pt-lg transition-colors duration-300">

@@ -112,7 +112,7 @@ export default async function ProgramPage({ params }: PageProps) {
               lead="Everything covered in the program, in the order you'll cover it."
             />
 
-            <div className="mt-xxl flex flex-col gap-md">
+            <div className="mt-xxl flex flex-col gap-lg">
               {program.modules.map((module, index) => (
                 <Reveal key={module.title}>
                   <div className="rounded-lg border border-hairline bg-canvas transition-colors duration-300 hover:border-ink/40">
@@ -137,7 +137,7 @@ export default async function ProgramPage({ params }: PageProps) {
                       <p className="text-body-sm text-ink-muted">
                         {module.summary}
                       </p>
-                      <ul className="mt-md grid grid-cols-1 gap-sm tablet:grid-cols-2">
+                      <ul className="mt-lg grid grid-cols-1 gap-sm tablet:grid-cols-2 tablet:gap-x-xl">
                         {module.topics.map((topic) => (
                           <li
                             key={topic}

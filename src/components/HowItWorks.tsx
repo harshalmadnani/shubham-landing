@@ -13,7 +13,7 @@ export function HowItWorks() {
           lead="No mystery process — you always know which stage you're in and what comes next."
         />
 
-        <ol className="mt-xxl grid grid-cols-1 gap-x-xxl gap-y-xl tablet:grid-cols-2 desktop:grid-cols-4">
+        <ol className="mt-xxl grid grid-cols-1 gap-x-xxl gap-y-xxl tablet:grid-cols-2 desktop:grid-cols-4">
           {howItWorks.map((step, index) => (
             <li key={step.title}>
               <Reveal delay={index * 80} className="h-full">

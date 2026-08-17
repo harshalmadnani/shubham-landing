@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/Reveal";
+import { TiltCard } from "@/components/TiltCard";
 import { CheckIcon } from "@/components/CheckIcon";
 import { SectionHeading } from "@/components/SectionHeading";
 import { audiences } from "@/content/sections";
@@ -18,10 +19,11 @@ export function WhoWeHelp() {
           lead="Four starting points, four different routes in — the program adapts to your background, not the other way round."
         />
 
-        <div className="mt-xxl grid grid-cols-1 gap-lg desktop:grid-cols-2">
+        <div className="mt-xxl grid grid-cols-1 gap-xl desktop:grid-cols-2">
           {audiences.map((audience, index) => (
-            <Reveal key={audience.title} delay={index * 80}>
-              <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-ink/40">
+            <Reveal key={audience.title} delay={index * 80} className="h-full">
+              <TiltCard className="h-full">
+                <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-ink/40">
                 <div className="flex items-baseline justify-between gap-md">
                   <p className="font-serif text-headline-sm text-ink">
                     {audience.title}
@@ -45,7 +47,8 @@ export function WhoWeHelp() {
                     </li>
                   ))}
                 </ul>
-              </div>
+                </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>

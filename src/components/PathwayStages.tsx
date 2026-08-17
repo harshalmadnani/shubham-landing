@@ -4,6 +4,7 @@ import { ArrowRightIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { TiltCard } from "@/components/TiltCard";
 import { commitments, pathwayStages } from "@/content/trainingStructure";
 
 /**
@@ -37,7 +38,8 @@ export function PathwayStages() {
               )}
 
               <Reveal delay={index * 90} className="h-full">
-                <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-lg transition-colors duration-300 hover:border-ink/40">
+                <TiltCard className="h-full">
+                  <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-lg transition-colors duration-300 hover:border-ink/40">
                   <p className="text-eyebrow uppercase text-ink-subtle">
                     {stage.step}
                   </p>
@@ -73,7 +75,8 @@ export function PathwayStages() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                  </div>
+                </TiltCard>
               </Reveal>
             </Fragment>
           ))}

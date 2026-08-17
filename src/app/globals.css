@@ -154,7 +154,9 @@
   --spacing-xl: 32px;
   --spacing-xxl: 48px;
   --spacing-xxxl: 72px;
-  --spacing-section: 112px;
+  /* Generous on purpose: the page carries a lot of copy, and air between
+     sections is what keeps it readable rather than congested. */
+  --spacing-section: 152px;
   --spacing-service-card: 28px;
   --spacing-tab-y: 10px;
   --spacing-tab-x: 18px;
@@ -188,6 +190,8 @@
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-float: float 7s ease-in-out infinite;
   --animate-marquee: marquee 38s linear infinite;
+  --animate-sway: sway 14s ease-in-out infinite;
+  --animate-rise-word: rise-word 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes fade-up {
@@ -217,6 +221,29 @@
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+/* Idle drift for the hero's 3D scene — slow enough to feel ambient. */
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotateX(12deg) rotateY(-16deg);
+  }
+  50% {
+    transform: rotateX(9deg) rotateY(-8deg);
+  }
+}
+
+/* Headline words rise in one after another. */
+@keyframes rise-word {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -260,6 +287,12 @@
   border: 1px solid rgb(247 245 238 / 0.25);
 }
 
+/* Outline-only display type, for oversized watermarks on ink bands. */
+@utility text-stroke-inverse {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-inverse-hairline);
+}
+
 /* Fades a scrolling row out at both edges instead of cutting it off. */
 @utility mask-fade-x {
   mask-image: linear-gradient(
@@ -288,6 +321,18 @@
     background-color: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
+  }
+
+  /* Film grain over everything — a faint tactile layer that separates the
+     page from flat-render sterility. Pure SVG turbulence, no image asset. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   /* Anchored sections sit under the sticky header without this. */

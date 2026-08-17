@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { TiltCard } from "@/components/TiltCard";
 import { expectations } from "@/content/sections";
 import type { Expectation } from "@/content/types";
 
@@ -29,17 +30,21 @@ export function WhatYouCanExpect() {
 
         <div className="mt-xxl grid grid-cols-1 gap-lg tablet:grid-cols-3">
           {expectations.map((expectation, index) => (
-            <Reveal key={expectation.title} delay={index * 90}>
-              <div
-                className={`h-full rounded-lg p-xl ${cardTone[expectation.tone]}`}
-              >
+            <Reveal key={expectation.title} delay={index * 90} className="h-full">
+              <TiltCard className="h-full">
+                <div
+                  className={`h-full rounded-lg p-xl ${cardTone[expectation.tone]}`}
+                >
                 <p className="font-serif text-headline-sm">
                   {expectation.title}
                 </p>
-                <p className={`mt-sm text-body-sm ${bodyTone[expectation.tone]}`}>
-                  {expectation.body}
-                </p>
-              </div>
+                  <p
+                    className={`mt-sm text-body-sm ${bodyTone[expectation.tone]}`}
+                  >
+                    {expectation.body}
+                  </p>
+                </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>

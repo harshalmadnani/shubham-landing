@@ -16,11 +16,11 @@ export function WhatsIncluded() {
 
         {/* Masonry columns — groups have very different lengths, and a grid
             would leave the short ones trailing whitespace. */}
-        <div className="mt-xxl columns-1 gap-lg tablet:columns-2 desktop:columns-3">
+        <div className="mt-xxl columns-1 gap-xl tablet:columns-2 desktop:columns-3">
           {includedGroups.map((group, index) => (
-            <div key={group.name} className="mb-lg break-inside-avoid">
+            <div key={group.name} className="mb-xl break-inside-avoid">
               <Reveal delay={(index % 3) * 60}>
-                <div className="rounded-lg border border-hairline bg-canvas p-lg">
+                <div className="rounded-lg border border-hairline bg-canvas p-xl">
                   <div className="flex items-baseline justify-between gap-md border-b-2 border-ink pb-md">
                     <h3 className="font-serif text-headline-sm text-ink">
                       {group.name}
@@ -37,7 +37,7 @@ export function WhatsIncluded() {
                     {group.items.map((item, itemIndex) => (
                       <li
                         key={item.title}
-                        className={`flex items-start gap-sm py-md ${
+                        className={`flex items-start gap-sm py-lg ${
                           itemIndex === 0 ? "" : "border-t border-hairline"
                         }`}
                       >

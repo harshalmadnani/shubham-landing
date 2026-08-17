@@ -38,7 +38,7 @@ function ProgramCard({ program }: { program: Program }) {
   );
 
   return (
-    <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-lg transition-colors duration-300 hover:border-ink/40">
+    <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-ink/40">
       <div className="flex items-start justify-between gap-md">
         <h4 className="font-serif text-headline-sm text-ink">
           {program.title}
@@ -140,7 +140,7 @@ export function Programs() {
           })}
         </div>
 
-        <div className="mt-xxl flex flex-col gap-xxl">
+        <div className="mt-xxl flex flex-col gap-xxxl">
           {visibleCategories.map((category) => (
             <div key={category.name}>
               <div className="flex items-baseline justify-between gap-md border-b-2 border-ink pb-md">
@@ -153,7 +153,7 @@ export function Programs() {
                 </span>
               </div>
 
-              <div className="mt-lg grid grid-cols-1 gap-lg tablet:grid-cols-2 desktop:grid-cols-3">
+              <div className="mt-xl grid grid-cols-1 gap-xl tablet:grid-cols-2 desktop:grid-cols-3">
                 {category.programs.map((program) => (
                   <ProgramCard key={program.title} program={program} />
                 ))}

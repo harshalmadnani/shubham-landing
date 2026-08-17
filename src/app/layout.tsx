@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, IBM_Plex_Sans } from "next/font/google";
 
 import { ChatWithUs } from "@/components/ChatWithUs";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import { site } from "@/content/site";
 
 import "./globals.css";
@@ -58,6 +59,7 @@ export default function RootLayout({
       className={`${ibmPlexSans.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <ScrollProgress />
         {children}
         {/* Every page gets the WhatsApp route, so it lives here rather than in
             each page's own composition. */}

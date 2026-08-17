@@ -21,7 +21,7 @@ export function Struggles() {
           tone="dark"
         />
 
-        <div className="mt-xxl grid grid-cols-1 gap-x-xxl gap-y-xl tablet:grid-cols-2 desktop:grid-cols-3">
+        <div className="mt-xxl grid grid-cols-1 gap-x-xxl gap-y-xxl tablet:grid-cols-2 desktop:grid-cols-3">
           {struggles.map((struggle, index) => (
             <Reveal key={struggle.title} delay={index * 60}>
               <div className="border-t border-inverse-hairline pt-lg">
