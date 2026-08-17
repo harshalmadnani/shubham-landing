@@ -135,9 +135,10 @@ Changing that one constant repoints every route on the site.
 1. **Photography.** The imagery under `public/images` predates this build and
    its provenance has not been confirmed. Verify each file is owned or
    licensed, and replace anything that is not.
-2. **Curriculum depth.** The 33 curricula that predate this build are
-   genericised — the Java page never names Spring, for instance. They are
-   accurate but vaguer than they should be, and thinner than what competitors
-   publish. Worth a pass to name the actual frameworks per module.
+2. **Curriculum review by a practitioner.** All 37 curricula are now distinct
+   and name real tooling, but nobody who teaches these subjects has signed
+   them off. Have each track's trainer read their own page and correct it —
+   module hours especially, since those are the numbers a candidate plans
+   around.
 3. **Outcome claims.** The site publishes no placement statistics, by choice.
    Add them only once they are measured and can be defined precisely.
