@@ -15,7 +15,7 @@ export const structureHero = {
   eyebrow: "How our training works",
   headline: "Three stages,",
   headlineAccent: "one route into work.",
-  body: "Every Aviro Work programme runs through the same three stages: instructor-led training, a hands-on bootcamp, and resume marketing that carries on until you are hired. Take the stage you need or run all three end to end.",
+  body: "Every AVIROwork Consultancy programme runs through the same three stages: instructor-led training — regular or AI-focused — a hands-on bootcamp, and resume marketing that carries on until you are hired. Take the stage you need or run all three end to end.",
 } as const;
 
 export type PathwayStage = {
@@ -23,24 +23,28 @@ export type PathwayStage = {
   readonly label: string;
   readonly title: string;
   readonly body: RichText;
-  readonly stat: string;
-  readonly statLabel: string;
+  /** Omitted for the two training options, which publish no hour count. */
+  readonly stat?: string;
+  readonly statLabel?: string;
   readonly points: readonly RichText[];
 };
 
 /**
- * The three stages of a pathway. Rendered as a sequence rather than a price
- * table — each is quoted on its own, so they are steps you move through, not
- * tiers you choose between.
+ * The stages of a pathway. Rendered as a sequence rather than a price table —
+ * each is quoted on its own, so they are steps you move through, not tiers you
+ * choose between.
+ *
+ * Stages 01 and 02 are alternatives: you pick the regular track or the
+ * AI-focused one. Neither publishes an hour count, since the two differ in
+ * shape as well as length and any single figure would misrepresent one of
+ * them.
  */
 export const pathwayStages: readonly PathwayStage[] = [
   {
-    step: "Stage 01",
-    label: "Training",
-    title: "Instructor-led programme",
-    body: "Live teaching on a fixed schedule, not a shelf of recordings you work through alone.",
-    stat: "50",
-    statLabel: "hours of live instruction",
+    step: "Stage 01 · option A",
+    label: "Regular training",
+    title: "Regular Training Program",
+    body: "Live instructor-led teaching in your chosen subject, on a fixed schedule rather than a shelf of recordings.",
     points: [
       "Daily one-hour sessions with a working practitioner",
       "Morning and evening batches, so the schedule fits around a job",
@@ -48,6 +52,20 @@ export const pathwayStages: readonly PathwayStage[] = [
       "Every session recorded, so a missed class is not a missed module",
       "Certification preparation built into the syllabus rather than bolted on afterwards",
       "Closes with a job-readiness screening across technical and behavioural rounds",
+    ],
+  },
+  {
+    step: "Stage 01 · option B",
+    label: "AI training",
+    title: "AI Training Program",
+    body: "The same structure, built around the AI skills employers now screen for — for anyone targeting an AI-titled role.",
+    points: [
+      "Everything in the regular programme, taught through an AI lens",
+      "Large language models, prompting, RAG and agent patterns",
+      "Applied projects on the AI services of AWS, Azure and Google Cloud",
+      "Model evaluation, guardrails and responsible-use practice",
+      "Suited to the AI Engineer, Gen AI, Agentic AI and AI analyst tracks",
+      "Closes with the same job-readiness screening as the regular programme",
     ],
   },
   {

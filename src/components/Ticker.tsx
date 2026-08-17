@@ -1,57 +1,48 @@
+import { technologyMarks } from "@/content/logos";
+
 /**
- * A slow editorial ticker of the technologies taught, running between two
- * hairlines. Real curriculum content doing decorative duty — the list is what
- * the programs actually cover, not set dressing.
+ * A continuously sliding strip of vendor and platform marks, between hairlines.
+ *
+ * The label above it matters as much as the marks: these identify what the
+ * programmes teach, and nothing here claims a partnership, an accreditation or
+ * a hiring relationship with any of these companies. Keep it that way.
  *
  * The track renders the list twice and slides -50%, so the loop is seamless.
- * `prefers-reduced-motion` freezes it via the global media rule, leaving a
- * static, still-legible strip.
+ * `prefers-reduced-motion` freezes it through the global media rule, leaving a
+ * static strip that still reads.
  */
-const SUBJECTS = [
-  "Java & Spring Boot",
-  "Python",
-  "AWS",
-  "React",
-  "Azure",
-  "Kubernetes",
-  "SQL",
-  "Google Cloud",
-  "Terraform",
-  "Power BI",
-  "Selenium",
-  "LangChain",
-  "Salesforce",
-  "SAP S/4HANA",
-  "Docker",
-  "PyTorch",
-] as const;
-
 export function Ticker() {
   return (
-    <div
-      aria-hidden="true"
-      className="mt-xl overflow-hidden border-y border-hairline py-md"
-    >
-      <div className="flex w-max animate-marquee gap-xl hover:[animation-play-state:paused]">
-        {[0, 1].map((copy) => (
-          <ul key={copy} className="flex shrink-0 items-center gap-xl">
-            {SUBJECTS.map((subject, index) => (
-              <li
-                key={subject}
-                className={`flex items-center gap-xl whitespace-nowrap ${
-                  index % 2 === 0
-                    ? "font-serif italic text-headline-sm text-ink"
-                    : "text-body-lg text-ink-muted"
-                }`}
-              >
-                {subject}
-                <span aria-hidden="true" className="text-primary">
-                  ✳
-                </span>
-              </li>
-            ))}
-          </ul>
-        ))}
+    <div className="mt-xxl">
+      <p className="mx-auto max-w-content px-md text-eyebrow uppercase text-ink-subtle tablet:px-lg">
+        Technologies taught across our programmes
+      </p>
+
+      <div
+        aria-hidden="true"
+        className="mt-md overflow-hidden border-y border-hairline py-xl"
+      >
+        <div className="flex w-max animate-marquee items-center gap-xxl hover:[animation-play-state:paused]">
+          {[0, 1].map((copy) => (
+            <ul key={copy} className="flex shrink-0 items-center gap-xxl">
+              {technologyMarks.map((mark) => (
+                <li key={mark.label} className="shrink-0">
+                  <svg
+                    role="img"
+                    aria-label={mark.label}
+                    viewBox={mark.viewBox}
+                    fill="currentColor"
+                    className="h-xxl w-xxl text-ink-muted transition-colors duration-300 hover:text-ink"
+                  >
+                    {mark.paths.map((d, index) => (
+                      <path key={index} d={d} />
+                    ))}
+                  </svg>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
       </div>
     </div>
   );

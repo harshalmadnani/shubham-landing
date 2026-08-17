@@ -7,7 +7,7 @@
  */
 
 export const site = {
-  name: "Aviro Work",
+  name: "AVIROwork Consultancy",
   tagline: "IT training & placement support",
   description:
     "Structured IT training in web development, data, cloud and more, with placement support until you're hired.",
@@ -59,7 +59,7 @@ export const hero = {
   /** Split so the second half can carry the brand gradient. */
   headline: "Structured training.",
   headlineAccent: "Real placement support.",
-  body: "Aviro Work trains people for IT careers in web development, data, and cloud, including the AI skills employers now expect — and stays with you through placement, not just through the syllabus.",
+  body: "AVIROwork Consultancy trains people for IT careers in web development, data, and cloud, including the AI skills employers now expect — and stays with you through placement, not just through the syllabus.",
 } as const;
 
 export const ctaBanner = {

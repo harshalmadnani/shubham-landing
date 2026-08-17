@@ -5,7 +5,6 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
 import { OurApproach } from "@/components/OurApproach";
-import { ProgramsTeaser } from "@/components/ProgramsTeaser";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Services } from "@/components/Services";
 import { Struggles } from "@/components/Struggles";
@@ -25,7 +24,6 @@ export default function HomePage() {
         <HowItWorks />
         <OurApproach />
         <WhatsIncluded />
-        <ProgramsTeaser />
         <WhatYouCanExpect />
         <Faq />
         <CtaBanner />

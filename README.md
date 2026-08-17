@@ -1,13 +1,13 @@
-# Aviro Work
+# AVIROwork Consultancy
 
-Marketing site for Aviro Work, an IT training and placement business serving
+Marketing site for AVIROwork Consultancy, an IT training and placement business serving
 the UK and Canada: a long-form landing page, a training-structure page, and a
 curriculum page for each program in the catalogue.
 
 The programme model — instructor-led training, a project bootcamp, and resume
 marketing that runs until placement — follows the pattern established by
 NCPL Consulting. The catalogue covers the same 37 subjects. Copy, curricula,
-imagery and design are Aviro Work's own and are not reproduced from any other
+imagery and design are AVIROwork Consultancy's own and are not reproduced from any other
 provider; keep it that way when editing.
 
 ## Stack
@@ -74,11 +74,11 @@ touching a component.
 
 ## The catalogue
 
-The full grid lives on `/programs`, not on the landing page — with 37 cards on
-it the home page was mostly catalogue, and roughly twice the length it needed to
-be. `ProgramsTeaser` stands in for it there: the specializations and their
-counts, then a hand-off. Both derive from the same array, so adding a program
-updates the teaser, the tabs and the counts together.
+The catalogue lives on `/programs` and nowhere else. The landing page carried
+it once, then carried a summary of it; both made the home page mostly
+catalogue. It now hands off through the nav and the hero's call to action
+instead, and the counts on `/programs` all derive from the same array, so
+adding a program updates the tabs and the totals together.
 
 `programs.ts` (the cards) and `programDetails.ts` (the curricula) are joined by
 slug, and every program has a detail page. Three invariants are worth keeping,

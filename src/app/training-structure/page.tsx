@@ -14,7 +14,7 @@ import { structureFaqs } from "@/content/trainingStructure";
 export const metadata: Metadata = {
   title: `Training Structure — ${site.name}`,
   description:
-    "How an Aviro Work programme runs: 50 hours of instructor-led training, a 20-hour project bootcamp, and resume marketing that continues until you are hired.",
+    "How an AVIROwork Consultancy programme runs: instructor-led training — regular or AI-focused — a hands-on project bootcamp, and resume marketing that continues until you are hired.",
 };
 
 export default function TrainingStructurePage() {
