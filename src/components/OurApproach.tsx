@@ -36,8 +36,8 @@ export function OurApproach() {
                   onClick={() => setSelectedIndex(index)}
                   className={`flex items-center gap-md rounded-xl border p-lg text-left transition-[background-color,border-color,box-shadow,transform] duration-300 ${
                     isSelected
-                      ? "border-transparent bg-brand-gradient shadow-primary"
-                      : "border-hairline bg-canvas shadow-sm hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card"
+                      ? "border-transparent bg-ink"
+                      : "border-hairline bg-canvas hover:border-ink/40"
                   }`}
                 >
                   <span
@@ -61,10 +61,10 @@ export function OurApproach() {
             })}
           </div>
 
-          <div className="rounded-xl border border-hairline bg-canvas p-xl shadow-card">
+          <div className="rounded-xl border border-hairline bg-canvas p-xl">
             <div className="flex flex-col gap-xs tablet:flex-row tablet:items-start tablet:justify-between tablet:gap-md">
               <div>
-                <p className="text-eyebrow uppercase text-primary">
+                <p className="text-eyebrow uppercase text-ink-muted">
                   {selected.name}
                 </p>
                 <p className="mt-sm max-w-2xl text-body-lg text-ink-muted">
@@ -82,14 +82,14 @@ export function OurApproach() {
                 return (
                   <li key={step.title} className="flex gap-md">
                     <div className="flex flex-col items-center">
-                      <span className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-brand-gradient text-body-emphasis text-on-primary">
+                      <span className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-ink font-serif text-body text-inverse-ink">
                         {index + 1}
                       </span>
                       {/* Connector down to the next step. */}
                       {!isLast && (
                         <span
                           aria-hidden="true"
-                          className="mt-xs w-px flex-1 bg-linear-to-b from-primary/40 to-hairline"
+                          className="mt-xs w-px flex-1 bg-hairline"
                         />
                       )}
                     </div>

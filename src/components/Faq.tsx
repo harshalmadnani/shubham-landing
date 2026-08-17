@@ -47,7 +47,7 @@ export function Faq({
                 key={faq.question}
                 className={`overflow-hidden rounded-xl border transition-[background-color,border-color,box-shadow] duration-300 ${
                   isOpen
-                    ? "border-primary/40 bg-canvas shadow-card"
+                    ? "border-ink/40 bg-canvas"
                     : "border-hairline bg-canvas hover:border-primary/30"
                 }`}
               >
@@ -64,7 +64,7 @@ export function Faq({
                   <span
                     className={`flex h-xl w-xl shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
                       isOpen
-                        ? "bg-brand-gradient text-on-primary"
+                        ? "bg-ink text-inverse-ink"
                         : "bg-surface-1 text-ink-muted"
                     }`}
                   >

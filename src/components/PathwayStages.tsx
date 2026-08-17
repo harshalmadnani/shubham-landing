@@ -37,14 +37,14 @@ export function PathwayStages() {
               )}
 
               <Reveal delay={index * 90} className="h-full">
-                <div className="group flex h-full flex-col rounded-xl border border-hairline bg-canvas p-lg shadow-card transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-lift">
+                <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-lg transition-colors duration-300 hover:border-ink/40">
                   <p className="text-eyebrow uppercase text-ink-subtle">
                     {stage.step}
                   </p>
                   {/* Titles run to one or two lines and bodies to two or
                       three; reserving the taller of each keeps the stat rows
                       on one line across the three cards. */}
-                  <h3 className="mt-sm min-h-[2em] text-card-title text-ink">
+                  <h3 className="mt-sm min-h-[2em] font-serif text-headline-sm text-ink">
                     {stage.title}
                   </h3>
                   <p className="mt-xs min-h-[4.5em] text-body-sm text-ink-muted">
@@ -52,7 +52,7 @@ export function PathwayStages() {
                   </p>
 
                   <p className="mt-lg flex items-baseline gap-xs">
-                    <span className="text-headline-sm text-gradient">
+                    <span className="font-serif text-headline-sm text-primary">
                       {stage.stat}
                     </span>
                     <span className="text-body-sm text-ink-muted">
@@ -65,7 +65,7 @@ export function PathwayStages() {
                       <li key={pointIndex} className="flex gap-sm">
                         <span
                           aria-hidden="true"
-                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gradient"
+                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
                         />
                         <span className="text-body-sm text-ink">
                           <RichTextContent value={point} />
@@ -81,19 +81,18 @@ export function PathwayStages() {
 
         {/* What the training stage asks of you in return. */}
         <Reveal delay={140}>
-          <div className="relative mt-md overflow-hidden rounded-xl bg-brand-gradient p-lg shadow-primary tablet:p-xl">
-            <div aria-hidden="true" className="absolute inset-0 bg-grid" />
-            <div className="relative">
-              <p className="text-eyebrow uppercase text-on-primary/70">
+          <div className="mt-md rounded-lg bg-inverse-canvas p-lg tablet:p-xl">
+            <div>
+              <p className="text-eyebrow uppercase text-inverse-ink-muted">
                 What we ask in return
               </p>
               <dl className="mt-lg grid gap-lg tablet:grid-cols-3">
                 {commitments.map((commitment) => (
                   <div key={commitment.value}>
-                    <dt className="text-headline-sm text-on-primary">
+                    <dt className="font-serif text-headline-sm text-inverse-ink">
                       {commitment.value}
                     </dt>
-                    <dd className="mt-xxs text-body-sm text-on-primary/80">
+                    <dd className="mt-xxs text-body-sm text-inverse-ink-muted">
                       {commitment.label}
                     </dd>
                   </div>

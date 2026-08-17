@@ -32,10 +32,10 @@ export function ProgramsTeaser() {
               <li key={category.name}>
                 <Link
                   href="/programs"
-                  className="group flex h-full items-baseline justify-between gap-sm rounded-xl border border-hairline bg-canvas p-lg shadow-sm transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card"
+                  className="group flex h-full items-baseline justify-between gap-sm rounded-lg border border-hairline bg-canvas p-lg transition-colors duration-300 hover:border-ink/40"
                   style={{ transitionDelay: `${index * 20}ms` }}
                 >
-                  <span className="text-card-title text-ink">
+                  <span className="font-serif text-headline-sm text-ink">
                     {category.name}
                   </span>
                   <span className="shrink-0 rounded-full bg-surface-1 px-sm text-caption text-ink-subtle">

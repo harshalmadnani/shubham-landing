@@ -7,15 +7,9 @@ export function Footer() {
   return (
     <footer
       id="footer"
-      className="relative mt-section overflow-hidden bg-inverse-canvas px-md py-footer tablet:px-lg"
+      className="mt-section bg-inverse-canvas px-md py-footer tablet:px-lg"
     >
-      <div aria-hidden="true" className="absolute inset-0 bg-grid" />
-      <div
-        aria-hidden="true"
-        className="absolute -bottom-40 left-1/4 h-96 w-96 rounded-full bg-primary/20 blur-3xl"
-      />
-
-      <div className="relative mx-auto max-w-content">
+      <div className="mx-auto max-w-content">
         <div className="grid grid-cols-1 gap-xl tablet:grid-cols-2 desktop:grid-cols-5">
           <div className="desktop:col-span-2">
             <Image

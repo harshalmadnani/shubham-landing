@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans } from "next/font/google";
+import { Fraunces, IBM_Plex_Sans } from "next/font/google";
 
 import { ChatWithUs } from "@/components/ChatWithUs";
 import { site } from "@/content/site";
@@ -10,6 +10,18 @@ const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-ibm-plex-sans",
+  display: "swap",
+});
+
+/**
+ * Display face. A variable serif carries the editorial register the sans
+ * cannot — headlines set in it are what makes the site read as designed
+ * rather than generated. Body copy stays in the Plex sans.
+ */
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  axes: ["opsz", "SOFT", "WONK"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -41,7 +53,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${ibmPlexSans.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${ibmPlexSans.variable} ${fraunces.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col">
         {children}
         {/* Every page gets the WhatsApp route, so it lives here rather than in

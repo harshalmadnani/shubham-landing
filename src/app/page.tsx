@@ -5,7 +5,6 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
 import { OurApproach } from "@/components/OurApproach";
-import { ProofStrip } from "@/components/ProofStrip";
 import { ProgramsTeaser } from "@/components/ProgramsTeaser";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Services } from "@/components/Services";
@@ -20,7 +19,6 @@ export default function HomePage() {
       <Header />
       <main className="flex flex-1 flex-col">
         <Hero />
-        <ProofStrip />
         <Struggles />
         <WhoWeHelp />
         <Services />

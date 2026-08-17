@@ -13,22 +13,16 @@ export function HowItWorks() {
           lead="No mystery process — you always know which stage you're in and what comes next."
         />
 
-        <ol className="relative mt-xxl grid grid-cols-1 gap-lg tablet:grid-cols-2 desktop:grid-cols-4">
-          {/* Rail connecting the four steps, desktop only. */}
-          <span
-            aria-hidden="true"
-            className="absolute left-0 right-0 top-6 hidden h-px bg-linear-to-r from-primary/40 via-accent-warm/40 to-transparent desktop:block"
-          />
-
+        <ol className="mt-xxl grid grid-cols-1 gap-x-xxl gap-y-xl tablet:grid-cols-2 desktop:grid-cols-4">
           {howItWorks.map((step, index) => (
-            <li key={step.title} className="relative">
-              <Reveal delay={index * 90} className="h-full">
-                <div className="group h-full rounded-xl border border-hairline bg-canvas p-lg shadow-card transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <li key={step.title}>
+              <Reveal delay={index * 80} className="h-full">
+                <div className="h-full border-t border-hairline pt-lg">
                   <span
                     aria-hidden="true"
-                    className="flex h-xl w-xl items-center justify-center rounded-full bg-brand-gradient text-body-emphasis text-on-primary shadow-primary"
+                    className="flex h-xl w-xl items-center justify-center rounded-full bg-ink font-serif text-body text-inverse-ink"
                   >
-                    {String(index + 1).padStart(2, "0")}
+                    {index + 1}
                   </span>
                   <p className="mt-lg text-card-title text-ink">{step.title}</p>
                   <p className="mt-xs text-body-sm text-ink-muted">

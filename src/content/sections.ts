@@ -51,7 +51,6 @@ export const struggles: readonly Struggle[] = [
 
 export const audiences: readonly Audience[] = [
   {
-    image: "audience-recent-graduates",
     title: "Recent Graduates",
     body: "Start your IT career with a solid technical foundation and structured mentoring.",
     bullets: [
@@ -61,7 +60,6 @@ export const audiences: readonly Audience[] = [
     ]
   },
   {
-    image: "audience-career-changers",
     title: "Career Changers",
     body: "Move into IT from any background, with a path built around where you're starting from.",
     bullets: [
@@ -71,7 +69,6 @@ export const audiences: readonly Audience[] = [
     ]
   },
   {
-    image: "audience-non-it-professionals",
     title: "Non-IT Professionals",
     body: "Move from a non-technical role into IT, using the experience you already have.",
     bullets: [
@@ -81,7 +78,6 @@ export const audiences: readonly Audience[] = [
     ]
   },
   {
-    image: "audience-it-professionals",
     title: "IT Professionals",
     body: "Build on the technical career you already have.",
     bullets: [
@@ -94,32 +90,26 @@ export const audiences: readonly Audience[] = [
 
 export const services: readonly Service[] = [
   {
-    image: "service-structured-training",
     title: "Structured training",
     body: "Instructor-led courses in web development, data, and cloud, built around real projects and the AI tools teams actually use — not pre-recorded lectures."
   },
   {
-    image: "service-mentoring",
     title: "One-on-one mentoring",
     body: "Direct guidance from mentors who've actually worked the roles you're training for, not a generic advisor script."
   },
   {
-    image: "service-resume-support",
     title: "Resume & profile support",
     body: "Your resume and LinkedIn profile rebuilt to actually get noticed by the hiring managers reviewing them."
   },
   {
-    image: "service-bootcamps",
     title: "Project bootcamps",
     body: "Short, intensive bootcamps focused entirely on hands-on projects you can show, not just watch."
   },
   {
-    image: "service-self-paced",
     title: "Self-paced resources",
     body: "Structured material for learners who want to move at their own pace, with guidance available when you need it."
   },
   {
-    image: "service-placement-support",
     title: "Placement support",
     body: "Support continues after training ends — introductions to hiring partners, not just a certificate and a goodbye."
   },

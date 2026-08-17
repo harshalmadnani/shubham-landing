@@ -60,9 +60,6 @@ export const hero = {
   headline: "Structured training.",
   headlineAccent: "Real placement support.",
   body: "Aviro Work trains people for IT careers in web development, data, and cloud, including the AI skills employers now expect — and stays with you through placement, not just through the syllabus.",
-  image: "/images/hero-training-session.webp",
-  imageAlt:
-    "An instructor and learners reviewing work together on a laptop",
 } as const;
 
 export const ctaBanner = {

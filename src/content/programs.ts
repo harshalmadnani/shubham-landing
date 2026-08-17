@@ -12,7 +12,6 @@ export const programCategories: readonly ProgramCategory[] = [
     programs: [
       {
         title: "Python Full Stack Developer",
-        image: "program-python-full-stack-developer",
         description: "Structured, project-based training in Python-based full-stack development — front-end frameworks through to backend APIs, databases, and cloud deployment.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -20,7 +19,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Java Full Stack Developer",
-        image: "program-java-full-stack-developer",
         description: "Structured, project-based training in Java-based full-stack development — front-end frameworks through to backend APIs, databases, and cloud deployment.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -28,7 +26,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: ".NET Full Stack Developer",
-        image: "program-dotnet-full-stack-developer",
         description: "Structured, project-based training in the Microsoft stack — C# and ASP.NET Core on the server, a modern JavaScript framework on the client, and Azure for deployment.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -41,7 +38,6 @@ export const programCategories: readonly ProgramCategory[] = [
     programs: [
       {
         title: "Data Science & AI",
-        image: "program-data-science-ai",
         description: "Structured training in Python, SQL, applied statistics, and practical machine learning, with a portfolio of real projects by the end of the program.",
         meta: "50 hours · Some technical background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -49,7 +45,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Data Analyst",
-        image: "program-data-analyst",
         description: "Structured training in querying, cleaning, and visualizing data to answer real business questions — a practical entry point into data work.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -57,7 +52,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Data Scientist",
-        image: "program-data-scientist",
         description: "Structured training in statistical modeling, machine learning, and data pipelines — for learners aiming at the modeling-heavy end of data work rather than analysis alone.",
         meta: "50 hours · Some technical background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -70,7 +64,6 @@ export const programCategories: readonly ProgramCategory[] = [
     programs: [
       {
         title: "AI Product Manager",
-        image: "program-ai-product-manager",
         description: "Structured training in scoping and shipping AI-powered products — bridging technical teams and business goals without needing to build the models yourself.",
         meta: "50 hours · Some professional background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -78,7 +71,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AI Consultant",
-        image: "program-ai-consultant",
         description: "Structured training in advising organizations on where and how AI actually fits their operations — grounded in practical implementation, not hype.",
         meta: "70 hours · Some professional background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -86,7 +78,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AWS AI Cloud Engineer",
-        image: "program-aws-ai-cloud-engineer",
         brand: {
           label: "AWS",
           viewBox: "0 0 24 24",
@@ -101,7 +92,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Azure AI Cloud Engineer",
-        image: "program-azure-ai-cloud-engineer",
         brand: {
           label: "Microsoft Azure",
           viewBox: "0 0 24 24",
@@ -116,7 +106,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Google AI Cloud Engineer",
-        image: "program-google-ai-cloud-engineer",
         brand: {
           label: "Google Cloud",
           viewBox: "0 0 24 24",
@@ -131,7 +120,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Gen AI Engineer",
-        image: "program-gen-ai-engineer",
         description: "Structured training in building applications on large language models — prompt design, fine-tuning, and deploying generative AI features into production.",
         meta: "50 hours · Some technical background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -139,7 +127,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AI Engineer",
-        image: "program-ai-engineer",
         description: "Structured, foundational training across the AI/ML lifecycle — model foundations, deep learning, ethics, and deployment — for learners building toward a general AI engineering role.",
         meta: "50 hours · Some technical background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -147,7 +134,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AI/ML Engineer",
-        image: "program-ai-ml-engineer",
         description: "Structured training in building, training, and evaluating machine learning models — from foundations through deep learning architectures to production deployment.",
         meta: "50 hours · Some technical background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -155,7 +141,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Machine Learning Engineer",
-        image: "program-machine-learning-engineer",
         description: "Structured training focused on the engineering side of machine learning — building reliable training pipelines and deployment infrastructure around working models.",
         meta: "50 hours · Some technical background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -163,7 +148,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Agentic AI Engineer",
-        image: "program-agentic-ai-engineer",
         description: "Structured training in building autonomous, multi-step AI agents — orchestrating tools, memory, and decision-making on top of large language models.",
         meta: "50 hours · Some technical background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -171,7 +155,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AI Prompt Engineer",
-        image: "program-ai-prompt-engineer",
         description: "Structured training in designing, testing, and refining prompts that reliably get large language models to do what you need — a practical, low-code entry point into AI work.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -179,7 +162,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AI DevOps Engineer",
-        image: "program-ai-devops-engineer",
         description: "Structured training in the automation and infrastructure practices specific to shipping AI systems — containerizing models, CI/CD for ML, and continuous monitoring in production.",
         meta: "50 hours · Some technical background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -187,7 +169,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AI Business Analyst",
-        image: "program-ai-business-analyst",
         description: "Structured training in applying AI and data analysis to real business decisions — bridging traditional business analysis with the AI tools increasingly built into that work.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -195,7 +176,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AI Data Analyst",
-        image: "program-ai-data-analyst",
         description: "Structured training in using AI-assisted tools and machine learning fundamentals to extract insight from data — an AI-forward track for analyst-minded learners.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -203,7 +183,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AI Quality Analyst",
-        image: "program-ai-quality-analyst",
         description: "Structured training in testing and validating AI systems — model auditing, bias checks, and quality processes specific to AI, not just traditional QA.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -216,7 +195,6 @@ export const programCategories: readonly ProgramCategory[] = [
     programs: [
       {
         title: "Google Cloud Engineer",
-        image: "program-google-cloud-engineer",
         brand: {
           label: "Google Cloud",
           viewBox: "0 0 24 24",
@@ -231,7 +209,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AWS Cloud Engineer",
-        image: "program-aws-cloud-engineer",
         brand: {
           label: "AWS",
           viewBox: "0 0 24 24",
@@ -246,7 +223,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Azure Cloud Engineer",
-        image: "program-azure-cloud-engineer",
         brand: {
           label: "Microsoft Azure",
           viewBox: "0 0 24 24",
@@ -261,7 +237,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Azure Data Engineering",
-        image: "program-azure-data-engineering",
         brand: {
           label: "Microsoft Azure",
           viewBox: "0 0 24 24",
@@ -276,7 +251,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "AWS Data Engineering",
-        image: "program-aws-data-engineering",
         brand: {
           label: "AWS",
           viewBox: "0 0 24 24",
@@ -291,7 +265,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Google Data Engineering",
-        image: "program-google-data-engineering",
         brand: {
           label: "Google Cloud",
           viewBox: "0 0 24 24",
@@ -311,7 +284,6 @@ export const programCategories: readonly ProgramCategory[] = [
     programs: [
       {
         title: "Cyber Security Analyst",
-        image: "program-cyber-security-analyst",
         description: "Structured training in identifying, monitoring, and responding to real security threats — the day-to-day work of a security analyst, not just theory.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -319,7 +291,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Cybersecurity Engineering",
-        image: "program-cybersecurity-engineering",
         description: "Structured training in designing and securing systems end-to-end — network defense, offensive testing, and cloud security — for learners aiming at a hands-on engineering role rather than analyst work alone.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -332,7 +303,6 @@ export const programCategories: readonly ProgramCategory[] = [
     programs: [
       {
         title: "DevOps Engineer",
-        image: "program-devops-engineer",
         description: "Structured training in the pipelines, automation, and infrastructure practices that connect development and operations.",
         meta: "50 hours · Some technical background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -345,7 +315,6 @@ export const programCategories: readonly ProgramCategory[] = [
     programs: [
       {
         title: "IT Analyst",
-        image: "program-it-analyst",
         description: "Structured training in translating business needs into technical requirements — the connective role between IT teams and the people who rely on them.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -353,7 +322,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Business Analyst",
-        image: "program-business-analyst",
         description: "Structured training in analyzing processes and data to support real business decisions, without requiring a technical background to start.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -361,7 +329,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Quality Analyst",
-        image: "program-quality-analyst",
         description: "Structured training in software testing and QA automation — building the test suites and defect workflows that catch problems before your users do.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -374,7 +341,6 @@ export const programCategories: readonly ProgramCategory[] = [
     programs: [
       {
         title: "IT Support Analyst",
-        image: "program-it-support-analyst",
         description: "Structured training in diagnosing hardware, network, and systems issues, and delivering the day-to-day technical support that keeps a business running.",
         meta: "60 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -382,7 +348,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "Microsoft 365 IT Support",
-        image: "program-microsoft-365-it-support",
         description: "Structured training in supporting and administering Microsoft 365 environments — identity, email, file sharing, and end-user troubleshooting.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -395,7 +360,6 @@ export const programCategories: readonly ProgramCategory[] = [
     programs: [
       {
         title: "Salesforce Administrator & Developer",
-        image: "program-salesforce-administrator-developer",
         description: "Structured training across both Salesforce tracks — configuring and administering an org, then extending it with Apex, Lightning components and integrations.",
         meta: "50 hours · Beginner-friendly · Certificate on completion",
         ctaLabel: "View full curriculum",
@@ -403,7 +367,6 @@ export const programCategories: readonly ProgramCategory[] = [
       },
       {
         title: "SAP Consultant",
-        image: "program-sap-consultant",
         description: "Structured training across the functional, technical and Basis sides of SAP S/4HANA — the platform that runs finance, supply chain and operations at enterprise scale.",
         meta: "50 hours · Some professional background helpful · Certificate on completion",
         ctaLabel: "View full curriculum",

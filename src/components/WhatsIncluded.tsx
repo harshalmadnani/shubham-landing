@@ -1,5 +1,4 @@
-import Image from "next/image";
-
+import { CheckIcon } from "@/components/CheckIcon";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -20,32 +19,29 @@ export function WhatsIncluded() {
         <div className="mt-xxl columns-1 gap-lg tablet:columns-2 desktop:columns-3">
           {includedGroups.map((group, index) => (
             <div key={group.name} className="mb-lg break-inside-avoid">
-              <Reveal delay={(index % 3) * 70}>
-                <div className="rounded-xl border border-hairline bg-canvas p-lg shadow-card">
-                  <div className="flex items-baseline justify-between gap-md">
-                    <h3 className="text-card-title text-ink">{group.name}</h3>
-                    <span className="shrink-0 whitespace-nowrap rounded-full bg-primary-soft px-sm py-xxs text-caption text-primary">
+              <Reveal delay={(index % 3) * 60}>
+                <div className="rounded-lg border border-hairline bg-canvas p-lg">
+                  <div className="flex items-baseline justify-between gap-md border-b-2 border-ink pb-md">
+                    <h3 className="font-serif text-headline-sm text-ink">
+                      {group.name}
+                    </h3>
+                    <span
+                      aria-hidden="true"
+                      className="font-serif text-body text-ink-subtle"
+                    >
                       {group.items.length}
                     </span>
                   </div>
 
-                  <ul className="mt-md flex flex-col">
+                  <ul className="flex flex-col">
                     {group.items.map((item, itemIndex) => (
                       <li
                         key={item.title}
-                        className={`flex items-start gap-md py-md ${
+                        className={`flex items-start gap-sm py-md ${
                           itemIndex === 0 ? "" : "border-t border-hairline"
                         }`}
                       >
-                        <span className="flex h-xxl w-xxl shrink-0 items-center justify-center rounded-md bg-surface-1">
-                          <Image
-                            src={`/images/icons/${item.icon}.webp`}
-                            alt=""
-                            width={48}
-                            height={48}
-                            className="h-xl w-xl"
-                          />
-                        </span>
+                        <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                         <div>
                           <p className="text-body-emphasis text-ink">
                             {item.title}

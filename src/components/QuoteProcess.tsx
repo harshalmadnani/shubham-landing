@@ -16,12 +16,12 @@ export function QuoteProcess() {
       <div className="mx-auto max-w-content">
         <div className="grid gap-lg desktop:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] desktop:gap-xl">
           <Reveal>
-            <div className="flex h-full flex-col justify-between rounded-2xl border border-hairline bg-surface-1 p-xl shadow-card tablet:p-xxl">
+            <div className="flex h-full flex-col justify-between rounded-lg border border-hairline bg-surface-1 p-xl tablet:p-xxl">
               <div>
-                <p className="text-eyebrow uppercase text-primary">
+                <p className="text-eyebrow uppercase text-ink-muted">
                   What it costs
                 </p>
-                <h2 className="mt-sm text-headline-sm text-ink">
+                <h2 className="mt-sm font-serif text-headline-sm text-ink">
                   {quotePanel.heading}
                 </h2>
                 <p className="mt-md text-body text-ink-muted">
@@ -44,11 +44,11 @@ export function QuoteProcess() {
               {quoteSteps.map((step, index) => (
                 <li
                   key={step.title}
-                  className="flex flex-1 items-start gap-md rounded-xl border border-hairline bg-canvas p-lg shadow-sm transition-[box-shadow,border-color] duration-300 hover:border-primary/40 hover:shadow-card"
+                  className="flex flex-1 items-start gap-md rounded-lg border border-hairline bg-canvas p-lg transition-colors duration-300 hover:border-ink/40"
                 >
                   <span
                     aria-hidden="true"
-                    className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-brand-gradient text-body-emphasis text-on-primary shadow-primary"
+                    className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-ink font-serif text-body text-inverse-ink"
                   >
                     {index + 1}
                   </span>

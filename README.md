@@ -64,9 +64,8 @@ src/
     programs.ts             the 37-program catalogue
     programDetails.ts       the curriculum behind each of the 37 programs
 public/
-  images/                   section, audience, service and program photography
-  images/icons/             "What's Included" icons
   logo/                     wordmark, light and reversed
+  og.png                    share image: wordmark on paper, one cobalt rule
 ```
 
 Content and presentation are kept apart: components hold no copy, and the files
@@ -113,10 +112,12 @@ Four things worth knowing before editing:
   silently turn `max-w-3xl` into a 72px clamp. Same trap applies to `xs`, `sm`,
   `md`, `lg` and `xl` — those steps exist, so `max-w-xl` is 32px, not 36rem.
   Use `max-w-2xl`/`max-w-3xl` or an arbitrary `max-w-[…]`.
-- **A few effects live as `@utility` rules**, not tokens, because they can't be
-  expressed as a single value: `text-gradient` and `bg-brand-gradient` (the
-  brand ramp as text fill and surface), `bg-grid` / `bg-grid-light` (texture),
-  `bg-mesh` (the dark-section colour wash) and `glass` (frosted panels).
+- **The look is editorial, not decorative.** Warm paper canvas, warm
+  near-black ink, one cobalt accent, Fraunces for display type, hairlines for
+  structure — and no photography or generated artwork anywhere. The legacy
+  utility names (`text-gradient`, `bg-brand-gradient`, `bg-mesh`, `bg-grid`,
+  `glass`) still exist but resolve to flat, on-palette styles, so a straggler
+  cannot reintroduce neon.
 
 ## Pending data
 
@@ -140,9 +141,9 @@ Changing that one constant repoints every route on the site.
 
 ## Outstanding
 
-1. **Photography.** The imagery under `public/images` predates this build and
-   its provenance has not been confirmed. Verify each file is owned or
-   licensed, and replace anything that is not.
+1. ~~Photography~~ — resolved. The redesign removed `public/images`
+   entirely; the site ships no photography or generated artwork, so the
+   unverified-provenance risk went with it.
 2. **Curriculum review by a practitioner.** All 37 curricula are now distinct
    and name real tooling, but nobody who teaches these subjects has signed
    them off. Have each track's trainer read their own page and correct it —

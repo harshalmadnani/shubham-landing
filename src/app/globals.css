@@ -14,79 +14,87 @@
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1180px;
 
-  /* Colour */
-  --color-primary: #5e29f8;
-  --color-violet-80: #4a1ecb;
-  --color-violet-hover: #4f20e0;
-  --color-primary-soft: #efe9ff;
+  /* Colour.
 
-  /* Accents. Used only at gradient ends and for glow — never as flat fills. */
-  --color-accent: #00c8ff;
-  --color-accent-warm: #b845ff;
+     One accent, used sparingly: a deep cobalt against warm paper and warm
+     near-black ink. Everything decorative that used to be a gradient is now a
+     flat fill from this list — restraint is the whole design. */
+  --color-primary: #1f3ad6;
+  --color-violet-80: #16289b;
+  --color-violet-hover: #182fb0;
+  --color-primary-soft: #e9edfb;
+
+  /* Legacy accent names, pinned to the one accent so any straggler stays
+     on-palette rather than reintroducing neon. */
+  --color-accent: #1f3ad6;
+  --color-accent-warm: #1f3ad6;
 
   /* WhatsApp brand green. Deliberately outside the palette: the floating chat
      button reads as "this opens WhatsApp" only if it looks like WhatsApp. */
   --color-whatsapp: #25d366;
   --color-whatsapp-hover: #1eb959;
 
-  --color-canvas: #ffffff;
-  --color-surface-1: #f7f6fc;
-  --color-surface-2: #efedf9;
+  --color-canvas: #fbfaf7;
+  --color-surface-1: #f3f1ea;
+  --color-surface-2: #ebe8df;
 
-  --color-hairline: #e7e5f0;
-  --color-hairline-strong: #0a0b10;
+  --color-hairline: #e2ded3;
+  --color-hairline-strong: #191613;
 
-  --color-inverse-canvas: #08080d;
-  --color-inverse-surface-1: #14131c;
-  --color-inverse-hairline: #23212f;
+  --color-inverse-canvas: #16130f;
+  --color-inverse-surface-1: #211d18;
+  --color-inverse-hairline: #37322a;
 
-  --color-ink: #0a0b10;
-  --color-ink-muted: #56555f;
-  --color-ink-subtle: #8b8a94;
-  --color-inverse-ink: #fdfdfd;
-  --color-inverse-ink-muted: #a5a3b4;
-  --color-on-primary: #fdfdfd;
+  --color-ink: #191613;
+  --color-ink-muted: #5d584f;
+  --color-ink-subtle: #8f8a7e;
+  --color-inverse-ink: #f7f5ee;
+  --color-inverse-ink-muted: #a8a294;
+  --color-on-primary: #f7f5ee;
 
-  --color-semantic-error: #e5484d;
+  --color-semantic-error: #c73e35;
 
   /* Type scale. Each step carries its own line-height, tracking and weight so
      `text-headline` is a complete typographic decision, not just a size.
      Large steps carry negative tracking — at display sizes, default spacing
      reads loose and cheap. */
-  --text-display-xl: 4.75rem;
-  --text-display-xl--line-height: 1.02;
-  --text-display-xl--letter-spacing: -2.4px;
-  --text-display-xl--font-weight: 300;
+  /* Display steps are set in the serif (apply `font-serif` alongside them).
+     Serifs carry their own character at size, so tracking is gentler than the
+     old grotesque needed. */
+  --text-display-xl: 4.5rem;
+  --text-display-xl--line-height: 1.04;
+  --text-display-xl--letter-spacing: -1.4px;
+  --text-display-xl--font-weight: 420;
 
-  --text-display-xl-tablet: 3.5rem;
-  --text-display-xl-tablet--line-height: 1.04;
-  --text-display-xl-tablet--letter-spacing: -1.6px;
-  --text-display-xl-tablet--font-weight: 300;
+  --text-display-xl-tablet: 3.375rem;
+  --text-display-xl-tablet--line-height: 1.06;
+  --text-display-xl-tablet--letter-spacing: -0.8px;
+  --text-display-xl-tablet--font-weight: 420;
 
   --text-display-xl-mobile: 2.5rem;
-  --text-display-xl-mobile--line-height: 1.06;
-  --text-display-xl-mobile--letter-spacing: -1px;
-  --text-display-xl-mobile--font-weight: 300;
+  --text-display-xl-mobile--line-height: 1.08;
+  --text-display-xl-mobile--letter-spacing: -0.4px;
+  --text-display-xl-mobile--font-weight: 420;
 
-  --text-display-lg: 3.5rem;
-  --text-display-lg--line-height: 1.06;
-  --text-display-lg--letter-spacing: -1.6px;
-  --text-display-lg--font-weight: 300;
+  --text-display-lg: 3.375rem;
+  --text-display-lg--line-height: 1.08;
+  --text-display-lg--letter-spacing: -0.8px;
+  --text-display-lg--font-weight: 420;
 
   --text-display-md: 2.5rem;
-  --text-display-md--line-height: 1.12;
-  --text-display-md--letter-spacing: -1px;
-  --text-display-md--font-weight: 300;
+  --text-display-md--line-height: 1.14;
+  --text-display-md--letter-spacing: -0.4px;
+  --text-display-md--font-weight: 420;
 
-  --text-headline: 2.25rem;
-  --text-headline--line-height: 1.14;
-  --text-headline--letter-spacing: -0.8px;
-  --text-headline--font-weight: 400;
+  --text-headline: 2.125rem;
+  --text-headline--line-height: 1.16;
+  --text-headline--letter-spacing: -0.3px;
+  --text-headline--font-weight: 450;
 
-  --text-headline-sm: 1.75rem;
-  --text-headline-sm--line-height: 1.2;
-  --text-headline-sm--letter-spacing: -0.5px;
-  --text-headline-sm--font-weight: 400;
+  --text-headline-sm: 1.625rem;
+  --text-headline-sm--line-height: 1.22;
+  --text-headline-sm--letter-spacing: -0.2px;
+  --text-headline-sm--font-weight: 450;
 
   --text-card-title: 1.375rem;
   --text-card-title--line-height: 1.28;
@@ -165,15 +173,16 @@
   --radius-2xl: 30px;
   --radius-full: 9999px;
 
-  /* Elevation. Two-layer shadows — a tight contact shadow plus a wide ambient
-     one — read as depth; a single blurred drop reads as a smudge. */
-  --shadow-sm: 0 1px 2px rgb(10 11 16 / 0.04), 0 1px 3px rgb(10 11 16 / 0.05);
-  --shadow-card: 0 1px 2px rgb(10 11 16 / 0.03), 0 6px 20px rgb(10 11 16 / 0.05);
-  --shadow-lift: 0 2px 6px rgb(10 11 16 / 0.05), 0 16px 40px rgb(10 11 16 / 0.11);
-  --shadow-primary: 0 2px 8px rgb(94 41 248 / 0.24), 0 10px 28px rgb(94 41 248 / 0.22);
-  --shadow-glow: 0 0 60px rgb(94 41 248 / 0.4);
+  /* Elevation. Kept faint on purpose — hairlines do the separating in this
+     design, shadows only whisper. Colored glow shadows are gone. */
+  --shadow-sm: 0 1px 2px rgb(25 22 19 / 0.04);
+  --shadow-card: 0 1px 2px rgb(25 22 19 / 0.03), 0 4px 14px rgb(25 22 19 / 0.04);
+  --shadow-lift: 0 2px 4px rgb(25 22 19 / 0.04), 0 10px 28px rgb(25 22 19 / 0.08);
+  --shadow-primary: 0 1px 2px rgb(25 22 19 / 0.06), 0 6px 18px rgb(25 22 19 / 0.1);
+  --shadow-glow: 0 2px 4px rgb(25 22 19 / 0.04), 0 10px 28px rgb(25 22 19 / 0.08);
 
   --font-sans: var(--font-ibm-plex-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
 
   /* Motion */
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -219,67 +228,36 @@
  * than inline in a component.
  */
 
-/* Brand gradient, clipped to the glyphs. */
+/* Once a gradient clipped to glyphs; now the flat accent. The name survives so
+   a straggler can't reintroduce neon. */
 @utility text-gradient {
-  background-image: linear-gradient(
-    100deg,
-    var(--color-primary) 0%,
-    var(--color-accent-warm) 52%,
-    var(--color-accent) 100%
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  color: var(--color-primary);
 }
 
-/* Same gradient as a fill, for buttons and banner surfaces. */
+/* Once the brand gradient fill; now flat ink. Number badges, banners and
+   selected tabs all become quiet black surfaces. */
 @utility bg-brand-gradient {
-  background-image: linear-gradient(
-    120deg,
-    var(--color-primary) 0%,
-    #7b3ff2 45%,
-    var(--color-accent-warm) 100%
-  );
+  background-color: var(--color-ink);
 }
 
-/* Faint engineering grid — reads as texture on dark sections, not as a table. */
+/* Decorative textures, retired. Kept as no-ops so a missed usage renders
+   nothing rather than breaking the build. */
 @utility bg-grid {
-  background-image: linear-gradient(
-      to right,
-      rgb(255 255 255 / 0.045) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-  background-size: 56px 56px;
+  background-image: none;
 }
 
 @utility bg-grid-light {
-  background-image: linear-gradient(
-      to right,
-      rgb(10 11 16 / 0.035) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, rgb(10 11 16 / 0.035) 1px, transparent 1px);
-  background-size: 56px 56px;
+  background-image: none;
 }
 
-/* Soft colour wash behind dark hero content. */
 @utility bg-mesh {
-  background-image: radial-gradient(
-      60% 55% at 12% 8%,
-      rgb(94 41 248 / 0.5) 0%,
-      transparent 62%
-    ),
-    radial-gradient(48% 48% at 88% 12%, rgb(0 200 255 / 0.22) 0%, transparent 60%),
-    radial-gradient(65% 60% at 72% 96%, rgb(184 69 255 / 0.3) 0%, transparent 65%);
+  background-image: none;
 }
 
-/* Frosted panel over the mesh. */
+/* Once frosted glass; now a plain outline that works on dark surfaces. */
 @utility glass {
-  background-color: rgb(255 255 255 / 0.06);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgb(255 255 255 / 0.12);
+  background-color: transparent;
+  border: 1px solid rgb(247 245 238 / 0.25);
 }
 
 /* Fades a scrolling row out at both edges instead of cutting it off. */

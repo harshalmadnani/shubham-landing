@@ -2,19 +2,16 @@ import { ButtonLink } from "@/components/Button";
 import { CalendarIcon } from "@/components/icons";
 import { consultationMessage, ctaBanner, whatsAppUrl } from "@/content/site";
 
+/** The closing ask: a flat ink band, a serif line, one paper button. */
 export function CtaBanner() {
   return (
     <section id="cta-banner" className="px-md pt-section tablet:px-lg">
-      <div className="relative mx-auto max-w-content overflow-hidden rounded-2xl bg-brand-gradient px-lg py-xxxl text-center shadow-primary tablet:px-xxl">
-        <div aria-hidden="true" className="absolute inset-0 bg-grid" />
-        <div
-          aria-hidden="true"
-          className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-accent/30 blur-3xl"
-        />
-
-        <div className="relative mx-auto max-w-2xl">
-          <h2 className="text-headline text-on-primary">{ctaBanner.heading}</h2>
-          <p className="mt-md text-body-lg text-on-primary/85">
+      <div className="mx-auto max-w-content rounded-lg bg-inverse-canvas px-lg py-xxxl text-center tablet:px-xxl">
+        <div className="mx-auto max-w-2xl">
+          <h2 className="font-serif text-headline text-inverse-ink">
+            {ctaBanner.heading}
+          </h2>
+          <p className="mt-md text-body-lg text-inverse-ink-muted">
             {ctaBanner.body}
           </p>
           <ButtonLink

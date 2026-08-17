@@ -15,14 +15,12 @@ export type Struggle = {
 };
 
 export type Audience = {
-  readonly image: string;
   readonly title: string;
   readonly body: string;
   readonly bullets: readonly string[];
 };
 
 export type Service = {
-  readonly image: string;
   readonly title: string;
   readonly body: string;
 };
@@ -70,7 +68,6 @@ export type Brand = {
 
 export type Program = {
   readonly title: string;
-  readonly image: string;
   readonly brand?: Brand;
   readonly description: RichText;
   readonly meta: RichText;

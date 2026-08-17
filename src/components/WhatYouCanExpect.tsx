@@ -3,10 +3,12 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { expectations } from "@/content/sections";
 import type { Expectation } from "@/content/types";
 
+/* Three flat editorial surfaces: ink, cobalt, and outlined paper. The one
+   saturated card is the single loudest moment on the page — by design. */
 const cardTone: Record<Expectation["tone"], string> = {
-  inverse: "bg-inverse-canvas text-inverse-ink shadow-lift",
-  primary: "bg-brand-gradient text-on-primary shadow-primary",
-  outline: "border border-hairline bg-canvas text-ink shadow-card",
+  inverse: "bg-inverse-canvas text-inverse-ink",
+  primary: "bg-primary text-on-primary",
+  outline: "border border-hairline bg-canvas text-ink",
 };
 
 const bodyTone: Record<Expectation["tone"], string> = {
@@ -29,11 +31,11 @@ export function WhatYouCanExpect() {
           {expectations.map((expectation, index) => (
             <Reveal key={expectation.title} delay={index * 90}>
               <div
-                className={`h-full rounded-xl p-xl transition-transform duration-300 hover:-translate-y-1 ${
-                  cardTone[expectation.tone]
-                }`}
+                className={`h-full rounded-lg p-xl ${cardTone[expectation.tone]}`}
               >
-                <p className="text-card-title">{expectation.title}</p>
+                <p className="font-serif text-headline-sm">
+                  {expectation.title}
+                </p>
                 <p className={`mt-sm text-body-sm ${bodyTone[expectation.tone]}`}>
                   {expectation.body}
                 </p>

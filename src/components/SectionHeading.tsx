@@ -28,20 +28,24 @@ export function SectionHeading({
       <div className={centered ? "mx-auto max-w-3xl text-center" : ""}>
         {eyebrow && (
           <p
-            className={`flex items-center gap-xs text-eyebrow uppercase ${
+            className={`flex items-center gap-sm text-eyebrow uppercase ${
               centered ? "justify-center" : ""
-            } ${isDark ? "text-accent" : "text-primary"}`}
+            } ${isDark ? "text-inverse-ink-muted" : "text-ink-muted"}`}
           >
             <span
               aria-hidden="true"
-              className={`h-px w-6 ${isDark ? "bg-accent/60" : "bg-primary/50"}`}
+              className={`h-px w-6 ${
+                isDark ? "bg-inverse-ink-muted/60" : "bg-ink/30"
+              }`}
             />
             {eyebrow}
           </p>
         )}
 
+        {/* Headlines carry the serif — it is what separates this from every
+            template that ships with a grotesque and a gradient. */}
         <h2
-          className={`mt-sm text-headline ${
+          className={`mt-sm font-serif text-headline ${
             isDark ? "text-inverse-ink" : "text-ink"
           }`}
         >

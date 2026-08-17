@@ -1,9 +1,13 @@
-import Image from "next/image";
-
 import { Reveal } from "@/components/Reveal";
+import { CheckIcon } from "@/components/CheckIcon";
 import { SectionHeading } from "@/components/SectionHeading";
 import { audiences } from "@/content/sections";
 
+/**
+ * Four starting points as editorial cards — a serif numeral, a title, and the
+ * bullets. The generated portrait photos are gone; nothing here pretends to be
+ * a person who does not exist.
+ */
 export function WhoWeHelp() {
   return (
     <section id="who-we-help" className="px-md pt-section tablet:px-lg">
@@ -17,41 +21,30 @@ export function WhoWeHelp() {
         <div className="mt-xxl grid grid-cols-1 gap-lg desktop:grid-cols-2">
           {audiences.map((audience, index) => (
             <Reveal key={audience.title} delay={index * 80}>
-              <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-hairline bg-canvas shadow-card transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-lift tablet:flex-row">
-                <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden tablet:aspect-auto tablet:w-[38%]">
-                  <Image
-                    src={`/images/${audience.image}.webp`}
-                    alt=""
-                    width={640}
-                    height={800}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div
+              <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-ink/40">
+                <div className="flex items-baseline justify-between gap-md">
+                  <p className="font-serif text-headline-sm text-ink">
+                    {audience.title}
+                  </p>
+                  <span
                     aria-hidden="true"
-                    className="absolute inset-0 bg-linear-to-t from-inverse-canvas/60 to-transparent"
-                  />
-                  <span className="absolute left-md top-md flex h-xl w-xl items-center justify-center rounded-full bg-brand-gradient text-body-emphasis text-on-primary shadow-primary">
+                    className="font-serif text-headline-sm text-ink-subtle"
+                  >
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
+                <p className="mt-xs text-body-sm text-ink-muted">
+                  {audience.body}
+                </p>
 
-                <div className="flex-1 p-xl">
-                  <p className="text-card-title text-ink">{audience.title}</p>
-                  <p className="mt-xs text-body-sm text-ink-muted">
-                    {audience.body}
-                  </p>
-                  <ul className="mt-lg flex flex-col gap-sm">
-                    {audience.bullets.map((bullet) => (
-                      <li key={bullet} className="flex gap-sm">
-                        <span
-                          aria-hidden="true"
-                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gradient"
-                        />
-                        <span className="text-body-sm text-ink">{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <ul className="mt-lg flex flex-col gap-sm border-t border-hairline pt-lg">
+                  {audience.bullets.map((bullet) => (
+                    <li key={bullet} className="flex gap-sm">
+                      <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-primary" />
+                      <span className="text-body-sm text-ink">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Reveal>
           ))}

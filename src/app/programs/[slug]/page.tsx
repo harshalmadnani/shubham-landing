@@ -54,52 +54,52 @@ export default async function ProgramPage({ params }: PageProps) {
       <Header />
 
       <main className="flex flex-1 flex-col">
-        <section className="px-md pt-md tablet:px-lg tablet:pt-lg">
-          <div className="relative mx-auto max-w-content overflow-hidden rounded-2xl bg-inverse-canvas px-lg py-xxxl tablet:px-xxl">
-            <div aria-hidden="true" className="absolute inset-0 bg-mesh" />
-            <div aria-hidden="true" className="absolute inset-0 bg-grid" />
+        <section className="px-md tablet:px-lg">
+          <div className="mx-auto max-w-content border-b border-hairline pb-xxl pt-xxl">
+            <Link
+              href="/programs"
+              className="inline-flex items-center gap-xs text-body-sm text-ink-muted transition-colors hover:text-ink"
+            >
+              <ArrowRightIcon className="h-md w-md rotate-180" />
+              All programs
+            </Link>
 
-            <div className="relative">
-              <Link
-                href="/programs"
-                className="inline-flex items-center gap-xs text-body-sm text-inverse-ink-muted transition-colors hover:text-inverse-ink"
-              >
-                <ArrowRightIcon className="h-md w-md rotate-180" />
-                All programs
-              </Link>
+            <p className="mt-xl flex items-center gap-sm text-eyebrow uppercase text-ink-muted">
+              <span aria-hidden="true" className="h-px w-6 bg-ink/30" />
+              {program.category}
+            </p>
+            <h1 className="mt-sm max-w-3xl font-serif text-display-md text-ink">
+              {program.title}
+            </h1>
+            <p className="mt-md max-w-2xl text-body-lg text-ink-muted">
+              {program.description}
+            </p>
 
-              <p className="mt-lg text-eyebrow uppercase text-accent">
-                {program.category}
-              </p>
-              <h1 className="mt-sm max-w-3xl text-display-md text-inverse-ink">
-                {program.title}
-              </h1>
-              <p className="mt-md max-w-2xl text-body-lg text-inverse-ink-muted">
-                {program.description}
-              </p>
+            <ul className="mt-xl flex flex-wrap gap-x-lg gap-y-xs">
+              {[
+                `${program.hours} hours live training`,
+                `${program.modules.length} modules`,
+                `${countTopics(program)} topics`,
+                "Certificate on completion",
+              ].map((fact) => (
+                <li
+                  key={fact}
+                  className="flex items-center gap-xs text-body-sm text-ink"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="h-1 w-1 rounded-full bg-primary"
+                  />
+                  {fact}
+                </li>
+              ))}
+            </ul>
 
-              <ul className="mt-xl flex flex-wrap gap-xs">
-                {[
-                  `${program.hours} hours live training`,
-                  `${program.modules.length} modules`,
-                  `${countTopics(program)} topics`,
-                  "Certificate on completion",
-                ].map((fact) => (
-                  <li
-                    key={fact}
-                    className="rounded-full glass px-md py-xs text-body-sm text-inverse-ink"
-                  >
-                    {fact}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-xl flex flex-wrap gap-sm">
-                <ButtonLink href={enquiryUrl}>
-                  <CalendarIcon className="h-md w-md" />
-                  Chat with an advisor
-                </ButtonLink>
-              </div>
+            <div className="mt-xl flex flex-wrap gap-sm">
+              <ButtonLink href={enquiryUrl}>
+                <CalendarIcon className="h-md w-md" />
+                Chat with an advisor
+              </ButtonLink>
             </div>
           </div>
         </section>
@@ -115,17 +115,20 @@ export default async function ProgramPage({ params }: PageProps) {
             <div className="mt-xxl flex flex-col gap-md">
               {program.modules.map((module, index) => (
                 <Reveal key={module.title}>
-                  <div className="overflow-hidden rounded-xl border border-hairline bg-canvas shadow-card transition-shadow duration-300 hover:shadow-lift">
-                    <div className="flex flex-wrap items-center justify-between gap-md border-b border-hairline bg-surface-1 px-lg py-md">
-                      <div className="flex items-center gap-md">
-                        <span className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-brand-gradient text-body-emphasis text-on-primary shadow-primary">
+                  <div className="rounded-lg border border-hairline bg-canvas transition-colors duration-300 hover:border-ink/40">
+                    <div className="flex flex-wrap items-center justify-between gap-md border-b border-hairline px-lg py-md">
+                      <div className="flex items-baseline gap-md">
+                        <span
+                          aria-hidden="true"
+                          className="font-serif text-headline-sm text-ink-subtle"
+                        >
                           {String(index + 1).padStart(2, "0")}
                         </span>
-                        <h3 className="text-card-title text-ink">
+                        <h3 className="font-serif text-headline-sm text-ink">
                           {module.title}
                         </h3>
                       </div>
-                      <span className="shrink-0 whitespace-nowrap rounded-full bg-canvas px-md py-xxs text-caption text-ink-muted">
+                      <span className="shrink-0 whitespace-nowrap text-body-sm text-ink-subtle">
                         {module.hours} hours
                       </span>
                     </div>
@@ -154,18 +157,12 @@ export default async function ProgramPage({ params }: PageProps) {
         </section>
 
         <section className="px-md pt-section tablet:px-lg">
-          <div className="relative mx-auto max-w-content overflow-hidden rounded-2xl bg-brand-gradient px-lg py-xxxl text-center shadow-primary tablet:px-xxl">
-            <div aria-hidden="true" className="absolute inset-0 bg-grid" />
-            <div
-              aria-hidden="true"
-              className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-accent/30 blur-3xl"
-            />
-
-            <div className="relative mx-auto max-w-2xl">
-              <h2 className="text-headline text-on-primary">
+          <div className="mx-auto max-w-content rounded-lg bg-inverse-canvas px-lg py-xxxl text-center tablet:px-xxl">
+            <div className="mx-auto max-w-2xl">
+              <h2 className="font-serif text-headline text-inverse-ink">
                 Ready to talk through {program.title}?
               </h2>
-              <p className="mt-md text-body-lg text-on-primary/85">
+              <p className="mt-md text-body-lg text-inverse-ink-muted">
                 No pressure, no commitment — just a real conversation about your
                 goals and whether this program fits.
               </p>
