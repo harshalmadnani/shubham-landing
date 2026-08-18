@@ -68,7 +68,7 @@ export default async function ProgramPage({ params }: PageProps) {
               <span aria-hidden="true" className="h-px w-6 bg-ink/30" />
               {program.category}
             </p>
-            <h1 className="mt-sm max-w-3xl font-serif text-display-md text-ink">
+            <h1 className="mt-sm max-w-3xl text-display-md text-ink">
               {program.title}
             </h1>
             <p className="mt-md max-w-2xl text-body-lg text-ink-muted">
@@ -159,7 +159,7 @@ export default async function ProgramPage({ params }: PageProps) {
         <section className="px-md pt-section tablet:px-lg">
           <div className="mx-auto max-w-content rounded-lg bg-inverse-canvas px-lg py-xxxl text-center tablet:px-xxl">
             <div className="mx-auto max-w-2xl">
-              <h2 className="font-serif text-headline text-inverse-ink">
+              <h2 className="text-headline text-inverse-ink">
                 Ready to talk through {program.title}?
               </h2>
               <p className="mt-md text-body-lg text-inverse-ink-muted">

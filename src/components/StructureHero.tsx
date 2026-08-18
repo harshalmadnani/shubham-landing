@@ -12,7 +12,7 @@ export function StructureHero() {
           {structureHero.eyebrow}
         </p>
 
-        <h1 className="mt-lg max-w-4xl font-serif text-display-xl-mobile tablet:text-display-lg text-ink animate-fade-up">
+        <h1 className="mt-lg max-w-4xl text-display-xl-mobile tablet:text-display-lg text-ink animate-fade-up">
           {structureHero.headline}{" "}
           <em className="text-primary">{structureHero.headlineAccent}</em>
         </h1>

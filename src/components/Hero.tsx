@@ -53,12 +53,12 @@ export function Hero() {
               {hero.eyebrow}
             </p>
 
-            <h1 className="mt-lg font-serif text-display-xl-mobile tablet:text-display-xl-tablet desktop:text-display-xl text-ink">
+            <h1 className="mt-lg text-display-xl-mobile tablet:text-display-xl-tablet desktop:text-display-xl text-ink">
               <StaggeredWords text={hero.headline} />
               <StaggeredWords
                 text={hero.headlineAccent}
                 startIndex={headlineWordCount}
-                className="italic text-primary"
+                className="not-italic text-primary"
               />
             </h1>
 

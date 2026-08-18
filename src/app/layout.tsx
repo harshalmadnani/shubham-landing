@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, IBM_Plex_Sans } from "next/font/google";
+import { IBM_Plex_Sans } from "next/font/google";
 
 import { ChatWithUs } from "@/components/ChatWithUs";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -7,22 +7,19 @@ import { site } from "@/content/site";
 
 import "./globals.css";
 
+/**
+ * The whole type system, in one family.
+ *
+ * A second display face was doing more harm than good on a technology
+ * training site: a wonky serif reads editorial, and every headline set in it
+ * pulled against the technical register of the rest of the page. Plex carries
+ * both jobs — 600 and 700 at display sizes with tight tracking read confident
+ * rather than literary, and one family is one fewer font to download.
+ */
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-ibm-plex-sans",
-  display: "swap",
-});
-
-/**
- * Display face. A variable serif carries the editorial register the sans
- * cannot — headlines set in it are what makes the site read as designed
- * rather than generated. Body copy stays in the Plex sans.
- */
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  axes: ["opsz", "SOFT", "WONK"],
-  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -56,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ibmPlexSans.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${ibmPlexSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <ScrollProgress />

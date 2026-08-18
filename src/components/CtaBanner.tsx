@@ -10,13 +10,13 @@ export function CtaBanner() {
         {/* Oversized outline-serif watermark, drifting slowly behind the ask. */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute -right-8 -top-10 animate-float font-serif italic text-stroke-inverse text-[11rem] leading-none tablet:text-[15rem]"
+          className="pointer-events-none absolute -right-8 -top-10 animate-float text-stroke-inverse text-[11rem] leading-none tablet:text-[15rem]"
         >
           Hired.
         </span>
 
         <div className="relative mx-auto max-w-2xl">
-          <h2 className="font-serif text-headline text-inverse-ink">
+          <h2 className="text-headline text-inverse-ink">
             {ctaBanner.heading}
           </h2>
           <p className="mt-md text-body-lg text-inverse-ink-muted">

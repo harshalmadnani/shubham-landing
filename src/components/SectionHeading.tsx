@@ -45,7 +45,7 @@ export function SectionHeading({
         {/* Headlines carry the serif — it is what separates this from every
             template that ships with a grotesque and a gradient. */}
         <h2
-          className={`mt-sm font-serif text-headline ${
+          className={`mt-sm text-headline ${
             isDark ? "text-inverse-ink" : "text-ink"
           }`}
         >

@@ -68,7 +68,7 @@ function StageCard({ stage, region }: { stage: PathwayStage; region: RegionId })
         <RichTextContent value={stage.body} />
       </p>
 
-      <p className="mt-md font-serif text-headline-sm text-ink">
+      <p className="mt-md text-headline-sm text-ink">
         {formatPrice(region, stage.priceKey)}
       </p>
 
@@ -144,7 +144,7 @@ function PathwayRow({ pathway, region }: { pathway: Pathway; region: RegionId })
         </div>
 
         <div className="tablet:text-right">
-          <p className="font-serif text-headline-sm text-ink">
+          <p className="text-headline-sm text-ink">
             {formatAmount(region, total)}
           </p>
           <p className="mt-xxs text-body-sm text-ink-muted">
@@ -231,7 +231,7 @@ export function PathwayRows() {
             <dl className="mt-lg grid gap-lg tablet:grid-cols-3">
               {commitments.map((commitment) => (
                 <div key={commitment.value}>
-                  <dt className="font-serif text-headline-sm text-inverse-ink">
+                  <dt className="text-headline-sm text-inverse-ink">
                     {commitment.value}
                   </dt>
                   <dd className="mt-xxs text-body-sm text-inverse-ink-muted">

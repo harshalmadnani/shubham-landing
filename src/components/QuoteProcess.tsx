@@ -23,7 +23,7 @@ export function QuoteProcess() {
                 <p className="text-eyebrow uppercase text-ink-muted">
                   How pricing works
                 </p>
-                <h2 className="mt-sm font-serif text-headline-sm text-ink">
+                <h2 className="mt-sm text-headline-sm text-ink">
                   {quotePanel.heading}
                 </h2>
                 <p className="mt-md text-body text-ink-muted">

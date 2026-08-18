@@ -121,17 +121,33 @@ Four things worth knowing before editing:
   silently turn `max-w-3xl` into a 72px clamp. Same trap applies to `xs`, `sm`,
   `md`, `lg` and `xl` — those steps exist, so `max-w-xl` is 32px, not 36rem.
   Use `max-w-2xl`/`max-w-3xl` or an arbitrary `max-w-[…]`.
-- **The look is a hybrid.** White canvas, near-black ink and one azure accent
-  give the clarity of a large course platform; Fraunces is held back for `h1`
-  and section `h2` only, which is what keeps the site from looking like every
-  other education template. Card titles, numerals and UI chrome are all sans.
-  If you add a heading, ask whether it is a page-level moment — if not, it is
-  sans. The legacy utility names (`text-gradient`, `bg-brand-gradient`,
-  `bg-mesh`, `bg-grid`, `glass`) still exist but resolve to flat, on-palette
-  styles, so a straggler cannot reintroduce the old neon.
+- **One family, doing both jobs.** IBM Plex Sans at 300–700 carries body copy
+  and display alike. A second face used to sit on the headlines and made a
+  technology-training site read like a magazine; display sizes now get weight
+  700 and hard negative tracking instead, which is what a display face was
+  compensating for. `font-serif` survives as an alias pinned to the same
+  family, so a straggler cannot reintroduce a second download. Likewise the
+  legacy utility names (`text-gradient`, `bg-brand-gradient`, `bg-mesh`,
+  `bg-grid`, `glass`) resolve to flat, on-palette styles.
+- **A headline's accent half is coloured, not slanted.** `h1/h2/h3 em` is
+  forced upright in the base layer; italic display sans reads as an accident.
+- **`--color-primary-bright` is the accent for inverse surfaces.** The normal
+  azure on near-black is under 3:1 — a shape, not text.
 - **The primary button is the accent, not ink.** On a white canvas a blue CTA
   is the clearest "click this" signal the page has; keep it that way rather
   than making every action equally loud.
+
+## Illustration
+
+`Illustrations.tsx` holds one flat vector scene per process page, drawn as
+inline SVG in the palette's own hex values. Drawn rather than generated or
+licensed, for three reasons: it is sharp at any size, it costs no network
+request, and it can never ship the garbled lettering that gives a generated
+illustration away. They are decorative — the page states everything they
+depict — so every one is `aria-hidden`.
+
+If you add a process, add its scene to `processIllustrations`. A slug with no
+entry renders nothing rather than a broken image.
 
 ## How It Works
 

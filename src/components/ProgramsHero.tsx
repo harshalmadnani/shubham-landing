@@ -12,7 +12,7 @@ export function ProgramsHero() {
           Programs
         </p>
 
-        <h1 className="mt-lg max-w-4xl font-serif text-display-xl-mobile tablet:text-display-lg text-ink animate-fade-up">
+        <h1 className="mt-lg max-w-4xl text-display-xl-mobile tablet:text-display-lg text-ink animate-fade-up">
           {totalProgramCount} programs,{" "}
           <em className="text-primary">one route into work.</em>
         </h1>

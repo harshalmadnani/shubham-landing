@@ -6,6 +6,7 @@ import { CtaBanner } from "@/components/CtaBanner";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ArrowRightIcon, CalendarIcon } from "@/components/icons";
+import { processIllustrations } from "@/components/Illustrations";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -37,7 +38,7 @@ export default function HowItWorksPage() {
               {processIndex.eyebrow}
             </p>
 
-            <h1 className="mt-lg max-w-4xl font-serif text-display-xl-mobile tablet:text-display-lg text-ink animate-fade-up">
+            <h1 className="mt-lg max-w-4xl text-display-xl-mobile tablet:text-display-lg text-ink animate-fade-up">
               {processIndex.headline}{" "}
               <em className="text-primary">{processIndex.headlineAccent}</em>
             </h1>
@@ -61,43 +62,43 @@ export default function HowItWorksPage() {
 
         <section className="px-md pt-section tablet:px-lg">
           <div className="mx-auto max-w-content grid gap-lg tablet:grid-cols-2">
-            {processes.map((process, index) => (
-              <Reveal key={process.slug} delay={index * 70} className="h-full">
-                <Link
-                  href={`/how-it-works/${process.slug}`}
-                  className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-primary"
-                >
-                  <p className="text-eyebrow uppercase text-ink-subtle">
-                    {process.eyebrow}
-                  </p>
-                  <h2 className="mt-sm font-serif text-headline-sm text-ink">
-                    {process.headline}{" "}
-                    <em className="text-primary">{process.headlineAccent}</em>
-                  </h2>
-                  <p className="mt-md text-body-sm text-ink-muted">
-                    <RichTextContent value={process.lead} />
-                  </p>
-
-                  <dl className="mt-lg flex flex-wrap gap-lg border-t border-hairline pt-md">
-                    {process.facts.map((fact) => (
-                      <div key={fact.label}>
-                        <dt className="text-body-emphasis text-primary">
-                          {fact.value}
-                        </dt>
-                        <dd className="mt-xxs max-w-[16rem] text-body-sm text-ink-subtle">
-                          {fact.label}
-                        </dd>
+            {processes.map((process, index) => {
+              const Illustration = processIllustrations[process.slug];
+              return (
+                <Reveal key={process.slug} delay={index * 70} className="h-full">
+                  <Link
+                    href={`/how-it-works/${process.slug}`}
+                    className="group flex h-full flex-col overflow-hidden rounded-lg border border-hairline bg-canvas transition-colors duration-300 hover:border-primary"
+                  >
+                    {Illustration && (
+                      <div className="border-b border-hairline bg-surface-1 px-lg pt-lg">
+                        <Illustration className="w-full" />
                       </div>
-                    ))}
-                  </dl>
+                    )}
 
-                  <span className="mt-lg inline-flex items-center gap-xs text-body-sm text-primary">
-                    Read the {process.navLabel.toLowerCase()} process
-                    <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
+                    <div className="flex flex-1 flex-col p-xl">
+                      <p className="text-eyebrow uppercase text-ink-subtle">
+                        {process.eyebrow}
+                      </p>
+                      <h2 className="mt-sm text-headline-sm text-ink">
+                        {process.headline}{" "}
+                        <em className="text-primary">
+                          {process.headlineAccent}
+                        </em>
+                      </h2>
+                      <p className="mt-md text-body-sm text-ink-muted">
+                        <RichTextContent value={process.lead} />
+                      </p>
+
+                      <span className="mt-auto inline-flex items-center gap-xs pt-lg text-body-sm text-primary">
+                        Read the {process.navLabel.toLowerCase()} process
+                        <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </section>
 
