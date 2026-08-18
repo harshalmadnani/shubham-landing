@@ -237,6 +237,50 @@ export function MarketingIllustration({ className }: Props) {
   );
 }
 
+
+/** Four routes, one destination — the business model in one picture. */
+export function AboutIllustration({ className }: Props) {
+  return (
+    <Frame className={className}>
+      {/* The four pathways converging. */}
+      <g stroke={PRIMARY} strokeOpacity=".35" strokeWidth="3" strokeLinecap="round" strokeDasharray="1 11">
+        <path d="M138 92c78 0 62 78 128 78" />
+        <path d="M138 144c60 0 44 26 128 26" />
+        <path d="M138 196c60 0 44-26 128-26" />
+        <path d="M138 248c78 0 62-78 128-78" />
+      </g>
+
+      {[92, 144, 196, 248].map((y, index) => (
+        <g key={y}>
+          <rect x="52" y={y - 18} width="86" height="36" rx="10" fill={WHITE} stroke={LINE} strokeWidth="2" />
+          <circle cx="72" cy={y} r="9" fill={index === 0 ? PRIMARY : PRIMARY_SOFT} />
+          <text x="72" y={y + 4} textAnchor="middle" fontFamily="inherit" fontSize="11" fontWeight="700" fill={index === 0 ? WHITE : PRIMARY}>
+            {index + 1}
+          </text>
+          <rect x="88" y={y - 4} width="36" height="8" rx="4" fill={LINE} />
+        </g>
+      ))}
+
+      {/* The destination. */}
+      <rect x="266" y="106" width="150" height="128" rx="18" fill={INK} />
+      <circle cx="341" cy="152" r="26" fill={PRIMARY} />
+      <path d="m331 152 7 8 14-16" stroke={WHITE} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="296" y="192" width="90" height="9" rx="4.5" fill={CODE_GREY} />
+      <rect x="316" y="210" width="50" height="9" rx="4.5" fill={INK_SOFT} />
+
+      {/* Two markets, one programme. */}
+      <rect x="266" y="252" width="70" height="34" rx="10" fill={WHITE} stroke={LINE} strokeWidth="2" />
+      <circle cx="286" cy="269" r="7" fill={PRIMARY} />
+      <rect x="300" y="265" width="24" height="8" rx="4" fill={LINE} />
+      <rect x="346" y="252" width="70" height="34" rx="10" fill={WHITE} stroke={LINE} strokeWidth="2" />
+      <circle cx="366" cy="269" r="7" fill={TEAL} />
+      <rect x="380" y="265" width="24" height="8" rx="4" fill={LINE} />
+
+      <circle cx="404" cy="76" r="26" fill={PRIMARY} opacity=".12" />
+    </Frame>
+  );
+}
+
 /** Looked up by process slug, so a new page without art fails visibly. */
 export const processIllustrations: Record<
   string,

@@ -50,6 +50,7 @@ src/
     training-structure/     the four pathways and their prices per region, the
                             stages they are built from, what we ask in return,
                             and how to enrol
+    about/                  who we are, what we do, what we hold to
     how-it-works/           overview of the four processes
     how-it-works/[slug]/    one page per process: training, bootcamp,
                             mentoring, marketing
@@ -66,6 +67,7 @@ src/
     sections.ts             copy for every landing-page section
     trainingStructure.ts    copy for the training-structure page
     processes.ts            copy for the four How It Works process pages
+    about.ts                copy for the About page
     regions.ts              the UK and Canada price lists, and currency rules
     pathways.ts             the four routes, and which stages each contains
     programs.ts             the 37-program catalogue
@@ -137,6 +139,19 @@ Four things worth knowing before editing:
   is the clearest "click this" signal the page has; keep it that way rather
   than making every action equally loud.
 
+## About
+
+`about.ts` carries only what the business can stand behind today: what it
+sells, how it sells it, where it operates, how to reach it. There is no
+founding date, no headcount, no student total and no success rate, because
+none has been supplied — and an About page is the single worst place on a site
+to invent one.
+
+Two sections are still missing by design: **the story** (why this exists, and
+since when) and **the people** (who teaches, and what they have actually done).
+Both need to come from the business. Add them to `about.ts` and drop them into
+`about/page.tsx` between "How we work" and "Where we work".
+
 ## Illustration
 
 `Illustrations.tsx` holds one flat vector scene per process page, drawn as
@@ -147,7 +162,8 @@ illustration away. They are decorative — the page states everything they
 depict — so every one is `aria-hidden`.
 
 If you add a process, add its scene to `processIllustrations`. A slug with no
-entry renders nothing rather than a broken image.
+entry renders nothing rather than a broken image. `AboutIllustration` is
+imported directly, since there is only one About page.
 
 ## How It Works
 

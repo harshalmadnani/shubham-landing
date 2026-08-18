@@ -54,6 +54,11 @@ export type NavLink = {
  * Entries whose href carries a `#` are sections of the home page; the rest are
  * pages in their own right, and the header highlights whichever one you are on.
  *
+ * Six entries is the ceiling before the row starts wrapping, so "Who We Help"
+ * and the FAQ live in the footer rather than the header. Both sections are
+ * still on the home page and still linked — they are just no longer competing
+ * with the pages somebody actually navigates to.
+ *
  * "How It Works" carries children, so it opens a menu rather than navigating.
  * Its own href is still real — the overview page — which is what the footer
  * points at and what a typed URL resolves to.
@@ -88,8 +93,7 @@ export const navLinks: readonly NavLink[] = [
       },
     ],
   },
-  { label: "Who We Help", href: "/#who-we-help" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "About", href: "/about" },
 ];
 
 export const hero = {
@@ -123,6 +127,7 @@ export const footerColumns = [
     heading: "Programme",
     links: [
       { label: "Home", href: "/" },
+      { label: "About", href: "/about" },
       { label: "Training Structure", href: "/training-structure" },
       { label: "How It Works", href: "/how-it-works" },
       { label: "Who We Help", href: "/#who-we-help" },
