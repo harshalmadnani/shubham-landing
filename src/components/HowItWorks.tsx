@@ -1,3 +1,6 @@
+import Link from "next/link";
+
+import { ArrowRightIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -33,6 +36,18 @@ export function HowItWorks() {
             </li>
           ))}
         </ol>
+
+        {/* The four steps in summary; the process pages are where each one is
+            actually described. */}
+        <Reveal delay={320}>
+          <Link
+            href="/how-it-works"
+            className="group mt-xxl inline-flex items-center gap-xs text-body text-primary"
+          >
+            Read how each part actually works
+            <ArrowRightIcon className="h-md w-md transition-transform duration-200 group-hover:translate-x-1" />
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

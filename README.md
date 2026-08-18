@@ -50,17 +50,22 @@ src/
     training-structure/     the four pathways and their prices per region, the
                             stages they are built from, what we ask in return,
                             and how to enrol
+    how-it-works/           overview of the four processes
+    how-it-works/[slug]/    one page per process: training, bootcamp,
+                            mentoring, marketing
     programs/                the catalogue: all 37 cards, filterable by
                             specialization
     programs/[slug]/        curriculum page, statically generated per program
   components/               one component per landing-page section
     SectionHeading.tsx      shared eyebrow + headline + lead for every section
     Reveal.tsx              fade-up on scroll; no-JS and reduced-motion safe
+    NavMenu.tsx             the one nav entry that opens a menu
   content/
     types.ts                shared content types
     site.ts                 brand, nav, hero, footer, WhatsApp links
     sections.ts             copy for every landing-page section
     trainingStructure.ts    copy for the training-structure page
+    processes.ts            copy for the four How It Works process pages
     regions.ts              the UK and Canada price lists, and currency rules
     pathways.ts             the four routes, and which stages each contains
     programs.ts             the 37-program catalogue
@@ -127,6 +132,31 @@ Four things worth knowing before editing:
 - **The primary button is the accent, not ink.** On a white canvas a blue CTA
   is the clearest "click this" signal the page has; keep it that way rather
   than making every action equally loud.
+
+## How It Works
+
+Four process pages — training, bootcamp, mentoring, marketing — all rendered
+by one `ProcessPage` component from one array in `processes.ts`. They share a
+layout on purpose: somebody weighing the bootcamp against marketing is already
+comparing two things that differ in substance, and giving each page its own
+shape would add a difference that means nothing.
+
+Every claim on them traces back to something the site already commits to — the
+stage cards on `/training-structure`, the services list, the FAQs. Cadences
+the business has not fixed (how often a mentor calls, how long a campaign runs
+before review) are **absent rather than guessed at**. Add them to
+`processes.ts` when they are decided; the pages render the same shape either
+way.
+
+The nav entry that opens them is the only one with `children`, which is what
+makes `NavMenu` render instead of a link. Two rules there:
+
+- **Click, not hover.** A hover menu is unreachable on a touch screen and
+  fires on every pass of the cursor.
+- **The parent does not double as a link.** An element that both navigates and
+  opens a menu has to guess what a tap meant, and guesses wrong on touch — so
+  the overview is an entry inside the menu, and `/how-it-works` is what the
+  footer and a typed URL resolve to.
 
 ## Pricing
 

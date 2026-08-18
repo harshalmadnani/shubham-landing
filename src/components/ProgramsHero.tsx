@@ -18,9 +18,10 @@ export function ProgramsHero() {
         </h1>
 
         <p className="mt-xl max-w-2xl text-body-lg text-ink-muted animate-fade-up">
-          Every program runs the same three stages — instructor-led training, a
-          hands-on bootcamp, then resume marketing until you are hired. Pick
-          the subject; the route through it is the same.
+          Every program is delivered through the same four pathways —
+          instructor-led training, a hands-on bootcamp, then resume marketing
+          until you are hired. Pick the subject; the routes through it are the
+          same.
         </p>
 
         <div className="mt-xl flex flex-wrap items-center gap-md animate-fade-up">

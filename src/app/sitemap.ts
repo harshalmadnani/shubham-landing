@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { processes } from "@/content/processes";
 import { programDetails } from "@/content/programDetails";
 
 // `output: "export"` requires metadata routes to declare themselves static.
@@ -23,6 +24,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${BASE}/how-it-works/`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    ...processes.map((process) => ({
+      url: `${BASE}/how-it-works/${process.slug}/`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
   ];
 
   return [

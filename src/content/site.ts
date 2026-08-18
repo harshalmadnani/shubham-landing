@@ -38,21 +38,59 @@ export function programEnquiryMessage(programTitle: string): string {
   return `Hi! I'm interested in the ${programTitle} program. Can you share more details?`;
 }
 
+export type NavLink = {
+  readonly label: string;
+  readonly href: string;
+  /** A short line describing the destination, shown in dropdown menus. */
+  readonly summary?: string;
+  /** Present on entries that open a menu instead of navigating. */
+  readonly children?: readonly NavLink[];
+};
+
 /**
  * Primary navigation. "Home" earns its place now that the site is more than
  * one page — from a curriculum page the logo was the only way back.
  *
  * Entries whose href carries a `#` are sections of the home page; the rest are
  * pages in their own right, and the header highlights whichever one you are on.
+ *
+ * "How It Works" carries children, so it opens a menu rather than navigating.
+ * Its own href is still real — the overview page — which is what the footer
+ * points at and what a typed URL resolves to.
  */
-export const navLinks = [
+export const navLinks: readonly NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Programs", href: "/programs" },
   { label: "Training Structure", href: "/training-structure" },
-  { label: "How It Works", href: "/#how-it-works" },
+  {
+    label: "How It Works",
+    href: "/how-it-works",
+    children: [
+      {
+        label: "Training",
+        href: "/how-it-works/training",
+        summary: "Live sessions, batches, attendance and certification",
+      },
+      {
+        label: "Bootcamp",
+        href: "/how-it-works/bootcamp",
+        summary: "Five projects, four phases, one portfolio",
+      },
+      {
+        label: "Mentoring",
+        href: "/how-it-works/mentoring",
+        summary: "Your mentor, and what they are there for",
+      },
+      {
+        label: "Marketing",
+        href: "/how-it-works/marketing",
+        summary: "Resume, positioning and the search until you are hired",
+      },
+    ],
+  },
   { label: "Who We Help", href: "/#who-we-help" },
   { label: "FAQ", href: "/#faq" },
-] as const;
+];
 
 export const hero = {
   eyebrow: "IT training & placement support",
@@ -86,7 +124,7 @@ export const footerColumns = [
     links: [
       { label: "Home", href: "/" },
       { label: "Training Structure", href: "/training-structure" },
-      { label: "How It Works", href: "/#how-it-works" },
+      { label: "How It Works", href: "/how-it-works" },
       { label: "Who We Help", href: "/#who-we-help" },
     ],
   },

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { ButtonLink } from "@/components/Button";
 import { CalendarIcon, CloseIcon, MenuIcon } from "@/components/icons";
+import { NavMenu } from "@/components/NavMenu";
 import {
   consultationMessage,
   navLinks,
@@ -70,6 +71,18 @@ export function Header() {
         >
           {navLinks.map((link) => {
             const isCurrent = isCurrentPage(link.href, pathname);
+
+            if (link.children) {
+              return (
+                <NavMenu
+                  key={link.href}
+                  link={link}
+                  isSectionActive={isCurrent}
+                  pathname={pathname}
+                />
+              );
+            }
+
             return (
               <Link
                 key={link.href}
@@ -115,19 +128,46 @@ export function Header() {
             {navLinks.map((link) => {
               const isCurrent = isCurrentPage(link.href, pathname);
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={closeMenu}
-                  aria-current={isCurrent ? "page" : undefined}
-                  className={`rounded-md px-sm py-sm text-body transition-colors ${
-                    isCurrent
-                      ? "bg-surface-1 text-ink"
-                      : "text-ink-muted hover:bg-surface-1 hover:text-ink"
-                  }`}
-                >
-                  {link.label}
-                </Link>
+                <div key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={closeMenu}
+                    aria-current={isCurrent ? "page" : undefined}
+                    className={`block rounded-md px-sm py-sm text-body transition-colors ${
+                      isCurrent
+                        ? "bg-surface-1 text-ink"
+                        : "text-ink-muted hover:bg-surface-1 hover:text-ink"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+
+                  {/* Four children, so they sit open rather than behind a
+                      second tap. A nested accordion inside a menu that is
+                      already an accordion is one drawer too many. */}
+                  {link.children && (
+                    <div className="ml-sm mt-xxs flex flex-col gap-xxs border-l border-hairline pl-sm">
+                      {link.children.map((child) => {
+                        const isChildCurrent = isCurrentPage(child.href, pathname);
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={closeMenu}
+                            aria-current={isChildCurrent ? "page" : undefined}
+                            className={`rounded-md px-sm py-xs text-body-sm transition-colors ${
+                              isChildCurrent
+                                ? "bg-surface-1 text-ink"
+                                : "text-ink-muted hover:bg-surface-1 hover:text-ink"
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               );
             })}
           </nav>
