@@ -4,10 +4,8 @@ import { CtaBanner } from "@/components/CtaBanner";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { PathwayRoutes } from "@/components/PathwayRoutes";
-import { PathwayStages } from "@/components/PathwayStages";
+import { PathwayRows } from "@/components/PathwayRows";
 import { QuoteProcess } from "@/components/QuoteProcess";
-import { RegionProvider } from "@/components/RegionProvider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { StructureHero } from "@/components/StructureHero";
 import { site } from "@/content/site";
@@ -25,12 +23,7 @@ export default function TrainingStructurePage() {
       <Header />
       <main className="flex flex-1 flex-col">
         <StructureHero />
-        {/* Both priced sections share one region choice, so the route totals
-            and the stage prices can never be shown in different currencies. */}
-        <RegionProvider>
-          <PathwayRoutes />
-          <PathwayStages />
-        </RegionProvider>
+        <PathwayRows />
         <QuoteProcess />
         <Faq
           items={structureFaqs}

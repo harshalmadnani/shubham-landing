@@ -142,18 +142,19 @@ Four things worth knowing before editing:
   currency before discovering it was switchable.
 
 The choice persists in `localStorage` and is read after mount rather than
-during render, so the prerendered HTML and the first client render agree. It
-lives in `RegionProvider` rather than in a section, because two sections price
-things — the routes and the stages — and two independent switches on one page
-would let someone compare a total in one currency against stage prices in
-another.
+during render, so the prerendered HTML and the first client render agree.
 
 `pathways.ts` layers the four routes on top of that. A pathway is not a product
-with a price of its own: it is a list of stage keys, and `pathwayTotal()` adds
-them up at render time. There is no bundle discount and no stored total, so a
-route can never quote a figure its stages have moved away from. Route 04 holds
-a single stage by design — the Marketing pathway is resume marketing on its
-own.
+with a price of its own: it is an ordered list of stage keys, and
+`pathwayTotal()` adds them up at render time. There is no bundle discount and
+no stored total, so a route can never quote a figure its stages have moved away
+from. Pathway 4 holds a single stage by design — Marketing is resume marketing
+on its own.
+
+Stage cards carry a `kind` ("Training", "Project work", "Placement") rather
+than a step number, because the same stage sits in a different position in
+every row: the bootcamp is second in pathway 1 and first in pathway 3, and a
+number would contradict whichever row it was standing in.
 
 ## Photography
 

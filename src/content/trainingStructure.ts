@@ -19,7 +19,11 @@ export const structureHero = {
 } as const;
 
 export type PathwayStage = {
-  readonly step: string;
+  /** What kind of stage this is, shown as the card's eyebrow. A stage sits in
+   *  a different position in every pathway, so a step number would contradict
+   *  the row it is standing in. */
+  readonly kind: string;
+  /** Short name, used on the pathway cards where the full title will not fit. */
   readonly label: string;
   readonly title: string;
   readonly body: RichText;
@@ -32,19 +36,19 @@ export type PathwayStage = {
 };
 
 /**
- * The stages of a pathway. Rendered as a sequence rather than a price table —
- * each is quoted on its own, so they are steps you move through, not tiers you
- * choose between.
+ * The stages a pathway is built from. Each is quoted on its own, so they are
+ * steps you move through rather than tiers you choose between, and a pathway
+ * costs whatever its stages come to.
  *
- * Stages 01 and 02 are alternatives: you pick the regular track or the
- * AI-focused one. Neither publishes an hour count, since the two differ in
- * shape as well as length and any single figure would misrepresent one of
- * them.
+ * The two training stages are alternatives — the regular track or the
+ * AI-focused one — and head their own pathways for that reason. Neither
+ * publishes an hour count, since the two differ in shape as well as length and
+ * any single figure would misrepresent one of them.
  */
 export const pathwayStages: readonly PathwayStage[] = [
   {
-    step: "Stage 01 · option A",
-    label: "Regular training",
+    kind: "Training",
+    label: "Regular Training",
     priceKey: "regular-training",
     title: "Regular Training Program",
     body: "Live instructor-led teaching in your chosen subject, on a fixed schedule rather than a shelf of recordings.",
@@ -58,8 +62,8 @@ export const pathwayStages: readonly PathwayStage[] = [
     ],
   },
   {
-    step: "Stage 01 · option B",
-    label: "AI training",
+    kind: "Training",
+    label: "AI Training",
     priceKey: "ai-training",
     title: "AI Training Program",
     body: "The same structure, built around the AI skills employers now screen for — for anyone targeting an AI-titled role.",
@@ -73,7 +77,7 @@ export const pathwayStages: readonly PathwayStage[] = [
     ],
   },
   {
-    step: "Stage 02",
+    kind: "Project work",
     label: "Bootcamp",
     priceKey: "bootcamp",
     title: "Hands-on project intensive",
@@ -89,8 +93,8 @@ export const pathwayStages: readonly PathwayStage[] = [
     ],
   },
   {
-    step: "Stage 03",
-    label: "Resume marketing",
+    kind: "Placement",
+    label: "Resume Marketing",
     priceKey: "resume-marketing",
     title: "Positioning and placement support",
     body: "The part that usually stops the day a course ends. Here it runs until you have an offer.",
