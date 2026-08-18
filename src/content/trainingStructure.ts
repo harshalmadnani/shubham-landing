@@ -13,9 +13,9 @@ import type { FaqItem, RichText } from "./types";
 
 export const structureHero = {
   eyebrow: "How our training works",
-  headline: "Three stages,",
-  headlineAccent: "one route into work.",
-  body: "Every AVIROwork Consultancy programme runs through the same three stages: instructor-led training — regular or AI-focused — a hands-on bootcamp, and resume marketing that carries on until you are hired. Take the stage you need or run all three end to end.",
+  headline: "Four pathways,",
+  headlineAccent: "one destination.",
+  body: "Every AVIROwork Consultancy programme is assembled from the same priced stages: instructor-led training — regular or AI-focused — a hands-on project bootcamp, and resume marketing that carries on until you are hired. Pick the pathway that matches where you are starting from and skip what you have already done.",
 } as const;
 
 export type PathwayStage = {
@@ -130,15 +130,20 @@ export const quoteSteps: readonly { title: string; body: RichText }[] = [
 ];
 
 export const quotePanel = {
-  heading: "Priced by the stage, not by the bundle",
-  body: "Each stage is priced on its own, so you pay for the ones you take rather than a package built around someone else. Most people run all three in order — training, then the bootcamp, then resume marketing — but the training stage alone is a perfectly normal place to start, and you can add the rest later.",
+  heading: "A pathway costs what its stages add up to",
+  body: "Every stage carries its own price, and a pathway is simply the stages it contains — nothing is marked up for being sold together, and nothing is hidden behind a package built around someone else\u2019s situation. Take the full route if you are starting from scratch, join at the bootcamp if you already have the theory, or come to us for resume marketing alone. You can add a stage later whenever it makes sense.",
 } as const;
 
 export const structureFaqs: readonly FaqItem[] = [
   {
-    question: "Do I have to take all three stages?",
+    question: "Which pathway should I take?",
     answer:
-      "No. Each stage is priced on its own, so you can take training alone, add the bootcamp when you want project experience, or come to us for resume marketing with skills you already have. Most people run all three in order, because that is the route that ends in an offer.",
+      "It comes down to what you already have. New to the discipline: the Regular pathway teaches it, builds it and markets it. Chasing an AI-titled role: the AI pathway does the same with the training stage rebuilt around model and agent work. Holding the theory but with nothing shipped: the Bootcamp pathway starts you at the project stage. Able to do the job but stuck at the screening stage: the Marketing pathway is the one you need. If none of those obviously describes you, that is exactly what the free consultation is for.",
+  },
+  {
+    question: "Can I start on one pathway and add to it later?",
+    answer:
+      "Yes. Because every stage is quoted on its own, adding one later costs the same as it would have cost on day one — there is no penalty for building your route in steps. People often take the training stage first, then come back for the bootcamp once they have seen how far the theory alone carries them.",
   },
   {
     question: "When do sessions run, and can I keep working?",

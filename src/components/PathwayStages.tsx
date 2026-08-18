@@ -1,54 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
-import { RegionSwitch, readStoredRegion, storeRegion } from "@/components/RegionSwitch";
+import { useRegion } from "@/components/RegionProvider";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TiltCard } from "@/components/TiltCard";
-import { DEFAULT_REGION, formatPrice } from "@/content/regions";
-import type { RegionId } from "@/content/regions";
+import { formatPrice } from "@/content/regions";
 import { commitments, pathwayStages } from "@/content/trainingStructure";
 
 /**
- * The stages of a pathway, each with its own price for the chosen market.
+ * The parts a pathway is built from, each with its own price for the chosen
+ * market.
  *
  * The first two cards are the two training options, so they carry
  * `option A` / `option B` labels rather than step numbers of their own. There
  * are no arrow connectors: an arrow between two alternatives would read as a
  * sequence, which is wrong.
  *
- * Region lives here rather than in a context because this is the only section
- * that prices anything. It is read from storage after mount, not during
- * render, so the prerendered HTML and the first client render agree — reading
- * localStorage during render is the standard way this pattern hydration-errors.
+ * The region comes from context rather than local state, because the routes
+ * section above prices the same stages — two independent switches on one page
+ * is how a reader ends up comparing a total in one currency against stage
+ * prices in another. The switch itself renders once, up there.
  */
 export function PathwayStages() {
-  const [region, setRegion] = useState<RegionId>(DEFAULT_REGION);
-
-  useEffect(() => {
-    setRegion(readStoredRegion());
-  }, []);
-
-  const chooseRegion = (id: RegionId) => {
-    setRegion(id);
-    storeRegion(id);
-  };
+  const { region } = useRegion();
 
   return (
     <section id="stages" className="px-md pt-section tablet:px-lg">
       <div className="mx-auto max-w-content">
         <SectionHeading
-          eyebrow="The pathway"
+          eyebrow="Inside a pathway"
           title="What each stage involves, and what it costs"
-          lead="Most providers deliver the training and stop there. A pathway carries you from your first session through to an offer — starting with whichever training track fits, then the stages you need."
+          lead="Four stages, priced individually and combined into the routes above. This is what you are actually buying at each one — how it runs, what you do, and what you walk away holding."
         />
-
-        {/* The switch sits above the figures, never below them. */}
-        <div className="mt-xl">
-          <RegionSwitch value={region} onChange={chooseRegion} />
-        </div>
 
         <div className="mt-xl grid gap-lg tablet:grid-cols-2 desktop:grid-cols-4">
           {pathwayStages.map((stage, index) => (

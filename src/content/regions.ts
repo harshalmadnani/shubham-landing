@@ -83,8 +83,11 @@ export function findRegion(id: RegionId): Region {
   return regions.find((region) => region.id === id) ?? regions[0];
 }
 
+/** Formats a bare amount — used for pathway totals, which are sums. */
+export function formatAmount(regionId: RegionId, amount: number): string {
+  return `${findRegion(regionId).symbol}${amount.toLocaleString("en-GB")}`;
+}
+
 export function formatPrice(regionId: RegionId, key: PriceKey): string {
-  const region = findRegion(regionId);
-  const amount = prices[regionId][key];
-  return `${region.symbol}${amount.toLocaleString("en-GB")}`;
+  return formatAmount(regionId, prices[regionId][key]);
 }

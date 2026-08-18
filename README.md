@@ -47,9 +47,9 @@ src/
     layout.tsx              root layout, font, metadata
     globals.css             the entire design system (see below)
     page.tsx                landing page — composes the sections in order
-    training-structure/     how a programme runs: the pathway stages, their
-                            prices per region, what we ask in return, and how
-                            to enrol
+    training-structure/     the four pathways and their prices per region, the
+                            stages they are built from, what we ask in return,
+                            and how to enrol
     programs/                the catalogue: all 37 cards, filterable by
                             specialization
     programs/[slug]/        curriculum page, statically generated per program
@@ -62,6 +62,7 @@ src/
     sections.ts             copy for every landing-page section
     trainingStructure.ts    copy for the training-structure page
     regions.ts              the UK and Canada price lists, and currency rules
+    pathways.ts             the four routes, and which stages each contains
     programs.ts             the 37-program catalogue
     programDetails.ts       the curriculum behind each of the 37 programs
 public/
@@ -141,7 +142,18 @@ Four things worth knowing before editing:
   currency before discovering it was switchable.
 
 The choice persists in `localStorage` and is read after mount rather than
-during render, so the prerendered HTML and the first client render agree.
+during render, so the prerendered HTML and the first client render agree. It
+lives in `RegionProvider` rather than in a section, because two sections price
+things — the routes and the stages — and two independent switches on one page
+would let someone compare a total in one currency against stage prices in
+another.
+
+`pathways.ts` layers the four routes on top of that. A pathway is not a product
+with a price of its own: it is a list of stage keys, and `pathwayTotal()` adds
+them up at render time. There is no bundle discount and no stored total, so a
+route can never quote a figure its stages have moved away from. Route 04 holds
+a single stage by design — the Marketing pathway is resume marketing on its
+own.
 
 ## Photography
 
