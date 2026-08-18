@@ -96,6 +96,32 @@ export function ProcessPage({ content }: { content: ProcessContent }) {
         </div>
       </section>
 
+      {/* Detail blocks: the five projects, the guidelines, what we ask of you.
+          A grid rather than a second numbered list — these are a set, and
+          numbering them again would imply an order they do not have. */}
+      {content.details?.map((detail) => (
+        <section key={detail.title} className="px-md pt-section tablet:px-lg">
+          <div className="mx-auto max-w-content">
+            <SectionHeading
+              title={detail.title}
+              lead={<RichTextContent value={detail.lead} />}
+            />
+            <div className="mt-xl grid gap-md tablet:grid-cols-2 desktop:grid-cols-3">
+              {detail.items.map((item, index) => (
+                <Reveal key={item.title} delay={index * 50} className="h-full">
+                  <div className="h-full rounded-lg border border-hairline bg-surface-1 p-lg transition-colors duration-300 hover:border-ink/40">
+                    <p className="text-card-title text-ink">{item.title}</p>
+                    <p className="mt-xs text-body-sm text-ink-muted">
+                      <RichTextContent value={item.body} />
+                    </p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+
       {/* What you get, and who it is for — side by side, both checklists. */}
       <section className="px-md pt-section tablet:px-lg">
         <div className="mx-auto max-w-content grid gap-lg desktop:grid-cols-2 desktop:gap-xl">

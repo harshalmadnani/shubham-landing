@@ -141,12 +141,22 @@ layout on purpose: somebody weighing the bootcamp against marketing is already
 comparing two things that differ in substance, and giving each page its own
 shape would add a difference that means nothing.
 
-Every claim on them traces back to something the site already commits to — the
-stage cards on `/training-structure`, the services list, the FAQs. Cadences
-the business has not fixed (how often a mentor calls, how long a campaign runs
-before review) are **absent rather than guessed at**. Add them to
-`processes.ts` when they are decided; the pages render the same shape either
-way.
+Content follows the same rule as the rest of the site: the process model comes
+from the pattern NCPL established, the words do not. Nothing on these pages
+shares even a five-word run with theirs — worth re-checking if you rewrite one.
+
+Two things are deliberately missing, and should stay missing until the business
+decides them:
+
+- **Service levels nobody has committed to.** How many applications go out a
+  day, how often a mentor calls, how often the campaign is reviewed. The pages
+  describe the activity without inventing a number.
+- **Post-placement guarantees.** The provider this model comes from offers a
+  365-day one. We publish no such promise, because promising it is a
+  contractual act, not a copy decision.
+
+Add either to `processes.ts` once they are real; the pages render the same
+shape with or without them.
 
 The nav entry that opens them is the only one with `children`, which is what
 makes `NavMenu` render instead of a link. Two rules there:
