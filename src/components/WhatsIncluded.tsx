@@ -4,15 +4,15 @@ import { Section, SectionHead } from "@/components/Section";
 import { includedGroups } from "@/content/sections";
 
 /**
- * The contents page: every group of support, listed in full.
+ * Everything the programme includes, grouped.
  *
- * The group name stays in the left margin while its items run down the right,
- * which is how a printed contents page is set and why fifteen entries here
- * still scan in a couple of seconds.
+ * The group name sits on its own line above its items rather than in a margin
+ * column, so each group reads as its own short list instead of as one long
+ * table of fifteen rows.
  */
 export function WhatsIncluded() {
   return (
-    <Section id="whats-included" index="06" label="What's included">
+    <Section id="whats-included" label="What's included">
       <SectionHead
         title={
           <>
@@ -22,33 +22,23 @@ export function WhatsIncluded() {
         lead="Whichever route you take, none of these are add-ons or upsells."
       />
 
-      <div className="mt-16 border-t border-ink">
-        {includedGroups.map((group, groupIndex) => (
-          <div
-            key={group.name}
-            className="grid gap-x-10 gap-y-6 border-b border-rule py-10 desktop:grid-cols-12"
-          >
-            <div className="desktop:col-span-3">
-              <p className="flex items-baseline gap-3 font-mono text-label uppercase text-ink-3">
-                <span className="tnum text-flame-ink">
-                  {String(groupIndex + 1).padStart(2, "0")}
-                </span>
-                {group.name}
-              </p>
-            </div>
+      <div className="mt-16 flex flex-col gap-16">
+        {includedGroups.map((group) => (
+          <div key={group.name}>
+            <h3 className="text-label text-ink-3">{group.name}</h3>
 
-            <ul className="grid gap-x-10 gap-y-7 desktop:col-span-9 tablet:grid-cols-2">
+            <div className="mt-6 grid gap-4 tablet:grid-cols-2 desktop:grid-cols-3 desktop:gap-6">
               {group.items.map((item, index) => (
-                <li key={item.title}>
-                  <Reveal delay={(index % 2) * 50}>
-                    <h3 className="text-subtitle text-ink">{item.title}</h3>
-                    <p className="mt-1.5 text-small text-ink-2">
+                <Reveal key={item.title} delay={(index % 3) * 50}>
+                  <div className="h-full rounded-lg bg-surface p-7">
+                    <p className="text-heading">{item.title}</p>
+                    <p className="mt-2 text-small text-ink-2">
                       <RichTextContent value={item.body} />
                     </p>
-                  </Reveal>
-                </li>
+                  </div>
+                </Reveal>
               ))}
-            </ul>
+            </div>
           </div>
         ))}
       </div>

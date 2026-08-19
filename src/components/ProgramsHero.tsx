@@ -13,7 +13,7 @@ export function ProgramsHero() {
           {totalProgramCount} programs, <em>one route into work.</em>
         </>
       }
-      lead="Every program is delivered through the same four pathways — instructor-led training, a hands-on bootcamp, then resume marketing until you are hired. Pick the subject; the routes through it are the same."
+      lead="Every program runs through the same four pathways — instructor-led training, a hands-on bootcamp, then resume marketing until you are hired."
       actions={
         <>
           <ButtonLink href={whatsAppUrl(consultationMessage)}>
@@ -28,7 +28,7 @@ export function ProgramsHero() {
       meta={
         <>
           {programCategories.length} specializations · {totalProgramCount}{" "}
-          programs · every one with a full curriculum
+          programs
         </>
       }
     />

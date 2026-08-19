@@ -1,18 +1,11 @@
-import { Marker } from "@/components/Marker";
 import { Reveal } from "@/components/Reveal";
 import { Section, SectionHead } from "@/components/Section";
 import { audiences } from "@/content/sections";
 
-/**
- * Four starting points, set as a ruled table.
- *
- * Name on the left, the summary beside it, what you get on the right. Four
- * rows of the same shape let a reader compare across them, which four cards
- * side by side never allow.
- */
+/** Four starting points, one card each. */
 export function WhoWeHelp() {
   return (
-    <Section id="who-we-help" index="02" label="Who we help" tone="paper-2">
+    <Section id="who-we-help" label="Who we help" tone="surface">
       <SectionHead
         title={
           <>
@@ -22,27 +15,20 @@ export function WhoWeHelp() {
         lead="Four starting points, four different routes in — the program adapts to your background, not the other way round."
       />
 
-      <div className="mt-16 border-t border-ink">
+      <div className="mt-16 grid gap-4 tablet:grid-cols-2 desktop:gap-6">
         {audiences.map((audience, index) => (
-          <Reveal key={audience.title}>
-            <article className="grid gap-6 border-b border-rule py-10 desktop:grid-cols-12 desktop:gap-10">
-              <div className="flex gap-4 desktop:col-span-4">
-                <span className="mt-1.5 font-mono text-index tnum text-flame-ink">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-display text-title text-ink">
-                  {audience.title}
-                </h3>
-              </div>
+          <Reveal key={audience.title} delay={(index % 2) * 60}>
+            <article className="flex h-full flex-col rounded-lg bg-card p-8 tablet:p-10">
+              <h3 className="text-title">{audience.title}</h3>
+              <p className="mt-4 text-body text-ink-2">{audience.body}</p>
 
-              <p className="text-body text-ink-2 desktop:col-span-4">
-                {audience.body}
-              </p>
-
-              <ul className="flex flex-col gap-3 desktop:col-span-4">
+              <ul className="mt-8 flex flex-col gap-3 border-t border-line pt-8">
                 {audience.bullets.map((bullet) => (
                   <li key={bullet} className="flex gap-3 text-small text-ink-2">
-                    <Marker className="mt-1.5 h-2.5 w-2.5 shrink-0 text-flame" />
+                    <span
+                      aria-hidden="true"
+                      className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                    />
                     {bullet}
                   </li>
                 ))}

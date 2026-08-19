@@ -75,24 +75,16 @@ export function NavMenu({
         aria-controls={menuId}
         onClick={() => setIsOpen((open) => !open)}
         onKeyDown={onButtonKeyDown}
-        className={`relative flex items-center gap-1.5 py-1 font-mono text-label uppercase transition-colors ${
-          isSectionActive || isOpen
-            ? "text-ink"
-            : "text-ink-2 hover:text-flame-ink"
+        className={`flex items-center gap-1.5 text-label transition-colors ${
+          isSectionActive || isOpen ? "text-ink" : "text-ink-2 hover:text-ink"
         }`}
       >
         {link.label}
         <ChevronDownIcon
-          className={`h-3.5 w-3.5 transition-transform duration-200 ${
+          className={`h-4 w-4 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
-        {isSectionActive && (
-          <span
-            aria-hidden="true"
-            className="absolute -bottom-0.5 left-0 h-px w-full bg-flame"
-          />
-        )}
       </button>
 
       {isOpen && (
@@ -100,17 +92,9 @@ export function NavMenu({
           id={menuId}
           role="menu"
           aria-label={link.label}
-          className="absolute left-0 top-[calc(100%+13px)] z-50 w-[24rem] animate-rise border border-ink bg-paper"
+          className="absolute left-1/2 top-[calc(100%+18px)] z-50 w-[22rem] -translate-x-1/2 animate-rise rounded-lg border border-line bg-card p-2"
         >
-          <Link
-            role="menuitem"
-            href={link.href}
-            className="block border-b border-rule px-5 py-3 font-mono text-label uppercase text-ink-2 transition-colors hover:bg-paper-2 hover:text-ink"
-          >
-            Overview — all four processes
-          </Link>
-
-          {link.children?.map((child, index) => {
+          {link.children?.map((child) => {
             const isCurrent = pathname.replace(/\/+$/, "") === child.href;
             return (
               <Link
@@ -118,26 +102,27 @@ export function NavMenu({
                 role="menuitem"
                 href={child.href}
                 aria-current={isCurrent ? "page" : undefined}
-                className={`group/item flex gap-4 border-b border-rule px-5 py-4 transition-colors last:border-b-0 ${
-                  isCurrent ? "bg-paper-2" : "hover:bg-paper-2"
+                className={`block rounded-md px-4 py-3 transition-colors ${
+                  isCurrent ? "bg-surface" : "hover:bg-surface"
                 }`}
               >
-                <span className="mt-1 font-mono text-index tnum text-flame-ink">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span>
-                  <span className="block text-subtitle text-ink">
-                    {child.label}
+                <span className="block text-label text-ink">{child.label}</span>
+                {child.summary && (
+                  <span className="mt-1 block text-micro text-ink-3">
+                    {child.summary}
                   </span>
-                  {child.summary && (
-                    <span className="mt-1 block text-small text-ink-2">
-                      {child.summary}
-                    </span>
-                  )}
-                </span>
+                )}
               </Link>
             );
           })}
+
+          <Link
+            role="menuitem"
+            href={link.href}
+            className="mt-1 block rounded-md px-4 py-3 text-micro text-ink-2 transition-colors hover:bg-surface hover:text-ink"
+          >
+            Overview — all four together
+          </Link>
         </div>
       )}
     </div>

@@ -1,37 +1,29 @@
 import { ButtonLink } from "@/components/Button";
 import { consultationMessage, ctaBanner, whatsAppUrl } from "@/content/site";
 
-/**
- * The closing ask.
- *
- * A full-bleed ink band with the ruled grid showing through it — the same
- * measure as the cover, closing the document the way it opened.
- */
+/** The closing ask, given a full section of its own. */
 export function CtaBanner() {
   return (
-    <section
-      id="cta-banner"
-      className="relative overflow-hidden border-t border-rule bg-night text-bone"
-    >
-      <div
-        aria-hidden="true"
-        className="rule-grid-night pointer-events-none absolute inset-0 opacity-80"
-      />
+    <section id="cta-banner" className="bg-canvas">
+      <div className="mx-auto w-full max-w-page px-6 pb-24 tablet:px-8 tablet:pb-32">
+        <div className="relative overflow-hidden rounded-lg bg-night px-8 py-20 text-center tablet:px-16 tablet:py-28">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-32 left-1/2 h-96 w-[42rem] -translate-x-1/2 rounded-full bg-accent/25 blur-3xl"
+          />
 
-      <div className="relative mx-auto w-full max-w-page px-6 py-24 tablet:px-10 tablet:py-32">
-        <div className="grid gap-10 desktop:grid-cols-12">
-          <h2 className="font-display text-display text-bone desktop:col-span-7">
-            {ctaBanner.heading}
-          </h2>
-
-          <div className="desktop:col-span-4 desktop:col-start-9">
-            <p className="text-lead text-bone-2">{ctaBanner.body}</p>
+          <div className="relative mx-auto max-w-2xl">
+            <h2 className="text-display text-chalk text-balance">
+              {ctaBanner.heading}
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-lead text-chalk-2">
+              {ctaBanner.body}
+            </p>
             <ButtonLink
               href={whatsAppUrl(consultationMessage)}
-              variant="onNight"
-              className="mt-8"
+              className="mt-10 bg-canvas text-ink hover:bg-chalk"
             >
-              Book free consultation
+              Book a free consultation
             </ButtonLink>
           </div>
         </div>

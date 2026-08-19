@@ -47,7 +47,7 @@ export function RegionSwitch({
       <div
         role="radiogroup"
         aria-label="Choose your region"
-        className="inline-flex w-max border border-ink"
+        className="inline-flex w-max gap-1 rounded-full bg-surface p-1"
       >
         {regions.map((region) => {
           const isActive = region.id === value;
@@ -58,10 +58,10 @@ export function RegionSwitch({
               role="radio"
               aria-checked={isActive}
               onClick={() => onChange(region.id)}
-              className={`border-r border-ink px-5 py-2.5 font-mono text-label uppercase transition-colors duration-200 last:border-r-0 ${
+              className={`rounded-full px-5 py-2 text-micro transition-colors duration-200 ${
                 isActive
-                  ? "bg-ink text-paper"
-                  : "bg-transparent text-ink-2 hover:text-ink"
+                  ? "bg-ink text-canvas"
+                  : "text-ink-2 hover:text-ink"
               }`}
             >
               {region.shortLabel}
@@ -70,9 +70,8 @@ export function RegionSwitch({
         })}
       </div>
 
-      <p className="font-mono text-meta uppercase text-ink-3">
-        Prices in {active.currencyName} ({active.currencyCode}).{" "}
-        {active.taxNote}
+      <p className="text-micro text-ink-3">
+        Prices in {active.currencyName} ({active.currencyCode}). {active.taxNote}
       </p>
     </div>
   );

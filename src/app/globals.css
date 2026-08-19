@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — "the prospectus".
+ * Design tokens.
  *
- * The site is a course catalogue, so it is built like one: a ruled grid, an
- * index number in the margin of every section, metadata set in mono, and one
- * high-contrast serif carrying the headlines. Separation is done with
- * hairlines and paper tone. There are no shadows, no gradients, no rounded
- * cards and no glass anywhere in the system — if a surface needs to detach
- * from the page it changes tone or gains a rule, never a blur.
+ * One sans, a lot of air, and a single accent. The page is built from large
+ * type on quiet surfaces: no rules dividing every row, no uppercase mono
+ * labels, no print furniture. Where something needs to separate from the page
+ * it changes surface tone and takes a soft radius, which is what makes the
+ * whole thing read as a modern product page rather than a printed document.
  *
  * Components resolve every colour, size and edge through a token below.
  */
@@ -20,119 +19,107 @@
 
   /* Colour.
 
-     Warm paper and a near-black ink with a little warmth left in it, so the
-     page reads printed rather than rendered. One accent — a signal vermilion —
-     used for emphasis, rules and fills. `flame-ink` is the same hue darkened
-     to clear 4.5:1 on paper, and is the only one allowed to set small text.
+     A near-white ground with the warmth taken out of it, near-black ink, and
+     one vermilion that only ever marks the thing you should look at next.
+     `accent-ink` is the same hue darkened to clear 4.5:1 on light surfaces and
+     is the only one allowed to set text below display size. */
+  --color-canvas: #fcfcfb;
+  --color-surface: #f3f3f1;
+  --color-surface-2: #e9e9e6;
+  --color-card: #ffffff;
 
-     Every ink tone here clears 4.5:1 against both paper tones, and `ink-3` —
-     which sets the mono labels, at 11px — is the one that decides how dark
-     the bottom of the ramp can be. */
-  --color-paper: #f6f4ef;
-  --color-paper-2: #efece4;
-  --color-paper-3: #e7e3d9;
-  --color-raise: #fffefb;
+  --color-ink: #0e0e0d;
+  --color-ink-2: #52524e;
+  --color-ink-3: #6e6e69;
 
-  --color-ink: #17150f;
-  --color-ink-2: #55524a;
-  --color-ink-3: #6f6b61;
+  --color-line: #e2e2de;
+  --color-line-2: #d2d2cd;
 
-  --color-rule: #d9d4c8;
-  --color-rule-2: #c6c0b1;
+  /* The inverse surface, used for whole sections rather than for cards. */
+  --color-night: #101010;
+  --color-night-2: #1c1c1b;
+  --color-night-line: #2e2e2c;
+  --color-chalk: #f7f7f5;
+  --color-chalk-2: #a2a29c;
 
-  /* The inverse surface. Bands of it break the page into chapters. */
-  --color-night: #17150f;
-  --color-night-2: #211e17;
-  --color-night-rule: #35312a;
-  --color-bone: #f6f4ef;
-  --color-bone-2: #a8a396;
-
-  --color-flame: #d8380f;
-  --color-flame-ink: #ab2b08;
-  --color-flame-soft: #f7e6df;
-  /* Legible against night, where the base vermilion sits under 3:1. */
-  --color-flame-bright: #ff7a52;
+  --color-accent: #ee3b1f;
+  --color-accent-ink: #b52d0f;
+  --color-accent-soft: #fdeeea;
+  /* Legible against night, where the base accent sits under 3:1. */
+  --color-accent-bright: #ff7a5c;
 
   /* Type.
 
-     Two families and a mono. The serif sets display sizes only, where its
-     contrast is an asset; the grotesk sets everything you actually read; the
-     mono sets labels, indices and figures so metadata never competes with
-     prose. Display steps are fluid — one token covers every viewport. */
-  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+     One family doing every job. Display steps are fluid and tightly tracked —
+     at 4rem and up, default spacing is what makes a headline look dated. */
   --font-sans: var(--font-instrument-sans), system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", monospace;
 
-  --text-display: clamp(2.875rem, 7.4vw, 5.75rem);
-  --text-display--line-height: 0.96;
-  --text-display--letter-spacing: -0.022em;
-  --text-display--font-weight: 400;
+  --text-hero: clamp(3rem, 6.6vw, 5.25rem);
+  --text-hero--line-height: 1.02;
+  --text-hero--letter-spacing: -0.035em;
+  --text-hero--font-weight: 600;
 
-  --text-display-sm: clamp(2.25rem, 5vw, 3.5rem);
-  --text-display-sm--line-height: 1;
-  --text-display-sm--letter-spacing: -0.02em;
-  --text-display-sm--font-weight: 400;
+  --text-display: clamp(2.5rem, 4.6vw, 3.75rem);
+  --text-display--line-height: 1.06;
+  --text-display--letter-spacing: -0.032em;
+  --text-display--font-weight: 600;
 
-  --text-title: clamp(1.75rem, 3.2vw, 2.5rem);
-  --text-title--line-height: 1.08;
-  --text-title--letter-spacing: -0.018em;
-  --text-title--font-weight: 400;
+  --text-title: clamp(1.75rem, 2.6vw, 2.25rem);
+  --text-title--line-height: 1.14;
+  --text-title--letter-spacing: -0.028em;
+  --text-title--font-weight: 600;
 
-  --text-subtitle: 1.375rem;
-  --text-subtitle--line-height: 1.25;
-  --text-subtitle--letter-spacing: -0.012em;
-  --text-subtitle--font-weight: 500;
+  --text-heading: 1.375rem;
+  --text-heading--line-height: 1.28;
+  --text-heading--letter-spacing: -0.02em;
+  --text-heading--font-weight: 600;
 
-  --text-lead: 1.1875rem;
-  --text-lead--line-height: 1.58;
-  --text-lead--letter-spacing: -0.005em;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.55;
+  --text-lead--letter-spacing: -0.014em;
   --text-lead--font-weight: 400;
 
-  --text-body: 1rem;
-  --text-body--line-height: 1.65;
-  --text-body--letter-spacing: 0em;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-body--letter-spacing: -0.008em;
   --text-body--font-weight: 400;
 
-  --text-small: 0.875rem;
-  --text-small--line-height: 1.6;
-  --text-small--letter-spacing: 0em;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.55;
+  --text-small--letter-spacing: -0.005em;
   --text-small--font-weight: 400;
 
-  /* Mono steps. Uppercase and widely tracked, so a label reads as a label at
-     any size rather than as undersized prose. */
-  --text-label: 0.6875rem;
-  --text-label--line-height: 1.2;
-  --text-label--letter-spacing: 0.16em;
+  /* Labels are sentence case at a normal weight — an uppercase, wide-tracked
+     eyebrow is the fastest way to make a page look ten years old. */
+  --text-label: 0.875rem;
+  --text-label--line-height: 1.3;
+  --text-label--letter-spacing: -0.005em;
   --text-label--font-weight: 500;
 
-  --text-meta: 0.75rem;
-  --text-meta--line-height: 1.45;
-  --text-meta--letter-spacing: 0.04em;
-  --text-meta--font-weight: 400;
+  --text-micro: 0.8125rem;
+  --text-micro--line-height: 1.4;
+  --text-micro--letter-spacing: 0em;
+  --text-micro--font-weight: 400;
 
-  --text-index: 0.75rem;
-  --text-index--line-height: 1;
-  --text-index--letter-spacing: 0.08em;
-  --text-index--font-weight: 500;
+  --container-page: 1200px;
 
-  --container-page: 1240px;
-  --container-reading: 68ch;
+  /* The header row, shared by the sticky bar and the mobile sheet under it. */
+  --spacing-header: 72px;
 
-  /* Edges. The system is square; the two values below exist for the handful of
-     round things (dots, avatars) and for inputs, which need a hint of relief
-     to read as interactive. */
-  --radius-hint: 2px;
+  /* Edges. Soft, not round: a 14px card reads current, a 999px pill reads like
+     a 2019 template. The pill is kept for chips only, where it is the shape. */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
   --radius-full: 9999px;
 
-  --animate-rise: rise 0.62s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  --animate-slide-rule: slide-rule 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  --animate-drift: drift 34s linear infinite;
+  --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -140,59 +127,7 @@
   }
 }
 
-/* Rules draw themselves in from the left — the page assembling on load. */
-@keyframes slide-rule {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes drift {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/*
- * Utilities.
- *
- * Each is a motif used in more than one place. Anything used once stays inline
- * in its component.
- */
-
-/* The ruled column grid, drawn as hairlines behind a section. This is the
-   signature of the whole design: the layout grid made visible, the way a
-   printed prospectus shows its measure. Four columns on mobile, twelve from
-   desktop, so the lines always land on real column boundaries. */
-@utility rule-grid {
-  background-image: repeating-linear-gradient(
-    to right,
-    var(--color-rule) 0,
-    var(--color-rule) 1px,
-    transparent 1px,
-    transparent 25%
-  );
-  background-position: left top;
-}
-
-@utility rule-grid-night {
-  background-image: repeating-linear-gradient(
-    to right,
-    var(--color-night-rule) 0,
-    var(--color-night-rule) 1px,
-    transparent 1px,
-    transparent 25%
-  );
-}
-
-/* A link that underlines itself on hover, sweeping in from the left. Used for
-   every inline text link so the whole page shares one link behaviour. */
+/* A link that underlines itself on hover, sweeping in from the left. */
 @utility link-sweep {
   background-image: linear-gradient(currentColor, currentColor);
   background-repeat: no-repeat;
@@ -205,29 +140,6 @@
   }
 }
 
-/* Figures set in mono look mechanical unless the numerals are tabular. */
-@utility tnum {
-  font-variant-numeric: tabular-nums;
-}
-
-/* Fades a scrolling row out at both edges instead of cutting it off. */
-@utility mask-fade-x {
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 6%,
-    black 94%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 6%,
-    black 94%,
-    transparent
-  );
-}
-
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -236,37 +148,34 @@
   }
 
   body {
-    background-color: var(--color-paper);
+    background-color: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    /* The grotesk's default figures are proportional; tabular ones keep the
-       mono metadata and the prose figures visually related. */
-    font-variant-numeric: slashed-zero;
   }
 
-  /* The accent word in a headline is set in the serif's italic. The serif is
-     the only face allowed to do this — italic in the grotesk reads as a
-     mistake rather than as emphasis. */
+  /* The accent word of a headline is coloured, never italicised: italic in a
+     grotesk reads as a slip rather than as emphasis. */
   h1 em,
   h2 em,
   h3 em {
-    font-style: italic;
-    color: var(--color-flame-ink);
+    font-style: normal;
+    color: var(--color-accent-ink);
   }
 
   /* Anchored sections sit under the sticky header without this. */
   :target {
-    scroll-margin-top: 7rem;
+    scroll-margin-top: 6rem;
   }
 
   ::selection {
-    background-color: var(--color-flame);
-    color: var(--color-paper);
+    background-color: var(--color-accent);
+    color: var(--color-canvas);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-flame);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
+    border-radius: var(--radius-sm);
   }
 
   @media (prefers-reduced-motion: reduce) {

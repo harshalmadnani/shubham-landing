@@ -26,7 +26,6 @@ export default function TrainingStructurePage() {
         <QuoteProcess />
         <Faq
           items={structureFaqs}
-          index="03"
           label="Structure FAQ"
           title={
             <>

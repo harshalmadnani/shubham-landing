@@ -1,57 +1,74 @@
 import type { ReactNode } from "react";
 
 /**
- * The head of every page that is not the home page.
- *
- * Same anatomy as the cover — index, label, serif headline, offset lead — at
- * three-quarter scale, so a section page is recognisably part of the same
- * document without competing with it.
+ * The head of every page that is not the home page: a tag, a big title, one
+ * paragraph, and the actions. Same anatomy as the home hero at a smaller size.
  */
 export function PageHero({
-  index = "00",
   label,
   title,
   lead,
   actions,
   meta,
+  tone = "canvas",
 }: {
-  index?: string;
   label: string;
   title: ReactNode;
   lead?: ReactNode;
   actions?: ReactNode;
-  /** A mono line of figures under the fold — counts, durations, totals. */
+  /** A short line of figures under the actions — counts, durations, totals. */
   meta?: ReactNode;
+  tone?: "canvas" | "night";
 }) {
+  const isNight = tone === "night";
+
   return (
-    <section className="relative overflow-hidden border-b border-rule bg-paper">
+    <section
+      className={`relative overflow-hidden ${isNight ? "bg-night text-chalk" : "bg-canvas"}`}
+    >
       <div
         aria-hidden="true"
-        className="rule-grid pointer-events-none absolute inset-0 opacity-60 [mask-image:linear-gradient(to_bottom,black,transparent_90%)]"
+        className={`pointer-events-none absolute -top-40 left-1/2 h-[32rem] w-[64rem] -translate-x-1/2 rounded-full blur-3xl ${
+          isNight ? "bg-accent/20" : "bg-accent-soft"
+        }`}
       />
 
-      <div className="relative mx-auto w-full max-w-page px-6 py-16 tablet:px-10 tablet:py-20">
-        <p className="flex items-center gap-4 font-mono text-label uppercase text-ink-3">
-          <span className="tnum text-flame-ink">{index}</span>
+      <div className="relative mx-auto w-full max-w-page px-6 pb-20 pt-16 tablet:px-8 tablet:pb-24 tablet:pt-20">
+        <p
+          className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-micro ${
+            isNight ? "bg-night-2 text-chalk-2" : "bg-card text-ink-2 ring-1 ring-line"
+          }`}
+        >
+          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
           {label}
         </p>
 
-        <h1 className="mt-8 max-w-4xl font-display text-display-sm text-ink tablet:text-display [text-wrap:balance]">
+        <h1
+          className={`mt-8 max-w-4xl text-hero text-balance ${
+            isNight ? "text-chalk" : "text-ink"
+          }`}
+        >
           {title}
         </h1>
 
         {lead && (
-          <div className="mt-8 grid desktop:grid-cols-12">
-            <p className="text-lead text-ink-2 desktop:col-span-7">{lead}</p>
-          </div>
+          <p
+            className={`mt-8 max-w-2xl text-lead ${
+              isNight ? "text-chalk-2" : "text-ink-2"
+            }`}
+          >
+            {lead}
+          </p>
         )}
 
         {actions && (
-          <div className="mt-10 flex flex-wrap items-center gap-4">{actions}</div>
+          <div className="mt-10 flex flex-wrap items-center gap-3">{actions}</div>
         )}
 
         {meta && (
-          <p className="mt-12 border-t border-rule pt-5 font-mono text-meta uppercase text-ink-3">
+          <p
+            className={`mt-10 text-micro ${isNight ? "text-chalk-2" : "text-ink-3"}`}
+          >
             {meta}
           </p>
         )}

@@ -2,47 +2,30 @@ import type { ReactNode } from "react";
 
 import { Reveal } from "@/components/Reveal";
 
-export type Tone = "paper" | "paper-2" | "night";
+export type Tone = "canvas" | "surface" | "night";
 
 const surfaces: Record<Tone, string> = {
-  paper: "bg-paper text-ink",
-  "paper-2": "bg-paper-2 text-ink",
-  night: "bg-night text-bone",
-};
-
-const ruleFor: Record<Tone, string> = {
-  paper: "bg-rule",
-  "paper-2": "bg-rule",
-  night: "bg-night-rule",
-};
-
-const labelFor: Record<Tone, string> = {
-  paper: "text-ink-3",
-  "paper-2": "text-ink-3",
-  night: "text-bone-2",
+  canvas: "bg-canvas text-ink",
+  surface: "bg-surface text-ink",
+  night: "bg-night text-chalk",
 };
 
 /**
- * Every section on the site opens the same way: an index number, a short
- * label, and a rule running out to the margin.
+ * One section, one idea, and a lot of room around it.
  *
- *     03 / STRUCTURE ─────────────────────────────────────────
- *
- * It is the one motif the whole site shares. Because the number is content
- * rather than decoration, a reader can scan the page the way they would scan a
- * contents page, and every section announces where it sits in the sequence.
+ * Vertical padding is deliberately larger than a section of this much copy
+ * would normally get: the page carries a lot of words, and the only way to
+ * stop it reading as a wall is to give each block its own screen.
  */
 export function Section({
   id,
-  index,
   label,
-  tone = "paper",
+  tone = "canvas",
   className,
   children,
 }: {
   id?: string;
-  /** Two-digit index shown in the margin, e.g. "04". */
-  index?: string;
+  /** The one-line tag above the heading. Sentence case, never an eyebrow. */
   label?: string;
   tone?: Tone;
   className?: string;
@@ -51,34 +34,23 @@ export function Section({
   return (
     <section
       id={id}
-      className={`${surfaces[tone]} border-t ${
-        tone === "night" ? "border-night-rule" : "border-rule"
-      }${className ? ` ${className}` : ""}`}
+      className={`${surfaces[tone]}${className ? ` ${className}` : ""}`}
     >
-      <div className="mx-auto w-full max-w-page px-6 py-20 tablet:px-10 tablet:py-28">
-        {(index || label) && (
-          <div className="flex items-center gap-4 pb-12 tablet:pb-16">
-            {index && (
-              <span
-                className={`text-index tnum font-mono ${
-                  tone === "night" ? "text-flame-bright" : "text-flame-ink"
-                }`}
-              >
-                {index}
-              </span>
-            )}
-            {label && (
-              <span
-                className={`text-label font-mono uppercase ${labelFor[tone]}`}
-              >
-                {label}
-              </span>
-            )}
+      <div className="mx-auto w-full max-w-page px-6 py-24 tablet:px-8 tablet:py-32 desktop:py-40">
+        {label && (
+          <p
+            className={`mb-6 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-micro ${
+              tone === "night"
+                ? "bg-night-2 text-chalk-2"
+                : "bg-surface-2 text-ink-2"
+            }`}
+          >
             <span
               aria-hidden="true"
-              className={`h-px flex-1 origin-left ${ruleFor[tone]}`}
+              className="h-1.5 w-1.5 rounded-full bg-accent"
             />
-          </div>
+            {label}
+          </p>
         )}
         {children}
       </div>
@@ -87,14 +59,15 @@ export function Section({
 }
 
 /**
- * The headline block that follows the index line: title left, lead offset to
- * the right on wide screens. The asymmetry is the point — a centred stack is
- * what every other training site does.
+ * The heading block: a large title and, at most, one line under it.
+ *
+ * The lead is capped at a comfortable measure rather than run to the full
+ * width — long lines are the other half of why a page feels text-heavy.
  */
 export function SectionHead({
   title,
   lead,
-  tone = "paper",
+  tone = "canvas",
   className,
 }: {
   title: ReactNode;
@@ -104,27 +77,23 @@ export function SectionHead({
 }) {
   return (
     <Reveal>
-      <div
-        className={`grid gap-x-10 gap-y-6 desktop:grid-cols-12${
-          className ? ` ${className}` : ""
-        }`}
-      >
+      <div className={`max-w-3xl${className ? ` ${className}` : ""}`}>
         <h2
-          className={`font-display text-display-sm text-balance desktop:col-span-6 ${
-            tone === "night" ? "text-bone" : "text-ink"
+          className={`text-display text-balance ${
+            tone === "night" ? "text-chalk" : "text-ink"
           }`}
         >
           {title}
         </h2>
 
         {lead && (
-          <div
-            className={`text-lead desktop:col-span-5 desktop:col-start-8 ${
-              tone === "night" ? "text-bone-2" : "text-ink-2"
+          <p
+            className={`mt-6 max-w-2xl text-lead ${
+              tone === "night" ? "text-chalk-2" : "text-ink-2"
             }`}
           >
             {lead}
-          </div>
+          </p>
         )}
       </div>
     </Reveal>

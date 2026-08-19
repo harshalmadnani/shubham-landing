@@ -7,6 +7,7 @@ import { HowItWorks } from "@/components/HowItWorks";
 import { OurApproach } from "@/components/OurApproach";
 import { Services } from "@/components/Services";
 import { Struggles } from "@/components/Struggles";
+import { TechIndex } from "@/components/TechIndex";
 import { WhatsIncluded } from "@/components/WhatsIncluded";
 import { WhatYouCanExpect } from "@/components/WhatYouCanExpect";
 import { WhoWeHelp } from "@/components/WhoWeHelp";
@@ -17,6 +18,7 @@ export default function HomePage() {
       <Header />
       <main className="flex flex-1 flex-col">
         <Hero />
+        <TechIndex />
         <Struggles />
         <WhoWeHelp />
         <Services />

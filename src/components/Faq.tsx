@@ -10,14 +10,9 @@ import type { FaqItem } from "@/content/types";
 /**
  * The shared accordion. Defaults to the site-wide questions; other pages pass
  * their own set rather than standing up a second accordion.
- *
- * Rows are ruled and full width, and the marker is a cross that rotates into a
- * minus — the same cross the lists elsewhere use as a bullet, so the page has
- * one vocabulary of marks rather than a separate set of chevrons.
  */
 export function Faq({
   items = faqs,
-  index = "08",
   label = "FAQ",
   title = (
     <>
@@ -27,7 +22,6 @@ export function Faq({
   lead = "Still unsure about something? The consultation call is free and there's no script.",
 }: {
   items?: readonly FaqItem[];
-  index?: string;
   label?: string;
   title?: React.ReactNode;
   lead?: string;
@@ -37,17 +31,22 @@ export function Faq({
   const baseId = useId();
 
   return (
-    <Section id="faq" index={index} label={label} tone="paper-2">
+    <Section id="faq" label={label}>
       <SectionHead title={title} lead={lead} />
 
-      <div className="mt-16 border-t border-ink">
+      <div className="mt-16 flex max-w-3xl flex-col gap-3">
         {items.map((faq, itemIndex) => {
           const isOpen = itemIndex === openIndex;
           const panelId = `${baseId}-panel-${itemIndex}`;
           const buttonId = `${baseId}-button-${itemIndex}`;
 
           return (
-            <div key={faq.question} className="border-b border-rule">
+            <div
+              key={faq.question}
+              className={`rounded-lg transition-colors duration-200 ${
+                isOpen ? "bg-surface" : "bg-surface/60 hover:bg-surface"
+              }`}
+            >
               <h3>
                 <button
                   type="button"
@@ -55,17 +54,12 @@ export function Faq({
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => setOpenIndex(isOpen ? null : itemIndex)}
-                  className="group flex w-full items-start gap-6 py-7 text-left"
+                  className="flex w-full items-start gap-6 p-7 text-left"
                 >
-                  <span className="mt-2 font-mono text-index tnum text-flame-ink">
-                    {String(itemIndex + 1).padStart(2, "0")}
-                  </span>
-                  <span className="flex-1 font-display text-title text-ink transition-colors duration-200 group-hover:text-flame-ink">
-                    {faq.question}
-                  </span>
+                  <span className="flex-1 text-heading">{faq.question}</span>
                   <span
                     aria-hidden="true"
-                    className={`relative mt-3 h-3 w-3 shrink-0 text-ink transition-transform duration-300 ${
+                    className={`relative mt-1.5 h-3.5 w-3.5 shrink-0 text-ink-2 transition-transform duration-300 ${
                       isOpen ? "rotate-45" : ""
                     }`}
                   >
@@ -75,16 +69,9 @@ export function Faq({
                 </button>
               </h3>
 
-              {/* Grid-rows trick: the panel animates open without a measured
-                  height, and stays in the DOM so it is searchable when shut. */}
-              <div
-                id={panelId}
-                role="region"
-                aria-labelledby={buttonId}
-                hidden={!isOpen}
-                className="grid pl-12 desktop:grid-cols-12"
-              >
-                <p className="max-w-prose pb-8 text-body text-ink-2 desktop:col-span-8">
+              {/* Kept in the DOM when shut so the answer is still findable. */}
+              <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!isOpen}>
+                <p className="px-7 pb-7 text-body text-ink-2">
                   <RichTextContent value={faq.answer} />
                 </p>
               </div>

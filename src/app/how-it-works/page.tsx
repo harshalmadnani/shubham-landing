@@ -53,32 +53,20 @@ export default function HowItWorksPage() {
           }
         />
 
-        <Section index="01" label="The four processes">
-          <div className="grid overflow-hidden border-l border-t border-rule-2 tablet:grid-cols-2">
+        <Section label="The four processes" tone="surface">
+          <div className="grid gap-4 tablet:grid-cols-2 desktop:gap-6">
             {processes.map((process, index) => {
               const Illustration = processIllustrations[process.slug];
               return (
-                <Reveal
-                  key={process.slug}
-                  delay={(index % 2) * 60}
-                  className="-mb-px -mr-px border-b border-r border-rule-2"
-                >
+                <Reveal key={process.slug} delay={(index % 2) * 60}>
                   <Link
                     href={`/how-it-works/${process.slug}`}
-                    className="group flex h-full flex-col p-7 transition-colors duration-200 hover:bg-paper-2 tablet:p-9"
+                    className="group flex h-full flex-col rounded-lg bg-card p-8 transition-colors duration-200 hover:bg-surface-2 tablet:p-10"
                   >
-                    <div className="flex items-baseline justify-between gap-4">
-                      <p className="font-mono text-label uppercase text-ink-3">
-                        {process.eyebrow}
-                      </p>
-                      <span className="font-mono text-index tnum text-flame-ink">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                    </div>
+                    <p className="text-micro text-ink-3">{process.eyebrow}</p>
 
-                    <h2 className="mt-4 font-display text-title text-ink transition-colors duration-200 group-hover:text-flame-ink">
-                      {process.headline}{" "}
-                      <em>{process.headlineAccent}</em>
+                    <h2 className="mt-4 text-title transition-colors duration-200 group-hover:text-accent-ink">
+                      {process.headline} <em>{process.headlineAccent}</em>
                     </h2>
 
                     <p className="mt-4 text-small text-ink-2">
@@ -86,12 +74,12 @@ export default function HowItWorksPage() {
                     </p>
 
                     {Illustration && (
-                      <div className="mt-8 text-ink-3">
+                      <div className="mt-10 text-ink-3">
                         <Illustration className="w-full" />
                       </div>
                     )}
 
-                    <span className="mt-8 inline-flex items-center gap-2 font-mono text-label uppercase text-ink">
+                    <span className="mt-10 inline-flex items-center gap-2 text-label text-ink">
                       Read the {process.navLabel.toLowerCase()} process
                       <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                     </span>

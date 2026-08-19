@@ -8,13 +8,7 @@ import { useEffect, useState } from "react";
 import { ButtonLink } from "@/components/Button";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 import { NavMenu } from "@/components/NavMenu";
-import {
-  consultationMessage,
-  footerContacts,
-  navLinks,
-  site,
-  whatsAppUrl,
-} from "@/content/site";
+import { consultationMessage, navLinks, site, whatsAppUrl } from "@/content/site";
 
 /**
  * Which nav entry, if any, describes the page you are on.
@@ -32,12 +26,11 @@ function isCurrentPage(href: string, pathname: string): boolean {
 }
 
 /**
- * A masthead, not a floating bar.
+ * A short bar: the monogram, the pages, one action.
  *
- * A folio line runs above it carrying what the place is and how to reach it —
- * the strip a printed prospectus puts at the head of every page. It scrolls
- * away; only the masthead itself sticks, so the sticky element stays one row
- * tall and the page keeps its full height for reading.
+ * The full wordmark lockup is 2060px wide and was being scaled down to a
+ * strip of unreadable type; the monogram says the same thing at 40px and
+ * leaves the row to the navigation.
  */
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,40 +55,24 @@ export function Header() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  const email = footerContacts[0];
-
   return (
     <>
-      <div className="hidden border-b border-rule bg-paper desktop:block">
-        <div className="mx-auto flex h-9 max-w-page items-center justify-between px-10 font-mono text-meta uppercase text-ink-3">
-          <span>{site.tagline}</span>
-          <span className="flex items-center gap-6">
-            <span>London</span>
-            {email?.href && (
-              <a href={email.href} className="link-sweep hover:text-ink">
-                {email.label}
-              </a>
-            )}
-          </span>
-        </div>
-      </div>
-
-      <header className="sticky top-0 z-50 border-b border-rule bg-paper">
-        <div className="mx-auto flex h-16 max-w-page items-center justify-between gap-8 px-6 tablet:h-20 tablet:px-10">
+      <header className="sticky top-0 z-50 border-b border-line/70 bg-canvas/85 backdrop-blur-xl">
+        <div className="mx-auto flex h-header max-w-page items-center justify-between gap-8 px-6 tablet:px-8">
           <Link href="/" aria-label={site.name} className="shrink-0">
             <Image
-              src={site.logo.primary}
+              src="/logo/mark.png"
               alt={site.name}
-              width={site.logo.width}
-              height={site.logo.height}
-              className="h-7 w-auto tablet:h-8"
+              width={512}
+              height={512}
+              className="h-10 w-10 rounded-md"
               priority
             />
           </Link>
 
           <nav
             aria-label="Primary"
-            className="hidden items-center gap-7 desktop:flex"
+            className="hidden items-center gap-8 desktop:flex"
           >
             {navLinks.map((link) => {
               const isCurrent = isCurrentPage(link.href, pathname);
@@ -116,19 +93,11 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   aria-current={isCurrent ? "page" : undefined}
-                  className={`relative py-1 font-mono text-label uppercase transition-colors ${
-                    isCurrent ? "text-ink" : "text-ink-2 hover:text-flame-ink"
+                  className={`text-label transition-colors ${
+                    isCurrent ? "text-ink" : "text-ink-2 hover:text-ink"
                   }`}
                 >
                   {link.label}
-                  {/* The current page is marked with a rule, the same device
-                      the rest of the page uses to mean "this one". */}
-                  {isCurrent && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute -bottom-0.5 left-0 h-px w-full bg-flame"
-                    />
-                  )}
                 </Link>
               );
             })}
@@ -136,7 +105,7 @@ export function Header() {
 
           <div className="hidden desktop:block">
             <ButtonLink href={whatsAppUrl(consultationMessage)}>
-              Book consultation
+              Book a call
             </ButtonLink>
           </div>
 
@@ -145,7 +114,7 @@ export function Header() {
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             onClick={() => setIsMenuOpen((open) => !open)}
-            className="-mr-2 flex h-10 w-10 items-center justify-center text-ink desktop:hidden"
+            className="-mr-2 flex h-11 w-11 items-center justify-center rounded-md text-ink transition-colors hover:bg-surface desktop:hidden"
           >
             {isMenuOpen ? (
               <CloseIcon className="h-6 w-6" />
@@ -156,41 +125,32 @@ export function Header() {
         </div>
       </header>
 
-      {/* The mobile menu is a page of its own: numbered entries set at reading
-          size, in the serif, rather than a cramped drawer of small links. */}
       {isMenuOpen && (
-        <div className="fixed inset-0 top-16 z-50 overflow-y-auto bg-paper tablet:top-20 desktop:hidden">
+        <div className="fixed inset-0 top-header z-50 overflow-y-auto bg-canvas desktop:hidden">
           <nav
             aria-label="Mobile"
-            className="mx-auto flex max-w-page flex-col px-6 pb-10 tablet:px-10"
+            className="mx-auto flex max-w-page flex-col gap-1 px-6 pb-12 pt-4"
           >
-            {navLinks.map((link, index) => {
+            {navLinks.map((link) => {
               const isCurrent = isCurrentPage(link.href, pathname);
               return (
-                <div key={link.href} className="border-b border-rule py-5">
+                <div key={link.href}>
                   <Link
                     href={link.href}
                     onClick={closeMenu}
                     aria-current={isCurrent ? "page" : undefined}
-                    className="flex items-baseline gap-4"
+                    className={`block rounded-md px-3 py-3.5 text-title ${
+                      isCurrent ? "text-accent-ink" : "text-ink"
+                    }`}
                   >
-                    <span className="font-mono text-index tnum text-flame-ink">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span
-                      className={`font-display text-display-sm ${
-                        isCurrent ? "text-flame-ink" : "text-ink"
-                      }`}
-                    >
-                      {link.label}
-                    </span>
+                    {link.label}
                   </Link>
 
                   {/* Four children, so they sit open rather than behind a
                       second tap. A nested accordion inside a menu that is
                       already an accordion is one drawer too many. */}
                   {link.children && (
-                    <div className="ml-10 mt-3 flex flex-col gap-2">
+                    <div className="flex flex-col gap-1 pb-2 pl-3">
                       {link.children.map((child) => {
                         const isChildCurrent = isCurrentPage(child.href, pathname);
                         return (
@@ -199,9 +159,9 @@ export function Header() {
                             href={child.href}
                             onClick={closeMenu}
                             aria-current={isChildCurrent ? "page" : undefined}
-                            className={`font-mono text-label uppercase transition-colors ${
+                            className={`rounded-md px-3 py-2 text-body transition-colors ${
                               isChildCurrent
-                                ? "text-flame-ink"
+                                ? "text-accent-ink"
                                 : "text-ink-2 hover:text-ink"
                             }`}
                           >
@@ -217,9 +177,9 @@ export function Header() {
 
             <ButtonLink
               href={whatsAppUrl(consultationMessage)}
-              className="mt-8 w-full"
+              className="mt-6 w-full"
             >
-              Book free consultation
+              Book a free consultation
             </ButtonLink>
           </nav>
         </div>

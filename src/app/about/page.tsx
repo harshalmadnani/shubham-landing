@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ArrowRightIcon } from "@/components/icons";
 import { AboutIllustration } from "@/components/Illustrations";
+import { PageHero } from "@/components/PageHero";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { Section, SectionHead } from "@/components/Section";
@@ -28,72 +29,51 @@ export default function AboutPage() {
     <div className="flex flex-1 flex-col">
       <Header />
       <main className="flex flex-1 flex-col">
-        <section className="relative overflow-hidden bg-night text-bone">
-          <div
-            aria-hidden="true"
-            className="rule-grid-night pointer-events-none absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,black,transparent_92%)]"
-          />
+        <PageHero
+          tone="night"
+          label={aboutHero.eyebrow}
+          title={
+            <>
+              {aboutHero.headline}{" "}
+              <em className="text-accent-bright">{aboutHero.headlineAccent}</em>
+            </>
+          }
+          lead={aboutHero.body}
+          actions={
+            <>
+              <ButtonLink
+                href={whatsAppUrl(consultationMessage)}
+                className="bg-canvas text-ink hover:bg-chalk"
+              >
+                Book a free consultation
+              </ButtonLink>
+              <ButtonLink href="/how-it-works" variant="onNight">
+                See how the programme runs
+                <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
+              </ButtonLink>
+            </>
+          }
+        />
 
-          <div className="relative mx-auto w-full max-w-page px-6 py-16 tablet:px-10 tablet:py-20">
-            <p className="flex items-center gap-4 font-mono text-label uppercase text-bone-2">
-              <span className="tnum text-flame-bright">00</span>
-              {aboutHero.eyebrow}
-            </p>
-
-            <div className="mt-10 grid gap-x-10 gap-y-12 desktop:grid-cols-12">
-              <div className="desktop:col-span-7">
-                <h1 className="font-display text-display text-bone [text-wrap:balance]">
-                  {aboutHero.headline}{" "}
-                  <em className="text-flame-bright">
-                    {aboutHero.headlineAccent}
-                  </em>
-                </h1>
-
-                <p className="mt-8 max-w-2xl text-lead text-bone-2">
-                  {aboutHero.body}
-                </p>
-
-                <div className="mt-10 flex flex-wrap gap-4">
-                  <ButtonLink
-                    href={whatsAppUrl(consultationMessage)}
-                    variant="onNight"
-                  >
-                    Book free consultation
-                  </ButtonLink>
-                  <ButtonLink href="/how-it-works" variant="onNight">
-                    See how the programme runs
-                    <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
-                  </ButtonLink>
-                </div>
-              </div>
-
-              <div className="desktop:col-span-4 desktop:col-start-9">
-                <AboutIllustration className="w-full text-bone" />
-              </div>
-            </div>
-
-            <dl className="mt-16 grid border-t border-night-rule tablet:grid-cols-3">
-              {aboutFacts.map((fact, index) => (
-                <div
-                  key={fact.label}
-                  className={`border-b border-night-rule py-6 tablet:border-b-0 ${
-                    index > 0 ? "tablet:border-l tablet:pl-6" : "tablet:pr-6"
-                  }`}
-                >
-                  <dt className="font-display text-display-sm tnum text-bone">
-                    {fact.value}
-                  </dt>
-                  <dd className="mt-1 font-mono text-meta uppercase text-bone-2">
-                    {fact.label}
-                  </dd>
+        <Section tone="surface">
+          <div className="grid items-center gap-12 desktop:grid-cols-12">
+            <dl className="grid gap-10 tablet:grid-cols-3 desktop:col-span-7">
+              {aboutFacts.map((fact) => (
+                <div key={fact.label}>
+                  <dt className="text-display text-ink">{fact.value}</dt>
+                  <dd className="mt-3 text-small text-ink-2">{fact.label}</dd>
                 </div>
               ))}
             </dl>
+
+            <div className="desktop:col-span-4 desktop:col-start-9">
+              <AboutIllustration className="w-full text-ink-3" />
+            </div>
           </div>
-        </section>
+        </Section>
 
         {/* What the business actually does. */}
-        <Section index="01" label="What we do">
+        <Section label="What we do">
           <SectionHead
             title={
               <>
@@ -103,20 +83,14 @@ export default function AboutPage() {
             lead="Take one of them or all four — but this is the sequence, and the last one is the reason the first three matter."
           />
 
-          <div className="mt-16 grid overflow-hidden border-l border-t border-rule-2 tablet:grid-cols-2">
+          <div className="mt-16 grid gap-4 tablet:grid-cols-2 desktop:gap-6">
             {whatWeDo.map((item, index) => (
-              <Reveal
-                key={item.title}
-                delay={(index % 2) * 60}
-                className="-mb-px -mr-px border-b border-r border-rule-2"
-              >
-                <div className="flex h-full flex-col p-7 tablet:p-9">
-                  <span className="font-mono text-index tnum text-flame-ink">
-                    {String(index + 1).padStart(2, "0")}
+              <Reveal key={item.title} delay={(index % 2) * 60}>
+                <div className="flex h-full flex-col rounded-lg bg-surface p-8 tablet:p-10">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-canvas text-micro text-ink-2">
+                    {index + 1}
                   </span>
-                  <h3 className="mt-4 font-display text-title text-ink">
-                    {item.title}
-                  </h3>
+                  <h3 className="mt-5 text-title">{item.title}</h3>
                   <p className="mt-3 text-body text-ink-2">
                     <RichTextContent value={item.body} />
                   </p>
@@ -127,7 +101,7 @@ export default function AboutPage() {
         </Section>
 
         {/* How the business chooses to behave. */}
-        <Section index="02" label="How we work" tone="paper-2">
+        <Section label="How we work" tone="surface">
           <SectionHead
             title={
               <>
@@ -137,17 +111,12 @@ export default function AboutPage() {
             lead="Four commitments that shape what you see on this site — including the things we have deliberately left off it."
           />
 
-          <ol className="mt-16 border-t border-ink">
+          <ol className="mt-16 grid gap-12 tablet:grid-cols-2 desktop:gap-x-16">
             {principles.map((principle, index) => (
-              <Reveal key={principle.title}>
-                <li className="grid gap-x-10 gap-y-3 border-b border-rule py-8 desktop:grid-cols-12">
-                  <div className="flex items-baseline gap-4 desktop:col-span-5">
-                    <span className="font-mono text-index tnum text-flame-ink">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <p className="text-subtitle text-ink">{principle.title}</p>
-                  </div>
-                  <p className="text-body text-ink-2 desktop:col-span-6 desktop:col-start-7">
+              <Reveal key={principle.title} delay={(index % 2) * 60}>
+                <li>
+                  <h3 className="text-heading">{principle.title}</h3>
+                  <p className="mt-3 text-body text-ink-2">
                     <RichTextContent value={principle.body} />
                   </p>
                 </li>
@@ -157,31 +126,27 @@ export default function AboutPage() {
         </Section>
 
         {/* Where we operate, and how to reach a person. */}
-        <Section index="03" label="Reach" tone="night">
-          <div className="grid gap-x-10 gap-y-10 desktop:grid-cols-12">
+        <Section label="Reach" tone="night">
+          <div className="grid gap-12 desktop:grid-cols-12">
             <div className="desktop:col-span-7">
-              <h2 className="font-display text-title text-bone">
-                {reach.title}
-              </h2>
-              <p className="mt-5 text-lead text-bone-2">{reach.body}</p>
+              <h2 className="text-title text-chalk">{reach.title}</h2>
+              <p className="mt-6 text-lead text-chalk-2">{reach.body}</p>
             </div>
 
             <div className="desktop:col-span-4 desktop:col-start-9">
-              <p className="border-b border-night-rule pb-3 font-mono text-label uppercase text-bone-2">
-                Get in touch
-              </p>
+              <p className="text-micro text-chalk-2">Get in touch</p>
               <ul className="mt-5 flex flex-col gap-3">
                 {footerContacts.map((contact) => (
                   <li key={contact.label} className="text-small">
                     {contact.href ? (
                       <a
                         href={contact.href}
-                        className="link-sweep text-bone hover:text-flame-bright"
+                        className="link-sweep text-chalk hover:text-accent-bright"
                       >
                         {contact.label}
                       </a>
                     ) : (
-                      <span className="text-bone-2">{contact.label}</span>
+                      <span className="text-chalk-2">{contact.label}</span>
                     )}
                   </li>
                 ))}

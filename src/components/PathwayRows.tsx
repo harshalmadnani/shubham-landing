@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { Marker } from "@/components/Marker";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { RegionSwitch, readStoredRegion, storeRegion } from "@/components/RegionSwitch";
@@ -37,44 +36,41 @@ function StageCell({
   position: number;
 }) {
   return (
-    <div className="-mb-px -mr-px flex flex-col border-b border-r border-rule-2 p-6 tablet:p-7">
-      <div className="flex items-baseline justify-between gap-3">
-        <p className="font-mono text-label uppercase text-ink-3">
-          {stage.kind}
-        </p>
-        <span className="font-mono text-index tnum text-flame-ink">
-          {String(position).padStart(2, "0")}
+    <div className="flex h-full flex-col rounded-lg bg-card p-8">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-micro text-ink-3">{stage.kind}</p>
+        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-surface text-micro text-ink-2">
+          {position}
         </span>
       </div>
 
-      <h4 className="mt-3 text-subtitle text-ink">{stage.label}</h4>
+      <h4 className="mt-5 text-heading">{stage.label}</h4>
 
       <p className="mt-2 text-small text-ink-2">
         <RichTextContent value={stage.body} />
       </p>
 
-      <p className="mt-5 font-display text-display-sm tnum text-ink">
-        {formatPrice(region, stage.priceKey)}
-      </p>
+      <p className="mt-6 text-title">{formatPrice(region, stage.priceKey)}</p>
 
       {/* Only two stages publish a figure, so the row holds its height rather
           than leaving a hole in the two that do not. */}
       <p className="mt-1 flex min-h-[1.6em] items-baseline gap-2">
         {stage.stat && (
           <>
-            <span className="font-mono text-label uppercase text-flame-ink">
-              {stage.stat}
-            </span>
+            <span className="text-small text-accent-ink">{stage.stat}</span>
             <span className="text-small text-ink-2">{stage.statLabel}</span>
           </>
         )}
       </p>
 
-      <ul className="mt-5 flex flex-1 flex-col gap-2 border-t border-rule pt-5">
+      <ul className="mt-6 flex flex-1 flex-col gap-3 border-t border-line pt-6">
         {stage.points.map((point, index) => (
           <li key={index} className="flex gap-3">
-            <Marker className="mt-1.5 h-2.5 w-2.5 shrink-0 text-flame" />
-            <span className="text-small text-ink">
+            <span
+              aria-hidden="true"
+              className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+            />
+            <span className="text-small text-ink-2">
               <RichTextContent value={point} />
             </span>
           </li>
@@ -85,7 +81,7 @@ function StageCell({
         href={whatsAppUrl(`Hi! I'd like to know more about the ${stage.title}.`)}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-6 self-start font-mono text-label uppercase text-ink transition-colors duration-200 hover:text-flame-ink"
+        className="mt-8 self-start text-label text-ink transition-colors duration-200 hover:text-accent-ink"
       >
         <span className="link-sweep">Ask about this stage</span>
       </a>
@@ -109,39 +105,30 @@ function PathwayRow({ pathway, region }: { pathway: Pathway; region: RegionId })
       id={`pathway-${pathway.id}`}
       aria-labelledby={`pathway-${pathway.id}-title`}
     >
-      <div className="flex flex-col gap-4 border-b border-ink pb-5 tablet:flex-row tablet:items-end tablet:justify-between">
-        <div className="flex items-baseline gap-4">
-          <span className="font-mono text-index tnum text-flame-ink">
-            {String(pathway.number).padStart(2, "0")}
-          </span>
-          <div>
-            <h3
-              id={`pathway-${pathway.id}-title`}
-              className="font-display text-title text-ink"
-            >
-              Pathway {pathway.number}
-            </h3>
-            <p className="mt-1 font-mono text-label uppercase text-ink-3">
-              {pathway.label}
-            </p>
-          </div>
+      <div className="flex flex-col gap-4 tablet:flex-row tablet:items-end tablet:justify-between">
+        <div>
+          <p className="text-micro text-ink-3">{pathway.label}</p>
+          <h3
+            id={`pathway-${pathway.id}-title`}
+            className="mt-2 text-title"
+          >
+            Pathway {pathway.number}
+          </h3>
         </div>
 
         <div className="tablet:text-right">
-          <p className="font-display text-title tnum text-ink">
-            {formatAmount(region, total)}
-          </p>
-          <p className="mt-1 font-mono text-meta uppercase text-ink-3">
+          <p className="text-title">{formatAmount(region, total)}</p>
+          <p className="mt-1 text-micro text-ink-3">
             {stageCountLabel[pathway.stages.length]}, tax included
           </p>
         </div>
       </div>
 
-      <p className="mt-5 max-w-3xl text-body text-ink-2">
+      <p className="mt-5 max-w-2xl text-body text-ink-2">
         {pathway.description}
       </p>
 
-      <div className="mt-8 grid overflow-hidden border-l border-t border-rule-2 tablet:grid-cols-2 desktop:grid-cols-3">
+      <div className="mt-8 grid gap-4 tablet:grid-cols-2 desktop:grid-cols-3 desktop:gap-6">
         {pathway.stages.map((key, index) => {
           const stage = stageByKey.get(key);
           if (!stage) return null;
@@ -184,14 +171,14 @@ export function PathwayRows() {
   };
 
   return (
-    <Section id="pathways" index="01" label="Choose your pathway">
+    <Section id="pathways" label="Choose your pathway" tone="surface">
       <SectionHead
         title={
           <>
-            Pick the row that <em>describes you</em>
+            Pick the route that <em>describes you</em>
           </>
         }
-        lead="Each row below is a complete route from where you are today through to an offer. They differ only in the starting point — every one of them ends with your profile in front of employers — so take the one that fits and skip what you have already done."
+        lead="Every route below runs from where you are today through to an offer. They differ only in the starting point, so take the one that fits and skip what you have already done."
       />
 
       {/* The switch sits above the figures, never below them. */}
@@ -199,7 +186,7 @@ export function PathwayRows() {
         <RegionSwitch value={region} onChange={chooseRegion} />
       </div>
 
-      <div className="mt-14 flex flex-col gap-20">
+      <div className="mt-16 flex flex-col gap-20">
         {pathways.map((pathway, index) => (
           <Reveal key={pathway.id} delay={index * 50}>
             <PathwayRow pathway={pathway} region={region} />
@@ -209,17 +196,13 @@ export function PathwayRows() {
 
       {/* What the training asks of you in return. */}
       <Reveal delay={100}>
-        <div className="mt-20 bg-night p-8 text-bone tablet:p-10">
-          <p className="font-mono text-label uppercase text-bone-2">
-            What we ask in return
-          </p>
+        <div className="mt-20 rounded-lg bg-night p-8 text-chalk tablet:p-12">
+          <p className="text-micro text-chalk-2">What we ask in return</p>
           <dl className="mt-8 grid gap-8 tablet:grid-cols-3">
             {commitments.map((commitment) => (
               <div key={commitment.value}>
-                <dt className="font-display text-display-sm tnum text-bone">
-                  {commitment.value}
-                </dt>
-                <dd className="mt-1 font-mono text-meta uppercase text-bone-2">
+                <dt className="text-title text-chalk">{commitment.value}</dt>
+                <dd className="mt-2 text-small text-chalk-2">
                   {commitment.label}
                 </dd>
               </div>
