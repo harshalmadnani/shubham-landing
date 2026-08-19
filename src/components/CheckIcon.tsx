@@ -1,20 +1,14 @@
-/** Bullet marker for curriculum topics. */
-export function CheckIcon({ className }: { className?: string }) {
+/**
+ * A short horizontal rule used as a list marker.
+ *
+ * The system's bullet is a segment of route line rather than a tick — a tick
+ * says "done", and these lists describe what is included, not what is finished.
+ */
+export function Marker({ className }: { className?: string }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
+    <span
       aria-hidden="true"
-      className={className}
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
+      className={`mt-[0.58em] block h-[2px] w-3 shrink-0 bg-signal ${className ?? ""}`}
+    />
   );
 }

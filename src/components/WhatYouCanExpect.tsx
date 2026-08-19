@@ -1,53 +1,45 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { TiltCard } from "@/components/TiltCard";
 import { expectations } from "@/content/sections";
-import type { Expectation } from "@/content/types";
 
-/* Three flat editorial surfaces: ink, cobalt, and outlined paper. The one
-   saturated card is the single loudest moment on the page — by design. */
-const cardTone: Record<Expectation["tone"], string> = {
-  inverse: "bg-inverse-canvas text-inverse-ink",
-  primary: "bg-primary text-on-primary",
-  outline: "border border-hairline bg-canvas text-ink",
-};
-
-const bodyTone: Record<Expectation["tone"], string> = {
-  inverse: "text-inverse-ink-muted",
-  primary: "text-on-primary/85",
-  outline: "text-ink-muted",
-};
-
+/**
+ * Three promises, set large.
+ *
+ * Full-width statements separated by rules rather than three cards in a row.
+ * These are the site's commitments, and a commitment set at 2.5rem reads like
+ * one; the same words inside a bordered box read like a feature.
+ */
 export function WhatYouCanExpect() {
   return (
-    <section id="what-you-can-expect" className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
+    <section id="what-to-expect" className="mt-band">
+      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
         <SectionHeading
-          eyebrow="What you can expect"
-          title="No guarantees — here's what we actually commit to"
-          lead="Plain commitments we're willing to put in writing, rather than outcome promises nobody can make."
+          label="Our side of it"
+          title="What you can expect from us"
         />
 
-        <div className="mt-xxl grid grid-cols-1 gap-lg tablet:grid-cols-3">
+        <ol className="mt-xxl border-t border-ink">
           {expectations.map((expectation, index) => (
-            <Reveal key={expectation.title} delay={index * 90} className="h-full">
-              <TiltCard className="h-full">
-                <div
-                  className={`h-full rounded-lg p-xl ${cardTone[expectation.tone]}`}
+            <Reveal key={expectation.title} delay={index * 80}>
+              <li className="grid gap-md border-b border-rule py-xl desktop:grid-cols-[4rem_minmax(0,1fr)] desktop:gap-xl">
+                <span
+                  aria-hidden="true"
+                  className="font-mono text-label text-signal-text"
                 >
-                <p className="text-card-title font-semibold">
-                  {expectation.title}
-                </p>
-                  <p
-                    className={`mt-sm text-body-sm ${bodyTone[expectation.tone]}`}
-                  >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="max-w-[26ch] text-title text-ink">
+                    {expectation.title}
+                  </h3>
+                  <p className="mt-md max-w-[58ch] text-lead text-ink-2">
                     {expectation.body}
                   </p>
                 </div>
-              </TiltCard>
+              </li>
             </Reveal>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

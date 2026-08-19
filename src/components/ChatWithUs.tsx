@@ -18,9 +18,9 @@ export function ChatWithUs() {
       href={whatsAppUrl(chatMessage)}
       target="_blank"
       rel="noopener noreferrer"
-      className="group/chat fixed bottom-lg right-lg z-40 flex h-xxl items-center gap-sm rounded-full bg-whatsapp px-md text-body-emphasis text-white shadow-lift transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-whatsapp-hover tablet:px-lg"
+      className="group/chat fixed bottom-lg right-lg z-40 flex h-12 items-center gap-sm border border-on-whatsapp/25 bg-whatsapp px-md font-mono text-nav uppercase text-on-whatsapp shadow-raise transition-[background-color,transform] duration-200 hover:-translate-y-px hover:bg-whatsapp-deep tablet:px-lg"
     >
-      <WhatsAppIcon className="h-lg w-lg shrink-0" />
+      <WhatsAppIcon className="h-5 w-5 shrink-0" />
       <span className="hidden tablet:inline">Chat with us</span>
       <span className="sr-only tablet:hidden">Chat with us on WhatsApp</span>
     </a>

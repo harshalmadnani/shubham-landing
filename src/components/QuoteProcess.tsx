@@ -1,62 +1,62 @@
 import { ButtonLink } from "@/components/Button";
-import { CalendarIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { consultationMessage, whatsAppUrl } from "@/content/site";
 import { quotePanel, quoteSteps } from "@/content/trainingStructure";
 
 /**
- * How someone goes from a published price to a place on a batch.
+ * How somebody goes from a published price to a place on a batch.
  *
- * This section used to stand in for a price table; the prices are on the page
- * now, so it explains the arrangement behind them — stage-by-stage rather than
- * a bundle — and the three steps to enrolling.
+ * The panel states the pricing principle; the three steps are the booking
+ * itself, numbered because they genuinely happen in that order.
  */
 export function QuoteProcess() {
   return (
-    <section id="what-it-costs" className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
-        <div className="grid gap-lg desktop:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] desktop:gap-xl">
+    <section id="what-it-costs" className="mt-band">
+      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
+        <div className="grid gap-xxl desktop:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] desktop:gap-xxxl">
           <Reveal>
-            <div className="flex h-full flex-col justify-between rounded-lg border border-hairline bg-surface-1 p-xl tablet:p-xxl">
-              <div>
-                <p className="text-eyebrow uppercase text-ink-muted">
+            <div>
+              <div className="flex items-center gap-sm">
+                <span
+                  aria-hidden="true"
+                  className="h-[7px] w-[7px] shrink-0 rounded-full bg-signal"
+                />
+                <p className="font-mono text-label uppercase text-ink-3">
                   How pricing works
                 </p>
-                <h2 className="mt-sm text-headline-sm text-ink">
-                  {quotePanel.heading}
-                </h2>
-                <p className="mt-md text-body text-ink-muted">
-                  {quotePanel.body}
-                </p>
               </div>
-
+              <h2 className="mt-lg max-w-[20ch] text-title text-ink">
+                {quotePanel.heading}
+              </h2>
+              <p className="mt-md max-w-[52ch] text-body text-ink-2">
+                {quotePanel.body}
+              </p>
               <ButtonLink
                 href={whatsAppUrl(consultationMessage)}
-                className="mt-xl self-start"
+                className="mt-xl"
               >
-                <CalendarIcon className="h-md w-md" />
-                Book free consultation
+                Book a free consultation
               </ButtonLink>
             </div>
           </Reveal>
 
           <Reveal delay={100}>
-            <ol className="flex h-full flex-col gap-sm">
+            <ol className="border-t border-ink">
               {quoteSteps.map((step, index) => (
                 <li
                   key={step.title}
-                  className="flex flex-1 items-start gap-md rounded-lg border border-hairline bg-canvas p-lg transition-colors duration-300 hover:border-ink/40"
+                  className="flex gap-md border-b border-rule py-lg"
                 >
                   <span
                     aria-hidden="true"
-                    className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-primary text-body-emphasis text-on-primary"
+                    className="mt-[2px] font-mono text-label text-signal-text"
                   >
-                    {index + 1}
+                    {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <p className="text-card-title text-ink">{step.title}</p>
-                    <p className="mt-xxs text-body-sm text-ink-muted">
+                    <p className="text-card text-ink">{step.title}</p>
+                    <p className="mt-xxs max-w-[52ch] text-small text-ink-2">
                       <RichTextContent value={step.body} />
                     </p>
                   </div>

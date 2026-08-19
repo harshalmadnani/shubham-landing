@@ -14,8 +14,8 @@ export const site = {
   logo: {
     primary: "/logo/logo-primary.webp",
     reversed: "/logo/logo-reversed.webp",
-    width: 2060,
-    height: 339,
+    width: 900,
+    height: 148,
   },
 } as const;
 

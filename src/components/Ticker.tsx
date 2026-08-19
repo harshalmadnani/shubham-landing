@@ -25,16 +25,16 @@ import { technologyMarks } from "@/content/logos";
  */
 export function Ticker() {
   return (
-    <div className="mt-xxl">
-      <p className="mx-auto max-w-content px-md text-eyebrow uppercase text-ink-subtle tablet:px-lg">
+    <div className="mt-xxxl">
+      <p className="mx-auto max-w-page px-gutter font-mono text-label uppercase text-ink-3 tablet:px-rail">
         Technologies taught across our programmes
       </p>
 
       <div
         aria-hidden="true"
-        className="mt-md overflow-hidden border-y border-hairline py-xl"
+        className="mt-md overflow-hidden border-y border-rule bg-paper-sunk py-xl"
       >
-        <div className="flex w-max animate-marquee items-center gap-xxl hover:[animation-play-state:paused]">
+        <div className="flex w-max animate-slide items-center gap-xxl hover:[animation-play-state:paused]">
           {[0, 1].map((copy) => (
             <ul key={copy} className="flex shrink-0 items-center gap-xxl">
               {technologyMarks.map((mark) => (

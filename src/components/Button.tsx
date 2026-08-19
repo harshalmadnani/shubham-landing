@@ -1,30 +1,27 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-export type ButtonVariant =
-  | "primary"
-  | "outline"
-  | "ghost"
-  | "inverse"
-  | "glass";
+export type ButtonVariant = "signal" | "pine" | "outline" | "ghost" | "onPine";
 
-/* Flat fills, no glow. The primary action carries the accent rather than ink:
-   a blue CTA is the clearest "this is the thing to click" signal an education
-   page has, and it reads at a glance against a white canvas. */
+/*
+ * Buttons are signs: square, set in mono, tracked out, and they say exactly
+ * what happens. The signal variant carries ink rather than white type —
+ * vermilion under white is 3.3:1 and under ink is 5.4:1, and the ink version
+ * also looks like a road sign, which is the point.
+ */
 const base =
-  "group/btn inline-flex items-center justify-center gap-xs rounded-full px-lg py-sm text-button transition-[background-color,border-color,color,box-shadow] duration-200";
+  "group/btn inline-flex items-center justify-center gap-xs border font-mono text-nav uppercase px-lg py-sm transition-[background-color,color,border-color,transform] duration-150 active:translate-y-px";
 
 const variants: Record<ButtonVariant, string> = {
-  primary:
-    "border border-transparent bg-primary text-on-primary shadow-sm hover:bg-violet-hover",
+  signal:
+    "border-signal bg-signal text-ink hover:bg-signal-deep hover:border-signal-deep hover:text-raised",
+  pine: "border-pine bg-pine text-pine-ink hover:bg-pine-deep hover:border-pine-deep",
   outline:
-    "border border-hairline bg-canvas text-ink shadow-sm hover:border-primary hover:text-primary",
+    "border-rule-strong bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-paper",
   ghost:
-    "border border-transparent bg-transparent text-primary hover:bg-primary-soft",
-  inverse:
-    "border border-transparent bg-canvas text-ink hover:bg-surface-1",
-  glass:
-    "border border-inverse-ink/30 bg-transparent text-inverse-ink hover:border-inverse-ink/70",
+    "border-transparent bg-transparent text-ink px-0 hover:text-signal-text",
+  onPine:
+    "border-pine-ink/40 bg-transparent text-pine-ink hover:bg-pine-ink hover:text-pine hover:border-pine-ink",
 };
 
 function classesFor(variant: ButtonVariant, className?: string) {
@@ -32,12 +29,12 @@ function classesFor(variant: ButtonVariant, className?: string) {
 }
 
 /**
- * An external link styled as a button — used for every WhatsApp CTA, which is
- * why it always opens in a new tab.
+ * An external link styled as a button — every WhatsApp route uses this, which
+ * is why it always opens in a new tab.
  */
 export function ButtonLink({
   href,
-  variant = "primary",
+  variant = "signal",
   className,
   children,
 }: {
@@ -69,7 +66,7 @@ export function ButtonLink({
 }
 
 export function Button({
-  variant = "primary",
+  variant = "signal",
   className,
   children,
   ...props

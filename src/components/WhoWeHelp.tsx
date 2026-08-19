@@ -1,54 +1,54 @@
 import { Reveal } from "@/components/Reveal";
-import { TiltCard } from "@/components/TiltCard";
-import { CheckIcon } from "@/components/CheckIcon";
 import { SectionHeading } from "@/components/SectionHeading";
 import { audiences } from "@/content/sections";
 
 /**
- * Four starting points as editorial cards — a serif numeral, a title, and the
- * bullets. The generated portrait photos are gone; nothing here pretends to be
- * a person who does not exist.
+ * Who the programme is for — the page's first pine panel.
+ *
+ * Full-bleed dark, because after two light sections the page needs a change of
+ * ground rather than another row of cards. Columns are divided by rules
+ * instead of being cards, which keeps the panel reading as one object.
  */
 export function WhoWeHelp() {
   return (
-    <section id="who-we-help" className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
+    <section id="who-we-help" className="mt-band panel-pine py-xxxl">
+      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
         <SectionHeading
-          eyebrow="Who we help"
-          title="Built around where you're actually starting from"
-          lead="Four starting points, four different routes in — the program adapts to your background, not the other way round."
+          tone="pine"
+          label="Who we help"
+          title="Four situations we know how to move"
+          lead="If one of these is you, the route is already mapped. If none of them is, the consultation is free and we will say so."
         />
 
-        <div className="mt-xxl grid grid-cols-1 gap-xl desktop:grid-cols-2">
+        <div className="mt-xxl grid gap-px bg-pine-rule tablet:grid-cols-2 desktop:grid-cols-4">
           {audiences.map((audience, index) => (
-            <Reveal key={audience.title} delay={index * 80} className="h-full">
-              <TiltCard className="h-full">
-                <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-ink/40">
-                <div className="flex items-baseline justify-between gap-md">
-                  <p className="text-card-title font-semibold text-ink">
-                    {audience.title}
-                  </p>
-                  <span
-                    aria-hidden="true"
-                    className="text-card-title font-semibold text-ink-subtle"
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <p className="mt-xs text-body-sm text-ink-muted">
+            <Reveal key={audience.title} delay={index * 70} className="h-full">
+              <div className="flex h-full flex-col bg-pine p-lg">
+                <span
+                  aria-hidden="true"
+                  className="font-mono text-label text-signal-on-pine"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-md text-card text-pine-ink">
+                  {audience.title}
+                </h3>
+                <p className="mt-xs text-small text-pine-ink-2">
                   {audience.body}
                 </p>
 
-                <ul className="mt-lg flex flex-col gap-sm border-t border-hairline pt-lg">
+                <ul className="mt-lg flex flex-col gap-sm border-t border-pine-rule pt-md">
                   {audience.bullets.map((bullet) => (
                     <li key={bullet} className="flex gap-sm">
-                      <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                      <span className="text-body-sm text-ink">{bullet}</span>
+                      <span
+                        aria-hidden="true"
+                        className="mt-[9px] h-[2px] w-3 shrink-0 bg-signal"
+                      />
+                      <span className="text-small text-pine-ink">{bullet}</span>
                     </li>
                   ))}
                 </ul>
-                </div>
-              </TiltCard>
+              </div>
             </Reveal>
           ))}
         </div>

@@ -1,61 +1,54 @@
-import { CheckIcon } from "@/components/CheckIcon";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { includedGroups } from "@/content/sections";
 
+/**
+ * The full inventory, grouped.
+ *
+ * A dense manifest rather than cards — this is the section somebody reads when
+ * they are deciding whether the price is fair, so it should look like a list of
+ * what you get, not like marketing.
+ */
 export function WhatsIncluded() {
   return (
-    <section id="whats-included" className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
+    <section id="whats-included" className="mt-band">
+      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
         <SectionHeading
-          eyebrow="What's included"
-          title="Every pathway draws from the same complete set of support"
-          lead="Whichever route you take, none of these are add-ons or upsells."
+          label="Inventory"
+          title="What you are actually buying"
+          lead="Everything the programme carries, in four groups."
         />
 
-        {/* Masonry columns — groups have very different lengths, and a grid
-            would leave the short ones trailing whitespace. */}
-        <div className="mt-xxl columns-1 gap-xl tablet:columns-2 desktop:columns-3">
-          {includedGroups.map((group, index) => (
-            <div key={group.name} className="mb-xl break-inside-avoid">
-              <Reveal delay={(index % 3) * 60}>
-                <div className="rounded-lg border border-hairline bg-canvas p-xl">
-                  <div className="flex items-baseline justify-between gap-md border-b-2 border-ink pb-md">
-                    <h3 className="text-card-title font-semibold text-ink">
-                      {group.name}
-                    </h3>
+        <div className="mt-xxl flex flex-col gap-xxl">
+          {includedGroups.map((group, groupIndex) => (
+            <Reveal key={group.name} delay={groupIndex * 60}>
+              <div className="grid gap-lg desktop:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] desktop:gap-xxl">
+                <div className="desktop:sticky desktop:top-[calc(var(--spacing-header)+24px)] desktop:self-start">
+                  <div className="flex items-center gap-sm">
                     <span
                       aria-hidden="true"
-                      className="text-body font-semibold text-ink-subtle"
-                    >
-                      {group.items.length}
-                    </span>
+                      className="h-[7px] w-[7px] shrink-0 rounded-full bg-signal"
+                    />
+                    <p className="font-mono text-label uppercase text-ink-3">
+                      Group {String(groupIndex + 1).padStart(2, "0")}
+                    </p>
                   </div>
-
-                  <ul className="flex flex-col">
-                    {group.items.map((item, itemIndex) => (
-                      <li
-                        key={item.title}
-                        className={`flex items-start gap-sm py-lg ${
-                          itemIndex === 0 ? "" : "border-t border-hairline"
-                        }`}
-                      >
-                        <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                        <div>
-                          <p className="text-body-emphasis text-ink">
-                            {item.title}
-                          </p>
-                          <p className="mt-xxs text-body-sm text-ink-muted">
-                            <RichTextContent value={item.body} />
-                          </p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="mt-sm text-subtitle text-ink">{group.name}</h3>
                 </div>
-              </Reveal>
-            </div>
+
+                <ul className="grid gap-px border-t border-rule bg-rule tablet:grid-cols-2">
+                  {group.items.map((item) => (
+                    <li key={item.title} className="bg-paper px-md py-md">
+                      <p className="text-card text-ink">{item.title}</p>
+                      <p className="mt-xxs text-small text-ink-2">
+                        <RichTextContent value={item.body} />
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

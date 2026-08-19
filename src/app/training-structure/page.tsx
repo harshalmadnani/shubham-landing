@@ -21,15 +21,15 @@ export default function TrainingStructurePage() {
   return (
     <div className="flex flex-1 flex-col">
       <Header />
-      <main className="flex flex-1 flex-col">
+      <main id="main" className="flex flex-1 flex-col">
         <StructureHero />
         <PathwayRows />
         <QuoteProcess />
         <Faq
           items={structureFaqs}
-          eyebrow="Structure FAQ"
+          label="Structure FAQ"
           title="Questions about how it runs"
-          lead="Scheduling, attendance, payment and what each stage covers."
+          lead="Scheduling, attendance, payment and what each stop covers."
         />
         <CtaBanner />
       </main>

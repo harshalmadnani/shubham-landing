@@ -18,7 +18,7 @@ export default function ProgramsPage() {
   return (
     <div className="flex flex-1 flex-col">
       <Header />
-      <main className="flex flex-1 flex-col">
+      <main id="main" className="flex flex-1 flex-col">
         <ProgramsHero />
         <Programs />
         <CtaBanner />

@@ -40,7 +40,7 @@ export default async function ProcessRoute({
   return (
     <div className="flex flex-1 flex-col">
       <Header />
-      <main className="flex flex-1 flex-col">
+      <main id="main" className="flex flex-1 flex-col">
         <ProcessPage content={content} />
         <CtaBanner />
       </main>

@@ -16,7 +16,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-1 flex-col">
       <Header />
-      <main className="flex flex-1 flex-col">
+      <main id="main" className="flex flex-1 flex-col">
         <Hero />
         <Struggles />
         <WhoWeHelp />

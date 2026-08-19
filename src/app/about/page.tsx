@@ -5,7 +5,6 @@ import { CtaBanner } from "@/components/CtaBanner";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { AboutIllustration } from "@/components/Illustrations";
-import { ArrowRightIcon, CalendarIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -28,82 +27,77 @@ export default function AboutPage() {
   return (
     <div className="flex flex-1 flex-col">
       <Header />
-      <main className="flex flex-1 flex-col">
-        <section className="bg-inverse-canvas px-md tablet:px-lg">
-          <div className="mx-auto grid max-w-content items-center gap-xl pb-xxxl pt-xxl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] desktop:gap-xxl desktop:pt-xxxl">
+      <main id="main" className="flex flex-1 flex-col">
+        <section className="panel-pine">
+          <div className="mx-auto grid max-w-page items-center gap-xxl px-gutter pb-xxxl pt-xxl tablet:px-rail tablet:pt-xxxl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)]">
             <div>
-              <p className="flex items-center gap-sm text-eyebrow uppercase text-inverse-ink-muted animate-fade-up">
-                <span aria-hidden="true" className="h-px w-6 bg-inverse-ink/40" />
+              <p className="flex items-center gap-sm font-mono text-label uppercase text-pine-ink-2">
+                <span
+                  aria-hidden="true"
+                  className="h-[7px] w-[7px] rounded-full bg-signal"
+                />
                 {aboutHero.eyebrow}
               </p>
 
-              <h1 className="mt-lg max-w-3xl text-display-xl-mobile tablet:text-display-lg text-inverse-ink animate-fade-up">
-                {aboutHero.headline}{" "}
-                <em className="text-primary-bright">
-                  {aboutHero.headlineAccent}
-                </em>
+              <h1 className="mt-lg max-w-[20ch] text-display text-pine-ink">
+                {aboutHero.headline} <em className="text-signal">{aboutHero.headlineAccent}</em>
               </h1>
 
-              <p className="mt-lg max-w-2xl text-body-lg text-inverse-ink-muted animate-fade-up">
+              <p className="mt-lg max-w-[52ch] text-lead text-pine-ink-2">
                 {aboutHero.body}
               </p>
 
-              <dl className="mt-xl grid gap-sm tablet:grid-cols-3 animate-fade-up">
+              <dl className="mt-xl grid gap-px bg-pine-rule tablet:grid-cols-3">
                 {aboutFacts.map((fact) => (
-                  <div
-                    key={fact.label}
-                    className="rounded-lg border border-inverse-hairline bg-inverse-surface-1 px-md py-sm"
-                  >
-                    <dt className="text-body-emphasis text-primary-bright">
+                  <div key={fact.label} className="bg-pine py-md pr-md">
+                    <dt className="font-mono text-figure text-signal">
                       {fact.value}
                     </dt>
-                    <dd className="mt-xxs text-body-sm text-inverse-ink-muted">
+                    <dd className="mt-xs text-small text-pine-ink-2">
                       {fact.label}
                     </dd>
                   </div>
                 ))}
               </dl>
 
-              <div className="mt-xl flex flex-wrap gap-sm animate-fade-up">
+              <div className="mt-xl flex flex-wrap gap-sm">
                 <ButtonLink href={whatsAppUrl(consultationMessage)}>
-                  <CalendarIcon className="h-md w-md" />
-                  Book free consultation
+                  Book a free consultation
                 </ButtonLink>
-                <ButtonLink href="/how-it-works" variant="glass">
+                <ButtonLink href="/how-it-works" variant="onPine">
                   See how the programme runs
-                  <ArrowRightIcon className="h-md w-md transition-transform duration-200 group-hover/btn:translate-x-1" />
                 </ButtonLink>
               </div>
             </div>
 
-            <div className="animate-fade-up rounded-lg bg-canvas p-md tablet:p-lg">
+            <div className="border border-pine-rule bg-paper p-md">
               <AboutIllustration className="w-full" />
             </div>
           </div>
         </section>
 
         {/* What the business actually does. */}
-        <section className="px-md pt-section tablet:px-lg">
-          <div className="mx-auto max-w-content">
+        <section className="mt-band">
+          <div className="mx-auto max-w-page px-gutter tablet:px-rail">
             <SectionHeading
-              eyebrow="What we do"
+              label="What we do"
               title="Four things, in this order"
               lead="Take one of them or all four — but this is the sequence, and the last one is the reason the first three matter."
             />
-            <div className="mt-xl grid gap-md tablet:grid-cols-2">
+            <div className="mt-xxl grid gap-px border border-rule bg-rule tablet:grid-cols-2">
               {whatWeDo.map((item, index) => (
                 <Reveal key={item.title} delay={index * 60} className="h-full">
-                  <div className="h-full rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-ink/40">
+                  <div className="flex h-full flex-col bg-paper p-lg">
                     <span
                       aria-hidden="true"
-                      className="flex h-lg w-lg items-center justify-center rounded-full bg-primary-soft text-caption text-primary"
+                      className="font-mono text-label text-signal-text"
                     >
-                      {index + 1}
+                      {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mt-md text-card-title text-ink">
+                    <h3 className="mt-sm text-subtitle text-ink">
                       {item.title}
                     </h3>
-                    <p className="mt-xs text-body-sm text-ink-muted">
+                    <p className="mt-xs max-w-[54ch] text-body text-ink-2">
                       <RichTextContent value={item.body} />
                     </p>
                   </div>
@@ -114,29 +108,27 @@ export default function AboutPage() {
         </section>
 
         {/* How the business chooses to behave. */}
-        <section className="px-md pt-section tablet:px-lg">
-          <div className="mx-auto max-w-content">
+        <section className="mt-band">
+          <div className="mx-auto max-w-page px-gutter tablet:px-rail">
             <SectionHeading
-              eyebrow="How we work"
+              label="How we work"
               title="What we hold ourselves to"
               lead="Four commitments that shape what you see on this site — including the things we have deliberately left off it."
             />
-            <ol className="mt-xl border-b border-hairline">
+            <ol className="mt-xxl border-t border-ink">
               {principles.map((principle, index) => (
                 <Reveal key={principle.title} delay={index * 50}>
-                  <li className="grid gap-sm border-t border-hairline py-lg desktop:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] desktop:gap-xl desktop:py-xl">
-                    <div className="flex items-start gap-sm">
-                      <span
-                        aria-hidden="true"
-                        className="flex h-lg w-lg shrink-0 items-center justify-center rounded-full bg-primary-soft text-caption text-primary"
-                      >
-                        {index + 1}
-                      </span>
-                      <p className="text-card-title text-ink">
-                        {principle.title}
-                      </p>
-                    </div>
-                    <p className="max-w-[46rem] text-body text-ink-muted">
+                  <li className="grid gap-sm border-b border-rule py-lg desktop:grid-cols-[4rem_minmax(0,22rem)_minmax(0,1fr)] desktop:gap-xl desktop:py-xl">
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-label text-signal-text"
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="text-subtitle text-ink">
+                      {principle.title}
+                    </h3>
+                    <p className="max-w-[62ch] text-body text-ink-2">
                       <RichTextContent value={principle.body} />
                     </p>
                   </li>
@@ -147,38 +139,38 @@ export default function AboutPage() {
         </section>
 
         {/* Where we operate, and how to reach a person. */}
-        <section className="px-md pt-section tablet:px-lg">
-          <div className="mx-auto max-w-content">
+        <section className="mt-band">
+          <div className="mx-auto max-w-page px-gutter tablet:px-rail">
             <Reveal>
-              <div className="grid gap-lg rounded-lg bg-inverse-canvas p-xl tablet:p-xxl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.7fr)] desktop:gap-xxl">
+              <div className="panel-pine grid gap-xxl border-l-2 border-signal p-lg tablet:p-xl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.6fr)] desktop:gap-xxxl">
                 <div>
-                  <p className="text-eyebrow uppercase text-inverse-ink-muted">
+                  <p className="font-mono text-label uppercase text-pine-ink-2">
                     Reach
                   </p>
-                  <h2 className="mt-sm text-headline-sm text-inverse-ink">
+                  <h2 className="mt-sm max-w-[20ch] text-title text-pine-ink">
                     {reach.title}
                   </h2>
-                  <p className="mt-md max-w-2xl text-body text-inverse-ink-muted">
+                  <p className="mt-md max-w-[58ch] text-body text-pine-ink-2">
                     {reach.body}
                   </p>
                 </div>
 
-                <div className="desktop:border-l desktop:border-inverse-hairline desktop:pl-xxl">
-                  <p className="text-eyebrow uppercase text-inverse-ink-muted">
+                <div className="desktop:border-l desktop:border-pine-rule desktop:pl-xxl">
+                  <p className="font-mono text-label uppercase text-pine-ink-2">
                     Get in touch
                   </p>
-                  <ul className="mt-md flex flex-col gap-sm">
+                  <ul className="mt-md flex flex-col">
                     {footerContacts.map((contact) => (
-                      <li key={contact.label} className="text-body-sm">
+                      <li key={contact.label} className="border-b border-pine-rule">
                         {contact.href ? (
                           <a
                             href={contact.href}
-                            className="text-inverse-ink underline underline-offset-4 hover:no-underline"
+                            className="block py-sm font-mono text-data text-pine-ink underline decoration-pine-rule underline-offset-4 transition-colors hover:decoration-signal"
                           >
                             {contact.label}
                           </a>
                         ) : (
-                          <span className="text-inverse-ink-muted">
+                          <span className="block py-sm font-mono text-data text-pine-ink-2">
                             {contact.label}
                           </span>
                         )}

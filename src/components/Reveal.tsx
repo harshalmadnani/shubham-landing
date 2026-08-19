@@ -4,12 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 
 /**
- * Fades its children up the first time they scroll into view.
+ * Uncovers its children the first time they scroll into view.
+ *
+ * A left-to-right wipe rather than a fade-up: signage is revealed by taking
+ * the cover off it, and that reads differently from the scroll-fade every
+ * other site uses.
  *
  * Content starts visible and is only hidden once the observer is known to be
- * running, so the page still reads correctly without JavaScript rather than
- * leaving every section blank. `prefers-reduced-motion` skips the effect
- * entirely.
+ * running, so the page still reads without JavaScript instead of rendering
+ * blank. `prefers-reduced-motion` skips the effect entirely.
  */
 export function Reveal({
   children,
@@ -28,14 +31,10 @@ export function Reveal({
     const node = ref.current;
     if (!node) return;
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reducedMotion) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     // Already on screen at mount — don't hide it just to animate it back in.
-    const rect = node.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.85) {
+    if (node.getBoundingClientRect().top < window.innerHeight * 0.86) {
       setState("shown");
       return;
     }
@@ -51,7 +50,7 @@ export function Reveal({
           }
         }
       },
-      { rootMargin: "0px 0px -12% 0px" },
+      { rootMargin: "0px 0px -10% 0px" },
     );
 
     observer.observe(node);
@@ -61,14 +60,17 @@ export function Reveal({
   return (
     <div
       ref={ref}
-      className={`${
+      className={className}
+      style={
         state === "hidden"
-          ? "translate-y-5 opacity-0"
-          : "translate-y-0 opacity-100"
-      } transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]${
-        className ? ` ${className}` : ""
-      }`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+          ? { opacity: 0, clipPath: "inset(0 100% 0 0)" }
+          : state === "shown"
+            ? {
+                animation: `var(--animate-wipe)`,
+                animationDelay: `${delay}ms`,
+              }
+            : undefined
+      }
     >
       {children}
     </div>

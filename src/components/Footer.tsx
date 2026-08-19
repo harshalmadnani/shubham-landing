@@ -3,74 +3,84 @@ import Link from "next/link";
 
 import { footerColumns, footerContacts, site } from "@/content/site";
 
+/**
+ * The footer is the last signage panel on the page: pine ground, mono column
+ * headings, and links given real vertical room — 18px-tall link rows were
+ * under the 24px minimum a touch target needs.
+ */
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer
-      id="footer"
-      className="mt-section bg-inverse-canvas px-md py-footer tablet:px-lg"
-    >
-      <div className="mx-auto max-w-content">
-        <div className="grid grid-cols-1 gap-xl tablet:grid-cols-2 desktop:grid-cols-5">
-          <div className="desktop:col-span-2">
+    <footer className="mt-band panel-pine">
+      <div className="mx-auto max-w-page px-gutter py-xxxl tablet:px-rail">
+        <div className="grid gap-xxl desktop:grid-cols-[minmax(0,1.15fr)_minmax(0,2fr)]">
+          <div>
             <Image
               src={site.logo.reversed}
               alt={site.name}
               width={site.logo.width}
               height={site.logo.height}
-              className="h-xxl w-auto"
+              className="h-[30px] w-auto"
             />
-            <p className="mt-lg max-w-[22rem] text-body-sm text-inverse-ink-muted">
+            <p className="mt-lg max-w-[34ch] text-body text-pine-ink-2">
               {site.description}
             </p>
-          </div>
 
-          {footerColumns.map((column) => (
-            <div key={column.heading}>
-              <p className="text-eyebrow uppercase text-inverse-ink">
-                {column.heading}
-              </p>
-              <ul className="mt-md flex flex-col gap-sm">
-                {column.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-body-sm text-inverse-ink-muted transition-colors hover:text-inverse-ink"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-xxxl border-t border-inverse-hairline pt-lg">
-          <div className="flex flex-col gap-md tablet:flex-row tablet:items-center tablet:justify-between">
-            <ul className="flex flex-wrap gap-x-lg gap-y-xs">
+            <ul className="mt-xl flex flex-col gap-xs">
               {footerContacts.map((contact) => (
-                <li
-                  key={contact.label}
-                  className="text-body-sm text-inverse-ink-muted"
-                >
+                <li key={contact.label}>
                   {contact.href ? (
                     <a
                       href={contact.href}
-                      className="transition-colors hover:text-inverse-ink"
+                      className="inline-block py-xxs font-mono text-data text-pine-ink underline decoration-pine-rule underline-offset-4 transition-colors hover:decoration-signal"
                     >
                       {contact.label}
                     </a>
                   ) : (
-                    contact.label
+                    <span className="inline-block py-xxs font-mono text-data text-pine-ink-2">
+                      {contact.label}
+                    </span>
                   )}
                 </li>
               ))}
             </ul>
           </div>
 
-          <p className="mt-lg text-caption text-inverse-ink-muted">
-            © {site.name}. {site.tagline}.
+          <div className="grid gap-xl tablet:grid-cols-3">
+            {footerColumns.map((column) => (
+              <div key={column.heading}>
+                <div className="flex items-center gap-sm">
+                  <span
+                    aria-hidden="true"
+                    className="h-[6px] w-[6px] shrink-0 rounded-full bg-signal"
+                  />
+                  <p className="font-mono text-label uppercase text-pine-ink-2">
+                    {column.heading}
+                  </p>
+                </div>
+                <ul className="mt-md flex flex-col">
+                  {column.links.map((linkItem) => (
+                    <li key={linkItem.href}>
+                      <Link
+                        href={linkItem.href}
+                        className="block py-[7px] text-small text-pine-ink transition-colors hover:text-signal-on-pine"
+                      >
+                        {linkItem.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-xxxl flex flex-col gap-sm border-t border-pine-rule pt-lg font-mono text-data text-pine-ink-2 tablet:flex-row tablet:items-center tablet:justify-between">
+          <p>
+            © {year} {site.name}
           </p>
+          <p className="uppercase tracking-[0.14em]">{site.tagline}</p>
         </div>
       </div>
     </footer>

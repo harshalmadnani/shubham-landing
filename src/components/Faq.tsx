@@ -2,101 +2,86 @@
 
 import { useId, useState } from "react";
 
-import { ChevronDownIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
 import { SectionHeading } from "@/components/SectionHeading";
 import { faqs } from "@/content/sections";
 import type { FaqItem } from "@/content/types";
 
+function Question({ item, index }: { item: FaqItem; index: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const panelId = useId();
+
+  return (
+    <li className="border-b border-rule">
+      <button
+        type="button"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onClick={() => setIsOpen((open) => !open)}
+        className="group flex w-full items-start gap-md py-lg text-left"
+      >
+        <span
+          aria-hidden="true"
+          className="mt-[5px] font-mono text-label text-signal-text"
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className="flex-1 text-subtitle text-ink transition-colors group-hover:text-signal-text">
+          {item.question}
+        </span>
+        {/* A plus that becomes a minus — no chevron, and no rotation that
+            reads as a different control mid-animation. */}
+        <span
+          aria-hidden="true"
+          className="relative mt-[10px] h-[14px] w-[14px] shrink-0"
+        >
+          <span className="absolute left-0 top-[6px] h-[2px] w-[14px] bg-ink" />
+          <span
+            className={`absolute left-[6px] top-0 h-[14px] w-[2px] bg-ink transition-transform duration-200 ${
+              isOpen ? "scale-y-0" : "scale-y-100"
+            }`}
+          />
+        </span>
+      </button>
+
+      {isOpen && (
+        <div id={panelId} className="pb-lg pl-[calc(4rem)] desktop:pr-rail">
+          <p className="max-w-[64ch] text-body text-ink-2">
+            <RichTextContent value={item.answer} />
+          </p>
+        </div>
+      )}
+    </li>
+  );
+}
+
 /**
- * The shared accordion. Defaults to the site-wide questions; the pricing page
- * passes its own set rather than standing up a second accordion.
+ * Questions, on rules.
+ *
+ * Every answer collapsed by default: an open accordion of nine long answers is
+ * the single fastest way to make a page look like a wall.
  */
 export function Faq({
   items = faqs,
-  eyebrow = "FAQ",
-  title = "Frequently asked questions",
-  lead = "Still unsure about something? The consultation call is free and there's no script.",
+  label = "Questions",
+  title = "The things people ask before enrolling",
+  lead = "Straight answers. If yours is not here, the consultation is free.",
 }: {
   items?: readonly FaqItem[];
-  eyebrow?: string;
+  label?: string;
   title?: string;
   lead?: string;
-} = {}) {
-  // One panel open at a time; the first starts expanded.
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const baseId = useId();
-
+}) {
   return (
-    <section id="faq" className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
-        <SectionHeading
-          eyebrow={eyebrow}
-          title={title}
-          lead={lead}
-          align="center"
-        />
+    <section id="faq" className="mt-band">
+      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
+        <SectionHeading label={label} title={title} lead={lead} />
 
-        <div className="mx-auto mt-xxl flex max-w-3xl flex-col gap-sm">
-          {items.map((faq, index) => {
-            const isOpen = index === openIndex;
-            const panelId = `${baseId}-panel-${index}`;
-
-            return (
-              <div
-                key={faq.question}
-                className={`overflow-hidden rounded-xl border transition-[background-color,border-color,box-shadow] duration-300 ${
-                  isOpen
-                    ? "border-ink/40 bg-canvas"
-                    : "border-hairline bg-canvas hover:border-primary/30"
-                }`}
-              >
-                <button
-                  type="button"
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="flex w-full items-center justify-between gap-md p-lg text-left"
-                >
-                  <span className="text-card-title text-ink">
-                    {faq.question}
-                  </span>
-                  <span
-                    className={`flex h-xl w-xl shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
-                      isOpen
-                        ? "bg-primary text-on-primary"
-                        : "bg-surface-1 text-ink-muted"
-                    }`}
-                  >
-                    <ChevronDownIcon
-                      className={`h-md w-md transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
-                    />
-                  </span>
-                </button>
-
-                {/* Grid-rows trick: animates to the panel's natural height
-                    without measuring it in JS. */}
-                <div
-                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${
-                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p
-                      id={panelId}
-                      aria-hidden={!isOpen}
-                      className="px-lg pb-lg text-body text-ink-muted"
-                    >
-                      <RichTextContent value={faq.answer} />
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <ul className="mt-xxl border-t border-ink">
+          {items.map((item, index) => (
+            <Question key={item.question} item={item} index={index} />
+          ))}
+        </ul>
       </div>
     </section>
   );

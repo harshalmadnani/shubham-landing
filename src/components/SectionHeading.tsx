@@ -3,50 +3,54 @@ import type { ReactNode } from "react";
 import { Reveal } from "@/components/Reveal";
 
 /**
- * The shared top of every section: a small tracked eyebrow, the headline, and
- * an optional lead paragraph. Centralising it is what keeps fourteen sections
- * reading as one page.
+ * The head of every section: a route label on a line, the sign, and the
+ * reading copy under it.
+ *
+ * The label sits on a rule that runs out to the edge of the column, with a
+ * node where the two meet. That device repeats down the page and is what ties
+ * a section heading to the pathway diagrams — one grammar, used everywhere.
  */
 export function SectionHeading({
-  eyebrow,
+  label,
   title,
   lead,
-  tone = "light",
-  align = "start",
+  tone = "paper",
 }: {
-  eyebrow?: string;
+  label?: string;
   title: ReactNode;
   lead?: ReactNode;
-  tone?: "light" | "dark";
-  align?: "start" | "center";
+  tone?: "paper" | "pine";
 }) {
-  const isDark = tone === "dark";
-  const centered = align === "center";
+  const onPine = tone === "pine";
 
   return (
     <Reveal>
-      <div className={centered ? "mx-auto max-w-3xl text-center" : ""}>
-        {eyebrow && (
-          <p
-            className={`flex items-center gap-sm text-eyebrow uppercase ${
-              centered ? "justify-center" : ""
-            } ${isDark ? "text-inverse-ink-muted" : "text-ink-muted"}`}
-          >
+      <div>
+        {label && (
+          <div className="flex items-center gap-sm">
             <span
               aria-hidden="true"
-              className={`h-px w-6 ${
-                isDark ? "bg-inverse-ink-muted/60" : "bg-ink/30"
+              className={`h-[7px] w-[7px] shrink-0 rounded-full ${
+                onPine ? "bg-signal" : "bg-signal"
               }`}
             />
-            {eyebrow}
-          </p>
+            <p
+              className={`font-mono text-label uppercase ${
+                onPine ? "text-pine-ink-2" : "text-ink-3"
+              }`}
+            >
+              {label}
+            </p>
+            <span
+              aria-hidden="true"
+              className={`h-px flex-1 ${onPine ? "bg-pine-rule" : "bg-rule"}`}
+            />
+          </div>
         )}
 
-        {/* Headlines carry the serif — it is what separates this from every
-            template that ships with a grotesque and a gradient. */}
         <h2
-          className={`mt-sm text-headline ${
-            isDark ? "text-inverse-ink" : "text-ink"
+          className={`mt-lg max-w-[19ch] text-title ${
+            onPine ? "text-pine-ink" : "text-ink"
           }`}
         >
           {title}
@@ -54,8 +58,8 @@ export function SectionHeading({
 
         {lead && (
           <p
-            className={`mt-md text-body-lg ${centered ? "mx-auto" : ""} max-w-2xl ${
-              isDark ? "text-inverse-ink-muted" : "text-ink-muted"
+            className={`mt-md max-w-[52ch] text-lead ${
+              onPine ? "text-pine-ink-2" : "text-ink-2"
             }`}
           >
             {lead}

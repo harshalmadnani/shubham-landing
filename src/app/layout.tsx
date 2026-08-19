@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans } from "next/font/google";
+import { Bricolage_Grotesque, JetBrains_Mono, Newsreader } from "next/font/google";
 
 import { ChatWithUs } from "@/components/ChatWithUs";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -8,18 +8,33 @@ import { site } from "@/content/site";
 import "./globals.css";
 
 /**
- * The whole type system, in one family.
+ * Three faces, three jobs.
  *
- * A second display face was doing more harm than good on a technology
- * training site: a wonky serif reads editorial, and every headline set in it
- * pulled against the technical register of the rest of the page. Plex carries
- * both jobs — 600 and 700 at display sizes with tight tracking read confident
- * rather than literary, and one family is one fewer font to download.
+ * Bricolage sets the signs — a grotesque with enough width and weight to hold
+ * a wall at 5rem and enough character not to read as a system default.
+ * Newsreader is what you actually read: a screen serif, because this site is
+ * long-form and a serif invites reading where a sans invites skimming. Mono
+ * carries the timetable register — route codes, prices, counts, labels.
  */
-const ibmPlexSans = IBM_Plex_Sans({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-ibm-plex-sans",
+  weight: ["600", "700", "800"],
+  variable: "--font-bricolage",
+  display: "swap",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
+  variable: "--font-newsreader",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -52,10 +67,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="en"
-      className={`${ibmPlexSans.variable} h-full antialiased`}
+      lang="en-GB"
+      className={`${bricolage.variable} ${newsreader.variable} ${jetbrains.variable} h-full`}
     >
       <body className="min-h-full flex flex-col">
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <ScrollProgress />
         {children}
         {/* Every page gets the WhatsApp route, so it lives here rather than in

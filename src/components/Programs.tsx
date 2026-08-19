@@ -1,60 +1,41 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 import { RichTextContent } from "@/components/PendingData";
-import {
-  categoryImage,
-  programCategories,
-  totalProgramCount,
-} from "@/content/programs";
+import { programCategories, totalProgramCount } from "@/content/programs";
 import { programEnquiryMessage, whatsAppUrl } from "@/content/site";
 import type { Program } from "@/content/types";
 
-const ALL = "All Programs";
+const ALL = "All programmes";
 
 /**
- * An editorial program card: category, serif title, description, meta, link.
+ * A catalogue cell.
  *
- * The generated 3D artwork that used to cap each card is gone — thirty-seven
- * near-identical neon renders said "template" louder than anything else on the
- * site. A vendor mark (AWS, Azure, Google Cloud) still appears where one
- * exists, because those are real logos with real meaning.
+ * Cells in a ruled grid rather than floating cards: thirty-seven bordered
+ * boxes with their own shadows is what made this page feel like a directory
+ * dump. The grid does the dividing, the cell just holds content.
+ *
+ * A vendor mark appears where one exists, drawn in ink rather than brand
+ * colour — thirty-seven cells of assorted logo colours would fight the page,
+ * and the ticker in the hero is where those marks get to be themselves.
  */
-function ProgramCard({ program }: { program: Program }) {
+function ProgramCell({ program }: { program: Program }) {
   const href =
     program.href ?? whatsAppUrl(programEnquiryMessage(program.title));
   const isExternal = href.startsWith("http");
-  const linkClasses =
-    "mt-lg inline-flex items-center gap-xs text-button text-primary transition-colors hover:text-violet-hover";
 
-  const label = (
+  const inner = (
     <>
-      {program.ctaLabel}
-      <span
-        aria-hidden="true"
-        className="transition-transform duration-200 group-hover:translate-x-1"
-      >
-        →
-      </span>
-    </>
-  );
-
-  return (
-    <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-ink/40">
       <div className="flex items-start justify-between gap-md">
-        <h4 className="text-card-title font-semibold text-ink">
-          {program.title}
-        </h4>
+        <h3 className="text-card text-ink">{program.title}</h3>
         {program.brand && (
           <svg
-            role="img"
-            aria-label={program.brand.label}
+            aria-hidden="true"
             viewBox={program.brand.viewBox}
             fill="currentColor"
-            className="mt-1 h-lg w-lg shrink-0 text-ink-subtle"
+            className="mt-[3px] h-4 w-4 shrink-0 text-ink-3"
           >
             {program.brand.paths.map((d, index) => (
               <path key={index} d={d} />
@@ -63,30 +44,47 @@ function ProgramCard({ program }: { program: Program }) {
         )}
       </div>
 
-      <p className="mt-sm text-body-sm text-ink-muted">
+      <p className="mt-sm text-small text-ink-2">
         <RichTextContent value={program.description} />
       </p>
 
       <div className="mt-auto pt-lg">
-        <p className="border-t border-hairline pt-md text-body-sm text-ink-subtle">
+        <p className="border-t border-rule pt-sm font-mono text-data text-ink-3">
           <RichTextContent value={program.meta} />
         </p>
-        {isExternal ? (
-          <a
-            href={href}
-            className={linkClasses}
-            target="_blank"
-            rel="noopener noreferrer"
+        <span className="mt-sm inline-flex items-center gap-xs font-mono text-nav uppercase text-ink transition-colors group-hover:text-signal-text">
+          {program.ctaLabel}
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-200 group-hover:translate-x-1"
           >
-            {label}
-          </a>
-        ) : (
-          <Link href={href} className={linkClasses}>
-            {label}
-          </Link>
-        )}
+            →
+          </span>
+        </span>
       </div>
-    </div>
+    </>
+  );
+
+  const cellClasses =
+    "group flex h-full flex-col bg-paper p-lg transition-colors duration-200 hover:bg-raised";
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cellClasses}
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={cellClasses}>
+      {inner}
+    </Link>
   );
 }
 
@@ -96,24 +94,25 @@ export function Programs() {
   const visibleCategories =
     activeCategory === ALL
       ? programCategories
-      : programCategories.filter((category) => category.name === activeCategory);
+      : programCategories.filter(
+          (category) => category.name === activeCategory,
+        );
 
   const tabs = [
-    { name: ALL, label: ALL, count: totalProgramCount },
+    { name: ALL, count: totalProgramCount },
     ...programCategories.map((category) => ({
       name: category.name,
-      label: category.name,
       count: category.programs.length,
     })),
   ];
 
   return (
-    <section className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
+    <section className="mt-xxxl">
+      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
         <div
           role="tablist"
-          aria-label="Program categories"
-          className="flex flex-wrap gap-xs"
+          aria-label="Programme specialisations"
+          className="flex flex-wrap gap-xs border-b border-ink pb-lg"
         >
           {tabs.map((tab) => {
             const isSelected = tab.name === activeCategory;
@@ -124,19 +123,17 @@ export function Programs() {
                 role="tab"
                 aria-selected={isSelected}
                 onClick={() => setActiveCategory(tab.name)}
-                className={`flex shrink-0 items-center gap-xs whitespace-nowrap rounded-full border px-tab-x py-tab-y text-button transition-[background-color,border-color,color] duration-200 ${
+                className={`flex shrink-0 items-center gap-xs whitespace-nowrap border px-sm py-[9px] font-mono text-data transition-colors duration-150 ${
                   isSelected
-                    ? "border-transparent bg-primary text-on-primary"
-                    : "border-hairline bg-canvas text-ink-muted hover:border-ink/40 hover:text-ink"
+                    ? "border-ink bg-ink text-paper"
+                    : "border-rule-strong bg-transparent text-ink-2 hover:border-ink hover:text-ink"
                 }`}
               >
-                {tab.label}
+                {tab.name}
                 <span
-                  className={`rounded-full px-xs text-caption ${
-                    isSelected
-                      ? "bg-white/20 text-on-primary"
-                      : "bg-surface-1 text-ink-subtle"
-                  }`}
+                  className={
+                    isSelected ? "text-paper/60" : "text-ink-3"
+                  }
                 >
                   {tab.count}
                 </span>
@@ -148,37 +145,22 @@ export function Programs() {
         <div className="mt-xxl flex flex-col gap-xxxl">
           {visibleCategories.map((category) => (
             <div key={category.name}>
-              {/* A banner per specialization: the image carries the section,
-                  the label sits on a scrim so it stays legible over any of
-                  them. Decorative, so the alt text is empty. */}
-              <div className="relative overflow-hidden rounded-lg bg-inverse-canvas">
-                {categoryImage(category.name) && (
-                  <Image
-                    src={categoryImage(category.name) as string}
-                    alt=""
-                    width={1200}
-                    height={800}
-                    className="absolute inset-0 h-full w-full object-cover opacity-70"
-                  />
-                )}
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-linear-to-r from-inverse-canvas via-inverse-canvas/80 to-inverse-canvas/55"
-                />
-                <div className="relative flex items-baseline justify-between gap-md px-lg py-xl tablet:px-xl">
-                  <h3 className="text-headline-sm font-semibold text-inverse-ink">
-                    {category.name}
-                  </h3>
-                  <span className="shrink-0 whitespace-nowrap text-caption text-inverse-ink-muted">
-                    {category.programs.length}{" "}
-                    {category.programs.length === 1 ? "program" : "programs"}
-                  </span>
-                </div>
+              {/* A signage band per specialisation. The photographs that used
+                  to sit here were licensed and generated stand-ins; a plate
+                  with the count on it says the same thing and belongs to this
+                  site rather than to a stock library. */}
+              <div className="flex items-baseline justify-between gap-md border-l-2 border-signal bg-pine px-lg py-md">
+                <h2 className="text-subtitle text-pine-ink">
+                  {category.name}
+                </h2>
+                <span className="shrink-0 font-mono text-data text-pine-ink-2">
+                  {String(category.programs.length).padStart(2, "0")}
+                </span>
               </div>
 
-              <div className="mt-xl grid grid-cols-1 gap-xl tablet:grid-cols-2 desktop:grid-cols-3">
+              <div className="grid gap-px border-x border-b border-rule bg-rule tablet:grid-cols-2 desktop:grid-cols-3">
                 {category.programs.map((program) => (
-                  <ProgramCard key={program.title} program={program} />
+                  <ProgramCell key={program.title} program={program} />
                 ))}
               </div>
             </div>

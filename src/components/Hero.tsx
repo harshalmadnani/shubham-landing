@@ -1,107 +1,66 @@
 import { ButtonLink } from "@/components/Button";
-import { HeroScene } from "@/components/HeroScene";
 import { RichTextContent } from "@/components/PendingData";
+import { RouteBoard } from "@/components/RouteBoard";
 import { Ticker } from "@/components/Ticker";
-import { ArrowRightIcon, CalendarIcon } from "@/components/icons";
 import { proofPoints } from "@/content/sections";
 import { consultationMessage, hero, whatsAppUrl } from "@/content/site";
 
 /**
- * Splits a phrase into words that rise in one after another. Pure CSS — the
- * stagger is an animation-delay per word, so it needs no JS and honours
- * reduced motion through the global media rule.
+ * The hero is a sign, and the board beside it is the proposition.
+ *
+ * No decorative scene: the graphic on the right is the four real routes,
+ * generated from the same data that prices them. The claim and the evidence
+ * for the claim are the same object.
  */
-function StaggeredWords({
-  text,
-  startIndex = 0,
-  className,
-}: {
-  text: string;
-  startIndex?: number;
-  className?: string;
-}) {
-  return (
-    <>
-      {text.split(" ").map((word, index) => (
-        <span
-          key={index}
-          className="inline-block overflow-visible whitespace-pre"
-        >
-          <span
-            className={`inline-block animate-rise-word ${className ?? ""}`}
-            style={{ animationDelay: `${(startIndex + index) * 90}ms` }}
-          >
-            {word}
-            {" "}
-          </span>
-        </span>
-      ))}
-    </>
-  );
-}
-
 export function Hero() {
-  const headlineWordCount = hero.headline.split(" ").length;
-
   return (
-    <section id="hero" className="px-md tablet:px-lg">
-      <div className="mx-auto max-w-content">
-        <div className="grid items-center gap-xxl pb-xxl pt-xxl tablet:pt-xxxl desktop:grid-cols-[1.15fr_1fr]">
+    <section id="hero">
+      <div className="mx-auto max-w-page px-gutter pt-xxl tablet:px-rail tablet:pt-xxxl">
+        <div className="grid items-end gap-xxl desktop:grid-cols-[1.05fr_minmax(0,0.95fr)]">
           <div>
-            <p className="flex items-center gap-sm text-eyebrow uppercase text-ink-muted animate-fade-up">
-              <span aria-hidden="true" className="h-px w-6 bg-ink/30" />
+            <p className="flex items-center gap-sm font-mono text-label uppercase text-ink-3">
+              <span
+                aria-hidden="true"
+                className="h-[7px] w-[7px] rounded-full bg-signal"
+              />
               {hero.eyebrow}
             </p>
 
-            <h1 className="mt-lg text-display-xl-mobile tablet:text-display-xl-tablet desktop:text-display-xl text-ink">
-              <StaggeredWords text={hero.headline} />
-              <StaggeredWords
-                text={hero.headlineAccent}
-                startIndex={headlineWordCount}
-                className="not-italic text-primary"
-              />
+            <h1 className="mt-lg text-mega text-ink">
+              {hero.headline}{" "}
+              <em className="text-pine">{hero.headlineAccent}</em>
             </h1>
 
-            <p
-              className="mt-xl max-w-2xl text-body-lg text-ink-muted animate-fade-up"
-              style={{ animationDelay: "450ms" }}
-            >
+            <p className="mt-xl max-w-[46ch] text-lead text-ink-2">
               {hero.body}
             </p>
 
-            <div
-              className="mt-xl flex flex-wrap gap-sm animate-fade-up"
-              style={{ animationDelay: "560ms" }}
-            >
+            <div className="mt-xl flex flex-wrap gap-sm">
               <ButtonLink href={whatsAppUrl(consultationMessage)}>
-                <CalendarIcon className="h-md w-md" />
-                Book free consultation
+                Book a free consultation
               </ButtonLink>
               <ButtonLink href="/programs" variant="outline">
-                Explore programs
-                <ArrowRightIcon className="h-md w-md transition-transform duration-200 group-hover/btn:translate-x-1" />
+                Browse 37 programmes
               </ButtonLink>
             </div>
           </div>
 
-          <HeroScene />
+          <RouteBoard />
         </div>
 
-        {/* The proof, set as a quiet fact row rather than three shadowed cards. */}
-        <dl className="grid grid-cols-1 gap-lg border-t border-hairline pt-lg tablet:grid-cols-3 tablet:gap-xl">
+        {/* Three claims, on the rule that closes the hero. */}
+        <ul className="mt-xxxl grid gap-lg border-t border-ink pt-lg tablet:grid-cols-3">
           {proofPoints.map((point, index) => (
-            <div
-              key={index}
-              className="flex gap-sm text-body text-ink tablet:block animate-fade-up"
-              style={{ animationDelay: `${640 + index * 90}ms` }}
-            >
-              <dt className="sr-only">Proof point {index + 1}</dt>
-              <dd>
+            <li key={index} className="flex gap-sm">
+              <span className="font-mono text-label text-signal-text">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="text-small text-ink-2">
                 <RichTextContent value={point} />
-              </dd>
-            </div>
+              </span>
+            </li>
           ))}
-        </dl>
+        </ul>
       </div>
 
       <Ticker />
