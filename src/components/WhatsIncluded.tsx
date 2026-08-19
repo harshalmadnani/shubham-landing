@@ -1,64 +1,57 @@
-import { CheckIcon } from "@/components/CheckIcon";
-import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading } from "@/components/SectionHeading";
+import { RichTextContent } from "@/components/PendingData";
+import { Section, SectionHead } from "@/components/Section";
 import { includedGroups } from "@/content/sections";
 
+/**
+ * The contents page: every group of support, listed in full.
+ *
+ * The group name stays in the left margin while its items run down the right,
+ * which is how a printed contents page is set and why fifteen entries here
+ * still scan in a couple of seconds.
+ */
 export function WhatsIncluded() {
   return (
-    <section id="whats-included" className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
-        <SectionHeading
-          eyebrow="What's included"
-          title="Every pathway draws from the same complete set of support"
-          lead="Whichever route you take, none of these are add-ons or upsells."
-        />
+    <Section id="whats-included" index="06" label="What's included">
+      <SectionHead
+        title={
+          <>
+            Every pathway draws from the <em>same complete set</em> of support
+          </>
+        }
+        lead="Whichever route you take, none of these are add-ons or upsells."
+      />
 
-        {/* Masonry columns — groups have very different lengths, and a grid
-            would leave the short ones trailing whitespace. */}
-        <div className="mt-xxl columns-1 gap-xl tablet:columns-2 desktop:columns-3">
-          {includedGroups.map((group, index) => (
-            <div key={group.name} className="mb-xl break-inside-avoid">
-              <Reveal delay={(index % 3) * 60}>
-                <div className="rounded-lg border border-hairline bg-canvas p-xl">
-                  <div className="flex items-baseline justify-between gap-md border-b-2 border-ink pb-md">
-                    <h3 className="text-card-title font-semibold text-ink">
-                      {group.name}
-                    </h3>
-                    <span
-                      aria-hidden="true"
-                      className="text-body font-semibold text-ink-subtle"
-                    >
-                      {group.items.length}
-                    </span>
-                  </div>
-
-                  <ul className="flex flex-col">
-                    {group.items.map((item, itemIndex) => (
-                      <li
-                        key={item.title}
-                        className={`flex items-start gap-sm py-lg ${
-                          itemIndex === 0 ? "" : "border-t border-hairline"
-                        }`}
-                      >
-                        <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                        <div>
-                          <p className="text-body-emphasis text-ink">
-                            {item.title}
-                          </p>
-                          <p className="mt-xxs text-body-sm text-ink-muted">
-                            <RichTextContent value={item.body} />
-                          </p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
+      <div className="mt-16 border-t border-ink">
+        {includedGroups.map((group, groupIndex) => (
+          <div
+            key={group.name}
+            className="grid gap-x-10 gap-y-6 border-b border-rule py-10 desktop:grid-cols-12"
+          >
+            <div className="desktop:col-span-3">
+              <p className="flex items-baseline gap-3 font-mono text-label uppercase text-ink-3">
+                <span className="tnum text-flame-ink">
+                  {String(groupIndex + 1).padStart(2, "0")}
+                </span>
+                {group.name}
+              </p>
             </div>
-          ))}
-        </div>
+
+            <ul className="grid gap-x-10 gap-y-7 desktop:col-span-9 tablet:grid-cols-2">
+              {group.items.map((item, index) => (
+                <li key={item.title}>
+                  <Reveal delay={(index % 2) * 50}>
+                    <h3 className="text-subtitle text-ink">{item.title}</h3>
+                    <p className="mt-1.5 text-small text-ink-2">
+                      <RichTextContent value={item.body} />
+                    </p>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

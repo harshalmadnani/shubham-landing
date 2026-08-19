@@ -5,7 +5,6 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
 import { OurApproach } from "@/components/OurApproach";
-import { ScrollToTop } from "@/components/ScrollToTop";
 import { Services } from "@/components/Services";
 import { Struggles } from "@/components/Struggles";
 import { WhatsIncluded } from "@/components/WhatsIncluded";
@@ -29,7 +28,6 @@ export default function HomePage() {
         <CtaBanner />
       </main>
       <Footer />
-      <ScrollToTop />
     </div>
   );
 }

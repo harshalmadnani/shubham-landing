@@ -1,25 +1,43 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans } from "next/font/google";
+import {
+  Instrument_Sans,
+  Instrument_Serif,
+  JetBrains_Mono,
+} from "next/font/google";
 
 import { ChatWithUs } from "@/components/ChatWithUs";
-import { ScrollProgress } from "@/components/ScrollProgress";
 import { site } from "@/content/site";
 
 import "./globals.css";
 
 /**
- * The whole type system, in one family.
+ * Three faces, three jobs, no overlap.
  *
- * A second display face was doing more harm than good on a technology
- * training site: a wonky serif reads editorial, and every headline set in it
- * pulled against the technical register of the rest of the page. Plex carries
- * both jobs — 600 and 700 at display sizes with tight tracking read confident
- * rather than literary, and one family is one fewer font to download.
+ * The serif sets display sizes only — its contrast is an asset at 5rem and a
+ * liability at 16px. The grotesk sets everything anybody actually reads. The
+ * mono sets labels, indices and figures, which is what keeps the catalogue
+ * metadata from competing with the prose it sits beside.
  */
-const ibmPlexSans = IBM_Plex_Sans({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-ibm-plex-sans",
+  weight: ["400"],
+  // The italic carries every accent word in every headline on the site.
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-instrument-sans",
+  display: "swap",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -39,7 +57,6 @@ export const metadata: Metadata = {
     images: [{ url: "/og.png", width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
-    // summary_large_image, since there is now an image worth showing at size.
     card: "summary_large_image",
     title: `${site.name} — IT Training & Placement Support`,
     description: site.description,
@@ -53,10 +70,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ibmPlexSans.variable} h-full antialiased`}
+      className={`${instrumentSerif.variable} ${instrumentSans.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <ScrollProgress />
+      <body className="min-h-full flex flex-col bg-paper text-ink">
         {children}
         {/* Every page gets the WhatsApp route, so it lives here rather than in
             each page's own composition. */}

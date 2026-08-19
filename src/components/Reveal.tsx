@@ -6,6 +6,9 @@ import type { ReactNode } from "react";
 /**
  * Fades its children up the first time they scroll into view.
  *
+ * The move is deliberately small — 8px and a fade. The page is a document, and
+ * a document that leaps around as you scroll reads as a slideshow.
+ *
  * Content starts visible and is only hidden once the observer is known to be
  * running, so the page still reads correctly without JavaScript rather than
  * leaving every section blank. `prefers-reduced-motion` skips the effect
@@ -35,7 +38,7 @@ export function Reveal({
 
     // Already on screen at mount — don't hide it just to animate it back in.
     const rect = node.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.85) {
+    if (rect.top < window.innerHeight * 0.9) {
       setState("shown");
       return;
     }
@@ -51,7 +54,7 @@ export function Reveal({
           }
         }
       },
-      { rootMargin: "0px 0px -12% 0px" },
+      { rootMargin: "0px 0px -10% 0px" },
     );
 
     observer.observe(node);
@@ -62,10 +65,8 @@ export function Reveal({
     <div
       ref={ref}
       className={`${
-        state === "hidden"
-          ? "translate-y-5 opacity-0"
-          : "translate-y-0 opacity-100"
-      } transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]${
+        state === "hidden" ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100"
+      } transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]${
         className ? ` ${className}` : ""
       }`}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}

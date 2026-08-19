@@ -1,7 +1,7 @@
 import { ButtonLink } from "@/components/Button";
-import { CalendarIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
+import { Section } from "@/components/Section";
 import { consultationMessage, whatsAppUrl } from "@/content/site";
 import { quotePanel, quoteSteps } from "@/content/trainingStructure";
 
@@ -14,58 +14,42 @@ import { quotePanel, quoteSteps } from "@/content/trainingStructure";
  */
 export function QuoteProcess() {
   return (
-    <section id="what-it-costs" className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
-        <div className="grid gap-lg desktop:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] desktop:gap-xl">
-          <Reveal>
-            <div className="flex h-full flex-col justify-between rounded-lg border border-hairline bg-surface-1 p-xl tablet:p-xxl">
-              <div>
-                <p className="text-eyebrow uppercase text-ink-muted">
-                  How pricing works
-                </p>
-                <h2 className="mt-sm text-headline-sm text-ink">
-                  {quotePanel.heading}
-                </h2>
-                <p className="mt-md text-body text-ink-muted">
-                  {quotePanel.body}
-                </p>
-              </div>
+    <Section id="what-it-costs" index="02" label="How pricing works" tone="paper-2">
+      <div className="grid gap-x-10 gap-y-12 desktop:grid-cols-12">
+        <Reveal className="desktop:col-span-5">
+          <h2 className="font-display text-title text-ink">
+            {quotePanel.heading}
+          </h2>
+          <p className="mt-5 text-lead text-ink-2">{quotePanel.body}</p>
+          <ButtonLink
+            href={whatsAppUrl(consultationMessage)}
+            className="mt-8"
+          >
+            Book free consultation
+          </ButtonLink>
+        </Reveal>
 
-              <ButtonLink
-                href={whatsAppUrl(consultationMessage)}
-                className="mt-xl self-start"
+        <Reveal delay={80} className="desktop:col-span-6 desktop:col-start-7">
+          <ol className="border-t border-ink">
+            {quoteSteps.map((step, index) => (
+              <li
+                key={step.title}
+                className="flex gap-6 border-b border-rule py-7"
               >
-                <CalendarIcon className="h-md w-md" />
-                Book free consultation
-              </ButtonLink>
-            </div>
-          </Reveal>
-
-          <Reveal delay={100}>
-            <ol className="flex h-full flex-col gap-sm">
-              {quoteSteps.map((step, index) => (
-                <li
-                  key={step.title}
-                  className="flex flex-1 items-start gap-md rounded-lg border border-hairline bg-canvas p-lg transition-colors duration-300 hover:border-ink/40"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-primary text-body-emphasis text-on-primary"
-                  >
-                    {index + 1}
-                  </span>
-                  <div>
-                    <p className="text-card-title text-ink">{step.title}</p>
-                    <p className="mt-xxs text-body-sm text-ink-muted">
-                      <RichTextContent value={step.body} />
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
-        </div>
+                <span className="mt-1 font-mono text-index tnum text-flame-ink">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <p className="text-subtitle text-ink">{step.title}</p>
+                  <p className="mt-2 text-small text-ink-2">
+                    <RichTextContent value={step.body} />
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }

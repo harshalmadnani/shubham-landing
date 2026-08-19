@@ -1,12 +1,12 @@
 import Link from "next/link";
 
 import { ButtonLink } from "@/components/Button";
-import { CheckIcon } from "@/components/CheckIcon";
-import { ArrowRightIcon, CalendarIcon } from "@/components/icons";
+import { ArrowRightIcon } from "@/components/icons";
 import { processIllustrations } from "@/components/Illustrations";
+import { Marker } from "@/components/Marker";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Section, SectionHead } from "@/components/Section";
 import type { ProcessPage as ProcessContent } from "@/content/processes";
 import { processes } from "@/content/processes";
 import { whatsAppUrl } from "@/content/site";
@@ -20,62 +20,76 @@ import { whatsAppUrl } from "@/content/site";
  */
 export function ProcessPage({ content }: { content: ProcessContent }) {
   const others = processes.filter((process) => process.slug !== content.slug);
+  const position = processes.findIndex(
+    (process) => process.slug === content.slug,
+  );
   const Illustration = processIllustrations[content.slug];
 
   return (
     <>
-      {/* Dark band. The rest of the site is white, and these four pages
-          benefit from reading as their own place — it also gives the artwork
-          a ground to sit on rather than floating in more white. */}
-      <section className="bg-inverse-canvas px-md tablet:px-lg">
-        <div className="mx-auto grid max-w-content items-center gap-xl pb-xxxl pt-xxl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] desktop:gap-xxl desktop:pt-xxxl">
-          <div>
-            <p className="flex items-center gap-sm text-eyebrow uppercase text-inverse-ink-muted animate-fade-up">
-              <span aria-hidden="true" className="h-px w-6 bg-inverse-ink/40" />
-              {content.eyebrow}
-            </p>
+      {/* The head runs on the inverse surface: these four pages are a section
+          of their own, and the plate needs a ground to sit on. */}
+      <section className="relative overflow-hidden bg-night text-bone">
+        <div
+          aria-hidden="true"
+          className="rule-grid-night pointer-events-none absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,black,transparent_92%)]"
+        />
 
-            <h1 className="mt-lg max-w-3xl text-display-xl-mobile tablet:text-display-lg text-inverse-ink animate-fade-up">
-              {content.headline}{" "}
-              <em className="text-primary-bright">{content.headlineAccent}</em>
-            </h1>
+        <div className="relative mx-auto w-full max-w-page px-6 py-16 tablet:px-10 tablet:py-20">
+          <p className="flex items-center gap-4 font-mono text-label uppercase text-bone-2">
+            <span className="tnum text-flame-bright">
+              {String(position + 1).padStart(2, "0")}
+            </span>
+            {content.eyebrow}
+          </p>
 
-            <p className="mt-lg max-w-2xl text-body-lg text-inverse-ink-muted animate-fade-up">
-              <RichTextContent value={content.lead} />
-            </p>
+          <div className="mt-10 grid gap-x-10 gap-y-12 desktop:grid-cols-12">
+            <div className="desktop:col-span-7">
+              <h1 className="font-display text-display text-bone [text-wrap:balance]">
+                {content.headline} <em className="text-flame-bright">{content.headlineAccent}</em>
+              </h1>
 
-            <dl className="mt-xl grid gap-sm tablet:grid-cols-3 animate-fade-up">
-              {content.facts.map((fact) => (
+              <p className="mt-8 max-w-2xl text-lead text-bone-2">
+                <RichTextContent value={content.lead} tone="dark" />
+              </p>
+
+              <div className="mt-10 flex flex-wrap gap-4">
+                <ButtonLink href={whatsAppUrl(content.enquiry)} variant="onNight">
+                  Book free consultation
+                </ButtonLink>
+                <ButtonLink href="/training-structure" variant="onNight">
+                  Where this sits, and what it costs
+                  <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
+                </ButtonLink>
+              </div>
+            </div>
+
+            {Illustration && (
+              <div className="desktop:col-span-4 desktop:col-start-9">
+                <Illustration className="w-full text-bone" />
+              </div>
+            )}
+          </div>
+
+          {/* The figures, as a ruled table across the foot of the band. */}
+          {content.facts.length > 0 && (
+            <dl className="mt-16 grid border-t border-night-rule tablet:grid-cols-3">
+              {content.facts.map((fact, index) => (
                 <div
                   key={fact.label}
-                  className="rounded-lg border border-inverse-hairline bg-inverse-surface-1 px-md py-sm"
+                  className={`border-b border-night-rule py-6 tablet:border-b-0 ${
+                    index > 0 ? "tablet:border-l tablet:pl-6" : "tablet:pr-6"
+                  }`}
                 >
-                  <dt className="text-body-emphasis text-primary-bright">
+                  <dt className="font-display text-display-sm text-bone">
                     {fact.value}
                   </dt>
-                  <dd className="mt-xxs text-body-sm text-inverse-ink-muted">
+                  <dd className="mt-1 font-mono text-meta uppercase text-bone-2">
                     {fact.label}
                   </dd>
                 </div>
               ))}
             </dl>
-
-            <div className="mt-xl flex flex-wrap gap-sm animate-fade-up">
-              <ButtonLink href={whatsAppUrl(content.enquiry)}>
-                <CalendarIcon className="h-md w-md" />
-                Book free consultation
-              </ButtonLink>
-              <ButtonLink href="/training-structure" variant="glass">
-                Where this sits, and what it costs
-                <ArrowRightIcon className="h-md w-md transition-transform duration-200 group-hover/btn:translate-x-1" />
-              </ButtonLink>
-            </div>
-          </div>
-
-          {Illustration && (
-            <div className="animate-fade-up rounded-lg bg-canvas p-md tablet:p-lg">
-              <Illustration className="w-full" />
-            </div>
           )}
         </div>
       </section>
@@ -83,208 +97,201 @@ export function ProcessPage({ content }: { content: ProcessContent }) {
       {/* The whole sequence in one line, before any of it is explained. This
           is what stops the page reading as an undifferentiated wall: you can
           see how many steps there are and where you are going first. */}
-      <section className="px-md pt-xxl tablet:px-lg">
-        <div className="mx-auto max-w-content">
-          <Reveal>
-            <ol className="flex flex-col gap-xs tablet:flex-row tablet:items-stretch">
-              {content.steps.map((step, index) => (
-                <li
-                  key={step.title}
-                  className="flex flex-1 items-center gap-sm tablet:flex-col tablet:items-start tablet:gap-xs"
-                >
-                  <span className="flex items-center gap-sm tablet:w-full">
-                    <span className="flex h-lg w-lg shrink-0 items-center justify-center rounded-full bg-primary text-caption text-on-primary">
-                      {index + 1}
-                    </span>
-                    {index < content.steps.length - 1 && (
-                      <span
-                        aria-hidden="true"
-                        className="hidden h-px flex-1 bg-hairline tablet:block"
-                      />
-                    )}
-                  </span>
-                  <span className="text-body-sm text-ink-muted tablet:pr-md">
-                    {step.title}
-                  </span>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* The process itself, as a numbered sequence. */}
-      <section className="px-md pt-xxxl tablet:px-lg">
-        <div className="mx-auto max-w-content">
-          <SectionHeading
-            eyebrow="Step by step"
-            title={content.stepsTitle}
-            lead={<RichTextContent value={content.stepsLead} />}
-          />
-
-          <ol className="mt-xl border-b border-hairline">
+      <div className="border-t border-rule bg-paper-2">
+        <div className="mx-auto w-full max-w-page px-6 py-6 tablet:px-10">
+          <ol className="flex flex-col gap-3 tablet:flex-row tablet:items-center tablet:gap-6">
             {content.steps.map((step, index) => (
-              <Reveal key={step.title} delay={index * 50}>
-                <li className="grid gap-sm border-t border-hairline py-lg desktop:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] desktop:gap-xl desktop:py-xl">
-                  <div className="flex items-start gap-sm">
-                    <span
-                      aria-hidden="true"
-                      className="flex h-lg w-lg shrink-0 items-center justify-center rounded-full bg-primary-soft text-caption text-primary"
-                    >
-                      {index + 1}
-                    </span>
-                    <p className="text-card-title text-ink">{step.title}</p>
-                  </div>
-                  <p className="max-w-[46rem] text-body text-ink-muted">
-                    <RichTextContent value={step.body} />
-                  </p>
-                </li>
-              </Reveal>
+              <li
+                key={step.title}
+                className="flex flex-1 items-center gap-3 font-mono text-meta uppercase text-ink-2"
+              >
+                <span className="tnum text-flame-ink">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="flex-1">{step.title}</span>
+                {index < content.steps.length - 1 && (
+                  <span
+                    aria-hidden="true"
+                    className="hidden h-px w-6 shrink-0 bg-rule-2 tablet:block"
+                  />
+                )}
+              </li>
             ))}
           </ol>
         </div>
-      </section>
+      </div>
+
+      <Section index="01" label="Step by step">
+        <SectionHead
+          title={content.stepsTitle}
+          lead={<RichTextContent value={content.stepsLead} />}
+        />
+
+        <ol className="mt-16 border-t border-ink">
+          {content.steps.map((step, index) => (
+            <Reveal key={step.title}>
+              <li className="grid gap-x-10 gap-y-3 border-b border-rule py-8 desktop:grid-cols-12">
+                <div className="flex items-baseline gap-4 desktop:col-span-4">
+                  <span className="font-mono text-index tnum text-flame-ink">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-subtitle text-ink">{step.title}</p>
+                </div>
+                <p className="text-body text-ink-2 desktop:col-span-8">
+                  <RichTextContent value={step.body} />
+                </p>
+              </li>
+            </Reveal>
+          ))}
+        </ol>
+      </Section>
 
       {/* Detail blocks: the five projects, the guidelines, what we ask of you.
-          A grid rather than a second numbered list — these are a set, and
-          numbering them again would imply an order they do not have. */}
-      {content.details?.map((detail) => (
-        <section key={detail.title} className="px-md pt-section tablet:px-lg">
-          <div className="mx-auto max-w-content">
-            <SectionHeading
-              title={detail.title}
-              lead={<RichTextContent value={detail.lead} />}
-            />
-            <div className="mt-xl grid gap-md tablet:grid-cols-2 desktop:grid-cols-3">
-              {detail.items.map((item, index) => (
-                <Reveal key={item.title} delay={index * 50} className="h-full">
-                  <div className="h-full rounded-lg border border-hairline bg-surface-1 p-lg transition-colors duration-300 hover:border-ink/40">
-                    <p className="text-card-title text-ink">{item.title}</p>
-                    <p className="mt-xs text-body-sm text-ink-muted">
-                      <RichTextContent value={item.body} />
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      ))}
-
-      {/* What you get, and who it is for — side by side, both checklists. */}
-      <section className="px-md pt-section tablet:px-lg">
-        <div className="mx-auto max-w-content grid gap-lg desktop:grid-cols-2 desktop:gap-xl">
-          <Reveal>
-            <div className="h-full rounded-lg border border-hairline bg-surface-1 p-xl">
-              <h2 className="text-headline-sm text-ink">
-                {content.includedTitle}
-              </h2>
-              <ul className="mt-lg flex flex-col gap-sm">
-                {content.included.map((item, index) => (
-                  <li key={index} className="flex gap-sm">
-                    <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                    <span className="text-body-sm text-ink">
-                      <RichTextContent value={item} />
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-
-          <Reveal delay={80}>
-            <div className="h-full rounded-lg border border-hairline bg-canvas p-xl">
-              <h2 className="text-headline-sm text-ink">
-                {content.suitsTitle}
-              </h2>
-              <ul className="mt-lg flex flex-col gap-sm">
-                {content.suits.map((item, index) => (
-                  <li key={index} className="flex gap-sm">
-                    <span
-                      aria-hidden="true"
-                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
-                    />
-                    <span className="text-body-sm text-ink">
-                      <RichTextContent value={item} />
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* The boundaries. Saying what a stage is not is what makes the rest of
-          the page believable. */}
-      <section className="px-md pt-section tablet:px-lg">
-        <div className="mx-auto max-w-content">
-          <Reveal>
-            <div className="rounded-lg bg-inverse-canvas p-xl tablet:p-xxl">
-              <p className="text-eyebrow uppercase text-inverse-ink-muted">
-                Straight answers
-              </p>
-              <h2 className="mt-sm text-headline-sm text-inverse-ink">
-                {content.boundariesTitle}
-              </h2>
-              <ul className="mt-lg grid gap-md tablet:grid-cols-3">
-                {content.boundaries.map((item, index) => (
-                  <li
-                    key={index}
-                    className="border-t border-inverse-hairline pt-md text-body-sm text-inverse-ink-muted"
-                  >
-                    <RichTextContent value={item} />
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-xl max-w-2xl text-body-sm text-inverse-ink-muted">
-                <RichTextContent value={content.pathwayNote} />{" "}
-                <Link
-                  href="/training-structure"
-                  className="text-inverse-ink underline underline-offset-4 hover:no-underline"
-                >
-                  See the four pathways
-                </Link>
-                .
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* On to the next process. */}
-      <section className="px-md pt-section tablet:px-lg">
-        <div className="mx-auto max-w-content">
-          <SectionHeading
-            eyebrow="The rest of the programme"
-            title="How the other parts work"
+          A ruled grid rather than a second numbered list — these are a set,
+          and numbering them again would imply an order they do not have. */}
+      {content.details?.map((detail, detailIndex) => (
+        <Section
+          key={detail.title}
+          index={String(detailIndex + 2).padStart(2, "0")}
+          label="In detail"
+          tone="paper-2"
+        >
+          <SectionHead
+            title={detail.title}
+            lead={<RichTextContent value={detail.lead} />}
           />
-          <div className="mt-xl grid gap-md tablet:grid-cols-3">
-            {others.map((other, index) => (
-              <Reveal key={other.slug} delay={index * 60} className="h-full">
-                <Link
-                  href={`/how-it-works/${other.slug}`}
-                  className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-lg transition-colors duration-300 hover:border-primary"
-                >
-                  <p className="text-eyebrow uppercase text-ink-subtle">
-                    {other.eyebrow}
+
+          <div className="mt-16 grid overflow-hidden border-l border-t border-rule-2 tablet:grid-cols-2 desktop:grid-cols-3">
+            {detail.items.map((item, index) => (
+              <Reveal
+                key={item.title}
+                delay={(index % 3) * 50}
+                className="-mb-px -mr-px border-b border-r border-rule-2"
+              >
+                <div className="h-full bg-paper p-6 tablet:p-7">
+                  <p className="text-subtitle text-ink">{item.title}</p>
+                  <p className="mt-2 text-small text-ink-2">
+                    <RichTextContent value={item.body} />
                   </p>
-                  <p className="mt-xs text-card-title text-ink">
-                    {other.navLabel}
-                  </p>
-                  <p className="mt-xs text-body-sm text-ink-muted">
-                    {other.headline} {other.headlineAccent}
-                  </p>
-                  <span className="mt-lg inline-flex items-center gap-xs text-body-sm text-primary">
-                    Read the process
-                    <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                  </span>
-                </Link>
+                </div>
               </Reveal>
             ))}
           </div>
+        </Section>
+      ))}
+
+      {/* What you get, and who it is for — side by side, both lists. */}
+      <Section
+        index={String((content.details?.length ?? 0) + 2).padStart(2, "0")}
+        label="What you get"
+      >
+        <div className="grid gap-x-10 gap-y-12 desktop:grid-cols-12">
+          <Reveal className="desktop:col-span-6">
+            <h2 className="font-display text-title text-ink">
+              {content.includedTitle}
+            </h2>
+            <ul className="mt-8 border-t border-rule">
+              {content.included.map((item, index) => (
+                <li key={index} className="flex gap-3 border-b border-rule py-4">
+                  <Marker className="mt-1.5 h-2.5 w-2.5 shrink-0 text-flame" />
+                  <span className="text-small text-ink">
+                    <RichTextContent value={item} />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={60} className="desktop:col-span-5 desktop:col-start-8">
+            <h2 className="font-display text-title text-ink">
+              {content.suitsTitle}
+            </h2>
+            <ul className="mt-8 border-t border-rule">
+              {content.suits.map((item, index) => (
+                <li key={index} className="flex gap-3 border-b border-rule py-4">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 h-1.5 w-1.5 shrink-0 bg-ink-3"
+                  />
+                  <span className="text-small text-ink">
+                    <RichTextContent value={item} />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
-      </section>
+      </Section>
+
+      {/* The boundaries. Saying what a stage is not is what makes the rest of
+          the page believable. */}
+      <Section
+        index={String((content.details?.length ?? 0) + 3).padStart(2, "0")}
+        label="Straight answers"
+        tone="night"
+      >
+        <SectionHead tone="night" title={content.boundariesTitle} />
+
+        <ul className="mt-12 grid gap-x-10 border-t border-night-rule tablet:grid-cols-3">
+          {content.boundaries.map((item, index) => (
+            <li
+              key={index}
+              className="border-b border-night-rule py-6 text-small text-bone-2 tablet:border-b-0"
+            >
+              <RichTextContent value={item} tone="dark" />
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-12 max-w-2xl text-small text-bone-2">
+          <RichTextContent value={content.pathwayNote} tone="dark" />{" "}
+          <Link
+            href="/training-structure"
+            className="link-sweep text-bone hover:text-flame-bright"
+          >
+            See the four pathways
+          </Link>
+          .
+        </p>
+      </Section>
+
+      {/* On to the next process. */}
+      <Section
+        index={String((content.details?.length ?? 0) + 4).padStart(2, "0")}
+        label="The rest of the programme"
+      >
+        <SectionHead
+          title={
+            <>
+              How the <em>other parts</em> work
+            </>
+          }
+        />
+
+        <div className="mt-12 border-t border-ink">
+          {others.map((other, index) => (
+            <Reveal key={other.slug} delay={index * 50}>
+              <Link
+                href={`/how-it-works/${other.slug}`}
+                className="group grid gap-x-10 gap-y-2 border-b border-rule py-7 transition-colors duration-200 hover:bg-paper-2 desktop:grid-cols-12 desktop:items-baseline"
+              >
+                <span className="font-mono text-label uppercase text-ink-3 desktop:col-span-3">
+                  {other.eyebrow}
+                </span>
+                <span className="font-display text-title text-ink transition-colors duration-200 group-hover:text-flame-ink desktop:col-span-3">
+                  {other.navLabel}
+                </span>
+                <span className="text-small text-ink-2 desktop:col-span-5">
+                  {other.headline} {other.headlineAccent}
+                </span>
+                <span className="flex items-center desktop:col-span-1 desktop:justify-end">
+                  <ArrowRightIcon className="h-4 w-4 text-ink transition-transform duration-200 group-hover:translate-x-1" />
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
     </>
   );
 }

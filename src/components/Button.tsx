@@ -1,30 +1,26 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-export type ButtonVariant =
-  | "primary"
-  | "outline"
-  | "ghost"
-  | "inverse"
-  | "glass";
+export type ButtonVariant = "primary" | "outline" | "quiet" | "onNight";
 
-/* Flat fills, no glow. The primary action carries the accent rather than ink:
-   a blue CTA is the clearest "this is the thing to click" signal an education
-   page has, and it reads at a glance against a white canvas. */
+/*
+ * Buttons are rectangles with a mono label.
+ *
+ * The label is set in the same face as the catalogue metadata and tracked
+ * wide, which is what makes a control read as a control here without a pill,
+ * a shadow or a gradient doing the work. Every variant shares one hover move:
+ * the fill goes vermilion.
+ */
 const base =
-  "group/btn inline-flex items-center justify-center gap-xs rounded-full px-lg py-sm text-button transition-[background-color,border-color,color,box-shadow] duration-200";
+  "group/btn inline-flex items-center justify-center gap-2.5 border px-6 py-3.5 text-label uppercase font-mono transition-colors duration-200";
 
 const variants: Record<ButtonVariant, string> = {
-  primary:
-    "border border-transparent bg-primary text-on-primary shadow-sm hover:bg-violet-hover",
-  outline:
-    "border border-hairline bg-canvas text-ink shadow-sm hover:border-primary hover:text-primary",
-  ghost:
-    "border border-transparent bg-transparent text-primary hover:bg-primary-soft",
-  inverse:
-    "border border-transparent bg-canvas text-ink hover:bg-surface-1",
-  glass:
-    "border border-inverse-ink/30 bg-transparent text-inverse-ink hover:border-inverse-ink/70",
+  // Ink by default. The accent is reserved for what it points at, not for
+  // every button on the page — a page of vermilion buttons has no emphasis.
+  primary: "border-ink bg-ink text-paper hover:border-flame hover:bg-flame",
+  outline: "border-ink-3 bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-paper",
+  quiet: "border-transparent bg-transparent px-0 text-ink hover:text-flame-ink",
+  onNight: "border-bone/35 bg-transparent text-bone hover:border-flame hover:bg-flame",
 };
 
 function classesFor(variant: ButtonVariant, className?: string) {
@@ -46,15 +42,15 @@ export function ButtonLink({
   className?: string;
   children: ReactNode;
 }) {
-  const isExternal = href.startsWith("http");
+  const isExternal = href.startsWith("http") || href.startsWith("mailto:");
 
   if (isExternal) {
     return (
       <a
         href={href}
         className={classesFor(variant, className)}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       >
         {children}
       </a>

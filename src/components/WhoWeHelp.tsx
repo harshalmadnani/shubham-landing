@@ -1,58 +1,56 @@
+import { Marker } from "@/components/Marker";
 import { Reveal } from "@/components/Reveal";
-import { TiltCard } from "@/components/TiltCard";
-import { CheckIcon } from "@/components/CheckIcon";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Section, SectionHead } from "@/components/Section";
 import { audiences } from "@/content/sections";
 
 /**
- * Four starting points as editorial cards — a serif numeral, a title, and the
- * bullets. The generated portrait photos are gone; nothing here pretends to be
- * a person who does not exist.
+ * Four starting points, set as a ruled table.
+ *
+ * Name on the left, the summary beside it, what you get on the right. Four
+ * rows of the same shape let a reader compare across them, which four cards
+ * side by side never allow.
  */
 export function WhoWeHelp() {
   return (
-    <section id="who-we-help" className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
-        <SectionHeading
-          eyebrow="Who we help"
-          title="Built around where you're actually starting from"
-          lead="Four starting points, four different routes in — the program adapts to your background, not the other way round."
-        />
+    <Section id="who-we-help" index="02" label="Who we help" tone="paper-2">
+      <SectionHead
+        title={
+          <>
+            Built around where you&apos;re <em>actually</em> starting from
+          </>
+        }
+        lead="Four starting points, four different routes in — the program adapts to your background, not the other way round."
+      />
 
-        <div className="mt-xxl grid grid-cols-1 gap-xl desktop:grid-cols-2">
-          {audiences.map((audience, index) => (
-            <Reveal key={audience.title} delay={index * 80} className="h-full">
-              <TiltCard className="h-full">
-                <div className="group flex h-full flex-col rounded-lg border border-hairline bg-canvas p-xl transition-colors duration-300 hover:border-ink/40">
-                <div className="flex items-baseline justify-between gap-md">
-                  <p className="text-card-title font-semibold text-ink">
-                    {audience.title}
-                  </p>
-                  <span
-                    aria-hidden="true"
-                    className="text-card-title font-semibold text-ink-subtle"
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <p className="mt-xs text-body-sm text-ink-muted">
-                  {audience.body}
-                </p>
+      <div className="mt-16 border-t border-ink">
+        {audiences.map((audience, index) => (
+          <Reveal key={audience.title}>
+            <article className="grid gap-6 border-b border-rule py-10 desktop:grid-cols-12 desktop:gap-10">
+              <div className="flex gap-4 desktop:col-span-4">
+                <span className="mt-1.5 font-mono text-index tnum text-flame-ink">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-display text-title text-ink">
+                  {audience.title}
+                </h3>
+              </div>
 
-                <ul className="mt-lg flex flex-col gap-sm border-t border-hairline pt-lg">
-                  {audience.bullets.map((bullet) => (
-                    <li key={bullet} className="flex gap-sm">
-                      <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                      <span className="text-body-sm text-ink">{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-                </div>
-              </TiltCard>
-            </Reveal>
-          ))}
-        </div>
+              <p className="text-body text-ink-2 desktop:col-span-4">
+                {audience.body}
+              </p>
+
+              <ul className="flex flex-col gap-3 desktop:col-span-4">
+                {audience.bullets.map((bullet) => (
+                  <li key={bullet} className="flex gap-3 text-small text-ink-2">
+                    <Marker className="mt-1.5 h-2.5 w-2.5 shrink-0 text-flame" />
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

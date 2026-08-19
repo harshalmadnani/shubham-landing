@@ -1,54 +1,48 @@
-import Link from "next/link";
-
-import { ArrowRightIcon } from "@/components/icons";
-import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading } from "@/components/SectionHeading";
+import { RichTextContent } from "@/components/PendingData";
+import { Section, SectionHead } from "@/components/Section";
 import { howItWorks } from "@/content/sections";
 
+/**
+ * The four stages, set as a sequence.
+ *
+ * The numeral is the illustration: set in the display serif at the size of a
+ * headline, in the margin, so the order of the stages is legible before a
+ * single word is read.
+ */
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
-        <SectionHeading
-          eyebrow="How it works"
-          title="Four steps from first call to hired"
-          lead="No mystery process — you always know which stage you're in and what comes next."
-        />
+    <Section id="how-it-works" index="04" label="How it works">
+      <SectionHead
+        title={
+          <>
+            Four steps from first call to <em>hired</em>
+          </>
+        }
+        lead="No mystery process — you always know which stage you're in and what comes next."
+      />
 
-        <ol className="mt-xxl grid grid-cols-1 gap-x-xxl gap-y-xxl tablet:grid-cols-2 desktop:grid-cols-4">
-          {howItWorks.map((step, index) => (
-            <li key={step.title}>
-              <Reveal delay={index * 80} className="h-full">
-                <div className="h-full border-t border-hairline pt-lg">
-                  <span
-                    aria-hidden="true"
-                    className="flex h-xl w-xl items-center justify-center rounded-full bg-primary text-body-emphasis text-on-primary"
-                  >
-                    {index + 1}
+      <ol className="mt-16 border-t border-ink">
+        {howItWorks.map((step, index) => (
+          <li key={step.title} className="border-b border-rule">
+            <Reveal>
+              <div className="group grid gap-4 py-9 desktop:grid-cols-12 desktop:gap-10">
+                <div className="flex items-baseline gap-5 desktop:col-span-5">
+                  <span className="font-display text-title tnum text-rule-2 transition-colors duration-300 group-hover:text-flame">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
-                  <p className="mt-lg text-card-title text-ink">{step.title}</p>
-                  <p className="mt-xs text-body-sm text-ink-muted">
-                    <RichTextContent value={step.body} />
-                  </p>
+                  <h3 className="font-display text-title text-ink">
+                    {step.title}
+                  </h3>
                 </div>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-
-        {/* The four steps in summary; the process pages are where each one is
-            actually described. */}
-        <Reveal delay={320}>
-          <Link
-            href="/how-it-works"
-            className="group mt-xxl inline-flex items-center gap-xs text-body text-primary"
-          >
-            Read how each part actually works
-            <ArrowRightIcon className="h-md w-md transition-transform duration-200 group-hover:translate-x-1" />
-          </Link>
-        </Reveal>
-      </div>
-    </section>
+                <p className="text-body text-ink-2 desktop:col-span-6 desktop:col-start-7">
+                  <RichTextContent value={step.body} />
+                </p>
+              </div>
+            </Reveal>
+          </li>
+        ))}
+      </ol>
+    </Section>
   );
 }

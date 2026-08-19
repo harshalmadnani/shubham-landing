@@ -5,7 +5,6 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Programs } from "@/components/Programs";
 import { ProgramsHero } from "@/components/ProgramsHero";
-import { ScrollToTop } from "@/components/ScrollToTop";
 import { programCategories, totalProgramCount } from "@/content/programs";
 import { site } from "@/content/site";
 
@@ -24,7 +23,6 @@ export default function ProgramsPage() {
         <CtaBanner />
       </main>
       <Footer />
-      <ScrollToTop />
     </div>
   );
 }

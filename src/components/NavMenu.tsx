@@ -75,18 +75,24 @@ export function NavMenu({
         aria-controls={menuId}
         onClick={() => setIsOpen((open) => !open)}
         onKeyDown={onButtonKeyDown}
-        className={`flex items-center gap-xxs rounded-full px-md py-xs text-body-sm transition-colors ${
+        className={`relative flex items-center gap-1.5 py-1 font-mono text-label uppercase transition-colors ${
           isSectionActive || isOpen
-            ? "bg-surface-1 text-ink"
-            : "text-ink-muted hover:bg-surface-1 hover:text-ink"
+            ? "text-ink"
+            : "text-ink-2 hover:text-flame-ink"
         }`}
       >
         {link.label}
         <ChevronDownIcon
-          className={`h-4 w-4 transition-transform duration-200 ${
+          className={`h-3.5 w-3.5 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
+        {isSectionActive && (
+          <span
+            aria-hidden="true"
+            className="absolute -bottom-0.5 left-0 h-px w-full bg-flame"
+          />
+        )}
       </button>
 
       {isOpen && (
@@ -94,19 +100,17 @@ export function NavMenu({
           id={menuId}
           role="menu"
           aria-label={link.label}
-          className="absolute left-0 top-[calc(100%+8px)] z-50 w-[22rem] rounded-lg border border-hairline bg-canvas p-xs shadow-lg animate-fade-up"
+          className="absolute left-0 top-[calc(100%+13px)] z-50 w-[24rem] animate-rise border border-ink bg-paper"
         >
           <Link
             role="menuitem"
             href={link.href}
-            className="block rounded-md px-sm py-xs text-body-sm text-ink-muted transition-colors hover:bg-surface-1 hover:text-ink"
+            className="block border-b border-rule px-5 py-3 font-mono text-label uppercase text-ink-2 transition-colors hover:bg-paper-2 hover:text-ink"
           >
             Overview — all four processes
           </Link>
 
-          <div aria-hidden="true" className="my-xs h-px bg-hairline" />
-
-          {link.children?.map((child) => {
+          {link.children?.map((child, index) => {
             const isCurrent = pathname.replace(/\/+$/, "") === child.href;
             return (
               <Link
@@ -114,18 +118,23 @@ export function NavMenu({
                 role="menuitem"
                 href={child.href}
                 aria-current={isCurrent ? "page" : undefined}
-                className={`block rounded-md px-sm py-sm transition-colors ${
-                  isCurrent ? "bg-surface-1" : "hover:bg-surface-1"
+                className={`group/item flex gap-4 border-b border-rule px-5 py-4 transition-colors last:border-b-0 ${
+                  isCurrent ? "bg-paper-2" : "hover:bg-paper-2"
                 }`}
               >
-                <span className="block text-body-sm font-semibold text-ink">
-                  {child.label}
+                <span className="mt-1 font-mono text-index tnum text-flame-ink">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-                {child.summary && (
-                  <span className="mt-0.5 block text-body-sm text-ink-muted">
-                    {child.summary}
+                <span>
+                  <span className="block text-subtitle text-ink">
+                    {child.label}
                   </span>
-                )}
+                  {child.summary && (
+                    <span className="mt-1 block text-small text-ink-2">
+                      {child.summary}
+                    </span>
+                  )}
+                </span>
               </Link>
             );
           })}

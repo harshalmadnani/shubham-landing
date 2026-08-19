@@ -43,11 +43,11 @@ export function RegionSwitch({
   const active = findRegion(value);
 
   return (
-    <div className="flex flex-col gap-xs">
+    <div className="flex flex-col gap-3">
       <div
         role="radiogroup"
         aria-label="Choose your region"
-        className="inline-flex w-max rounded-full border border-hairline bg-surface-1 p-1"
+        className="inline-flex w-max border border-ink"
       >
         {regions.map((region) => {
           const isActive = region.id === value;
@@ -58,10 +58,10 @@ export function RegionSwitch({
               role="radio"
               aria-checked={isActive}
               onClick={() => onChange(region.id)}
-              className={`rounded-full px-md py-xs text-button transition-colors duration-200 ${
+              className={`border-r border-ink px-5 py-2.5 font-mono text-label uppercase transition-colors duration-200 last:border-r-0 ${
                 isActive
-                  ? "bg-primary text-on-primary"
-                  : "text-ink-muted hover:text-ink"
+                  ? "bg-ink text-paper"
+                  : "bg-transparent text-ink-2 hover:text-ink"
               }`}
             >
               {region.shortLabel}
@@ -70,7 +70,7 @@ export function RegionSwitch({
         })}
       </div>
 
-      <p className="text-body-sm text-ink-muted">
+      <p className="font-mono text-meta uppercase text-ink-3">
         Prices in {active.currencyName} ({active.currencyCode}).{" "}
         {active.taxNote}
       </p>

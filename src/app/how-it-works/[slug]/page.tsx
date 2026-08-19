@@ -5,7 +5,6 @@ import { CtaBanner } from "@/components/CtaBanner";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ProcessPage } from "@/components/ProcessPage";
-import { ScrollToTop } from "@/components/ScrollToTop";
 import { findProcess, processes } from "@/content/processes";
 import { site } from "@/content/site";
 
@@ -45,7 +44,6 @@ export default async function ProcessRoute({
         <CtaBanner />
       </main>
       <Footer />
-      <ScrollToTop />
     </div>
   );
 }

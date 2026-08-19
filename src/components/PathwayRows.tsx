@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import { ButtonLink } from "@/components/Button";
-import { CheckIcon } from "@/components/CheckIcon";
+import { Marker } from "@/components/Marker";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { RegionSwitch, readStoredRegion, storeRegion } from "@/components/RegionSwitch";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Section, SectionHead } from "@/components/Section";
 import { pathways, pathwayTotal, stageCountLabel } from "@/content/pathways";
 import type { Pathway } from "@/content/pathways";
 import { formatAmount, formatPrice } from "@/content/regions";
@@ -22,85 +21,74 @@ const stageByKey = new Map<PriceKey, PathwayStage>(
 );
 
 /**
- * The connector between two stages of a route.
- *
- * Points right when the stages sit side by side and down when they stack, so
- * it always agrees with the reading order. Decorative — the sequence is
- * already carried by the list order and by each card's step number.
- */
-function StageArrow() {
-  return (
-    <div
-      aria-hidden="true"
-      className="flex shrink-0 items-center justify-center self-center text-primary/60"
-    >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.75}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-lg w-lg rotate-90 desktop:rotate-0"
-      >
-        <path d="M5 12h14" />
-        <path d="m13 6 6 6-6 6" />
-      </svg>
-    </div>
-  );
-}
-
-/**
  * One stage of a route, priced.
  *
- * Fixed width rather than flexible: a route with one stage and a route with
- * three have to look like the same kind of thing, and a card that stretches to
- * fill its row would make the shortest route look like the biggest product.
+ * The stages of a route are cells of one ruled block rather than free-floating
+ * cards, and the order is carried by a number rather than by an arrow — an
+ * arrow has to change direction when the row wraps, and a number never does.
  */
-function StageCard({ stage, region }: { stage: PathwayStage; region: RegionId }) {
+function StageCell({
+  stage,
+  region,
+  position,
+}: {
+  stage: PathwayStage;
+  region: RegionId;
+  position: number;
+}) {
   return (
-    <div className="flex w-full flex-col rounded-lg border border-hairline bg-canvas p-lg shadow-sm desktop:w-[17rem]">
-      <p className="text-eyebrow uppercase text-ink-subtle">{stage.kind}</p>
-      <h4 className="mt-xs text-card-title font-semibold text-ink">
-        {stage.label}
-      </h4>
-      <p className="mt-xs min-h-[4.5em] text-body-sm text-ink-muted">
+    <div className="-mb-px -mr-px flex flex-col border-b border-r border-rule-2 p-6 tablet:p-7">
+      <div className="flex items-baseline justify-between gap-3">
+        <p className="font-mono text-label uppercase text-ink-3">
+          {stage.kind}
+        </p>
+        <span className="font-mono text-index tnum text-flame-ink">
+          {String(position).padStart(2, "0")}
+        </span>
+      </div>
+
+      <h4 className="mt-3 text-subtitle text-ink">{stage.label}</h4>
+
+      <p className="mt-2 text-small text-ink-2">
         <RichTextContent value={stage.body} />
       </p>
 
-      <p className="mt-md text-headline-sm text-ink">
+      <p className="mt-5 font-display text-display-sm tnum text-ink">
         {formatPrice(region, stage.priceKey)}
       </p>
 
       {/* Only two stages publish a figure, so the row holds its height rather
           than leaving a hole in the two that do not. */}
-      <p className="mt-xxs flex min-h-[1.6em] items-baseline gap-xs">
+      <p className="mt-1 flex min-h-[1.6em] items-baseline gap-2">
         {stage.stat && (
           <>
-            <span className="text-body-emphasis text-primary">{stage.stat}</span>
-            <span className="text-body-sm text-ink-muted">{stage.statLabel}</span>
+            <span className="font-mono text-label uppercase text-flame-ink">
+              {stage.stat}
+            </span>
+            <span className="text-small text-ink-2">{stage.statLabel}</span>
           </>
         )}
       </p>
 
-      <ul className="mt-md flex flex-1 flex-col gap-xs border-t border-hairline pt-md">
+      <ul className="mt-5 flex flex-1 flex-col gap-2 border-t border-rule pt-5">
         {stage.points.map((point, index) => (
-          <li key={index} className="flex gap-xs">
-            <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-            <span className="text-body-sm text-ink">
+          <li key={index} className="flex gap-3">
+            <Marker className="mt-1.5 h-2.5 w-2.5 shrink-0 text-flame" />
+            <span className="text-small text-ink">
               <RichTextContent value={point} />
             </span>
           </li>
         ))}
       </ul>
 
-      <ButtonLink
+      <a
         href={whatsAppUrl(`Hi! I'd like to know more about the ${stage.title}.`)}
-        variant="outline"
-        className="mt-lg w-full"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-6 self-start font-mono text-label uppercase text-ink transition-colors duration-200 hover:text-flame-ink"
       >
-        Ask about this stage
-      </ButtonLink>
+        <span className="link-sweep">Ask about this stage</span>
+      </a>
     </div>
   );
 }
@@ -109,7 +97,7 @@ function StageCard({ stage, region }: { stage: PathwayStage; region: RegionId })
  * One pathway: its number, the route in shorthand, who it is for, and the
  * chain of stages that makes it up.
  *
- * The total sits in the header rather than on a card, because it belongs to
+ * The total sits in the header rather than on a cell, because it belongs to
  * the route and not to any one stage — and because a reader comparing routes
  * should be able to do it from the headers alone, without adding anything up.
  */
@@ -120,55 +108,50 @@ function PathwayRow({ pathway, region }: { pathway: Pathway; region: RegionId })
     <section
       id={`pathway-${pathway.id}`}
       aria-labelledby={`pathway-${pathway.id}-title`}
-      className="rounded-xl border border-primary/20 bg-primary-soft/40 p-lg tablet:p-xl"
     >
-      <div className="flex flex-col gap-md tablet:flex-row tablet:items-start tablet:justify-between">
-        <div className="flex items-center gap-sm">
-          <span
-            aria-hidden="true"
-            className="flex h-xl w-xl shrink-0 items-center justify-center rounded-full bg-primary text-body-emphasis text-on-primary"
-          >
-            {pathway.number}
+      <div className="flex flex-col gap-4 border-b border-ink pb-5 tablet:flex-row tablet:items-end tablet:justify-between">
+        <div className="flex items-baseline gap-4">
+          <span className="font-mono text-index tnum text-flame-ink">
+            {String(pathway.number).padStart(2, "0")}
           </span>
           <div>
             <h3
               id={`pathway-${pathway.id}-title`}
-              className="text-card-title font-semibold text-ink"
+              className="font-display text-title text-ink"
             >
               Pathway {pathway.number}
             </h3>
-            <p className="mt-xxs text-eyebrow uppercase text-primary">
+            <p className="mt-1 font-mono text-label uppercase text-ink-3">
               {pathway.label}
             </p>
           </div>
         </div>
 
         <div className="tablet:text-right">
-          <p className="text-headline-sm text-ink">
+          <p className="font-display text-title tnum text-ink">
             {formatAmount(region, total)}
           </p>
-          <p className="mt-xxs text-body-sm text-ink-muted">
+          <p className="mt-1 font-mono text-meta uppercase text-ink-3">
             {stageCountLabel[pathway.stages.length]}, tax included
           </p>
         </div>
       </div>
 
-      <p className="mt-md max-w-3xl text-body-sm text-ink-muted">
+      <p className="mt-5 max-w-3xl text-body text-ink-2">
         {pathway.description}
       </p>
 
-      <div className="mt-lg flex flex-col items-stretch justify-center gap-md desktop:flex-row desktop:items-stretch desktop:gap-lg">
+      <div className="mt-8 grid overflow-hidden border-l border-t border-rule-2 tablet:grid-cols-2 desktop:grid-cols-3">
         {pathway.stages.map((key, index) => {
           const stage = stageByKey.get(key);
           if (!stage) return null;
           return (
-            <div
+            <StageCell
               key={key}
-              className="flex flex-col items-stretch gap-md desktop:flex-row desktop:gap-lg"
-            >
-              <StageCard stage={stage} region={region} />
-              {index < pathway.stages.length - 1 && <StageArrow />}
-            </div>
+              stage={stage}
+              region={region}
+              position={index + 1}
+            />
           );
         })}
       </div>
@@ -201,48 +184,49 @@ export function PathwayRows() {
   };
 
   return (
-    <section id="pathways" className="px-md pt-section tablet:px-lg">
-      <div className="mx-auto max-w-content">
-        <SectionHeading
-          eyebrow="Choose your pathway"
-          title="Pick the row that describes you"
-          lead="Each row below is a complete route from where you are today through to an offer. They differ only in the starting point — every one of them ends with your profile in front of employers — so take the one that fits and skip what you have already done."
-        />
+    <Section id="pathways" index="01" label="Choose your pathway">
+      <SectionHead
+        title={
+          <>
+            Pick the row that <em>describes you</em>
+          </>
+        }
+        lead="Each row below is a complete route from where you are today through to an offer. They differ only in the starting point — every one of them ends with your profile in front of employers — so take the one that fits and skip what you have already done."
+      />
 
-        {/* The switch sits above the figures, never below them. */}
-        <div className="mt-xl">
-          <RegionSwitch value={region} onChange={chooseRegion} />
-        </div>
-
-        <div className="mt-xl flex flex-col gap-lg">
-          {pathways.map((pathway, index) => (
-            <Reveal key={pathway.id} delay={index * 60}>
-              <PathwayRow pathway={pathway} region={region} />
-            </Reveal>
-          ))}
-        </div>
-
-        {/* What the training asks of you in return. */}
-        <Reveal delay={120}>
-          <div className="mt-lg rounded-lg bg-inverse-canvas p-lg tablet:p-xl">
-            <p className="text-eyebrow uppercase text-inverse-ink-muted">
-              What we ask in return
-            </p>
-            <dl className="mt-lg grid gap-lg tablet:grid-cols-3">
-              {commitments.map((commitment) => (
-                <div key={commitment.value}>
-                  <dt className="text-headline-sm text-inverse-ink">
-                    {commitment.value}
-                  </dt>
-                  <dd className="mt-xxs text-body-sm text-inverse-ink-muted">
-                    {commitment.label}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </Reveal>
+      {/* The switch sits above the figures, never below them. */}
+      <div className="mt-12">
+        <RegionSwitch value={region} onChange={chooseRegion} />
       </div>
-    </section>
+
+      <div className="mt-14 flex flex-col gap-20">
+        {pathways.map((pathway, index) => (
+          <Reveal key={pathway.id} delay={index * 50}>
+            <PathwayRow pathway={pathway} region={region} />
+          </Reveal>
+        ))}
+      </div>
+
+      {/* What the training asks of you in return. */}
+      <Reveal delay={100}>
+        <div className="mt-20 bg-night p-8 text-bone tablet:p-10">
+          <p className="font-mono text-label uppercase text-bone-2">
+            What we ask in return
+          </p>
+          <dl className="mt-8 grid gap-8 tablet:grid-cols-3">
+            {commitments.map((commitment) => (
+              <div key={commitment.value}>
+                <dt className="font-display text-display-sm tnum text-bone">
+                  {commitment.value}
+                </dt>
+                <dd className="mt-1 font-mono text-meta uppercase text-bone-2">
+                  {commitment.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </Reveal>
+    </Section>
   );
 }
