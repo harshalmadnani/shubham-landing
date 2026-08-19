@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-export type ButtonVariant = "primary" | "outline" | "quiet" | "onNight";
+export type ButtonVariant = "primary" | "light" | "outline" | "quiet" | "onNight";
 
 /*
  * Buttons are soft-cornered rectangles with a sentence-case label.
@@ -10,15 +10,22 @@ export type ButtonVariant = "primary" | "outline" | "quiet" | "onNight";
  * ink and everything else is quieter than it. The accent is not used as a
  * button fill — it marks position and state elsewhere, and a page where the
  * accent means two different things means nothing.
+ *
+ * `light` is the primary action on a dark section, and exists as a variant on
+ * purpose. Passing `bg-canvas text-ink` to `primary` instead looks like it
+ * works and does not: Tailwind resolves `bg-canvas` against `bg-ink` by
+ * stylesheet order rather than by the order they are written, and `bg-ink`
+ * wins — which rendered ink on ink, an invisible button, on every dark band.
  */
 const base =
   "group/btn inline-flex items-center justify-center gap-2 rounded-md px-6 py-3.5 text-label transition-colors duration-200";
 
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-ink text-canvas hover:bg-ink/85",
+  light: "bg-canvas text-ink hover:bg-chalk",
   outline: "border border-line-2 bg-transparent text-ink hover:bg-surface",
   quiet: "px-0 text-ink hover:text-accent-ink",
-  onNight: "border border-chalk/25 bg-transparent text-chalk hover:bg-night-2",
+  onNight: "border border-chalk/35 bg-transparent text-chalk hover:border-chalk/60 hover:bg-night-2",
 };
 
 function classesFor(variant: ButtonVariant, className?: string) {

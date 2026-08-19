@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ButtonLink } from "@/components/Button";
+import { Wordmark } from "@/components/Wordmark";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 import { NavMenu } from "@/components/NavMenu";
 import { consultationMessage, navLinks, site, whatsAppUrl } from "@/content/site";
@@ -26,11 +26,7 @@ function isCurrentPage(href: string, pathname: string): boolean {
 }
 
 /**
- * A short bar: the monogram, the pages, one action.
- *
- * The full wordmark lockup is 2060px wide and was being scaled down to a
- * strip of unreadable type; the monogram says the same thing at 40px and
- * leaves the row to the navigation.
+ * A short bar: the wordmark, the pages, one action.
  */
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,14 +56,7 @@ export function Header() {
       <header className="sticky top-0 z-50 border-b border-line/70 bg-canvas/85 backdrop-blur-xl">
         <div className="mx-auto flex h-header max-w-page items-center justify-between gap-8 px-6 tablet:px-8">
           <Link href="/" aria-label={site.name} className="shrink-0">
-            <Image
-              src="/logo/mark.png"
-              alt={site.name}
-              width={512}
-              height={512}
-              className="h-10 w-10 rounded-md"
-              priority
-            />
+            <Wordmark />
           </Link>
 
           <nav

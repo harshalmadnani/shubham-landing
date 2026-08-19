@@ -144,10 +144,7 @@ export default async function ProgramPage({ params }: PageProps) {
               <h2 className="mx-auto max-w-2xl text-display text-chalk text-balance">
                 Ready to talk through {program.title}?
               </h2>
-              <ButtonLink
-                href={enquiryUrl}
-                className="mt-10 bg-canvas text-ink hover:bg-chalk"
-              >
+              <ButtonLink href={enquiryUrl} variant="light" className="mt-10">
                 Chat with an advisor
               </ButtonLink>
             </div>

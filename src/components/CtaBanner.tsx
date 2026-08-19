@@ -21,7 +21,8 @@ export function CtaBanner() {
             </p>
             <ButtonLink
               href={whatsAppUrl(consultationMessage)}
-              className="mt-10 bg-canvas text-ink hover:bg-chalk"
+              variant="light"
+              className="mt-10"
             >
               Book a free consultation
             </ButtonLink>

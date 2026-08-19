@@ -43,7 +43,7 @@ export default function AboutPage() {
             <>
               <ButtonLink
                 href={whatsAppUrl(consultationMessage)}
-                className="bg-canvas text-ink hover:bg-chalk"
+                variant="light"
               >
                 Book a free consultation
               </ButtonLink>

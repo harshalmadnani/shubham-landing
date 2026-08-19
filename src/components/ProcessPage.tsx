@@ -47,10 +47,7 @@ export function ProcessPage({ content }: { content: ProcessContent }) {
               </p>
 
               <div className="mt-10 flex flex-wrap gap-3">
-                <ButtonLink
-                  href={whatsAppUrl(content.enquiry)}
-                  className="bg-canvas text-ink hover:bg-chalk"
-                >
+                <ButtonLink href={whatsAppUrl(content.enquiry)} variant="light">
                   Book a free consultation
                 </ButtonLink>
                 <ButtonLink href="/training-structure" variant="onNight">
