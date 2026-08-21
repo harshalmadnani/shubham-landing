@@ -1,119 +1,225 @@
 @import "tailwindcss";
 
 /*
- * Design tokens.
+ * SIGNAL — the design system.
  *
- * One sans, a lot of air, and a single accent. The page is built from large
- * type on quiet surfaces: no rules dividing every row, no uppercase mono
- * labels, no print furniture. Where something needs to separate from the page
- * it changes surface tone and takes a soft radius, which is what makes the
- * whole thing read as a modern product page rather than a printed document.
+ * The product sells four named routes from wherever somebody is standing to a
+ * job offer. Wayfinding design exists for exactly that problem: making a route
+ * legible at a glance, under pressure, to a stranger. So the system borrows
+ * its grammar — signage panels, route lines, interchange nodes, timetable
+ * data — rather than borrowing a template.
  *
- * Components resolve every colour, size and edge through a token below.
+ * Blue, black and white. This is an education business, so the palette is the
+ * one people already trust for it: a white ground to read on, near-black
+ * institutional bands, and one confident blue that carries every action.
+ *
+ * Four rules hold it together:
+ *   1. White is the ground. The page is white; the sunk panels and the rules
+ *      are the only greys, and both are cool rather than neutral.
+ *   2. Corners are square. A radius appears only on a route node, which is a
+ *      circle because it is a node.
+ *   3. Blue is a signal, not a decoration. It marks direction, the live state,
+ *      and the one action on the screen — nothing else. Nothing on this site
+ *      is blue merely to look nice.
+ *   4. Every text pairing clears WCAG AA with room to spare, and no token
+ *      lands on the 4.5 line.
+ *
+ * The blue is the reason this palette is easier to hold than the one before
+ * it. A saturated orange is too light to carry text, so it needed a separate
+ * darkened token for type and a separate lightened one for dark grounds. Blue
+ * at #0b5ed7 is already dark enough to be a *graphic* and a *text* colour at
+ * once (5.6:1 on the white ground), and white type sits on it at 5.8:1. One
+ * colour, three jobs, no workarounds.
+ *
+ * Components reference tokens and never raw values, so the whole identity is
+ * this block.
  */
+
 @theme {
-  /* Breakpoints. Mobile is the base; `tablet:` and `desktop:` are the only two
-     responsive prefixes used in the app. */
+  /* Two responsive prefixes, and no others anywhere in the app. */
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1180px;
 
-  /* Colour.
+  /* ---------------------------------------------------------------- colour
+     White ground, near-black signage, one blue signal. The neutrals carry a
+     faint cool bias so they read as chosen stock rather than default grey. */
+  --color-paper: #f8fafc;
+  --color-paper-sunk: #eaeff5;
+  --color-raised: #ffffff;
 
-     A near-white ground with the warmth taken out of it, near-black ink, and
-     one vermilion that only ever marks the thing you should look at next.
-     `accent-ink` is the same hue darkened to clear 4.5:1 on light surfaces and
-     is the only one allowed to set text below display size. */
-  --color-canvas: #fcfcfb;
-  --color-surface: #f3f3f1;
-  --color-surface-2: #e9e9e6;
-  --color-card: #ffffff;
+  /* The ink tiers are deliberately dark. This is a site people read to decide
+     whether to spend money on a course, often on a phone in daylight, so every
+     text token clears AA with margin rather than landing on the 4.5 line:
+     ink 17.6:1, ink-2 8.5:1, ink-3 7.2:1 on the white ground. */
+  --color-ink: #12141a;
+  --color-ink-2: #444a56;
+  /* Carries every mono label on the site, so it is the tier most worth
+     over-building. It has been 3.5:1, then 5.1:1, then 6.6:1, now 7.2:1. */
+  --color-ink-3: #4e5561;
 
-  --color-ink: #0e0e0d;
-  --color-ink-2: #52524e;
-  --color-ink-3: #6e6e69;
+  --color-rule: #dce2ea;
+  --color-rule-strong: #b6bfcc;
 
-  --color-line: #e2e2de;
-  --color-line-2: #d2d2cd;
+  /* Night — the institutional surface. Headers, footers, signage blocks.
+     Near-black rather than a navy: with a blue signal on top, a blue-black
+     ground would leave the signal nothing to be brighter than. */
+  --color-night: #151821;
+  --color-night-deep: #0d0f15;
+  --color-night-raised: #1e222c;
+  --color-night-rule: #333844;
+  --color-night-ink: #ffffff;
+  /* 7.9:1 on night and 7.1:1 on night-raised — AAA on both, where the
+     equivalent token in the previous palette managed 5.9:1 at best. */
+  --color-night-ink-2: #a6adba;
 
-  /* The inverse surface, used for whole sections rather than for cards. */
-  --color-night: #101010;
-  --color-night-2: #1c1c1b;
-  --color-night-line: #2e2e2c;
-  --color-chalk: #f7f7f5;
-  --color-chalk-2: #a2a29c;
+  /* Blue — direction, live state, the single action. */
+  --color-signal: #0b5ed7;
+  /* Blue hovers *darker*, unlike the orange it replaces. The label here is
+     white, so deepening the ground raises the label from 5.8:1 to 8.0:1
+     instead of dropping it. */
+  --color-signal-hover: #084ab0;
+  --color-signal-tint: #e7f0fd;
+  /* White, and comfortably so. This was the whole problem with the previous
+     palette: white on vermilion was 3.3:1, the worst contrast on the site and
+     on its single most important element. On blue it is 5.8:1. */
+  --color-on-signal: #ffffff;
+  /* Blue text. Deeper than --color-signal by a little, which buys margin on
+     the sunk panels (5.6:1) where the catalogue labels sit. Unlike the
+     previous palette, this token is a refinement rather than a rescue — the
+     signal blue itself already passes as text. */
+  --color-signal-text: #0a52c9;
+  /* And on the dark bands, where the signal blue is too close to the ground.
+     7.5:1 on night. */
+  --color-signal-on-night: #74a9ff;
 
-  --color-accent: #ee3b1f;
-  --color-accent-ink: #b52d0f;
-  --color-accent-soft: #fdeeea;
-  /* Legible against night, where the base accent sits under 3:1. */
-  --color-accent-bright: #ff7a5c;
+  /* WhatsApp keeps its own green — the button reads as "this opens WhatsApp"
+     only if it looks like WhatsApp. Ink label, not white: white on this green
+     is 1.98:1, which is the worst contrast a primary action can have. */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-deep: #1dbb59;
+  --color-on-whatsapp: #08301a;
 
-  /* Type.
+  /* ------------------------------------------------------------------ type
+     Three faces, three jobs. Display sets the signs, the serif is what you
+     actually read, and the mono carries every number, label and route code —
+     the timetable register. */
+  --font-display: var(--font-bricolage), "Helvetica Neue", Arial, sans-serif;
+  --font-read: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
 
-     One family doing every job. Display steps are fluid and tightly tracked —
-     at 4rem and up, default spacing is what makes a headline look dated. */
-  --font-sans: var(--font-instrument-sans), system-ui, -apple-system, sans-serif;
+  /* Fluid steps. One token per role rather than a mobile/tablet/desktop trio;
+     the clamp does the work the breakpoints used to. */
+  --text-mega: clamp(2.75rem, 7.4vw, 5.75rem);
+  --text-mega--line-height: 0.94;
+  --text-mega--letter-spacing: -0.035em;
+  --text-mega--font-weight: 800;
 
-  --text-hero: clamp(3rem, 6.6vw, 5.25rem);
-  --text-hero--line-height: 1.02;
-  --text-hero--letter-spacing: -0.035em;
-  --text-hero--font-weight: 600;
+  --text-display: clamp(2.25rem, 5vw, 3.75rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 800;
 
-  --text-display: clamp(2.5rem, 4.6vw, 3.75rem);
-  --text-display--line-height: 1.06;
-  --text-display--letter-spacing: -0.032em;
-  --text-display--font-weight: 600;
+  --text-title: clamp(1.75rem, 3.2vw, 2.625rem);
+  --text-title--line-height: 1.04;
+  --text-title--letter-spacing: -0.025em;
+  --text-title--font-weight: 700;
 
-  --text-title: clamp(1.75rem, 2.6vw, 2.25rem);
-  --text-title--line-height: 1.14;
-  --text-title--letter-spacing: -0.028em;
-  --text-title--font-weight: 600;
+  --text-subtitle: 1.375rem;
+  --text-subtitle--line-height: 1.18;
+  --text-subtitle--letter-spacing: -0.018em;
+  --text-subtitle--font-weight: 700;
 
-  --text-heading: 1.375rem;
-  --text-heading--line-height: 1.28;
-  --text-heading--letter-spacing: -0.02em;
-  --text-heading--font-weight: 600;
+  --text-card: 1.125rem;
+  --text-card--line-height: 1.25;
+  --text-card--letter-spacing: -0.012em;
+  --text-card--font-weight: 700;
 
+  /* Reading sizes are set in the serif and run a little large — this site is
+     read, not skimmed, and Newsreader carries size well. */
   --text-lead: 1.25rem;
-  --text-lead--line-height: 1.55;
-  --text-lead--letter-spacing: -0.014em;
+  --text-lead--line-height: 1.5;
+  --text-lead--letter-spacing: -0.003em;
   --text-lead--font-weight: 400;
 
   --text-body: 1.0625rem;
-  --text-body--line-height: 1.6;
-  --text-body--letter-spacing: -0.008em;
+  --text-body--line-height: 1.58;
+  --text-body--letter-spacing: 0em;
   --text-body--font-weight: 400;
 
   --text-small: 0.9375rem;
-  --text-small--line-height: 1.55;
-  --text-small--letter-spacing: -0.005em;
+  --text-small--line-height: 1.52;
+  --text-small--letter-spacing: 0.002em;
   --text-small--font-weight: 400;
 
-  /* Labels are sentence case at a normal weight — an uppercase, wide-tracked
-     eyebrow is the fastest way to make a page look ten years old. */
-  --text-label: 0.875rem;
-  --text-label--line-height: 1.3;
-  --text-label--letter-spacing: -0.005em;
-  --text-label--font-weight: 500;
+  /* Mono steps — labels, codes, prices, counts. */
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.14em;
+  --text-label--font-weight: 600;
 
-  --text-micro: 0.8125rem;
-  --text-micro--line-height: 1.4;
-  --text-micro--letter-spacing: 0em;
-  --text-micro--font-weight: 400;
+  --text-data: 0.8125rem;
+  --text-data--line-height: 1.45;
+  --text-data--letter-spacing: 0.01em;
+  --text-data--font-weight: 500;
 
-  --container-page: 1200px;
+  --text-figure: clamp(2rem, 4vw, 3rem);
+  --text-figure--line-height: 1;
+  --text-figure--letter-spacing: -0.04em;
+  --text-figure--font-weight: 600;
 
-  /* The header row, shared by the sticky bar and the mobile sheet under it. */
-  --spacing-header: 72px;
+  --text-nav: 0.8125rem;
+  --text-nav--line-height: 1.2;
+  --text-nav--letter-spacing: 0.06em;
+  --text-nav--font-weight: 600;
 
-  /* Edges. Soft, not round: a 14px card reads current, a 999px pill reads like
-     a 2019 template. The pill is kept for chips only, where it is the shape. */
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --radius-full: 9999px;
+  /* --------------------------------------------------------------- spacing
+     Named steps, spelled to avoid the container-scale names: Tailwind
+     resolves `max-w-<name>` against this namespace *before* the container
+     scale, so a `--spacing-3xl` would silently redefine `max-w-3xl`. The same
+     trap applies to xs/sm/md/lg/xl — those exist here, so use `max-w-2xl`,
+     `max-w-3xl` or an arbitrary `max-w-[…]` and never `max-w-xl`. */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 34px;
+  --spacing-xxl: 52px;
+  --spacing-xxxl: 80px;
+  --spacing-band: 116px;
 
-  --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --spacing-gutter: 22px;
+  --spacing-rail: 40px;
+  --spacing-header: 66px;
+  --spacing-node: 11px;
+
+  /* Layout */
+  --container-page: 1240px;
+  --container-text: 660px;
+
+  /* Depth is used sparingly — a raised panel lifts, nothing glows. */
+  --shadow-raise: 0 1px 0 rgb(21 23 28 / 0.06), 0 10px 26px rgb(21 23 28 / 0.07);
+  --shadow-press: 0 1px 0 rgb(21 23 28 / 0.05);
+
+  /* Motion. A wipe rather than a fade-up: signage is revealed by uncovering
+     it, and the difference is what stops the page reading like every other
+     scroll-animated site. */
+  --animate-wipe: wipe 0.72s cubic-bezier(0.2, 0.9, 0.25, 1) both;
+  --animate-rise: rise 0.66s cubic-bezier(0.2, 0.9, 0.25, 1) both;
+  --animate-draw: draw 1.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+  --animate-slide: slide 34s linear infinite;
+  --animate-blink: blink 2.4s steps(1, end) infinite;
+}
+
+@keyframes wipe {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 @keyframes rise {
@@ -123,72 +229,153 @@
   }
   to {
     opacity: 1;
-    transform: none;
+    transform: translateY(0);
   }
 }
 
-/* A link that underlines itself on hover, sweeping in from the left. */
-@utility link-sweep {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 1px;
-  transition: background-size 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+@keyframes draw {
+  from {
+    stroke-dashoffset: var(--draw-length, 1000);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 
-  &:hover {
-    background-size: 100% 1px;
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes blink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0.25;
   }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background-color: var(--color-canvas);
+    background-color: var(--color-paper);
     color: var(--color-ink);
-    font-family: var(--font-sans);
+    font-family: var(--font-read);
+    font-size: 1.0625rem;
+    line-height: 1.58;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  /* The accent word of a headline is coloured, never italicised: italic in a
-     grotesk reads as a slip rather than as emphasis. */
+  /* Display and mono are opt-in; the serif is the default because the serif
+     is what the page is mostly made of. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  /* An emphasised span inside a heading is coloured, never slanted — a display
+     italic in a grotesque reads as an accident. The colour itself is set at
+     the usage, because it depends on the ground: ink on white, blue on
+     night. Setting it here once made the accent invisible on the dark heroes. */
   h1 em,
   h2 em,
   h3 em {
     font-style: normal;
-    color: var(--color-accent-ink);
   }
 
-  /* Anchored sections sit under the sticky header without this. */
+  /* Digits line up in every table, price list and count on the site. */
+  .tabular,
+  [class*="text-data"],
+  [class*="text-figure"],
+  [class*="text-label"] {
+    font-variant-numeric: tabular-nums;
+  }
+
   :target {
-    scroll-margin-top: 6rem;
+    scroll-margin-top: calc(var(--spacing-header) + var(--spacing-xl));
   }
 
   ::selection {
-    background-color: var(--color-accent);
-    color: var(--color-canvas);
+    background-color: var(--color-signal);
+    color: var(--color-on-signal);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-signal);
     outline-offset: 3px;
-    border-radius: var(--radius-sm);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
+  /* Keyboard users reach the content without tabbing the whole header. */
+  .skip-link {
+    position: absolute;
+    left: var(--spacing-gutter);
+    top: -100px;
+    z-index: 100;
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+    transition: top 0.15s ease;
+  }
 
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
+  .skip-link:focus {
+    top: var(--spacing-sm);
+  }
+}
+
+@utility rule-line {
+  /* The hairline that runs between and beside things. It is a route line, so
+     it is drawn in ink at low opacity rather than in a grey. */
+  background-color: var(--color-rule);
+}
+
+@utility node-dot {
+  /* An interchange marker sitting on a route line. */
+  width: var(--spacing-node);
+  height: var(--spacing-node);
+  border-radius: 999px;
+  background-color: var(--color-signal);
+  box-shadow: 0 0 0 3px var(--color-paper);
+}
+
+@utility panel-night {
+  background-color: var(--color-night);
+  color: var(--color-night-ink);
+}
+
+@utility text-stroke-signal {
+  -webkit-text-stroke: 1.5px var(--color-signal);
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

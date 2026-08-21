@@ -1,28 +1,39 @@
 import { ButtonLink } from "@/components/Button";
 import { consultationMessage, ctaBanner, whatsAppUrl } from "@/content/site";
 
-/** The closing ask, given a full section of its own. */
+/**
+ * The closing ask: a night terminus with the destination set large.
+ *
+ * The oversized outline word behind it is the same terminus label the route
+ * board ends on, so the page closes on the word it opened by promising.
+ */
 export function CtaBanner() {
   return (
-    <section id="cta-banner" className="bg-canvas">
-      <div className="mx-auto w-full max-w-page px-6 pb-24 tablet:px-8 tablet:pb-32">
-        <div className="relative overflow-hidden rounded-lg bg-night px-8 py-20 text-center tablet:px-16 tablet:py-28">
-          <div
+    <section id="cta" className="mt-band">
+      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
+        <div className="relative overflow-hidden border border-night bg-night px-lg py-xxxl tablet:px-xxl">
+          <span
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-32 left-1/2 h-96 w-[42rem] -translate-x-1/2 rounded-full bg-accent/25 blur-3xl"
-          />
+            className="pointer-events-none absolute -right-6 bottom-[-3.5rem] select-none font-display text-[13rem] font-extrabold leading-none tracking-tighter text-transparent [-webkit-text-stroke:1.5px_var(--color-night-raised)] tablet:text-[20rem]"
+          >
+            Hired
+          </span>
 
-          <div className="relative mx-auto max-w-2xl">
-            <h2 className="text-display text-chalk text-balance">
+          <div className="relative max-w-[34ch]">
+            <p className="flex items-center gap-sm font-mono text-label uppercase text-night-ink-2">
+              <span
+                aria-hidden="true"
+                className="h-[7px] w-[7px] rounded-full bg-signal"
+              />
+              Next departure
+            </p>
+            <h2 className="mt-lg text-display text-night-ink">
               {ctaBanner.heading}
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-lead text-chalk-2">
-              {ctaBanner.body}
-            </p>
+            <p className="mt-md text-lead text-night-ink-2">{ctaBanner.body}</p>
             <ButtonLink
               href={whatsAppUrl(consultationMessage)}
-              variant="light"
-              className="mt-10"
+              className="mt-xl"
             >
               Book a free consultation
             </ButtonLink>

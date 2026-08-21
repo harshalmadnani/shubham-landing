@@ -3,12 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ButtonLink } from "@/components/Button";
+import { Marker } from "@/components/CheckIcon";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { ArrowRightIcon } from "@/components/icons";
-import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { Section, SectionHead } from "@/components/Section";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { SectionHeading } from "@/components/SectionHeading";
 import {
   countTopics,
   findProgramDetail,
@@ -48,111 +48,132 @@ export default async function ProgramPage({ params }: PageProps) {
 
   const enquiryUrl = whatsAppUrl(programEnquiryMessage(program.title));
 
-  const facts = [
-    { value: `${program.hours}`, label: "hours of live training" },
-    { value: `${program.modules.length}`, label: "modules" },
-    { value: `${countTopics(program)}`, label: "topics covered" },
-  ];
-
   return (
     <div className="flex flex-1 flex-col">
       <Header />
 
-      <main className="flex flex-1 flex-col">
-        <div className="mx-auto w-full max-w-page px-6 pt-10 tablet:px-8">
-          <Link
-            href="/programs"
-            className="group inline-flex items-center gap-2 text-micro text-ink-2 transition-colors hover:text-ink"
-          >
-            <ArrowRightIcon className="h-4 w-4 rotate-180 transition-transform duration-200 group-hover:-translate-x-1" />
-            All programs
-          </Link>
-        </div>
+      <main id="main" className="flex flex-1 flex-col">
+        <section>
+          <div className="mx-auto max-w-page border-b border-ink px-gutter pb-xxl pt-xl tablet:px-rail">
+            <Link
+              href="/programs"
+              className="-my-xs inline-flex items-center gap-xs py-xs font-mono text-nav uppercase text-ink-2 transition-colors hover:text-signal-text"
+            >
+              <span aria-hidden="true">←</span>
+              All programmes
+            </Link>
 
-        <PageHero
-          label={program.category}
-          title={program.title}
-          lead={program.description}
-          actions={
-            <ButtonLink href={enquiryUrl}>Chat with an advisor</ButtonLink>
-          }
-        />
+            <p className="mt-xl flex items-center gap-sm font-mono text-label uppercase text-ink-3">
+              <span
+                aria-hidden="true"
+                className="h-[7px] w-[7px] rounded-full bg-signal"
+              />
+              {program.category}
+            </p>
 
-        <Section tone="surface">
-          <dl className="grid gap-10 tablet:grid-cols-3">
-            {facts.map((fact) => (
-              <div key={fact.label}>
-                <dt className="text-display text-ink">{fact.value}</dt>
-                <dd className="mt-3 text-small text-ink-2">{fact.label}</dd>
-              </div>
-            ))}
-          </dl>
-        </Section>
+            <h1 className="mt-lg max-w-[22ch] text-display text-ink">
+              {program.title}
+            </h1>
+            <p className="mt-lg max-w-[56ch] text-lead text-ink-2">
+              {program.description}
+            </p>
 
-        <Section label="Curriculum">
-          <SectionHead
-            title={
-              <>
-                A module-by-module <em>breakdown</em>
-              </>
-            }
-            lead="Everything covered in the program, in the order you'll cover it."
-          />
+            <dl className="mt-xl grid gap-lg tablet:grid-cols-4">
+              {[
+                { v: String(program.hours), l: "hours of live training" },
+                { v: String(program.modules.length), l: "modules, taught in order" },
+                { v: String(countTopics(program)), l: "topics covered" },
+                { v: "Yes", l: "certificate on completion" },
+              ].map((fact) => (
+                <div key={fact.l} className="border-t-2 border-signal pt-sm">
+                  <dt className="font-mono text-figure text-ink">{fact.v}</dt>
+                  <dd className="mt-xs max-w-[22ch] text-small text-ink-2">
+                    {fact.l}
+                  </dd>
+                </div>
+              ))}
+            </dl>
 
-          <div className="mt-16 flex flex-col gap-4 desktop:gap-6">
-            {program.modules.map((module, index) => (
-              <Reveal key={module.title}>
-                <article className="rounded-lg bg-surface p-8 tablet:p-10">
-                  <div className="flex flex-wrap items-baseline justify-between gap-4">
-                    <h3 className="text-title">
-                      <span className="mr-3 text-ink-3">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      {module.title}
-                    </h3>
-                    <span className="text-micro text-ink-3">
-                      {module.hours} hours
-                    </span>
-                  </div>
-
-                  <p className="mt-4 max-w-2xl text-body text-ink-2">
-                    {module.summary}
-                  </p>
-
-                  {/* Topics as chips: a module can carry a dozen of them, and
-                      a dozen bulleted lines per module is what made this page
-                      read as a wall of text. */}
-                  <ul className="mt-6 flex flex-wrap gap-2">
-                    {module.topics.map((topic) => (
-                      <li
-                        key={topic}
-                        className="rounded-full bg-canvas px-3.5 py-1.5 text-micro text-ink-2"
-                      >
-                        {topic}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              </Reveal>
-            ))}
+            <div className="mt-xl flex flex-wrap gap-sm">
+              <ButtonLink href={enquiryUrl}>Chat with an advisor</ButtonLink>
+              <ButtonLink href="/training-structure" variant="outline">
+                See the four routes
+              </ButtonLink>
+            </div>
           </div>
-        </Section>
+        </section>
 
-        <section className="bg-canvas">
-          <div className="mx-auto w-full max-w-page px-6 pb-24 tablet:px-8 tablet:pb-32">
-            <div className="rounded-lg bg-night px-8 py-20 text-center tablet:px-16">
-              <h2 className="mx-auto max-w-2xl text-display text-chalk text-balance">
+        <section className="mt-xxxl">
+          <div className="mx-auto max-w-page px-gutter tablet:px-rail">
+            <SectionHeading
+              label="Curriculum"
+              title="A module-by-module breakdown"
+              lead="Everything covered in the programme, in the order you will cover it."
+            />
+
+            <div className="mt-xxl border-t border-ink">
+              {program.modules.map((module, index) => (
+                <Reveal key={module.title}>
+                  <div className="border-b border-rule py-lg desktop:grid desktop:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] desktop:gap-xxl desktop:py-xl">
+                    <div>
+                      <div className="flex items-baseline gap-sm">
+                        <span
+                          aria-hidden="true"
+                          className="font-mono text-label text-signal-text"
+                        >
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <h3 className="text-subtitle text-ink">
+                          {module.title}
+                        </h3>
+                      </div>
+                      <p className="mt-xs font-mono text-data text-ink-3">
+                        {module.hours} hours
+                      </p>
+                      <p className="mt-sm max-w-[42ch] text-small text-ink-2">
+                        {module.summary}
+                      </p>
+                    </div>
+
+                    <ul className="mt-lg grid gap-x-xl gap-y-xs desktop:mt-0 tablet:grid-cols-2">
+                      {module.topics.map((topic) => (
+                        <li key={topic} className="flex items-start gap-sm">
+                          <Marker />
+                          <span className="text-small text-ink">{topic}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-band">
+          <div className="mx-auto max-w-page px-gutter tablet:px-rail">
+            <div className="panel-night border-l-2 border-signal p-lg tablet:p-xxl">
+              <p className="font-mono text-label uppercase text-night-ink-2">
+                Next departure
+              </p>
+              <h2 className="mt-lg max-w-[26ch] text-title text-night-ink">
                 Ready to talk through {program.title}?
               </h2>
-              <ButtonLink href={enquiryUrl} variant="light" className="mt-10">
+              <p className="mt-md max-w-[52ch] text-lead text-night-ink-2">
+                No pressure and no commitment — a real conversation about your
+                goals and whether this programme fits them.
+              </p>
+              <ButtonLink href={enquiryUrl} className="mt-xl">
                 Chat with an advisor
               </ButtonLink>
             </div>
           </div>
         </section>
+
       </main>
 
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { PathwayRows } from "@/components/PathwayRows";
 import { QuoteProcess } from "@/components/QuoteProcess";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { StructureHero } from "@/components/StructureHero";
 import { site } from "@/content/site";
 import { structureFaqs } from "@/content/trainingStructure";
@@ -20,23 +21,20 @@ export default function TrainingStructurePage() {
   return (
     <div className="flex flex-1 flex-col">
       <Header />
-      <main className="flex flex-1 flex-col">
+      <main id="main" className="flex flex-1 flex-col">
         <StructureHero />
         <PathwayRows />
         <QuoteProcess />
         <Faq
           items={structureFaqs}
           label="Structure FAQ"
-          title={
-            <>
-              Questions about <em>how it runs</em>
-            </>
-          }
-          lead="Scheduling, attendance, payment and what each stage covers."
+          title="Questions about how it runs"
+          lead="Scheduling, attendance, payment and what each stop covers."
         />
         <CtaBanner />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

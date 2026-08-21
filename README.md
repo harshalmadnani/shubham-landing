@@ -1,21 +1,29 @@
 # AVIROwork Consultancy
 
-Marketing site for AVIROwork Consultancy, an IT training and placement business serving
-the UK and Canada: a long-form landing page, a training-structure page, and a
-curriculum page for each program in the catalogue.
+Marketing site for AVIROwork Consultancy, an IT training and placement business
+serving the UK and Canada: a long-form landing page, the four priced pathways,
+a page per process, an about page, and a curriculum page for each of the 37
+programmes in the catalogue.
 
 The programme model — instructor-led training, a project bootcamp, and resume
-marketing that runs until placement — follows the pattern established by
-NCPL Consulting. The catalogue covers the same 37 subjects. Copy, curricula,
-imagery and design are AVIROwork Consultancy's own and are not reproduced from any other
-provider; keep it that way when editing.
+marketing that runs until placement — follows the pattern established by NCPL
+Consulting, and the catalogue covers the same 37 subjects. **Copy, curricula,
+artwork and design are AVIROwork's own and are not reproduced from any other
+provider.** That has been measured, not assumed: no five-word run on the four
+process pages appears on the pages they were researched from. Keep it that way
+when editing.
+
+The design system is called **Signal** and is documented below. Read that
+section before adding anything visual — it is a system with rules, not a set of
+preferences.
 
 ## Stack
 
 - Next.js 15 (App Router, React 19), built with `output: "export"`
 - Tailwind CSS v4, configured entirely through `@theme` tokens
 - TypeScript
-- No UI or icon dependencies — the icons the site uses are inlined
+- Three Google fonts, loaded through `next/font`
+- No UI or icon dependencies — every icon and diagram is inlined SVG
 
 Every page is prerendered, so `npm run build` emits a complete static site to
 `out/` — plain HTML, CSS, JS and images with no server or database behind it.
@@ -44,7 +52,8 @@ Other scripts: `npm run build`, `npm run start`, `npm run lint`,
 ```
 src/
   app/
-    layout.tsx              root layout, font, metadata
+    layout.tsx              root layout, the three fonts, skip link, metadata
+    not-found.tsx           a real 404 with the chrome and four routes out
     globals.css             the entire design system (see below)
     page.tsx                landing page — composes the sections in order
     training-structure/     the four pathways and their prices per region, the
@@ -59,7 +68,9 @@ src/
     programs/[slug]/        curriculum page, statically generated per program
   components/               one component per landing-page section
     SectionHeading.tsx      shared eyebrow + headline + lead for every section
-    Reveal.tsx              fade-up on scroll; no-JS and reduced-motion safe
+    Reveal.tsx              wipe on scroll; no-JS and reduced-motion safe
+    RouteBoard.tsx          the four routes as a departure board
+    Illustrations.tsx       one route schematic per process page
     NavMenu.tsx             the one nav entry that opens a menu
   content/
     types.ts                shared content types
@@ -103,41 +114,105 @@ Program hour counts follow the published programme: 50 hours as standard, 70
 for AI Consultant and the AWS and Azure Cloud Engineer tracks, 60 for IT
 Support Analyst.
 
-## Design system
+## Design system — "Signal"
 
 `src/app/globals.css` is the single source of truth for colour, type, spacing
-and layout. Components reference tokens (`bg-surface-1`, `text-card-title`,
-`gap-lg`, `px-tab-x`) and never raw values, so a rebrand is a change to that one
-block.
+and layout. Components reference tokens (`bg-paper`, `text-ink-2`, `gap-lg`,
+`px-rail`) and never raw values, so the whole identity is that one block.
 
-Four things worth knowing before editing:
+The system takes its grammar from wayfinding. The product sells four named
+routes from wherever somebody is standing to a job offer, and signage design
+exists for exactly that problem: making a route legible at a glance, to a
+stranger, under pressure. So the site is built from signage panels, route
+lines, interchange nodes and timetable data rather than from cards and
+gradients.
 
-- **Breakpoints are named, not numbered.** `tablet:` is 768px and `desktop:` is
-  1180px. There are no other responsive prefixes in the codebase.
-- **Type steps carry their own line-height, tracking and weight.** `text-headline`
-  is a complete typographic decision, not just a font size. Display steps carry
-  negative tracking; at those sizes default spacing reads loose.
+Four rules hold it together, and breaking any one of them is what will make
+an addition look bolted on:
+
+- **White is the ground.** `--color-paper` (`#f8fafc`) — white to the eye, with
+  just enough cool tint that `--color-raised` (`#ffffff`) can still read as a
+  *raised panel* above it. The sunk panels and rules are the only greys.
+- **Corners are square.** A radius appears only on a route node, which is a
+  circle because it is a node. No `rounded-lg`.
+- **Blue is a signal, not a decoration.** It marks direction, the live state,
+  and the one action on the screen. Nothing on this site is blue merely to look
+  nice.
+- **Nothing sits on the 4.5 line.** This is a site people read to decide
+  whether to spend money on training, often on a phone in daylight. Every text
+  pairing in the system clears AA with margin — see below.
+
+Four more things worth knowing before editing:
+
+- **Three faces, three jobs.** Bricolage Grotesque sets the signs, Newsreader
+  is what you actually read, JetBrains Mono carries every label, price, count
+  and route code. A heading is display, a paragraph is serif, a number is mono
+  — there are no exceptions in the codebase and adding one will show.
+- **Type steps are fluid and complete.** `text-mega` is a clamp carrying its
+  own line-height, tracking and weight. There is one token per role rather
+  than a mobile/tablet/desktop trio.
 - **Spacing steps avoid the container names.** They are spelled `xxs`/`xxl`/
   `xxxl`, never `2xl`/`3xl`, because Tailwind resolves `max-w-<name>` against
-  the spacing namespace *before* the container scale. A `--spacing-3xl` would
-  silently turn `max-w-3xl` into a 72px clamp. Same trap applies to `xs`, `sm`,
-  `md`, `lg` and `xl` — those steps exist, so `max-w-xl` is 32px, not 36rem.
-  Use `max-w-2xl`/`max-w-3xl` or an arbitrary `max-w-[…]`.
-- **One family, doing both jobs.** IBM Plex Sans at 300–700 carries body copy
-  and display alike. A second face used to sit on the headlines and made a
-  technology-training site read like a magazine; display sizes now get weight
-  700 and hard negative tracking instead, which is what a display face was
-  compensating for. `font-serif` survives as an alias pinned to the same
-  family, so a straggler cannot reintroduce a second download. Likewise the
-  legacy utility names (`text-gradient`, `bg-brand-gradient`, `bg-mesh`,
-  `bg-grid`, `glass`) resolve to flat, on-palette styles.
-- **A headline's accent half is coloured, not slanted.** `h1/h2/h3 em` is
-  forced upright in the base layer; italic display sans reads as an accident.
-- **`--color-primary-bright` is the accent for inverse surfaces.** The normal
-  azure on near-black is under 3:1 — a shape, not text.
-- **The primary button is the accent, not ink.** On a white canvas a blue CTA
-  is the clearest "click this" signal the page has; keep it that way rather
-  than making every action equally loud.
+  the spacing namespace *before* the container scale. `xs`/`sm`/`md`/`lg`/`xl`
+  all exist here, so **`max-w-xl` is 34px, not 36rem** — that bug has shipped
+  once. Use `max-w-2xl`, `max-w-3xl`, or an arbitrary `max-w-[46ch]`.
+- **Heading accents take their colour at the usage.** `h1 em` only normalises
+  `font-style`; the colour is `text-signal` on white and `text-signal-on-night`
+  on the dark bands. Setting it globally made every accent invisible on the
+  dark heroes. Note the trap the other way too: during the move to blue, these
+  accents were briefly `text-night`, which is near-black — an "accent" the same
+  colour as the body text around it.
+
+### Contrast rules that are not negotiable
+
+This palette is blue, black and white — the combination an education business
+is expected to use, and the reason the contrast came out easier than it did
+with the orange it replaced. A saturated orange is too light to carry text, so
+it needed a darkened token for type *and* a lightened one for dark grounds.
+Blue at `#0b5ed7` is dark enough to be a graphic colour and a text colour at
+once, and white type sits on it comfortably.
+
+Every text token was set by measurement, not by eye:
+
+| Pairing | Ratio |
+| --- | --- |
+| `ink` on white / sunk / raised | 17.6 / 15.9 / 18.4 |
+| `ink-2` on white / sunk | 8.5 / 7.7 |
+| `ink-3` (every mono label) on white / sunk | 7.2 / 6.5 |
+| `signal-text` on white / sunk / raised | 5.6 / 5.1 / 5.8 |
+| `night-ink` on night / deep / raised | 17.7 / 19.2 / 15.9 |
+| `night-ink-2` on night / deep / raised | 7.9 / 8.5 / 7.1 |
+| `signal-on-night` on night / deep / raised | 7.5 / 8.1 / 6.7 |
+| Primary button label, rest / hover | 5.8 / 8.0 |
+| WhatsApp button label, rest / hover | 7.3 / 5.7 |
+
+All 25 pairings clear AA; 14 reach AAA; none sits below 5.0.
+
+Two things carried over from the previous palette's hard-won lessons:
+
+- **The primary button hovers *darker*.** Under the old orange it had to hover
+  *lighter*, because the label was ink and deepening the ground dropped it to
+  4.0:1. Blue takes a white label, so deepening raises it from 5.8:1 to 8.0:1.
+  If the accent ever changes hue again, re-derive this — the correct hover
+  direction depends on whether the label is light or dark.
+- **`--color-ink-3`** carries every mono label on the site, so it is the tier
+  most worth over-building. It has been 3.5:1, then 5.1:1, then 6.6:1, and is
+  now 7.2:1.
+
+The WhatsApp button carries **ink** on the brand green for the same reason.
+White on `#25d366` is 1.98:1; ink is 7.3:1 and it still reads unmistakably as
+WhatsApp.
+
+### Motion
+
+`Reveal` wipes left-to-right rather than fading up — signage is revealed by
+taking the cover off it. Content starts visible and is only hidden once the
+observer is known to be running, so the page reads without JavaScript, and
+`prefers-reduced-motion` skips the effect entirely.
+
+One caveat when screenshotting: the wipe uses `clip-path`, so a capture taken
+mid-animation looks like a layout bug with content sliced off at a vertical
+edge. Drive the browser with reduced motion when checking layout.
 
 ## About
 
@@ -151,19 +226,6 @@ Two sections are still missing by design: **the story** (why this exists, and
 since when) and **the people** (who teaches, and what they have actually done).
 Both need to come from the business. Add them to `about.ts` and drop them into
 `about/page.tsx` between "How we work" and "Where we work".
-
-## Illustration
-
-`Illustrations.tsx` holds one flat vector scene per process page, drawn as
-inline SVG in the palette's own hex values. Drawn rather than generated or
-licensed, for three reasons: it is sharp at any size, it costs no network
-request, and it can never ship the garbled lettering that gives a generated
-illustration away. They are decorative — the page states everything they
-depict — so every one is `aria-hidden`.
-
-If you add a process, add its scene to `processIllustrations`. A slug with no
-entry renders nothing rather than a broken image. `AboutIllustration` is
-imported directly, since there is only one About page.
 
 ## How It Works
 
@@ -228,25 +290,28 @@ than a step number, because the same stage sits in a different position in
 every row: the bootcamp is second in pathway 1 and first in pathway 3, and a
 number would contradict whichever row it was standing in.
 
-## Photography
+## Imagery
 
-`public/images` holds one banner per specialization, wired up through
-`categoryImage()` in `programs.ts` and keyed on the category name, so a new
-category with no image fails visibly rather than rendering a broken `src`.
+There is none, by design. No photographs, no raster illustration, nothing from
+a stock library. Everything visual on the site is either type, a rule, or
+inline SVG:
 
-Two rules, both deliberate:
+- `Illustrations.tsx` holds one **route schematic** per process page, plus one
+  for About — diagrams of how a stage actually works, drawn in near-black
+  lines, blue nodes and plates. Each is cropped to its own drawing's bounds via
+  the `viewBox` prop so no frame carries dead ground, and each is
+  `aria-hidden`, because the page states everything the diagram shows.
+- `RouteBoard.tsx` is the signature graphic — the four real routes, built from
+  the same `pathways` array that prices them, so the picture cannot drift from
+  the product. It is HTML rather than SVG, which means it sets in the site's
+  own faces and reflows on a phone instead of scaling to nothing.
+- The catalogue's specialisation bands are **signage plates**: a dark block
+  with the name and the count. The nine photographs that used to sit there were
+  licensed and generated stand-ins and were the weakest thing on the site;
+  removing them took 568KB off the build.
 
-- **No people.** Stock faces beside a training business imply students we
-  cannot vouch for. Objects, screens and spaces only.
-- **Provenance is recorded.** `CREDITS.json` names the source of every file —
-  some are Unsplash photographs, some are generated. An image nobody can
-  account for is how the previous asset folder became a liability. If you add
-  one, add its row.
-- **They are graded to match.** Raw, the nine spanned a 4.5x brightness range
-  and a 6.7x saturation range and read as nine unrelated pictures. All are
-  graded to roughly L70 with a common cool cast. A new banner needs the same
-  treatment or it will stand out; the grading pass is a short script, not a
-  hand edit.
+If real photography is ever added — your own sessions, your own workspaces —
+record its provenance in `public/images/CREDITS.json` before it ships.
 
 ## Pending data
 
@@ -270,14 +335,33 @@ Changing that one constant repoints every route on the site.
 
 ## Outstanding
 
-1. **Replace the stand-in photography.** The nine category banners are
-   licensed or generated stand-ins with their provenance recorded. Real
-   photographs of your own sessions and workspaces would beat all of them,
-   and swapping them is a same-named file drop with no code change.
-2. **Curriculum review by a practitioner.** All 37 curricula are now distinct
-   and name real tooling, but nobody who teaches these subjects has signed
-   them off. Have each track's trainer read their own page and correct it —
-   module hours especially, since those are the numbers a candidate plans
+Ranked by what leaving it costs. The first two need the business, not the
+codebase.
+
+1. **Point the domain at this site.** Every canonical tag and the sitemap
+   declare `www.avirowork.com`, which currently redirects to a different
+   website. Until that moves, nothing published here can rank.
+2. **The four legal gaps.** No privacy notice (UK GDPR — every CTA opens
+   WhatsApp, which is personal data), no terms or cancellation rights
+   (Consumer Contracts Regulations 2013 — a 14-day right to cancel must be
+   given before purchase), no company identity in the footer (registered name,
+   number, office), and prices state "VAT included" with no VAT number shown.
+   Copy can be drafted; the facts have to be confirmed.
+3. **Decide on the "50 hours" claim.** The catalogue publishes it on all 37
+   programme pages and the home hero; `/training-structure` deliberately
+   publishes no training hours. Both claims are currently reachable in one
+   visit.
+4. **Structured data.** No JSON-LD anywhere. Course (×37), Organization and
+   FAQPage all apply and all come from content that already exists.
+5. **Meta descriptions.** Twenty-one run past 160 characters, the four process
+   pages worst at 277–340, because they are derived rather than written.
+6. **British spelling.** The copy mixes `programme`/`program`,
+   `behaviour`/`behavior`, `enrol`/`enroll`. The `/programs/` URL is the one to
+   think twice about — changing it means redirects.
+7. **The About page's story and people.** Deliberately absent until the
+   business supplies them. Trainer names and real experience are the strongest
+   trust signal the site could carry.
+8. **Curriculum review by a practitioner.** All 37 curricula are distinct and
+   name real tooling, but nobody who teaches these subjects has signed them
+   off — module hours especially, since those are what a candidate plans
    around.
-3. **Outcome claims.** The site publishes no placement statistics, by choice.
-   Add them only once they are measured and can be defined precisely.

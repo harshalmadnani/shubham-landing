@@ -1,60 +1,69 @@
 import { ButtonLink } from "@/components/Button";
-import { ArrowRightIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
+import { RouteBoard } from "@/components/RouteBoard";
+import { Ticker } from "@/components/Ticker";
 import { proofPoints } from "@/content/sections";
 import { consultationMessage, hero, whatsAppUrl } from "@/content/site";
 
 /**
- * The opening screen: a headline, a sentence, two actions.
+ * The hero is a sign, and the board beside it is the proposition.
  *
- * Everything else that used to live here — the figures table, the logo wall —
- * has moved to sections of its own further down. The first screen sells one
- * idea, and it can only do that if it is the only thing on it.
+ * No decorative scene: the graphic on the right is the four real routes,
+ * generated from the same data that prices them. The claim and the evidence
+ * for the claim are the same object.
  */
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-canvas">
-      {/* A single soft wash behind the type, warm side up. It is the only
-          gradient in the system and it never sits under body copy. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-40 left-1/2 h-[38rem] w-[70rem] -translate-x-1/2 rounded-full bg-accent-soft blur-3xl"
-      />
-
-      <div className="relative mx-auto w-full max-w-page px-6 pb-24 pt-20 tablet:px-8 tablet:pb-32 tablet:pt-28">
-        <p className="inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5 text-micro text-ink-2 ring-1 ring-line">
-          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
-          {hero.eyebrow}
-        </p>
-
-        <h1 className="mt-8 max-w-4xl text-hero text-balance">
-          {hero.headline} <em>{hero.headlineAccent}</em>
-        </h1>
-
-        <p className="mt-8 max-w-xl text-lead text-ink-2">{hero.body}</p>
-
-        <div className="mt-10 flex flex-wrap items-center gap-3">
-          <ButtonLink href={whatsAppUrl(consultationMessage)}>
-            Book a free consultation
-          </ButtonLink>
-          <ButtonLink href="/programs" variant="outline">
-            Browse programs
-            <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
-          </ButtonLink>
-        </div>
-
-        <ul className="mt-20 grid gap-8 tablet:grid-cols-3 tablet:gap-10">
-          {proofPoints.map((point, index) => (
-            <li key={index} className="flex gap-3 text-body text-ink-2">
+    <section id="hero">
+      <div className="mx-auto max-w-page px-gutter pt-xxl tablet:px-rail tablet:pt-xxxl">
+        <div className="grid items-end gap-xxl desktop:grid-cols-[1.05fr_minmax(0,0.95fr)]">
+          <div>
+            <p className="flex items-center gap-sm font-mono text-label uppercase text-ink-3">
               <span
                 aria-hidden="true"
-                className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                className="h-[7px] w-[7px] rounded-full bg-signal"
               />
-              <RichTextContent value={point} />
+              {hero.eyebrow}
+            </p>
+
+            <h1 className="mt-lg text-mega text-ink">
+              {hero.headline}{" "}
+              <em className="text-signal">{hero.headlineAccent}</em>
+            </h1>
+
+            <p className="mt-xl max-w-[46ch] text-lead text-ink-2">
+              {hero.body}
+            </p>
+
+            <div className="mt-xl flex flex-wrap gap-sm">
+              <ButtonLink href={whatsAppUrl(consultationMessage)}>
+                Book a free consultation
+              </ButtonLink>
+              <ButtonLink href="/programs" variant="outline">
+                Browse 37 programmes
+              </ButtonLink>
+            </div>
+          </div>
+
+          <RouteBoard />
+        </div>
+
+        {/* Three claims, on the rule that closes the hero. */}
+        <ul className="mt-xxxl grid gap-lg border-t border-ink pt-lg tablet:grid-cols-3">
+          {proofPoints.map((point, index) => (
+            <li key={index} className="flex gap-sm">
+              <span className="font-mono text-label text-signal-text">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="text-small text-ink-2">
+                <RichTextContent value={point} />
+              </span>
             </li>
           ))}
         </ul>
       </div>
+
+      <Ticker />
     </section>
   );
 }

@@ -5,12 +5,10 @@ import { ButtonLink } from "@/components/Button";
 import { CtaBanner } from "@/components/CtaBanner";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { ArrowRightIcon } from "@/components/icons";
 import { processIllustrations } from "@/components/Illustrations";
-import { PageHero } from "@/components/PageHero";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
-import { Section } from "@/components/Section";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { processIndex, processes } from "@/content/processes";
 import { consultationMessage, site, whatsAppUrl } from "@/content/site";
 
@@ -31,68 +29,88 @@ export default function HowItWorksPage() {
   return (
     <div className="flex flex-1 flex-col">
       <Header />
-      <main className="flex flex-1 flex-col">
-        <PageHero
-          label={processIndex.eyebrow}
-          title={
-            <>
-              {processIndex.headline} <em>{processIndex.headlineAccent}</em>
-            </>
-          }
-          lead={processIndex.body}
-          actions={
-            <>
+      <main id="main" className="flex flex-1 flex-col">
+        <section>
+          <div className="mx-auto max-w-page border-b border-ink px-gutter pb-xxl pt-xxl tablet:px-rail tablet:pt-xxxl">
+            <p className="flex items-center gap-sm font-mono text-label uppercase text-ink-3">
+              <span
+                aria-hidden="true"
+                className="h-[7px] w-[7px] rounded-full bg-signal"
+              />
+              {processIndex.eyebrow}
+            </p>
+
+            <h1 className="mt-lg max-w-[22ch] text-mega text-ink">
+              {processIndex.headline}{" "}
+              <em className="text-signal">{processIndex.headlineAccent}</em>
+            </h1>
+
+            <p className="mt-xl max-w-[52ch] text-lead text-ink-2">
+              {processIndex.body}
+            </p>
+
+            <div className="mt-xl flex flex-wrap gap-sm">
               <ButtonLink href={whatsAppUrl(consultationMessage)}>
-                Book free consultation
+                Book a free consultation
               </ButtonLink>
               <ButtonLink href="/training-structure" variant="outline">
-                See the four pathways
-                <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
+                See the four routes
               </ButtonLink>
-            </>
-          }
-        />
+            </div>
+          </div>
+        </section>
 
-        <Section label="The four processes" tone="surface">
-          <div className="grid gap-4 tablet:grid-cols-2 desktop:gap-6">
+        <section className="mt-xxxl">
+          <div className="mx-auto grid max-w-page gap-px border border-rule bg-rule px-0 tablet:grid-cols-2">
             {processes.map((process, index) => {
               const Illustration = processIllustrations[process.slug];
               return (
-                <Reveal key={process.slug} delay={(index % 2) * 60}>
+                <Reveal key={process.slug} delay={index * 70} className="h-full">
                   <Link
                     href={`/how-it-works/${process.slug}`}
-                    className="group flex h-full flex-col rounded-lg bg-card p-8 transition-colors duration-200 hover:bg-surface-2 tablet:p-10"
+                    className="group flex h-full flex-col bg-paper transition-colors duration-200 hover:bg-raised"
                   >
-                    <p className="text-micro text-ink-3">{process.eyebrow}</p>
-
-                    <h2 className="mt-4 text-title transition-colors duration-200 group-hover:text-accent-ink">
-                      {process.headline} <em>{process.headlineAccent}</em>
-                    </h2>
-
-                    <p className="mt-4 text-small text-ink-2">
-                      <RichTextContent value={process.lead} />
-                    </p>
-
                     {Illustration && (
-                      <div className="mt-10 text-ink-3">
+                      <div className="border-b border-rule">
                         <Illustration className="w-full" />
                       </div>
                     )}
 
-                    <span className="mt-10 inline-flex items-center gap-2 text-label text-ink">
-                      Read the {process.navLabel.toLowerCase()} process
-                      <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                    </span>
+                    <div className="flex flex-1 flex-col p-lg">
+                      <p className="font-mono text-label uppercase text-ink-3">
+                        {process.eyebrow}
+                      </p>
+                      <h2 className="mt-sm max-w-[24ch] text-title text-ink">
+                        {process.headline}{" "}
+                        <em className="text-signal">
+                          {process.headlineAccent}
+                        </em>
+                      </h2>
+                      <p className="mt-md max-w-[52ch] text-body text-ink-2">
+                        <RichTextContent value={process.lead} />
+                      </p>
+
+                      <span className="mt-auto inline-flex items-center gap-xs pt-lg font-mono text-nav uppercase text-ink transition-colors group-hover:text-signal-text">
+                        Read the {process.navLabel.toLowerCase()} process
+                        <span
+                          aria-hidden="true"
+                          className="transition-transform duration-200 group-hover:translate-x-1"
+                        >
+                          →
+                        </span>
+                      </span>
+                    </div>
                   </Link>
                 </Reveal>
               );
             })}
           </div>
-        </Section>
+        </section>
 
         <CtaBanner />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

@@ -11,11 +11,18 @@ export const site = {
   tagline: "IT training & placement support",
   description:
     "Structured IT training in web development, data, cloud and more, with placement support until you're hired.",
+  /*
+   * The supplied lockup, kept because it is the client's brand asset and is
+   * the right thing to hand to anyone who needs the logo as a file. The header
+   * and footer no longer use it: at chrome size its "CONSULTANCY" line is
+   * unreadable and a raster cannot take the colour of the surface under it, so
+   * `Wordmark` sets the name in type instead. See that component.
+   */
   logo: {
     primary: "/logo/logo-primary.webp",
     reversed: "/logo/logo-reversed.webp",
-    width: 2060,
-    height: 339,
+    width: 900,
+    height: 148,
   },
 } as const;
 

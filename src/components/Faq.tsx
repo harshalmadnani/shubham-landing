@@ -3,82 +3,86 @@
 import { useId, useState } from "react";
 
 import { RichTextContent } from "@/components/PendingData";
-import { Section, SectionHead } from "@/components/Section";
+import { SectionHeading } from "@/components/SectionHeading";
 import { faqs } from "@/content/sections";
 import type { FaqItem } from "@/content/types";
 
+function Question({ item, index }: { item: FaqItem; index: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const panelId = useId();
+
+  return (
+    <li className="border-b border-rule">
+      <button
+        type="button"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onClick={() => setIsOpen((open) => !open)}
+        className="group flex w-full items-start gap-md py-lg text-left"
+      >
+        <span
+          aria-hidden="true"
+          className="mt-[5px] font-mono text-label text-signal-text"
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className="flex-1 text-subtitle text-ink transition-colors group-hover:text-signal-text">
+          {item.question}
+        </span>
+        {/* A plus that becomes a minus — no chevron, and no rotation that
+            reads as a different control mid-animation. */}
+        <span
+          aria-hidden="true"
+          className="relative mt-[10px] h-[14px] w-[14px] shrink-0"
+        >
+          <span className="absolute left-0 top-[6px] h-[2px] w-[14px] bg-ink" />
+          <span
+            className={`absolute left-[6px] top-0 h-[14px] w-[2px] bg-ink transition-transform duration-200 ${
+              isOpen ? "scale-y-0" : "scale-y-100"
+            }`}
+          />
+        </span>
+      </button>
+
+      {isOpen && (
+        <div id={panelId} className="pb-lg pl-[calc(4rem)] desktop:pr-rail">
+          <p className="max-w-[64ch] text-body text-ink-2">
+            <RichTextContent value={item.answer} />
+          </p>
+        </div>
+      )}
+    </li>
+  );
+}
+
 /**
- * The shared accordion. Defaults to the site-wide questions; other pages pass
- * their own set rather than standing up a second accordion.
+ * Questions, on rules.
+ *
+ * Every answer collapsed by default: an open accordion of nine long answers is
+ * the single fastest way to make a page look like a wall.
  */
 export function Faq({
   items = faqs,
-  label = "FAQ",
-  title = (
-    <>
-      Frequently asked <em>questions</em>
-    </>
-  ),
-  lead = "Still unsure about something? The consultation call is free and there's no script.",
+  label = "Questions",
+  title = "The things people ask before enrolling",
+  lead = "Straight answers. If yours is not here, the consultation is free.",
 }: {
   items?: readonly FaqItem[];
   label?: string;
-  title?: React.ReactNode;
+  title?: string;
   lead?: string;
-} = {}) {
-  // One panel open at a time; the first starts expanded.
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const baseId = useId();
-
+}) {
   return (
-    <Section id="faq" label={label}>
-      <SectionHead title={title} lead={lead} />
+    <section id="faq" className="mt-band">
+      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
+        <SectionHeading label={label} title={title} lead={lead} />
 
-      <div className="mt-16 flex max-w-3xl flex-col gap-3">
-        {items.map((faq, itemIndex) => {
-          const isOpen = itemIndex === openIndex;
-          const panelId = `${baseId}-panel-${itemIndex}`;
-          const buttonId = `${baseId}-button-${itemIndex}`;
-
-          return (
-            <div
-              key={faq.question}
-              className={`rounded-lg transition-colors duration-200 ${
-                isOpen ? "bg-surface" : "bg-surface/60 hover:bg-surface"
-              }`}
-            >
-              <h3>
-                <button
-                  type="button"
-                  id={buttonId}
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                  onClick={() => setOpenIndex(isOpen ? null : itemIndex)}
-                  className="flex w-full items-start gap-6 p-7 text-left"
-                >
-                  <span className="flex-1 text-heading">{faq.question}</span>
-                  <span
-                    aria-hidden="true"
-                    className={`relative mt-1.5 h-3.5 w-3.5 shrink-0 text-ink-2 transition-transform duration-300 ${
-                      isOpen ? "rotate-45" : ""
-                    }`}
-                  >
-                    <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current" />
-                    <span className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-current" />
-                  </span>
-                </button>
-              </h3>
-
-              {/* Kept in the DOM when shut so the answer is still findable. */}
-              <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!isOpen}>
-                <p className="px-7 pb-7 text-body text-ink-2">
-                  <RichTextContent value={faq.answer} />
-                </p>
-              </div>
-            </div>
-          );
-        })}
+        <ul className="mt-xxl border-t border-ink">
+          {items.map((item, index) => (
+            <Question key={item.question} item={item} index={index} />
+          ))}
+        </ul>
       </div>
-    </Section>
+    </section>
   );
 }
