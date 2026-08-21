@@ -42,11 +42,16 @@
   --color-chalk: #f7f7f5;
   --color-chalk-2: #a2a29c;
 
-  --color-accent: #ee3b1f;
-  --color-accent-ink: #b52d0f;
-  --color-accent-soft: #fdeeea;
+  /* Blue, on a white-and-black ground. An education site is read to decide
+     whether to spend money on training, and blue is both the register people
+     expect for that and the easier colour to make legible: the red-orange this
+     replaces could not carry normal-size text on any of the light grounds
+     (3.3-4.0:1), where this blue clears AA on all of them (4.8-5.8:1). */
+  --color-accent: #0b5ed7;
+  --color-accent-ink: #0a4fbf;
+  --color-accent-soft: #e8f0fd;
   /* Legible against night, where the base accent sits under 3:1. */
-  --color-accent-bright: #ff7a5c;
+  --color-accent-bright: #74a9ff;
 
   /* Type.
 
