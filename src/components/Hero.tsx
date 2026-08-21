@@ -28,7 +28,7 @@ export function Hero() {
 
             <h1 className="mt-lg text-mega text-ink">
               {hero.headline}{" "}
-              <em className="text-pine">{hero.headlineAccent}</em>
+              <em className="text-signal">{hero.headlineAccent}</em>
             </h1>
 
             <p className="mt-xl max-w-[46ch] text-lead text-ink-2">

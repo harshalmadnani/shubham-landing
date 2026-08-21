@@ -28,10 +28,10 @@ export default function AboutPage() {
     <div className="flex flex-1 flex-col">
       <Header />
       <main id="main" className="flex flex-1 flex-col">
-        <section className="panel-pine">
+        <section className="panel-night">
           <div className="mx-auto grid max-w-page items-center gap-xxl px-gutter pb-xxxl pt-xxl tablet:px-rail tablet:pt-xxxl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)]">
             <div>
-              <p className="flex items-center gap-sm font-mono text-label uppercase text-pine-ink-2">
+              <p className="flex items-center gap-sm font-mono text-label uppercase text-night-ink-2">
                 <span
                   aria-hidden="true"
                   className="h-[7px] w-[7px] rounded-full bg-signal"
@@ -39,22 +39,22 @@ export default function AboutPage() {
                 {aboutHero.eyebrow}
               </p>
 
-              <h1 className="mt-lg max-w-[20ch] text-display text-pine-ink">
+              <h1 className="mt-lg max-w-[20ch] text-display text-night-ink">
                 {aboutHero.headline}{" "}
-                <em className="text-signal-on-pine">{aboutHero.headlineAccent}</em>
+                <em className="text-signal-on-night">{aboutHero.headlineAccent}</em>
               </h1>
 
-              <p className="mt-lg max-w-[52ch] text-lead text-pine-ink-2">
+              <p className="mt-lg max-w-[52ch] text-lead text-night-ink-2">
                 {aboutHero.body}
               </p>
 
-              <dl className="mt-xl grid gap-px bg-pine-rule tablet:grid-cols-3">
+              <dl className="mt-xl grid gap-px bg-night-rule tablet:grid-cols-3">
                 {aboutFacts.map((fact) => (
-                  <div key={fact.label} className="bg-pine py-md pr-md">
-                    <dt className="font-mono text-figure text-signal-on-pine">
+                  <div key={fact.label} className="bg-night py-md pr-md">
+                    <dt className="font-mono text-figure text-signal-on-night">
                       {fact.value}
                     </dt>
-                    <dd className="mt-xs text-small text-pine-ink-2">
+                    <dd className="mt-xs text-small text-night-ink-2">
                       {fact.label}
                     </dd>
                   </div>
@@ -65,13 +65,13 @@ export default function AboutPage() {
                 <ButtonLink href={whatsAppUrl(consultationMessage)}>
                   Book a free consultation
                 </ButtonLink>
-                <ButtonLink href="/how-it-works" variant="onPine">
+                <ButtonLink href="/how-it-works" variant="onNight">
                   See how the programme runs
                 </ButtonLink>
               </div>
             </div>
 
-            <div className="border border-pine-rule bg-paper p-md">
+            <div className="border border-night-rule bg-paper p-md">
               <AboutIllustration className="w-full" />
             </div>
           </div>
@@ -143,35 +143,35 @@ export default function AboutPage() {
         <section className="mt-band">
           <div className="mx-auto max-w-page px-gutter tablet:px-rail">
             <Reveal>
-              <div className="panel-pine grid gap-xxl border-l-2 border-signal p-lg tablet:p-xl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.6fr)] desktop:gap-xxxl">
+              <div className="panel-night grid gap-xxl border-l-2 border-signal p-lg tablet:p-xl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.6fr)] desktop:gap-xxxl">
                 <div>
-                  <p className="font-mono text-label uppercase text-pine-ink-2">
+                  <p className="font-mono text-label uppercase text-night-ink-2">
                     Reach
                   </p>
-                  <h2 className="mt-sm max-w-[20ch] text-title text-pine-ink">
+                  <h2 className="mt-sm max-w-[20ch] text-title text-night-ink">
                     {reach.title}
                   </h2>
-                  <p className="mt-md max-w-[58ch] text-body text-pine-ink-2">
+                  <p className="mt-md max-w-[58ch] text-body text-night-ink-2">
                     {reach.body}
                   </p>
                 </div>
 
-                <div className="desktop:border-l desktop:border-pine-rule desktop:pl-xxl">
-                  <p className="font-mono text-label uppercase text-pine-ink-2">
+                <div className="desktop:border-l desktop:border-night-rule desktop:pl-xxl">
+                  <p className="font-mono text-label uppercase text-night-ink-2">
                     Get in touch
                   </p>
                   <ul className="mt-md flex flex-col">
                     {footerContacts.map((contact) => (
-                      <li key={contact.label} className="border-b border-pine-rule">
+                      <li key={contact.label} className="border-b border-night-rule">
                         {contact.href ? (
                           <a
                             href={contact.href}
-                            className="block py-sm font-mono text-data text-pine-ink underline decoration-pine-rule underline-offset-4 transition-colors hover:decoration-signal"
+                            className="block py-sm font-mono text-data text-night-ink underline decoration-night-rule underline-offset-4 transition-colors hover:decoration-signal"
                           >
                             {contact.label}
                           </a>
                         ) : (
-                          <span className="block py-sm font-mono text-data text-pine-ink-2">
+                          <span className="block py-sm font-mono text-data text-night-ink-2">
                             {contact.label}
                           </span>
                         )}

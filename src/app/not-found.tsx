@@ -42,7 +42,7 @@ export default function NotFound() {
             </p>
 
             <h1 className="mt-lg max-w-[20ch] text-mega text-ink">
-              No route to <em className="text-pine">that address.</em>
+              No route to <em className="text-signal">that address.</em>
             </h1>
 
             <p className="mt-xl max-w-[46ch] text-lead text-ink-2">

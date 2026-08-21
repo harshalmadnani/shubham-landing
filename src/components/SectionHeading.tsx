@@ -19,9 +19,9 @@ export function SectionHeading({
   label?: string;
   title: ReactNode;
   lead?: ReactNode;
-  tone?: "paper" | "pine";
+  tone?: "paper" | "night";
 }) {
-  const onPine = tone === "pine";
+  const onNight = tone === "night";
 
   return (
     <Reveal>
@@ -34,21 +34,21 @@ export function SectionHeading({
             />
             <p
               className={`font-mono text-label uppercase ${
-                onPine ? "text-pine-ink-2" : "text-ink-3"
+                onNight ? "text-night-ink-2" : "text-ink-3"
               }`}
             >
               {label}
             </p>
             <span
               aria-hidden="true"
-              className={`h-px flex-1 ${onPine ? "bg-pine-rule" : "bg-rule"}`}
+              className={`h-px flex-1 ${onNight ? "bg-night-rule" : "bg-rule"}`}
             />
           </div>
         )}
 
         <h2
           className={`mt-lg max-w-[19ch] text-title ${
-            onPine ? "text-pine-ink" : "text-ink"
+            onNight ? "text-night-ink" : "text-ink"
           }`}
         >
           {title}
@@ -57,7 +57,7 @@ export function SectionHeading({
         {lead && (
           <p
             className={`mt-md max-w-[52ch] text-lead ${
-              onPine ? "text-pine-ink-2" : "text-ink-2"
+              onNight ? "text-night-ink-2" : "text-ink-2"
             }`}
           >
             {lead}

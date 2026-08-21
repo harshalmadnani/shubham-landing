@@ -42,7 +42,7 @@ export default function HowItWorksPage() {
 
             <h1 className="mt-lg max-w-[22ch] text-mega text-ink">
               {processIndex.headline}{" "}
-              <em className="text-pine">{processIndex.headlineAccent}</em>
+              <em className="text-signal">{processIndex.headlineAccent}</em>
             </h1>
 
             <p className="mt-xl max-w-[52ch] text-lead text-ink-2">
@@ -82,7 +82,7 @@ export default function HowItWorksPage() {
                       </p>
                       <h2 className="mt-sm max-w-[24ch] text-title text-ink">
                         {process.headline}{" "}
-                        <em className="text-pine">
+                        <em className="text-signal">
                           {process.headlineAccent}
                         </em>
                       </h2>

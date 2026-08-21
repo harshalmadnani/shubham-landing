@@ -2,7 +2,7 @@
  * Route schematics.
  *
  * Each one is a diagram of how a stage actually works, drawn in the same
- * grammar as the rest of the site: pine lines, vermilion nodes, plates for
+ * grammar as the rest of the site: near-black lines, blue nodes, plates for
  * things you receive. Not illustrations of an interface — the previous set
  * drew little fake apps, which told the reader nothing they could not see by
  * looking at the page.
@@ -12,13 +12,15 @@
  * generated image away. Decorative, so every one is `aria-hidden`.
  */
 
-const PINE = "#173d31";
-const PINE_LINE = "#2e5c4d";
-const SIGNAL = "#ff4e1b";
-const BONE = "#edede7";
-const PAPER_SUNK = "#e3e3da";
+/* Kept in step with the colour block in globals.css by hand — inline SVG
+   cannot read a CSS custom property through a `fill` attribute. */
+const NIGHT = "#151821";
+const NIGHT_LINE = "#333844";
+const SIGNAL = "#0b5ed7";
+const PAPER = "#f8fafc";
+const PAPER_SUNK = "#eaeff5";
 const WHITE = "#ffffff";
-const RULE = "#d2d2c7";
+const RULE = "#dce2ea";
 
 type Props = { className?: string };
 
@@ -45,14 +47,14 @@ function Frame({
   );
 }
 
-/** A vermilion interchange marker. */
+/** A blue interchange marker. */
 function Node({ x, y, filled = false }: { x: number; y: number; filled?: boolean }) {
   return (
     <circle
       cx={x}
       cy={y}
       r="7"
-      fill={filled ? SIGNAL : BONE}
+      fill={filled ? SIGNAL : PAPER}
       stroke={SIGNAL}
       strokeWidth="3"
     />
@@ -78,9 +80,9 @@ function Plate({
   return (
     <>
       <rect x={x} y={y} width={w} height={h} fill={fill} stroke={RULE} strokeWidth="1.5" />
-      <rect x={x + 10} y={y + 9} width={w * 0.5} height="4" fill={PINE_LINE} opacity=".45" />
+      <rect x={x + 10} y={y + 9} width={w * 0.5} height="4" fill={NIGHT_LINE} opacity=".45" />
       {bars > 1 && (
-        <rect x={x + 10} y={y + 18} width={w * 0.32} height="4" fill={PINE_LINE} opacity=".22" />
+        <rect x={x + 10} y={y + 18} width={w * 0.32} height="4" fill={NIGHT_LINE} opacity=".22" />
       )}
     </>
   );
@@ -91,16 +93,16 @@ export function TrainingIllustration({ className }: Props) {
   const xs = [58, 141, 224, 307, 390];
   return (
     <Frame className={className} viewBox="0 38 480 246">
-      <rect x="0" y="0" width="480" height="320" fill={BONE} />
+      <rect x="0" y="0" width="480" height="320" fill={PAPER} />
 
       {/* the line */}
-      <line x1="58" y1="160" x2="390" y2="160" stroke={PINE} strokeWidth="3" />
+      <line x1="58" y1="160" x2="390" y2="160" stroke={NIGHT} strokeWidth="3" />
 
       {/* daily practice running under the line, in short ticks */}
       {Array.from({ length: 21 }, (_, i) => 62 + i * 16.4).map((x) => (
-        <line key={x} x1={x} y1="188" x2={x} y2="200" stroke={PINE_LINE} strokeWidth="2" opacity=".5" />
+        <line key={x} x1={x} y1="188" x2={x} y2="200" stroke={NIGHT_LINE} strokeWidth="2" opacity=".5" />
       ))}
-      <text x="58" y="222" fill={PINE} opacity=".6" fontFamily="monospace" fontSize="11" letterSpacing="1.6">
+      <text x="58" y="222" fill={NIGHT} opacity=".6" fontFamily="monospace" fontSize="11" letterSpacing="1.6">
         DAILY PRACTICE
       </text>
 
@@ -110,7 +112,7 @@ export function TrainingIllustration({ className }: Props) {
       <Plate x={186} y={86} w={76} h={44} bars={2} fill={PAPER_SUNK} />
 
       {/* the certificate terminus */}
-      <rect x="352" y="82" width="108" height="52" fill={PINE} />
+      <rect x="352" y="82" width="108" height="52" fill={NIGHT} />
       <path d="m378 108 8 8 16-18" stroke={SIGNAL} strokeWidth="4" strokeLinecap="square" />
       <rect x="368" y="52" width="76" height="4" fill={SIGNAL} />
 
@@ -123,7 +125,7 @@ export function TrainingIllustration({ className }: Props) {
           key={`n-${x}`}
           x={x}
           y={266}
-          fill={PINE}
+          fill={NIGHT}
           fontFamily="monospace"
           fontSize="13"
           fontWeight="600"
@@ -146,7 +148,7 @@ export function BootcampIllustration({ className }: Props) {
   ];
   return (
     <Frame className={className} viewBox="0 40 480 254">
-      <rect x="0" y="0" width="480" height="320" fill={BONE} />
+      <rect x="0" y="0" width="480" height="320" fill={PAPER} />
 
       {/* the five briefs, stacked behind */}
       {[0, 1, 2, 3].map((i) => (
@@ -161,14 +163,14 @@ export function BootcampIllustration({ className }: Props) {
           strokeWidth="1.5"
         />
       ))}
-      <text x="47" y="240" fill={PINE} fontFamily="monospace" fontSize="26" fontWeight="700">
+      <text x="47" y="240" fill={NIGHT} fontFamily="monospace" fontSize="26" fontWeight="700">
         ×5
       </text>
 
       {/* the cycle */}
       <path
         d={`M ${pts[0].x} ${pts[0].y} L ${pts[1].x} ${pts[1].y} L ${pts[2].x} ${pts[2].y} L ${pts[3].x} ${pts[3].y} Z`}
-        stroke={PINE}
+        stroke={NIGHT}
         strokeWidth="3"
         fill="none"
       />
@@ -187,7 +189,7 @@ export function BootcampIllustration({ className }: Props) {
           key={l.t}
           x={l.x}
           y={l.y}
-          fill={PINE}
+          fill={NIGHT}
           fontFamily="monospace"
           fontSize="11"
           fontWeight="600"
@@ -199,9 +201,9 @@ export function BootcampIllustration({ className }: Props) {
       ))}
 
       {/* the portfolio it produces */}
-      <rect x="396" y="228" width="64" height="52" fill={PINE} />
+      <rect x="396" y="228" width="64" height="52" fill={NIGHT} />
       <rect x="408" y="244" width="40" height="4" fill={SIGNAL} />
-      <rect x="408" y="256" width="26" height="4" fill={BONE} opacity=".5" />
+      <rect x="408" y="256" width="26" height="4" fill={PAPER} opacity=".5" />
     </Frame>
   );
 }
@@ -211,14 +213,14 @@ export function MentoringIllustration({ className }: Props) {
   const xs = [70, 172, 274, 376];
   return (
     <Frame className={className} viewBox="0 74 480 196">
-      <rect x="0" y="0" width="480" height="320" fill={BONE} />
+      <rect x="0" y="0" width="480" height="320" fill={PAPER} />
 
       {/* the programme */}
-      <line x1="70" y1="128" x2="376" y2="128" stroke={PINE} strokeWidth="3" />
+      <line x1="70" y1="128" x2="376" y2="128" stroke={NIGHT} strokeWidth="3" />
       {xs.map((x) => (
         <Node key={x} x={x} y={128} />
       ))}
-      <text x="70" y="94" fill={PINE} fontFamily="monospace" fontSize="11" fontWeight="600" letterSpacing="1.6">
+      <text x="70" y="94" fill={NIGHT} fontFamily="monospace" fontSize="11" fontWeight="600" letterSpacing="1.6">
         THE PROGRAMME
       </text>
 
@@ -240,11 +242,11 @@ export function MentoringIllustration({ className }: Props) {
 
       {/* the ties between the two */}
       {xs.map((x) => (
-        <line key={`t-${x}`} x1={x} y1="135" x2={x} y2="189" stroke={PINE_LINE} strokeWidth="1.5" opacity=".4" />
+        <line key={`t-${x}`} x1={x} y1="135" x2={x} y2="189" stroke={NIGHT_LINE} strokeWidth="1.5" opacity=".4" />
       ))}
 
       {/* it continues past the last stop */}
-      <text x="410" y="252" fill={PINE} opacity=".55" fontFamily="monospace" fontSize="11" textAnchor="end">
+      <text x="410" y="252" fill={NIGHT} opacity=".55" fontFamily="monospace" fontSize="11" textAnchor="end">
         past the last stop
       </text>
     </Frame>
@@ -256,15 +258,15 @@ export function MarketingIllustration({ className }: Props) {
   const targets = [76, 124, 172, 220];
   return (
     <Frame className={className} viewBox="0 48 480 232">
-      <rect x="0" y="0" width="480" height="320" fill={BONE} />
+      <rect x="0" y="0" width="480" height="320" fill={PAPER} />
 
       {/* the profile */}
-      <rect x="26" y="112" width="92" height="96" fill={WHITE} stroke={PINE} strokeWidth="2" />
+      <rect x="26" y="112" width="92" height="96" fill={WHITE} stroke={NIGHT} strokeWidth="2" />
       <rect x="40" y="130" width="46" height="6" fill={SIGNAL} />
-      <rect x="40" y="148" width="64" height="4" fill={PINE_LINE} opacity=".4" />
-      <rect x="40" y="160" width="52" height="4" fill={PINE_LINE} opacity=".25" />
-      <rect x="40" y="176" width="64" height="4" fill={PINE_LINE} opacity=".4" />
-      <rect x="40" y="188" width="38" height="4" fill={PINE_LINE} opacity=".25" />
+      <rect x="40" y="148" width="64" height="4" fill={NIGHT_LINE} opacity=".4" />
+      <rect x="40" y="160" width="52" height="4" fill={NIGHT_LINE} opacity=".25" />
+      <rect x="40" y="176" width="64" height="4" fill={NIGHT_LINE} opacity=".4" />
+      <rect x="40" y="188" width="38" height="4" fill={NIGHT_LINE} opacity=".25" />
       <Node x={118} y={160} filled />
 
       {/* out to employers */}
@@ -272,7 +274,7 @@ export function MarketingIllustration({ className }: Props) {
         <g key={y}>
           <path
             d={`M126 160 C 200 160, 214 ${y}, 300 ${y}`}
-            stroke={PINE}
+            stroke={NIGHT}
             strokeWidth="2"
             fill="none"
             opacity={0.75 - i * 0.1}
@@ -282,17 +284,17 @@ export function MarketingIllustration({ className }: Props) {
             y={y - 15}
             width="112"
             height="30"
-            fill={i === 1 ? PINE : WHITE}
-            stroke={i === 1 ? PINE : RULE}
+            fill={i === 1 ? NIGHT : WHITE}
+            stroke={i === 1 ? NIGHT : RULE}
             strokeWidth="1.5"
           />
-          <rect x="318" y={y - 3} width="8" height="8" fill={i === 1 ? SIGNAL : PINE} />
+          <rect x="318" y={y - 3} width="8" height="8" fill={i === 1 ? SIGNAL : NIGHT} />
           <rect
             x="334"
             y={y - 2}
             width="60"
             height="4"
-            fill={i === 1 ? BONE : PINE_LINE}
+            fill={i === 1 ? PAPER : NIGHT_LINE}
             opacity={i === 1 ? 0.6 : 0.35}
           />
         </g>
@@ -313,7 +315,7 @@ export function AboutIllustration({ className }: Props) {
   const starts = [72, 128, 184, 240];
   return (
     <Frame className={className} viewBox="0 44 480 234">
-      <rect x="0" y="0" width="480" height="320" fill={BONE} />
+      <rect x="0" y="0" width="480" height="320" fill={PAPER} />
 
       {starts.map((y, i) => (
         <g key={y}>
@@ -321,17 +323,17 @@ export function AboutIllustration({ className }: Props) {
           <text
             x="38"
             y={y + 5}
-            fill={PINE}
+            fill={NIGHT}
             fontFamily="monospace"
             fontSize="12"
             fontWeight="600"
           >
             {String(i + 1).padStart(2, "0")}
           </text>
-          <rect x="62" y={y - 2} width="34" height="4" fill={PINE_LINE} opacity=".35" />
+          <rect x="62" y={y - 2} width="34" height="4" fill={NIGHT_LINE} opacity=".35" />
           <path
             d={`M110 ${y} C 190 ${y}, 210 156, 300 156`}
-            stroke={PINE}
+            stroke={NIGHT}
             strokeWidth="3"
             fill="none"
           />
@@ -340,18 +342,18 @@ export function AboutIllustration({ className }: Props) {
       ))}
 
       {/* the terminus */}
-      <rect x="300" y="104" width="152" height="104" fill={PINE} />
+      <rect x="300" y="104" width="152" height="104" fill={NIGHT} />
       <rect x="300" y="104" width="6" height="104" fill={SIGNAL} />
       <path d="m332 156 10 10 20-22" stroke={SIGNAL} strokeWidth="4" strokeLinecap="square" />
-      <rect x="326" y="184" width="96" height="4" fill={BONE} opacity=".45" />
+      <rect x="326" y="184" width="96" height="4" fill={PAPER} opacity=".45" />
 
       {/* the two markets it serves */}
       <rect x="300" y="232" width="72" height="30" fill={WHITE} stroke={RULE} strokeWidth="1.5" />
       <rect x="312" y="244" width="10" height="6" fill={SIGNAL} />
-      <rect x="330" y="245" width="28" height="4" fill={PINE_LINE} opacity=".35" />
+      <rect x="330" y="245" width="28" height="4" fill={NIGHT_LINE} opacity=".35" />
       <rect x="380" y="232" width="72" height="30" fill={WHITE} stroke={RULE} strokeWidth="1.5" />
-      <rect x="392" y="244" width="10" height="6" fill={PINE} />
-      <rect x="410" y="245" width="28" height="4" fill={PINE_LINE} opacity=".35" />
+      <rect x="392" y="244" width="10" height="6" fill={NIGHT} />
+      <rect x="410" y="245" width="28" height="4" fill={NIGHT_LINE} opacity=".35" />
     </Frame>
   );
 }

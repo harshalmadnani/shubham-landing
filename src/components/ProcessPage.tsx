@@ -23,13 +23,13 @@ export function ProcessPage({ content }: { content: ProcessContent }) {
 
   return (
     <>
-      {/* Pine hero. The rest of the site is bone, and these four pages benefit
+      {/* Dark hero. The rest of the site is white, and these four pages benefit
           from reading as their own place — it also gives the schematic a
           ground to sit on rather than floating in more paper. */}
-      <section className="panel-pine">
+      <section className="panel-night">
         <div className="mx-auto grid max-w-page items-center gap-xxl px-gutter pb-xxxl pt-xxl tablet:px-rail tablet:pt-xxxl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)]">
           <div>
-            <p className="flex items-center gap-sm font-mono text-label uppercase text-pine-ink-2">
+            <p className="flex items-center gap-sm font-mono text-label uppercase text-night-ink-2">
               <span
                 aria-hidden="true"
                 className="h-[7px] w-[7px] rounded-full bg-signal"
@@ -37,22 +37,22 @@ export function ProcessPage({ content }: { content: ProcessContent }) {
               {content.eyebrow}
             </p>
 
-            <h1 className="mt-lg max-w-[20ch] text-display text-pine-ink">
+            <h1 className="mt-lg max-w-[20ch] text-display text-night-ink">
               {content.headline}{" "}
-              <em className="text-signal-on-pine">{content.headlineAccent}</em>
+              <em className="text-signal-on-night">{content.headlineAccent}</em>
             </h1>
 
-            <p className="mt-lg max-w-[52ch] text-lead text-pine-ink-2">
+            <p className="mt-lg max-w-[52ch] text-lead text-night-ink-2">
               <RichTextContent value={content.lead} tone="dark" />
             </p>
 
-            <dl className="mt-xl grid gap-px bg-pine-rule tablet:grid-cols-3">
+            <dl className="mt-xl grid gap-px bg-night-rule tablet:grid-cols-3">
               {content.facts.map((fact) => (
-                <div key={fact.label} className="bg-pine py-md pr-md">
-                  <dt className="font-mono text-data text-signal-on-pine">
+                <div key={fact.label} className="bg-night py-md pr-md">
+                  <dt className="font-mono text-data text-signal-on-night">
                     {fact.value}
                   </dt>
-                  <dd className="mt-xxs text-small text-pine-ink-2">
+                  <dd className="mt-xxs text-small text-night-ink-2">
                     {fact.label}
                   </dd>
                 </div>
@@ -63,14 +63,14 @@ export function ProcessPage({ content }: { content: ProcessContent }) {
               <ButtonLink href={whatsAppUrl(content.enquiry)}>
                 Book a free consultation
               </ButtonLink>
-              <ButtonLink href="/training-structure" variant="onPine">
+              <ButtonLink href="/training-structure" variant="onNight">
                 Routes and prices
               </ButtonLink>
             </div>
           </div>
 
           {Illustration && (
-            <div className="border border-pine-rule bg-paper p-md">
+            <div className="border border-night-rule bg-paper p-md">
               <Illustration className="w-full" />
             </div>
           )}
@@ -210,28 +210,28 @@ export function ProcessPage({ content }: { content: ProcessContent }) {
       <section className="mt-band">
         <div className="mx-auto max-w-page px-gutter tablet:px-rail">
           <Reveal>
-            <div className="panel-pine border-l-2 border-signal p-lg tablet:p-xl">
-              <p className="font-mono text-label uppercase text-pine-ink-2">
+            <div className="panel-night border-l-2 border-signal p-lg tablet:p-xl">
+              <p className="font-mono text-label uppercase text-night-ink-2">
                 Straight answers
               </p>
-              <h2 className="mt-sm max-w-[24ch] text-title text-pine-ink">
+              <h2 className="mt-sm max-w-[24ch] text-title text-night-ink">
                 {content.boundariesTitle}
               </h2>
               <ul className="mt-xl grid gap-lg tablet:grid-cols-3">
                 {content.boundaries.map((item, index) => (
                   <li
                     key={index}
-                    className="border-t border-pine-rule pt-md text-small text-pine-ink-2"
+                    className="border-t border-night-rule pt-md text-small text-night-ink-2"
                   >
                     <RichTextContent value={item} tone="dark" />
                   </li>
                 ))}
               </ul>
-              <p className="mt-xl max-w-[62ch] text-small text-pine-ink-2">
+              <p className="mt-xl max-w-[62ch] text-small text-night-ink-2">
                 <RichTextContent value={content.pathwayNote} tone="dark" />{" "}
                 <Link
                   href="/training-structure"
-                  className="text-pine-ink underline decoration-signal underline-offset-4 hover:no-underline"
+                  className="text-night-ink underline decoration-signal underline-offset-4 hover:no-underline"
                 >
                   See the four routes
                 </Link>

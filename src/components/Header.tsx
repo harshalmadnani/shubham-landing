@@ -31,7 +31,7 @@ function isCurrentPage(href: string, pathname: string): boolean {
 
 /**
  * The header is a signage rail: a hairline under it at all times, the current
- * destination underscored in vermilion, and one action at the end.
+ * destination underscored in blue, and one action at the end.
  */
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

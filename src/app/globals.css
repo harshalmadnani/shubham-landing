@@ -9,18 +9,27 @@
  * its grammar — signage panels, route lines, interchange nodes, timetable
  * data — rather than borrowing a template.
  *
+ * Blue, black and white. This is an education business, so the palette is the
+ * one people already trust for it: a white ground to read on, near-black
+ * institutional bands, and one confident blue that carries every action.
+ *
  * Four rules hold it together:
- *   1. Bone is the ground. Never pure white; white is a raised panel only.
+ *   1. White is the ground. The page is white; the sunk panels and the rules
+ *      are the only greys, and both are cool rather than neutral.
  *   2. Corners are square. A radius appears only on a route node, which is a
  *      circle because it is a node.
- *   3. Vermilion is a signal, not a decoration. It marks direction, the live
- *      state, and the one action on the screen — nothing else.
+ *   3. Blue is a signal, not a decoration. It marks direction, the live state,
+ *      and the one action on the screen — nothing else. Nothing on this site
+ *      is blue merely to look nice.
  *   4. Every text pairing clears WCAG AA with room to spare, and no token
- *      lands on the 4.5 line. Full-strength vermilion is a *graphic* colour
- *      (2.8:1 on bone) and never carries type: text uses --color-signal-text
- *      on light grounds and --color-signal-on-pine on dark ones. That split is
- *      the whole reason those two tokens exist — reaching for --color-signal
- *      to colour a word is the one easy way to break this system.
+ *      lands on the 4.5 line.
+ *
+ * The blue is the reason this palette is easier to hold than the one before
+ * it. A saturated orange is too light to carry text, so it needed a separate
+ * darkened token for type and a separate lightened one for dark grounds. Blue
+ * at #0b5ed7 is already dark enough to be a *graphic* and a *text* colour at
+ * once (5.6:1 on the white ground), and white type sits on it at 5.8:1. One
+ * colour, three jobs, no workarounds.
  *
  * Components reference tokens and never raw values, so the whole identity is
  * this block.
@@ -32,54 +41,56 @@
   --breakpoint-desktop: 1180px;
 
   /* ---------------------------------------------------------------- colour
-     Bone ground, pine signage, vermilion signal. The neutrals carry a faint
-     warm-green bias so they read as chosen stock rather than default grey. */
-  --color-paper: #edede7;
-  --color-paper-sunk: #e3e3da;
+     White ground, near-black signage, one blue signal. The neutrals carry a
+     faint cool bias so they read as chosen stock rather than default grey. */
+  --color-paper: #f8fafc;
+  --color-paper-sunk: #eaeff5;
   --color-raised: #ffffff;
 
   /* The ink tiers are deliberately dark. This is a site people read to decide
      whether to spend money on a course, often on a phone in daylight, so every
      text token clears AA with margin rather than landing on the 4.5 line:
-     ink 15.3:1, ink-2 8.6:1, ink-3 6.6:1 on bone. */
-  --color-ink: #15171c;
-  --color-ink-2: #3f4249;
+     ink 17.6:1, ink-2 8.5:1, ink-3 7.2:1 on the white ground. */
+  --color-ink: #12141a;
+  --color-ink-2: #444a56;
   /* Carries every mono label on the site, so it is the tier most worth
-     over-building. It has been 3.5:1, then 5.1:1, and is now 6.6:1. */
-  --color-ink-3: #4f535a;
+     over-building. It has been 3.5:1, then 5.1:1, then 6.6:1, now 7.2:1. */
+  --color-ink-3: #4e5561;
 
-  --color-rule: #d2d2c7;
-  --color-rule-strong: #b4b4a6;
+  --color-rule: #dce2ea;
+  --color-rule-strong: #b6bfcc;
 
-  /* Pine — the institutional surface. Headers, footers, signage blocks. */
-  --color-pine: #173d31;
-  --color-pine-deep: #0e2a21;
-  --color-pine-raised: #1f4d3f;
-  --color-pine-rule: #2e5c4d;
-  --color-pine-ink: #eaeee9;
-  /* 7.4:1 on pine and 5.9:1 on pine-raised. The older value fell to 4.6:1 on
-     raised panels, which is where most of the lead paragraphs actually sit. */
-  --color-pine-ink-2: #bdd0c6;
+  /* Night — the institutional surface. Headers, footers, signage blocks.
+     Near-black rather than a navy: with a blue signal on top, a blue-black
+     ground would leave the signal nothing to be brighter than. */
+  --color-night: #151821;
+  --color-night-deep: #0d0f15;
+  --color-night-raised: #1e222c;
+  --color-night-rule: #333844;
+  --color-night-ink: #ffffff;
+  /* 7.9:1 on night and 7.1:1 on night-raised — AAA on both, where the
+     equivalent token in the previous palette managed 5.9:1 at best. */
+  --color-night-ink-2: #a6adba;
 
-  /* Vermilion — direction, live state, the single action. */
-  --color-signal: #ff4e1b;
-  /* The hover state goes *lighter*, not darker. Darkening vermilion is the
-     instinct, but the label on this button is ink: #dd3a0b drops it to 4.0:1
-     while a lighter tint lifts it to 6.4:1. The button also reads as
-     brightening under the cursor, which is the correct affordance. */
-  --color-signal-hover: #ff6d45;
-  --color-signal-tint: #ffe5db;
-  /* Ink, not white. White on vermilion is 3.3:1 — the worst contrast on the
-     site, on its single most important element. Ink is 5.4:1 and looks like a
-     road sign, which is what this system is imitating anyway. */
-  --color-on-signal: #15171c;
-  /* Legible as text on bone, where the full-strength signal is only 2.8:1.
-     6.6:1 on bone, 6.0:1 on the sunk panels — the previous value was 4.2:1 on
-     sunk, i.e. failing precisely where the catalogue labels sit. */
-  --color-signal-text: #9c2703;
-  /* And on pine, where full-strength vermilion is 3.6:1 — passable for a mega
-     headline, short of AA for a 13px label. 6.0:1 on pine. */
-  --color-signal-on-pine: #ffa07a;
+  /* Blue — direction, live state, the single action. */
+  --color-signal: #0b5ed7;
+  /* Blue hovers *darker*, unlike the orange it replaces. The label here is
+     white, so deepening the ground raises the label from 5.8:1 to 8.0:1
+     instead of dropping it. */
+  --color-signal-hover: #084ab0;
+  --color-signal-tint: #e7f0fd;
+  /* White, and comfortably so. This was the whole problem with the previous
+     palette: white on vermilion was 3.3:1, the worst contrast on the site and
+     on its single most important element. On blue it is 5.8:1. */
+  --color-on-signal: #ffffff;
+  /* Blue text. Deeper than --color-signal by a little, which buys margin on
+     the sunk panels (5.6:1) where the catalogue labels sit. Unlike the
+     previous palette, this token is a refinement rather than a rescue — the
+     signal blue itself already passes as text. */
+  --color-signal-text: #0a52c9;
+  /* And on the dark bands, where the signal blue is too close to the ground.
+     7.5:1 on night. */
+  --color-signal-on-night: #74a9ff;
 
   /* WhatsApp keeps its own green — the button reads as "this opens WhatsApp"
      only if it looks like WhatsApp. Ink label, not white: white on this green
@@ -279,8 +290,8 @@
 
   /* An emphasised span inside a heading is coloured, never slanted — a display
      italic in a grotesque reads as an accident. The colour itself is set at
-     the usage, because it depends on the ground: pine on bone, vermilion on
-     pine. Setting it here once made the accent invisible on the dark heroes. */
+     the usage, because it depends on the ground: ink on white, blue on
+     night. Setting it here once made the accent invisible on the dark heroes. */
   h1 em,
   h2 em,
   h3 em {
@@ -344,9 +355,9 @@
   box-shadow: 0 0 0 3px var(--color-paper);
 }
 
-@utility panel-pine {
-  background-color: var(--color-pine);
-  color: var(--color-pine-ink);
+@utility panel-night {
+  background-color: var(--color-night);
+  color: var(--color-night-ink);
 }
 
 @utility text-stroke-signal {

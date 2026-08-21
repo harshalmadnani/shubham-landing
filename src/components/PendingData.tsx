@@ -17,7 +17,7 @@ export function PendingChip({
 }) {
   const toneClasses =
     tone === "dark"
-      ? "border-pine-rule text-pine-ink-2"
+      ? "border-night-rule text-night-ink-2"
       : "border-rule-strong text-ink-3";
 
   return (

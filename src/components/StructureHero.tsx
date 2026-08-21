@@ -19,7 +19,7 @@ export function StructureHero() {
 
             <h1 className="mt-lg max-w-[20ch] text-mega text-ink">
               {structureHero.headline}{" "}
-              <em className="text-pine">{structureHero.headlineAccent}</em>
+              <em className="text-signal">{structureHero.headlineAccent}</em>
             </h1>
 
             <p className="mt-xl max-w-[50ch] text-lead text-ink-2">

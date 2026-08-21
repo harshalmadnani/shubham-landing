@@ -233,17 +233,17 @@ export function PathwayRows() {
 
         {/* What the programme asks of you in return. */}
         <Reveal delay={120}>
-          <div className="panel-pine border-l-2 border-signal p-lg tablet:p-xl">
-            <p className="font-mono text-label uppercase text-pine-ink-2">
+          <div className="panel-night border-l-2 border-signal p-lg tablet:p-xl">
+            <p className="font-mono text-label uppercase text-night-ink-2">
               What we ask in return
             </p>
             <dl className="mt-lg grid gap-lg tablet:grid-cols-3">
               {commitments.map((commitment) => (
                 <div key={commitment.value}>
-                  <dt className="font-mono text-figure text-pine-ink">
+                  <dt className="font-mono text-figure text-night-ink">
                     {commitment.value}
                   </dt>
-                  <dd className="mt-xs max-w-[28ch] text-small text-pine-ink-2">
+                  <dd className="mt-xs max-w-[28ch] text-small text-night-ink-2">
                     {commitment.label}
                   </dd>
                 </div>

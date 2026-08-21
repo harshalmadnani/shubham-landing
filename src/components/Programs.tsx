@@ -149,11 +149,11 @@ export function Programs() {
                   to sit here were licensed and generated stand-ins; a plate
                   with the count on it says the same thing and belongs to this
                   site rather than to a stock library. */}
-              <div className="flex items-baseline justify-between gap-md border-l-2 border-signal bg-pine px-lg py-md">
-                <h2 className="text-subtitle text-pine-ink">
+              <div className="flex items-baseline justify-between gap-md border-l-2 border-signal bg-night px-lg py-md">
+                <h2 className="text-subtitle text-night-ink">
                   {category.name}
                 </h2>
-                <span className="shrink-0 font-mono text-data text-pine-ink-2">
+                <span className="shrink-0 font-mono text-data text-night-ink-2">
                   {String(category.programs.length).padStart(2, "0")}
                 </span>
               </div>

@@ -74,8 +74,8 @@ export function RouteBoard({ className }: { className?: string }) {
         </ul>
 
         {/* All four lines run into the same terminus. */}
-        <div className="flex w-[74px] shrink-0 items-center justify-center border-l border-ink bg-pine tablet:w-[92px]">
-          <p className="rotate-180 font-display text-[1.05rem] font-bold uppercase tracking-[0.3em] text-pine-ink [writing-mode:vertical-rl]">
+        <div className="flex w-[74px] shrink-0 items-center justify-center border-l border-ink bg-night tablet:w-[92px]">
+          <p className="rotate-180 font-display text-[1.05rem] font-bold uppercase tracking-[0.3em] text-night-ink [writing-mode:vertical-rl]">
             Hired
           </p>
         </div>

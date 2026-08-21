@@ -16,7 +16,7 @@ export function ProgramsHero() {
 
         <h1 className="mt-lg max-w-[22ch] text-mega text-ink">
           {totalProgramCount} subjects,{" "}
-          <em className="text-pine">the same four routes.</em>
+          <em className="text-signal">the same four routes.</em>
         </h1>
 
         <p className="mt-xl max-w-[52ch] text-lead text-ink-2">

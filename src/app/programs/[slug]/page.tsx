@@ -152,14 +152,14 @@ export default async function ProgramPage({ params }: PageProps) {
 
         <section className="mt-band">
           <div className="mx-auto max-w-page px-gutter tablet:px-rail">
-            <div className="panel-pine border-l-2 border-signal p-lg tablet:p-xxl">
-              <p className="font-mono text-label uppercase text-pine-ink-2">
+            <div className="panel-night border-l-2 border-signal p-lg tablet:p-xxl">
+              <p className="font-mono text-label uppercase text-night-ink-2">
                 Next departure
               </p>
-              <h2 className="mt-lg max-w-[26ch] text-title text-pine-ink">
+              <h2 className="mt-lg max-w-[26ch] text-title text-night-ink">
                 Ready to talk through {program.title}?
               </h2>
-              <p className="mt-md max-w-[52ch] text-lead text-pine-ink-2">
+              <p className="mt-md max-w-[52ch] text-lead text-night-ink-2">
                 No pressure and no commitment — a real conversation about your
                 goals and whether this programme fits them.
               </p>
