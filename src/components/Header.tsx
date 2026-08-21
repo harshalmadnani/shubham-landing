@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ButtonLink } from "@/components/Button";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 import { NavMenu } from "@/components/NavMenu";
+import { Wordmark } from "@/components/Wordmark";
 import {
   consultationMessage,
   navLinks,
@@ -50,14 +50,7 @@ export function Header() {
           aria-label={site.name}
           className="shrink-0"
         >
-          <Image
-            src={site.logo.primary}
-            alt={site.name}
-            width={site.logo.width}
-            height={site.logo.height}
-            className="h-[26px] w-auto tablet:h-[30px]"
-            priority
-          />
+          <Wordmark />
         </Link>
 
         <nav

@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
+import { Wordmark } from "@/components/Wordmark";
 import { footerColumns, footerContacts, site } from "@/content/site";
 
 /**
@@ -16,13 +16,7 @@ export function Footer() {
       <div className="mx-auto max-w-page px-gutter py-xxxl tablet:px-rail">
         <div className="grid gap-xxl desktop:grid-cols-[minmax(0,1.15fr)_minmax(0,2fr)]">
           <div>
-            <Image
-              src={site.logo.reversed}
-              alt={site.name}
-              width={site.logo.width}
-              height={site.logo.height}
-              className="h-[30px] w-auto"
-            />
+            <Wordmark tone="dark" className="text-night-ink" />
             <p className="mt-lg max-w-[34ch] text-body text-night-ink-2">
               {site.description}
             </p>
