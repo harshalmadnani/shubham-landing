@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 // `output: "export"` requires metadata routes to declare themselves static.
 export const dynamic = "force-static";
 
-const BASE = "https://www.avirowork.com";
+const BASE = "https://avirowork.com";
 
 export default function robots(): MetadataRoute.Robots {
   return {

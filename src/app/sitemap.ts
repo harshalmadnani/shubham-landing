@@ -7,7 +7,7 @@ import { programDetails } from "@/content/programDetails";
 // `output: "export"` requires metadata routes to declare themselves static.
 export const dynamic = "force-static";
 
-const BASE = "https://www.avirowork.com";
+const BASE = "https://avirowork.com";
 
 /**
  * Emitted as a static sitemap.xml at build time.

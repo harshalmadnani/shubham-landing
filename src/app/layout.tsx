@@ -24,7 +24,7 @@ const instrumentSans = Instrument_Sans({
 export const metadata: Metadata = {
   // Absolute URLs are needed for share previews; relative ones resolve against
   // this base rather than against whatever host happens to serve the page.
-  metadataBase: new URL("https://www.avirowork.com"),
+  metadataBase: new URL("https://avirowork.com"),
   title: `${site.name} — IT Training & Placement Support`,
   description: site.description,
   alternates: { canonical: "/" },
