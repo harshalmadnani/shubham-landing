@@ -20,7 +20,7 @@
   /* Colour.
 
      A near-white ground with the warmth taken out of it, near-black ink, and
-     one vermilion that only ever marks the thing you should look at next.
+     one blue that only ever marks the thing you should look at next.
      `accent-ink` is the same hue darkened to clear 4.5:1 on light surfaces and
      is the only one allowed to set text below display size. */
   --color-canvas: #fcfcfb;
@@ -52,6 +52,13 @@
   --color-accent-soft: #e8f0fd;
   /* Legible against night, where the base accent sits under 3:1. */
   --color-accent-bright: #74a9ff;
+
+  /* WhatsApp keeps its own brand green, because the floating button only reads
+     as "this opens WhatsApp" if it looks like WhatsApp. The label is `ink`,
+     not white: white on this green is 1.98:1 — the worst contrast a primary
+     action can have — where ink is 9.7:1. */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-deep: #1dbb59;
 
   /* Type.
 

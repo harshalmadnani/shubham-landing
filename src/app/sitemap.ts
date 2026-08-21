@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { legalDocuments } from "@/content/legal";
 import { processes } from "@/content/processes";
 import { programDetails } from "@/content/programDetails";
 
@@ -25,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     { url: `${BASE}/about/`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/contact/`, changeFrequency: "monthly", priority: 0.7 },
     {
       url: `${BASE}/how-it-works/`,
       changeFrequency: "monthly",
@@ -39,6 +41,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...pages,
+    // The policies are low priority but they need to be indexable: a candidate
+    // checking whether a training provider has published refund terms is
+    // exactly the kind of visitor worth having.
+    ...legalDocuments.map((document) => ({
+      url: `${BASE}/legal/${document.slug}/`,
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    })),
     ...programDetails.map((program) => ({
       url: `${BASE}/programs/${program.slug}/`,
       changeFrequency: "monthly" as const,

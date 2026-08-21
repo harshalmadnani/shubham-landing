@@ -179,7 +179,7 @@ export function ProcessPage({ content }: { content: ProcessContent }) {
           <RichTextContent value={content.pathwayNote} tone="dark" />{" "}
           <Link
             href="/training-structure"
-            className="link-sweep text-chalk hover:text-accent-bright"
+            className="link-sweep -my-1.5 inline-block py-1.5 text-chalk hover:text-accent-bright"
           >
             See the four pathways
           </Link>

@@ -34,12 +34,12 @@ export function Hero() {
         <p className="mt-8 max-w-xl text-lead text-ink-2">{hero.body}</p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
-          <ButtonLink href={whatsAppUrl(consultationMessage)}>
-            Book a free consultation
-          </ButtonLink>
-          <ButtonLink href="/programs" variant="outline">
-            Browse programs
+          <ButtonLink href={hero.primaryCta.href}>
+            {hero.primaryCta.label}
             <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
+          </ButtonLink>
+          <ButtonLink href={whatsAppUrl(consultationMessage)} variant="outline">
+            {hero.secondaryCta.label}
           </ButtonLink>
         </div>
 

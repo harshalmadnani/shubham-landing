@@ -3,6 +3,8 @@ import type {
   Expectation,
   FaqItem,
   IncludedGroup,
+  Inclusion,
+  JourneyStage,
   Pathway,
   RichText,
   Service,
@@ -371,3 +373,122 @@ export const faqs: readonly FaqItem[] = [
     answer: "Breaks of up to 30 days are fine — tell your mentor and we will hold your place. Beyond 30 days a rejoining fee applies, since your batch will have moved on and you would pick up with a later one. Either way, talk to us early: pausing is much easier to arrange before you fall behind."
   },
 ];
+
+/**
+ * What every programme includes, as one scannable strip.
+ *
+ * Each label carries a line of detail, because the labels on their own are the
+ * same seven words every training provider uses. "Placement Support" means
+ * nothing until it says what it is and, just as importantly, what it is not.
+ */
+export const inclusions: readonly Inclusion[] = [
+  {
+    label: "Live training",
+    detail: "Taught live by a practitioner, not pre-recorded video you work through alone.",
+  },
+  {
+    label: "50 hours",
+    detail: "Per programme as standard — 60 for IT Support Analyst, 70 for the AI Consultant and cloud engineering tracks.",
+  },
+  {
+    label: "Projects",
+    detail: "Five briefs in your own stack, each scoped, designed, built and reviewed the way a delivery team would.",
+  },
+  {
+    label: "Mentoring",
+    detail: "One mentor who stays with you for the whole programme, rather than whoever is free that week.",
+  },
+  {
+    label: "Resume & LinkedIn",
+    detail: "Both rewritten around the work you actually built, and positioned for the roles you are targeting.",
+  },
+  {
+    label: "Interview prep",
+    detail: "Mock interviews on the technical and the competency side, including defending the projects you built.",
+  },
+  {
+    label: "Placement support",
+    detail: "Your profile put in front of employers, and the search continues until you are hired.",
+  },
+];
+
+/**
+ * The candidate's journey in five stages.
+ *
+ * This is the same programme described elsewhere as four priced services; the
+ * five stages are what it feels like from the outside, and each names the
+ * service that does the work so the two views cannot drift apart. Somebody
+ * deciding whether to enrol thinks in stages, not in line items.
+ */
+export const journey: readonly JourneyStage[] = [
+  {
+    name: "Assess",
+    body: "A free consultation to work out which role is realistic from where you are standing, and which programme gets you there. If the answer is that we are not the right fit, you get told that on the call.",
+    service: "Free consultation",
+  },
+  {
+    name: "Learn",
+    body: "Live instructor-led sessions covering the syllabus, with daily practice between them and recordings for anything you miss. Certifications are earned as you go rather than at the end.",
+    service: "Training",
+  },
+  {
+    name: "Build",
+    body: "Five projects in your own technology, each taken through briefing, architecture, supervised build and review. This is where the syllabus turns into a portfolio you can defend.",
+    service: "Bootcamp",
+  },
+  {
+    name: "Prepare",
+    body: "Resume and LinkedIn rewritten around what you built, plus mock interviews on both the technical and competency side. You are interview-ready before you start applying, not after.",
+    service: "Mentoring",
+  },
+  {
+    name: "Apply",
+    body: "Your profile goes out to employers and the search runs until you are hired, with the applications kept consistent rather than done in bursts.",
+    service: "Resume marketing",
+  },
+];
+
+/**
+ * What placement support actually is.
+ *
+ * The phrase is the most over-promised one in this industry, so this section
+ * exists to say what is and is not being offered. The last entry is a
+ * deliberate non-promise: the campaign runs until you are hired, which is not
+ * the same as a guaranteed job, and saying so here is worth more than the
+ * enquiries it costs.
+ */
+export const placementSupport = {
+  heading: "Placement support, spelled out",
+  lead: "It is the part that usually stops the day a course ends. Here it starts there, and it is included in the programme rather than sold as an upgrade.",
+  includes: [
+    {
+      title: "Your profile, rebuilt",
+      body: "LinkedIn and the job boards that matter in your market rewritten around the titles and skills recruiters actually search on.",
+    },
+    {
+      title: "A resume per application",
+      body: "Not one resume but versions, each written against the job description in front of it and formatted to clear the automated screen that reads it first.",
+    },
+    {
+      title: "Applications sent for you",
+      body: "Applications go out daily from our side, matched to roles and employers where your profile has a genuine chance — targeted rather than sprayed.",
+    },
+    {
+      title: "Recruiters approached directly",
+      body: "In-house recruiters, the agencies that supply them, and the managers the role reports to, contacted with a message written for them.",
+    },
+    {
+      title: "Interview preparation",
+      body: "Mock interviews on the technical and the competency side, including defending the projects you built during the bootcamp.",
+    },
+    {
+      title: "The campaign is adjusted",
+      body: "What comes back changes what goes out next — the targeting, the positioning and the volume are reviewed rather than left running.",
+    },
+  ],
+  /** Said plainly, and on the home page rather than buried in a FAQ. */
+  limit: {
+    title: "What it is not",
+    body: "It is not a guaranteed job offer, and nobody honest can sell you one. The campaign continues until you are hired rather than stopping at a fixed number of weeks — that is the commitment, and it is the one we can actually keep.",
+  },
+} as const;

@@ -446,3 +446,17 @@ export const processes: readonly ProcessPage[] = [
 export function findProcess(slug: string): ProcessPage | undefined {
   return processes.find((process) => process.slug === slug);
 }
+
+/**
+ * The five bootcamp projects, exported on their own.
+ *
+ * Every programme's page shows these, because the projects are the same five
+ * stages in whatever technology you enrolled in — that is the design of the
+ * bootcamp, not a shortcut. Exported from here rather than copied onto the
+ * programme pages so there is one description of them on the site.
+ */
+export const bootcampProjects =
+  findProcess("bootcamp")?.details?.find((detail) =>
+    detail.title.startsWith("The five projects"),
+  )?.items ?? [];
+

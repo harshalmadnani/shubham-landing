@@ -23,7 +23,7 @@ export function Footer() {
                   {contact.href ? (
                     <a
                       href={contact.href}
-                      className="link-sweep transition-colors hover:text-chalk"
+                      className="link-sweep -my-1.5 inline-block py-1.5 transition-colors hover:text-chalk"
                     >
                       {contact.label}
                     </a>
@@ -35,7 +35,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="grid gap-10 tablet:grid-cols-3 desktop:col-span-7 desktop:col-start-6">
+          <div className="grid gap-10 tablet:grid-cols-2 desktop:col-span-7 desktop:col-start-6 desktop:grid-cols-4">
             {footerColumns.map((column) => (
               <div key={column.heading}>
                 <p className="text-micro text-chalk-2">{column.heading}</p>
@@ -44,7 +44,7 @@ export function Footer() {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="text-small text-chalk transition-colors hover:text-accent-bright"
+                        className="-my-1.5 inline-block py-1.5 text-small text-chalk transition-colors hover:text-accent-bright"
                       >
                         {link.label}
                       </Link>

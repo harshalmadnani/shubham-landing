@@ -20,10 +20,12 @@ import type { ProgramDetail } from "./types";
 export const programDetails: readonly ProgramDetail[] = [
   {
     slug: "python-full-stack-developer",
-    category: "Web Development",
+    category: "Development",
     title: "Python Full Stack Developer",
     description: "Structured, project-based training in Python-based full-stack development — front-end frameworks through to backend APIs, databases, and cloud deployment.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Frontend with React",
@@ -81,10 +83,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "java-full-stack-developer",
-    category: "Web Development",
+    category: "Development",
     title: "Java Full Stack Developer",
     description: "Structured, project-based training in Java-based full-stack development — front-end frameworks through to backend APIs, databases, and cloud deployment.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Frontend with Angular",
@@ -142,10 +146,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "data-science-and-machine-learning",
-    category: "Data & Analytics",
+    category: "Data",
     title: "Data Science & AI",
     description: "Structured training in Python, SQL, applied statistics, and practical machine learning, with a portfolio of real projects by the end of the program.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Python & Statistical Foundations",
@@ -203,10 +209,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "data-analyst",
-    category: "Data & Analytics",
+    category: "Data",
     title: "Data Analyst",
     description: "Structured training in querying, cleaning, and visualizing data to answer real business questions — a practical entry point into data work.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "SQL for Analysis",
@@ -264,10 +272,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "data-scientist",
-    category: "Data & Analytics",
+    category: "Data",
     title: "Data Scientist",
     description: "Structured training in statistical modeling, machine learning, and data pipelines — for learners aiming at the modeling-heavy end of data work rather than analysis alone.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Statistics & Experimental Design",
@@ -325,10 +335,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "ai-product-manager",
-    category: "AI Careers",
+    category: "AI",
     title: "AI Product Manager",
     description: "Structured training in scoping and shipping AI-powered products — bridging technical teams and business goals without needing to build the models yourself.",
     hours: 50,
+    prerequisites: "Some professional background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "What AI Can and Cannot Do",
@@ -386,10 +398,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "ai-consultant",
-    category: "AI Careers",
+    category: "AI",
     title: "AI Consultant",
     description: "Structured training in advising organizations on where and how AI actually fits their operations — grounded in practical implementation, not hype.",
     hours: 70,
+    prerequisites: "Some professional background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "AI Fluency for Advisory Work",
@@ -447,10 +461,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "aws-ai-cloud-engineer",
-    category: "AI Careers",
+    category: "AI",
     title: "AWS AI Cloud Engineer",
     description: "Structured training in building and deploying AI/ML solutions on AWS — from model foundations through MLOps and production monitoring.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "AWS Foundations for AI Workloads",
@@ -508,10 +524,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "azure-ai-cloud-engineer",
-    category: "AI Careers",
+    category: "AI",
     title: "Azure AI Cloud Engineer",
     description: "Structured training in building and deploying AI/ML solutions on Microsoft Azure — from model foundations through MLOps and production monitoring.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "Azure Foundations for AI Workloads",
@@ -569,10 +587,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "google-ai-cloud-engineer",
-    category: "AI Careers",
+    category: "AI",
     title: "Google AI Cloud Engineer",
     description: "Structured training in building and deploying AI/ML solutions on Google Cloud — from model foundations through MLOps and production monitoring.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "Google Cloud Foundations for AI",
@@ -630,10 +650,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "gen-ai-engineer",
-    category: "AI Careers",
+    category: "AI",
     title: "Gen AI Engineer",
     description: "Structured training in building applications on large language models — prompt design, fine-tuning, and deploying generative AI features into production.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "Transformers & LLM Internals",
@@ -691,10 +713,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "ai-engineer",
-    category: "AI Careers",
+    category: "AI",
     title: "AI Engineer",
     description: "Structured, foundational training across the AI/ML lifecycle — model foundations, deep learning, ethics, and deployment — for learners building toward a general AI engineering role.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "Python & ML Foundations",
@@ -752,10 +776,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "ai-ml-engineer",
-    category: "AI Careers",
+    category: "AI",
     title: "AI/ML Engineer",
     description: "Structured training in building, training, and evaluating machine learning models — from foundations through deep learning architectures to production deployment.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "Software Engineering for ML",
@@ -813,10 +839,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "machine-learning-engineer",
-    category: "AI Careers",
+    category: "AI",
     title: "Machine Learning Engineer",
     description: "Structured training focused on the engineering side of machine learning — building reliable training pipelines and deployment infrastructure around working models.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "ML Fundamentals in Practice",
@@ -874,10 +902,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "agentic-ai-engineer",
-    category: "AI Careers",
+    category: "AI",
     title: "Agentic AI Engineer",
     description: "Structured training in building autonomous, multi-step AI agents — orchestrating tools, memory, and decision-making on top of large language models.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "Agent Foundations",
@@ -935,10 +965,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "ai-prompt-engineer",
-    category: "AI Careers",
+    category: "AI",
     title: "AI Prompt Engineer",
     description: "Structured training in designing, testing, and refining prompts that reliably get large language models to do what you need — a practical, low-code entry point into AI work.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "ai-training",
     modules: [
       {
         title: "Prompting Fundamentals",
@@ -996,10 +1028,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "ai-devops-engineer",
-    category: "AI Careers",
+    category: "AI",
     title: "AI DevOps Engineer",
     description: "Structured training in the automation and infrastructure practices specific to shipping AI systems — containerizing models, CI/CD for ML, and continuous monitoring in production.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "ai-training",
     modules: [
       {
         title: "DevOps Foundations",
@@ -1057,10 +1091,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "ai-business-analyst",
-    category: "AI Careers",
+    category: "AI",
     title: "AI Business Analyst",
     description: "Structured training in applying AI and data analysis to real business decisions — bridging traditional business analysis with the AI tools increasingly built into that work.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "ai-training",
     modules: [
       {
         title: "Business Analysis Core",
@@ -1118,10 +1154,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "ai-data-analyst",
-    category: "AI Careers",
+    category: "AI",
     title: "AI Data Analyst",
     description: "Structured training in using AI-assisted tools and machine learning fundamentals to extract insight from data — an AI-forward track for analyst-minded learners.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "ai-training",
     modules: [
       {
         title: "Analysis Foundations",
@@ -1179,10 +1217,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "ai-quality-analyst",
-    category: "AI Careers",
+    category: "AI",
     title: "AI Quality Analyst",
     description: "Structured training in testing and validating AI systems — model auditing, bias checks, and quality processes specific to AI, not just traditional QA.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "ai-training",
     modules: [
       {
         title: "QA Foundations",
@@ -1240,10 +1280,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "google-cloud-engineer",
-    category: "Cloud",
+    category: "Cloud & DevOps",
     title: "Google Cloud Engineer",
     description: "Structured training across the core Google Cloud services — compute, storage, networking, and identity — through to automation and monitoring, aligned to Google Cloud certification paths.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "GCP Foundations & IAM",
@@ -1301,10 +1343,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "aws-cloud-engineer",
-    category: "Cloud",
+    category: "Cloud & DevOps",
     title: "AWS Cloud Engineer",
     description: "Structured training across the core AWS services — compute, storage, networking, and identity — through to automation and monitoring, aligned to AWS certification paths.",
     hours: 70,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "AWS Foundations & IAM",
@@ -1362,10 +1406,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "azure-cloud-engineer",
-    category: "Cloud",
+    category: "Cloud & DevOps",
     title: "Azure Cloud Engineer",
     description: "Structured training across the core Microsoft Azure services — compute, storage, networking, and identity — through to automation and monitoring, aligned to Azure certification paths.",
     hours: 70,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Azure Foundations & Entra ID",
@@ -1423,10 +1469,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "azure-data-engineering",
-    category: "Cloud",
+    category: "Data",
     title: "Azure Data Engineering",
     description: "Specialized, hands-on training in building data pipelines on Microsoft Azure, for learners ready to go deeper than cloud fundamentals.",
     hours: 50,
+    prerequisites: "Cloud fundamentals recommended first",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Data Modelling & SQL",
@@ -1484,10 +1532,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "aws-data-engineering",
-    category: "Cloud",
+    category: "Data",
     title: "AWS Data Engineering",
     description: "Specialized, hands-on training in building data pipelines on Amazon Web Services, for learners ready to go deeper than cloud fundamentals.",
     hours: 50,
+    prerequisites: "Cloud fundamentals recommended first",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Data Modelling & SQL",
@@ -1545,10 +1595,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "google-data-engineering",
-    category: "Cloud",
+    category: "Data",
     title: "Google Data Engineering",
     description: "Specialized, hands-on training in building data pipelines on Google Cloud, for learners ready to go deeper than cloud fundamentals.",
     hours: 50,
+    prerequisites: "Cloud fundamentals recommended first",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Data Modelling & SQL",
@@ -1610,6 +1662,8 @@ export const programDetails: readonly ProgramDetail[] = [
     title: "Cyber Security Analyst",
     description: "Structured training in identifying, monitoring, and responding to real security threats — the day-to-day work of a security analyst, not just theory.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Security Operations Foundations",
@@ -1671,6 +1725,8 @@ export const programDetails: readonly ProgramDetail[] = [
     title: "Cybersecurity Engineering",
     description: "Structured training in designing and securing systems end-to-end — network defense, offensive testing, and cloud security — for learners aiming at a hands-on engineering role rather than analyst work alone.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Secure Architecture & Networks",
@@ -1728,10 +1784,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "devops-engineer",
-    category: "DevOps",
+    category: "Cloud & DevOps",
     title: "DevOps Engineer",
     description: "Structured training in the pipelines, automation, and infrastructure practices that connect development and operations.",
     hours: 50,
+    prerequisites: "Some technical background helpful",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Linux, Git & Foundations",
@@ -1789,10 +1847,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "it-analyst",
-    category: "Analyst Roles",
+    category: "Business",
     title: "IT Analyst",
     description: "Structured training in translating business needs into technical requirements — the connective role between IT teams and the people who rely on them.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Business & IT Systems",
@@ -1850,10 +1910,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "business-analyst",
-    category: "Analyst Roles",
+    category: "Business",
     title: "Business Analyst",
     description: "Structured training in analyzing processes and data to support real business decisions, without requiring a technical background to start.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Business Analysis Foundations",
@@ -1915,6 +1977,8 @@ export const programDetails: readonly ProgramDetail[] = [
     title: "IT Support Analyst",
     description: "Structured training in diagnosing hardware, network, and systems issues, and delivering the day-to-day technical support that keeps a business running.",
     hours: 60,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Hardware, OS & Endpoints",
@@ -1976,6 +2040,8 @@ export const programDetails: readonly ProgramDetail[] = [
     title: "Microsoft 365 IT Support",
     description: "Structured training in supporting and administering Microsoft 365 environments — identity, email, file sharing, and end-user troubleshooting.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Microsoft 365 Foundations",
@@ -2033,10 +2099,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "dotnet-full-stack-developer",
-    category: "Web Development",
+    category: "Development",
     title: ".NET Full Stack Developer",
     description: "Structured, project-based training in the Microsoft stack — C# and ASP.NET Core on the server, a modern JavaScript framework on the client, and Azure for deployment.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Frontend Development Stack",
@@ -2094,10 +2162,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "quality-analyst",
-    category: "Analyst Roles",
+    category: "QA",
     title: "Quality Analyst",
     description: "Structured training in software testing and QA automation — building the test suites and defect workflows that catch problems before your users do.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Testing Foundations",
@@ -2155,10 +2225,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "salesforce-administrator-developer",
-    category: "Enterprise Platforms",
+    category: "Business",
     title: "Salesforce Administrator & Developer",
     description: "Structured training across both Salesforce tracks — configuring and administering an org, then extending it with Apex, Lightning components and integrations.",
     hours: 50,
+    prerequisites: "Beginner-friendly",
+    priceKey: "regular-training",
     modules: [
       {
         title: "Platform Fundamentals & Org Setup",
@@ -2216,10 +2288,12 @@ export const programDetails: readonly ProgramDetail[] = [
   },
   {
     slug: "sap-consultant",
-    category: "Enterprise Platforms",
+    category: "Business",
     title: "SAP Consultant",
     description: "Structured training across the functional, technical and Basis sides of SAP S/4HANA — the platform that runs finance, supply chain and operations at enterprise scale.",
     hours: 50,
+    prerequisites: "Some professional background helpful",
+    priceKey: "regular-training",
     modules: [
       {
         title: "S/4HANA Foundations",
@@ -2288,3 +2362,18 @@ export function countTopics(program: ProgramDetail): number {
     0,
   );
 }
+
+/**
+ * How long a programme takes in calendar weeks.
+ *
+ * Derived rather than stored, because it is a function of the hours and the
+ * delivery pattern: sessions run one hour a day on weekdays, so a 50-hour
+ * programme is fifty weekdays, or ten weeks. If the delivery pattern ever
+ * changes, it changes here once instead of in thirty-seven places.
+ */
+export const SESSIONS_PER_WEEK = 5;
+
+export function weeksForHours(hours: number): number {
+  return Math.round(hours / SESSIONS_PER_WEEK);
+}
+

@@ -141,7 +141,7 @@ export default function AboutPage() {
                     {contact.href ? (
                       <a
                         href={contact.href}
-                        className="link-sweep text-chalk hover:text-accent-bright"
+                        className="link-sweep -my-1.5 inline-block py-1.5 text-chalk hover:text-accent-bright"
                       >
                         {contact.label}
                       </a>

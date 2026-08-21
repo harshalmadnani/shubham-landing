@@ -81,7 +81,7 @@ function StageCell({
         href={whatsAppUrl(`Hi! I'd like to know more about the ${stage.title}.`)}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-8 self-start text-label text-ink transition-colors duration-200 hover:text-accent-ink"
+        className="mt-8 -mb-2 self-start py-2 text-label text-ink transition-colors duration-200 hover:text-accent-ink"
       >
         <span className="link-sweep">Ask about this stage</span>
       </a>

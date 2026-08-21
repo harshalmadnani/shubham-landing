@@ -54,10 +54,11 @@ export type NavLink = {
  * Entries whose href carries a `#` are sections of the home page; the rest are
  * pages in their own right, and the header highlights whichever one you are on.
  *
- * Six entries is the ceiling before the row starts wrapping, so "Who We Help"
- * and the FAQ live in the footer rather than the header. Both sections are
- * still on the home page and still linked — they are just no longer competing
- * with the pages somebody actually navigates to.
+ * Six entries is the ceiling before the row starts wrapping, and Contact takes
+ * the sixth. "Who We Help" and the FAQ live in the footer rather than the
+ * header: both sections are still on the home page and still linked, they are
+ * just no longer competing with the pages somebody actually navigates to.
+ * Anything added from here has to displace something.
  *
  * "How It Works" carries children, so it opens a menu rather than navigating.
  * Its own href is still real — the overview page — which is what the footer
@@ -94,14 +95,23 @@ export const navLinks: readonly NavLink[] = [
     ],
   },
   { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const hero = {
   eyebrow: "IT training & placement support",
-  /** Split so the second half can carry the brand gradient. */
-  headline: "Structured training.",
-  headlineAccent: "Real placement support.",
-  body: "AVIROwork Consultancy trains people for IT careers in web development, data, and cloud, including the AI skills employers now expect — and stays with you through placement, not just through the syllabus.",
+  /** Split so the second half can carry the accent colour. */
+  headline: "Develop the skills",
+  headlineAccent: "and build up your career.",
+  body: "Training in IT, together with mentoring and assistance with job placement.",
+  /**
+   * Explore Programs leads, because somebody arriving cold wants to see what is
+   * taught before they will agree to talk to anyone. The consultation is the
+   * second button here and the floating WhatsApp button everywhere else, so it
+   * is never more than one tap away.
+   */
+  primaryCta: { label: "Explore Programs", href: "/programs" },
+  secondaryCta: { label: "Free Consultation" },
 } as const;
 
 export const ctaBanner = {
@@ -136,9 +146,18 @@ export const footerColumns = [
   {
     heading: "Get in touch",
     links: [
+      { label: "Contact", href: "/contact" },
       { label: "Book a consultation", href: "/training-structure#what-it-costs" },
       { label: "info@avirowork.com", href: "mailto:info@avirowork.com" },
       { label: "FAQ", href: "/#faq" },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { label: "Terms and conditions", href: "/legal/terms" },
+      { label: "Privacy policy", href: "/legal/privacy" },
+      { label: "Refund policy", href: "/legal/refunds" },
     ],
   },
 ] as const;

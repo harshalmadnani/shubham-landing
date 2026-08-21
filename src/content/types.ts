@@ -99,5 +99,35 @@ export type ProgramDetail = {
   readonly title: string;
   readonly description: string;
   readonly hours: number;
+  /**
+   * What somebody needs before starting, in the programme's own words. Carried
+   * here as well as in the catalogue `meta` line because a candidate reading
+   * the curriculum is deciding whether they can do it, and sending them back
+   * to the card to find out is the wrong way round.
+   */
+  readonly prerequisites: string;
+  /**
+   * Which of the priced services covers this programme's training. The AI
+   * track is priced separately from the rest, so this cannot be inferred from
+   * the hours. Kept as the price *key* rather than an amount: the amount
+   * depends on the region the reader has selected.
+   */
+  readonly priceKey: "regular-training" | "ai-training";
   readonly modules: readonly CurriculumModule[];
+};
+
+/** One item in the "Why AVIROwork" strip — what every programme includes. */
+export type Inclusion = {
+  readonly label: string;
+  /** One line saying what the label actually means, so it is not just a word. */
+  readonly detail: string;
+};
+
+/** One stage of the candidate's journey, from first call to first offer. */
+export type JourneyStage = {
+  /** Single word, so the five read as a sequence rather than five headings. */
+  readonly name: string;
+  readonly body: string;
+  /** Which of the four priced services does the work in this stage. */
+  readonly service: string;
 };
