@@ -1,46 +1,55 @@
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Section, SectionHead } from "@/components/Section";
 import { expectations } from "@/content/sections";
+import type { Expectation } from "@/content/types";
 
-/**
- * Three promises, set large.
+/*
+ * Three commitments, three surfaces.
  *
- * Full-width statements separated by rules rather than three cards in a row.
- * These are the site's commitments, and a commitment set at 2.5rem reads like
- * one; the same words inside a bordered box read like a feature.
+ * The tones come from the content model, so the copy still decides which panel
+ * is loudest: ink for the first, the accent for the one we most want read, and
+ * a plain card for the one about numbers we do not have yet.
  */
+const panels: Record<Expectation["tone"], string> = {
+  inverse: "bg-night text-chalk",
+  primary: "bg-accent-ink text-canvas",
+  outline: "bg-surface text-ink",
+};
+
+const bodies: Record<Expectation["tone"], string> = {
+  inverse: "text-chalk-2",
+  primary: "text-canvas/85",
+  outline: "text-ink-2",
+};
+
 export function WhatYouCanExpect() {
   return (
-    <section id="what-to-expect" className="mt-band">
-      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
-        <SectionHeading
-          label="Our side of it"
-          title="What you can expect from us"
-        />
+    <Section id="what-you-can-expect" label="What you can expect" tone="surface">
+      <SectionHead
+        title={
+          <>
+            No guarantees — here&apos;s what we <em>actually commit to</em>
+          </>
+        }
+        lead="Plain commitments we're willing to put in writing, rather than outcome promises nobody can make."
+      />
 
-        <ol className="mt-xxl border-t border-ink">
-          {expectations.map((expectation, index) => (
-            <Reveal key={expectation.title} delay={index * 80}>
-              <li className="grid gap-md border-b border-rule py-xl desktop:grid-cols-[4rem_minmax(0,1fr)] desktop:gap-xl">
-                <span
-                  aria-hidden="true"
-                  className="font-mono text-label text-signal-text"
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="max-w-[26ch] text-title text-ink">
-                    {expectation.title}
-                  </h3>
-                  <p className="mt-md max-w-[58ch] text-lead text-ink-2">
-                    {expectation.body}
-                  </p>
-                </div>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
+      <div className="mt-16 grid gap-4 desktop:grid-cols-3 desktop:gap-6">
+        {expectations.map((expectation, index) => (
+          <Reveal key={expectation.title} delay={index * 70}>
+            <div
+              className={`flex h-full flex-col rounded-lg p-8 tablet:p-10 ${
+                panels[expectation.tone]
+              }`}
+            >
+              <h3 className="text-title">{expectation.title}</h3>
+              <p className={`mt-4 text-body ${bodies[expectation.tone]}`}>
+                {expectation.body}
+              </p>
+            </div>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

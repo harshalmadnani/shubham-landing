@@ -5,7 +5,6 @@ import { CtaBanner } from "@/components/CtaBanner";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ProcessPage } from "@/components/ProcessPage";
-import { ScrollToTop } from "@/components/ScrollToTop";
 import { findProcess, processes } from "@/content/processes";
 import { site } from "@/content/site";
 
@@ -40,12 +39,11 @@ export default async function ProcessRoute({
   return (
     <div className="flex flex-1 flex-col">
       <Header />
-      <main id="main" className="flex flex-1 flex-col">
+      <main className="flex flex-1 flex-col">
         <ProcessPage content={content} />
         <CtaBanner />
       </main>
       <Footer />
-      <ScrollToTop />
     </div>
   );
 }

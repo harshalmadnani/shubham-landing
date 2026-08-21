@@ -1,71 +1,41 @@
 import { ButtonLink } from "@/components/Button";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
+import { Section, SectionHead } from "@/components/Section";
 import { consultationMessage, whatsAppUrl } from "@/content/site";
 import { quotePanel, quoteSteps } from "@/content/trainingStructure";
 
 /**
- * How somebody goes from a published price to a place on a batch.
+ * How someone goes from a published price to a place on a batch.
  *
- * The panel states the pricing principle; the three steps are the booking
- * itself, numbered because they genuinely happen in that order.
+ * The prices are on the page already, so this explains the arrangement behind
+ * them — stage by stage rather than a bundle — and the three steps to
+ * enrolling.
  */
 export function QuoteProcess() {
   return (
-    <section id="what-it-costs" className="mt-band">
-      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
-        <div className="grid gap-xxl desktop:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] desktop:gap-xxxl">
-          <Reveal>
-            <div>
-              <div className="flex items-center gap-sm">
-                <span
-                  aria-hidden="true"
-                  className="h-[7px] w-[7px] shrink-0 rounded-full bg-signal"
-                />
-                <p className="font-mono text-label uppercase text-ink-3">
-                  How pricing works
-                </p>
-              </div>
-              <h2 className="mt-lg max-w-[20ch] text-title text-ink">
-                {quotePanel.heading}
-              </h2>
-              <p className="mt-md max-w-[52ch] text-body text-ink-2">
-                {quotePanel.body}
+    <Section id="what-it-costs" label="How pricing works" tone="surface">
+      <SectionHead title={quotePanel.heading} lead={quotePanel.body} />
+
+      <div className="mt-16 grid gap-4 tablet:grid-cols-3 desktop:gap-6">
+        {quoteSteps.map((step, index) => (
+          <Reveal key={step.title} delay={index * 60}>
+            <div className="h-full rounded-lg bg-card p-8">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-surface text-micro text-ink-2">
+                {index + 1}
+              </span>
+              <p className="mt-5 text-heading">{step.title}</p>
+              <p className="mt-2 text-small text-ink-2">
+                <RichTextContent value={step.body} />
               </p>
-              <ButtonLink
-                href={whatsAppUrl(consultationMessage)}
-                className="mt-xl"
-              >
-                Book a free consultation
-              </ButtonLink>
             </div>
           </Reveal>
-
-          <Reveal delay={100}>
-            <ol className="border-t border-ink">
-              {quoteSteps.map((step, index) => (
-                <li
-                  key={step.title}
-                  className="flex gap-md border-b border-rule py-lg"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="mt-[2px] font-mono text-label text-signal-text"
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <p className="text-card text-ink">{step.title}</p>
-                    <p className="mt-xxs max-w-[52ch] text-small text-ink-2">
-                      <RichTextContent value={step.body} />
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
-        </div>
+        ))}
       </div>
-    </section>
+
+      <ButtonLink href={whatsAppUrl(consultationMessage)} className="mt-12">
+        Book a free consultation
+      </ButtonLink>
+    </Section>
   );
 }

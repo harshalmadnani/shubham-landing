@@ -1,40 +1,23 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, JetBrains_Mono, Newsreader } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
 
 import { ChatWithUs } from "@/components/ChatWithUs";
-import { ScrollProgress } from "@/components/ScrollProgress";
 import { site } from "@/content/site";
 
 import "./globals.css";
 
 /**
- * Three faces, three jobs.
+ * One family, every job.
  *
- * Bricolage sets the signs — a grotesque with enough width and weight to hold
- * a wall at 5rem and enough character not to read as a system default.
- * Newsreader is what you actually read: a screen serif, because this site is
- * long-form and a serif invites reading where a sans invites skimming. Mono
- * carries the timetable register — route codes, prices, counts, labels.
+ * The site used to run three faces — a display serif, a grotesk and a mono —
+ * which is a lot of personality for a page whose job is to be read quickly.
+ * Instrument Sans covers display and body from 400 to 600; the personality now
+ * comes from scale, space and one accent colour rather than from typefaces.
  */
-const bricolage = Bricolage_Grotesque({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-bricolage",
-  display: "swap",
-});
-
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
   weight: ["400", "500", "600"],
-  variable: "--font-newsreader",
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-jetbrains",
+  variable: "--font-instrument-sans",
   display: "swap",
 });
 
@@ -54,7 +37,6 @@ export const metadata: Metadata = {
     images: [{ url: "/og.png", width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
-    // summary_large_image, since there is now an image worth showing at size.
     card: "summary_large_image",
     title: `${site.name} — IT Training & Placement Support`,
     description: site.description,
@@ -67,14 +49,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="en-GB"
-      className={`${bricolage.variable} ${newsreader.variable} ${jetbrains.variable} h-full`}
+      lang="en"
+      className={`${instrumentSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <a href="#main" className="skip-link">
-          Skip to content
-        </a>
-        <ScrollProgress />
+      <body className="min-h-full flex flex-col bg-canvas text-ink">
         {children}
         {/* Every page gets the WhatsApp route, so it lives here rather than in
             each page's own composition. */}

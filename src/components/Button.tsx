@@ -1,28 +1,31 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-export type ButtonVariant = "signal" | "night" | "outline" | "ghost" | "onNight";
+export type ButtonVariant = "primary" | "light" | "outline" | "quiet" | "onNight";
 
 /*
- * Buttons are signs: square, set in mono, tracked out, and they say exactly
- * what happens. The signal variant is white on blue at 5.8:1, and deepens to
- * 8.0:1 on hover. Worth knowing if this ever changes colour again: the orange
- * this replaced could not carry white type at all (3.3:1), so it had to run an
- * ink label and a *lightening* hover. Blue needs neither workaround.
+ * Buttons are soft-cornered rectangles with a sentence-case label.
+ *
+ * No pills, no uppercase tracking, no gradient: the primary action is solid
+ * ink and everything else is quieter than it. The accent is not used as a
+ * button fill — it marks position and state elsewhere, and a page where the
+ * accent means two different things means nothing.
+ *
+ * `light` is the primary action on a dark section, and exists as a variant on
+ * purpose. Passing `bg-canvas text-ink` to `primary` instead looks like it
+ * works and does not: Tailwind resolves `bg-canvas` against `bg-ink` by
+ * stylesheet order rather than by the order they are written, and `bg-ink`
+ * wins — which rendered ink on ink, an invisible button, on every dark band.
  */
 const base =
-  "group/btn inline-flex items-center justify-center gap-xs border font-mono text-nav uppercase px-lg py-sm transition-[background-color,color,border-color,transform] duration-150 active:translate-y-px";
+  "group/btn inline-flex items-center justify-center gap-2 rounded-md px-6 py-3.5 text-label transition-colors duration-200";
 
 const variants: Record<ButtonVariant, string> = {
-  signal:
-    "border-signal bg-signal text-on-signal hover:bg-signal-hover hover:border-signal-hover",
-  night: "border-night bg-night text-night-ink hover:bg-night-deep hover:border-night-deep",
-  outline:
-    "border-rule-strong bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-paper",
-  ghost:
-    "border-transparent bg-transparent text-ink px-0 hover:text-signal-text",
-  onNight:
-    "border-night-ink/40 bg-transparent text-night-ink hover:bg-night-ink hover:text-night hover:border-night-ink",
+  primary: "bg-ink text-canvas hover:bg-ink/85",
+  light: "bg-canvas text-ink hover:bg-chalk",
+  outline: "border border-line-2 bg-transparent text-ink hover:bg-surface",
+  quiet: "px-0 text-ink hover:text-accent-ink",
+  onNight: "border border-chalk/35 bg-transparent text-chalk hover:border-chalk/60 hover:bg-night-2",
 };
 
 function classesFor(variant: ButtonVariant, className?: string) {
@@ -30,12 +33,12 @@ function classesFor(variant: ButtonVariant, className?: string) {
 }
 
 /**
- * An external link styled as a button — every WhatsApp route uses this, which
- * is why it always opens in a new tab.
+ * An external link styled as a button — used for every WhatsApp CTA, which is
+ * why it always opens in a new tab.
  */
 export function ButtonLink({
   href,
-  variant = "signal",
+  variant = "primary",
   className,
   children,
 }: {
@@ -44,15 +47,15 @@ export function ButtonLink({
   className?: string;
   children: ReactNode;
 }) {
-  const isExternal = href.startsWith("http");
+  const isExternal = href.startsWith("http") || href.startsWith("mailto:");
 
   if (isExternal) {
     return (
       <a
         href={href}
         className={classesFor(variant, className)}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       >
         {children}
       </a>
@@ -67,7 +70,7 @@ export function ButtonLink({
 }
 
 export function Button({
-  variant = "signal",
+  variant = "primary",
   className,
   children,
   ...props

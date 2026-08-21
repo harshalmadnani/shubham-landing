@@ -1,66 +1,52 @@
 import Link from "next/link";
 
 import { Wordmark } from "@/components/Wordmark";
+
 import { footerColumns, footerContacts, site } from "@/content/site";
 
-/**
- * The footer is the last signage panel on the page: night ground, mono column
- * headings, and links given real vertical room — 18px-tall link rows were
- * under the 24px minimum a touch target needs.
- */
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-band panel-night">
-      <div className="mx-auto max-w-page px-gutter py-xxxl tablet:px-rail">
-        <div className="grid gap-xxl desktop:grid-cols-[minmax(0,1.15fr)_minmax(0,2fr)]">
-          <div>
-            <Wordmark tone="dark" className="text-night-ink" />
-            <p className="mt-lg max-w-[34ch] text-body text-night-ink-2">
+    <footer id="footer" className="bg-night text-chalk">
+      <div className="mx-auto w-full max-w-page px-6 py-20 tablet:px-8 tablet:py-24">
+        <div className="grid gap-12 desktop:grid-cols-12">
+          <div className="desktop:col-span-4">
+            <Wordmark tone="dark" className="text-chalk" />
+            <p className="mt-6 max-w-xs text-body text-chalk-2">
               {site.description}
             </p>
 
-            <ul className="mt-xl flex flex-col gap-xs">
+            <ul className="mt-8 flex flex-col gap-2.5">
               {footerContacts.map((contact) => (
-                <li key={contact.label}>
+                <li key={contact.label} className="text-small text-chalk-2">
                   {contact.href ? (
                     <a
                       href={contact.href}
-                      className="inline-block py-xxs font-mono text-data text-night-ink underline decoration-night-rule underline-offset-4 transition-colors hover:decoration-signal"
+                      className="link-sweep transition-colors hover:text-chalk"
                     >
                       {contact.label}
                     </a>
                   ) : (
-                    <span className="inline-block py-xxs font-mono text-data text-night-ink-2">
-                      {contact.label}
-                    </span>
+                    contact.label
                   )}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="grid gap-xl tablet:grid-cols-3">
+          <div className="grid gap-10 tablet:grid-cols-3 desktop:col-span-7 desktop:col-start-6">
             {footerColumns.map((column) => (
               <div key={column.heading}>
-                <div className="flex items-center gap-sm">
-                  <span
-                    aria-hidden="true"
-                    className="h-[6px] w-[6px] shrink-0 rounded-full bg-signal"
-                  />
-                  <p className="font-mono text-label uppercase text-night-ink-2">
-                    {column.heading}
-                  </p>
-                </div>
-                <ul className="mt-md flex flex-col">
-                  {column.links.map((linkItem) => (
-                    <li key={linkItem.href}>
+                <p className="text-micro text-chalk-2">{column.heading}</p>
+                <ul className="mt-5 flex flex-col gap-3">
+                  {column.links.map((link) => (
+                    <li key={link.label}>
                       <Link
-                        href={linkItem.href}
-                        className="block py-[7px] text-small text-night-ink transition-colors hover:text-signal-on-night"
+                        href={link.href}
+                        className="text-small text-chalk transition-colors hover:text-accent-bright"
                       >
-                        {linkItem.label}
+                        {link.label}
                       </Link>
                     </li>
                   ))}
@@ -70,11 +56,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-xxxl flex flex-col gap-sm border-t border-night-rule pt-lg font-mono text-data text-night-ink-2 tablet:flex-row tablet:items-center tablet:justify-between">
-          <p>
+        <div className="mt-20 flex flex-col gap-2 border-t border-night-line pt-8 text-micro text-chalk-2 tablet:flex-row tablet:items-center tablet:justify-between">
+          <span>
             © {year} {site.name}
-          </p>
-          <p className="uppercase tracking-[0.14em]">{site.tagline}</p>
+          </span>
+          <span>{site.tagline}</span>
         </div>
       </div>
     </footer>

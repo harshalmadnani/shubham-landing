@@ -3,87 +3,70 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import { ArrowRightIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
 import { programCategories, totalProgramCount } from "@/content/programs";
 import { programEnquiryMessage, whatsAppUrl } from "@/content/site";
 import type { Program } from "@/content/types";
 
-const ALL = "All programmes";
+const ALL = "All programs";
 
 /**
- * A catalogue cell.
+ * A program in the catalogue: its name and its facts, and nothing else.
  *
- * Cells in a ruled grid rather than floating cards: thirty-seven bordered
- * boxes with their own shadows is what made this page feel like a directory
- * dump. The grid does the dividing, the cell just holds content.
- *
- * A vendor mark appears where one exists, drawn in ink rather than brand
- * colour — thirty-seven cells of assorted logo colours would fight the page,
- * and the ticker in the hero is where those marks get to be themselves.
+ * The paragraph each of these used to carry is on the program's own page,
+ * where somebody who has picked it will read it. Thirty-seven paragraphs
+ * stacked in a list is a page nobody reads at all.
  */
-function ProgramCell({ program }: { program: Program }) {
+function ProgramCard({ program }: { program: Program }) {
   const href =
     program.href ?? whatsAppUrl(programEnquiryMessage(program.title));
   const isExternal = href.startsWith("http");
 
-  const inner = (
+  const body = (
     <>
-      <div className="flex items-start justify-between gap-md">
-        <h3 className="text-card text-ink">{program.title}</h3>
+      <span className="flex items-start justify-between gap-4">
+        <span className="text-heading transition-colors duration-200 group-hover:text-accent-ink">
+          {program.title}
+        </span>
         {program.brand && (
           <svg
-            aria-hidden="true"
+            role="img"
+            aria-label={program.brand.label}
             viewBox={program.brand.viewBox}
             fill="currentColor"
-            className="mt-[3px] h-4 w-4 shrink-0 text-ink-3"
+            className="mt-1 h-5 w-5 shrink-0 text-ink-3"
           >
             {program.brand.paths.map((d, index) => (
               <path key={index} d={d} />
             ))}
           </svg>
         )}
-      </div>
+      </span>
 
-      <p className="mt-sm text-small text-ink-2">
-        <RichTextContent value={program.description} />
-      </p>
-
-      <div className="mt-auto pt-lg">
-        <p className="border-t border-rule pt-sm font-mono text-data text-ink-3">
+      <span className="mt-8 flex items-center justify-between gap-4">
+        <span className="text-micro text-ink-3">
           <RichTextContent value={program.meta} />
-        </p>
-        <span className="mt-sm inline-flex items-center gap-xs font-mono text-nav uppercase text-ink transition-colors group-hover:text-signal-text">
-          {program.ctaLabel}
-          <span
-            aria-hidden="true"
-            className="transition-transform duration-200 group-hover:translate-x-1"
-          >
-            →
-          </span>
         </span>
-      </div>
+        <ArrowRightIcon className="h-4 w-4 shrink-0 text-ink-3 transition-transform duration-200 group-hover:translate-x-1" />
+      </span>
     </>
   );
 
-  const cellClasses =
-    "group flex h-full flex-col bg-paper p-lg transition-colors duration-200 hover:bg-raised";
+  const cardClasses =
+    "group flex h-full flex-col justify-between rounded-lg bg-surface p-7 transition-colors duration-200 hover:bg-surface-2";
 
   if (isExternal) {
     return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={cellClasses}
-      >
-        {inner}
+      <a href={href} target="_blank" rel="noopener noreferrer" className={cardClasses}>
+        {body}
       </a>
     );
   }
 
   return (
-    <Link href={href} className={cellClasses}>
-      {inner}
+    <Link href={href} className={cardClasses}>
+      {body}
     </Link>
   );
 }
@@ -94,25 +77,24 @@ export function Programs() {
   const visibleCategories =
     activeCategory === ALL
       ? programCategories
-      : programCategories.filter(
-          (category) => category.name === activeCategory,
-        );
+      : programCategories.filter((category) => category.name === activeCategory);
 
   const tabs = [
-    { name: ALL, count: totalProgramCount },
+    { name: ALL, label: ALL, count: totalProgramCount },
     ...programCategories.map((category) => ({
       name: category.name,
+      label: category.name,
       count: category.programs.length,
     })),
   ];
 
   return (
-    <section className="mt-xxxl">
-      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
+    <section className="bg-canvas">
+      <div className="mx-auto w-full max-w-page px-6 py-20 tablet:px-8 tablet:py-24">
         <div
           role="tablist"
-          aria-label="Programme specialisations"
-          className="flex flex-wrap gap-xs border-b border-ink pb-lg"
+          aria-label="Program categories"
+          className="flex flex-wrap gap-2"
         >
           {tabs.map((tab) => {
             const isSelected = tab.name === activeCategory;
@@ -123,18 +105,14 @@ export function Programs() {
                 role="tab"
                 aria-selected={isSelected}
                 onClick={() => setActiveCategory(tab.name)}
-                className={`flex shrink-0 items-center gap-xs whitespace-nowrap border px-sm py-[9px] font-mono text-data transition-colors duration-150 ${
+                className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-micro transition-colors duration-200 ${
                   isSelected
-                    ? "border-ink bg-ink text-paper"
-                    : "border-rule-strong bg-transparent text-ink-2 hover:border-ink hover:text-ink"
+                    ? "bg-ink text-canvas"
+                    : "bg-surface text-ink-2 hover:bg-surface-2 hover:text-ink"
                 }`}
               >
-                {tab.name}
-                <span
-                  className={
-                    isSelected ? "text-paper/60" : "text-ink-3"
-                  }
-                >
+                {tab.label}
+                <span className={isSelected ? "text-canvas/60" : "text-ink-3"}>
                   {tab.count}
                 </span>
               </button>
@@ -142,25 +120,14 @@ export function Programs() {
           })}
         </div>
 
-        <div className="mt-xxl flex flex-col gap-xxxl">
+        <div className="mt-16 flex flex-col gap-20">
           {visibleCategories.map((category) => (
             <div key={category.name}>
-              {/* A signage band per specialisation. The photographs that used
-                  to sit here were licensed and generated stand-ins; a plate
-                  with the count on it says the same thing and belongs to this
-                  site rather than to a stock library. */}
-              <div className="flex items-baseline justify-between gap-md border-l-2 border-signal bg-night px-lg py-md">
-                <h2 className="text-subtitle text-night-ink">
-                  {category.name}
-                </h2>
-                <span className="shrink-0 font-mono text-data text-night-ink-2">
-                  {String(category.programs.length).padStart(2, "0")}
-                </span>
-              </div>
+              <h2 className="text-title">{category.name}</h2>
 
-              <div className="grid gap-px border-x border-b border-rule bg-rule tablet:grid-cols-2 desktop:grid-cols-3">
+              <div className="mt-8 grid gap-4 tablet:grid-cols-2 desktop:grid-cols-3 desktop:gap-6">
                 {category.programs.map((program) => (
-                  <ProgramCell key={program.title} program={program} />
+                  <ProgramCard key={program.title} program={program} />
                 ))}
               </div>
             </div>

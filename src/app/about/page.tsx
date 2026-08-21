@@ -4,11 +4,12 @@ import { ButtonLink } from "@/components/Button";
 import { CtaBanner } from "@/components/CtaBanner";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ArrowRightIcon } from "@/components/icons";
 import { AboutIllustration } from "@/components/Illustrations";
+import { PageHero } from "@/components/PageHero";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
-import { ScrollToTop } from "@/components/ScrollToTop";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Section, SectionHead } from "@/components/Section";
 import { aboutFacts, aboutHero, principles, reach, whatWeDo } from "@/content/about";
 import {
   consultationMessage,
@@ -27,167 +28,136 @@ export default function AboutPage() {
   return (
     <div className="flex flex-1 flex-col">
       <Header />
-      <main id="main" className="flex flex-1 flex-col">
-        <section className="panel-night">
-          <div className="mx-auto grid max-w-page items-center gap-xxl px-gutter pb-xxxl pt-xxl tablet:px-rail tablet:pt-xxxl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)]">
-            <div>
-              <p className="flex items-center gap-sm font-mono text-label uppercase text-night-ink-2">
-                <span
-                  aria-hidden="true"
-                  className="h-[7px] w-[7px] rounded-full bg-signal"
-                />
-                {aboutHero.eyebrow}
-              </p>
+      <main className="flex flex-1 flex-col">
+        <PageHero
+          tone="night"
+          label={aboutHero.eyebrow}
+          title={
+            <>
+              {aboutHero.headline}{" "}
+              <em className="text-accent-bright">{aboutHero.headlineAccent}</em>
+            </>
+          }
+          lead={aboutHero.body}
+          actions={
+            <>
+              <ButtonLink
+                href={whatsAppUrl(consultationMessage)}
+                variant="light"
+              >
+                Book a free consultation
+              </ButtonLink>
+              <ButtonLink href="/how-it-works" variant="onNight">
+                See how the programme runs
+                <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
+              </ButtonLink>
+            </>
+          }
+        />
 
-              <h1 className="mt-lg max-w-[20ch] text-display text-night-ink">
-                {aboutHero.headline}{" "}
-                <em className="text-signal-on-night">{aboutHero.headlineAccent}</em>
-              </h1>
+        <Section tone="surface">
+          <div className="grid items-center gap-12 desktop:grid-cols-12">
+            <dl className="grid gap-10 tablet:grid-cols-3 desktop:col-span-7">
+              {aboutFacts.map((fact) => (
+                <div key={fact.label}>
+                  <dt className="text-display text-ink">{fact.value}</dt>
+                  <dd className="mt-3 text-small text-ink-2">{fact.label}</dd>
+                </div>
+              ))}
+            </dl>
 
-              <p className="mt-lg max-w-[52ch] text-lead text-night-ink-2">
-                {aboutHero.body}
-              </p>
-
-              <dl className="mt-xl grid gap-px bg-night-rule tablet:grid-cols-3">
-                {aboutFacts.map((fact) => (
-                  <div key={fact.label} className="bg-night py-md pr-md">
-                    <dt className="font-mono text-figure text-signal-on-night">
-                      {fact.value}
-                    </dt>
-                    <dd className="mt-xs text-small text-night-ink-2">
-                      {fact.label}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-
-              <div className="mt-xl flex flex-wrap gap-sm">
-                <ButtonLink href={whatsAppUrl(consultationMessage)}>
-                  Book a free consultation
-                </ButtonLink>
-                <ButtonLink href="/how-it-works" variant="onNight">
-                  See how the programme runs
-                </ButtonLink>
-              </div>
-            </div>
-
-            <div className="border border-night-rule bg-paper p-md">
-              <AboutIllustration className="w-full" />
+            <div className="desktop:col-span-4 desktop:col-start-9">
+              <AboutIllustration className="w-full text-ink-3" />
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* What the business actually does. */}
-        <section className="mt-band">
-          <div className="mx-auto max-w-page px-gutter tablet:px-rail">
-            <SectionHeading
-              label="What we do"
-              title="Four things, in this order"
-              lead="Take one of them or all four — but this is the sequence, and the last one is the reason the first three matter."
-            />
-            <div className="mt-xxl grid gap-px border border-rule bg-rule tablet:grid-cols-2">
-              {whatWeDo.map((item, index) => (
-                <Reveal key={item.title} delay={index * 60} className="h-full">
-                  <div className="flex h-full flex-col bg-paper p-lg">
-                    <span
-                      aria-hidden="true"
-                      className="font-mono text-label text-signal-text"
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="mt-sm text-subtitle text-ink">
-                      {item.title}
-                    </h3>
-                    <p className="mt-xs max-w-[54ch] text-body text-ink-2">
-                      <RichTextContent value={item.body} />
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+        <Section label="What we do">
+          <SectionHead
+            title={
+              <>
+                Four things, <em>in this order</em>
+              </>
+            }
+            lead="Take one of them or all four — but this is the sequence, and the last one is the reason the first three matter."
+          />
+
+          <div className="mt-16 grid gap-4 tablet:grid-cols-2 desktop:gap-6">
+            {whatWeDo.map((item, index) => (
+              <Reveal key={item.title} delay={(index % 2) * 60}>
+                <div className="flex h-full flex-col rounded-lg bg-surface p-8 tablet:p-10">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-canvas text-micro text-ink-2">
+                    {index + 1}
+                  </span>
+                  <h3 className="mt-5 text-title">{item.title}</h3>
+                  <p className="mt-3 text-body text-ink-2">
+                    <RichTextContent value={item.body} />
+                  </p>
+                </div>
+              </Reveal>
+            ))}
           </div>
-        </section>
+        </Section>
 
         {/* How the business chooses to behave. */}
-        <section className="mt-band">
-          <div className="mx-auto max-w-page px-gutter tablet:px-rail">
-            <SectionHeading
-              label="How we work"
-              title="What we hold ourselves to"
-              lead="Four commitments that shape what you see on this site — including the things we have deliberately left off it."
-            />
-            <ol className="mt-xxl border-t border-ink">
-              {principles.map((principle, index) => (
-                <Reveal key={principle.title} delay={index * 50}>
-                  <li className="grid gap-sm border-b border-rule py-lg desktop:grid-cols-[4rem_minmax(0,22rem)_minmax(0,1fr)] desktop:gap-xl desktop:py-xl">
-                    <span
-                      aria-hidden="true"
-                      className="font-mono text-label text-signal-text"
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="text-subtitle text-ink">
-                      {principle.title}
-                    </h3>
-                    <p className="max-w-[62ch] text-body text-ink-2">
-                      <RichTextContent value={principle.body} />
-                    </p>
-                  </li>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </section>
+        <Section label="How we work" tone="surface">
+          <SectionHead
+            title={
+              <>
+                What we <em>hold ourselves to</em>
+              </>
+            }
+            lead="Four commitments that shape what you see on this site — including the things we have deliberately left off it."
+          />
+
+          <ol className="mt-16 grid gap-12 tablet:grid-cols-2 desktop:gap-x-16">
+            {principles.map((principle, index) => (
+              <Reveal key={principle.title} delay={(index % 2) * 60}>
+                <li>
+                  <h3 className="text-heading">{principle.title}</h3>
+                  <p className="mt-3 text-body text-ink-2">
+                    <RichTextContent value={principle.body} />
+                  </p>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+        </Section>
 
         {/* Where we operate, and how to reach a person. */}
-        <section className="mt-band">
-          <div className="mx-auto max-w-page px-gutter tablet:px-rail">
-            <Reveal>
-              <div className="panel-night grid gap-xxl border-l-2 border-signal p-lg tablet:p-xl desktop:grid-cols-[minmax(0,1fr)_minmax(0,0.6fr)] desktop:gap-xxxl">
-                <div>
-                  <p className="font-mono text-label uppercase text-night-ink-2">
-                    Reach
-                  </p>
-                  <h2 className="mt-sm max-w-[20ch] text-title text-night-ink">
-                    {reach.title}
-                  </h2>
-                  <p className="mt-md max-w-[58ch] text-body text-night-ink-2">
-                    {reach.body}
-                  </p>
-                </div>
+        <Section label="Reach" tone="night">
+          <div className="grid gap-12 desktop:grid-cols-12">
+            <div className="desktop:col-span-7">
+              <h2 className="text-title text-chalk">{reach.title}</h2>
+              <p className="mt-6 text-lead text-chalk-2">{reach.body}</p>
+            </div>
 
-                <div className="desktop:border-l desktop:border-night-rule desktop:pl-xxl">
-                  <p className="font-mono text-label uppercase text-night-ink-2">
-                    Get in touch
-                  </p>
-                  <ul className="mt-md flex flex-col">
-                    {footerContacts.map((contact) => (
-                      <li key={contact.label} className="border-b border-night-rule">
-                        {contact.href ? (
-                          <a
-                            href={contact.href}
-                            className="block py-sm font-mono text-data text-night-ink underline decoration-night-rule underline-offset-4 transition-colors hover:decoration-signal"
-                          >
-                            {contact.label}
-                          </a>
-                        ) : (
-                          <span className="block py-sm font-mono text-data text-night-ink-2">
-                            {contact.label}
-                          </span>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Reveal>
+            <div className="desktop:col-span-4 desktop:col-start-9">
+              <p className="text-micro text-chalk-2">Get in touch</p>
+              <ul className="mt-5 flex flex-col gap-3">
+                {footerContacts.map((contact) => (
+                  <li key={contact.label} className="text-small">
+                    {contact.href ? (
+                      <a
+                        href={contact.href}
+                        className="link-sweep text-chalk hover:text-accent-bright"
+                      >
+                        {contact.label}
+                      </a>
+                    ) : (
+                      <span className="text-chalk-2">{contact.label}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </section>
+        </Section>
 
         <CtaBanner />
       </main>
       <Footer />
-      <ScrollToTop />
     </div>
   );
 }

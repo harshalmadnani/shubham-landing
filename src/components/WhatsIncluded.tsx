@@ -1,57 +1,47 @@
-import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading } from "@/components/SectionHeading";
+import { RichTextContent } from "@/components/PendingData";
+import { Section, SectionHead } from "@/components/Section";
 import { includedGroups } from "@/content/sections";
 
 /**
- * The full inventory, grouped.
+ * Everything the programme includes, grouped.
  *
- * A dense manifest rather than cards — this is the section somebody reads when
- * they are deciding whether the price is fair, so it should look like a list of
- * what you get, not like marketing.
+ * The group name sits on its own line above its items rather than in a margin
+ * column, so each group reads as its own short list instead of as one long
+ * table of fifteen rows.
  */
 export function WhatsIncluded() {
   return (
-    <section id="whats-included" className="mt-band">
-      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
-        <SectionHeading
-          label="Inventory"
-          title="What you are actually buying"
-          lead="Everything the programme carries, in four groups."
-        />
+    <Section id="whats-included" label="What's included">
+      <SectionHead
+        title={
+          <>
+            Every pathway draws from the <em>same complete set</em> of support
+          </>
+        }
+        lead="Whichever route you take, none of these are add-ons or upsells."
+      />
 
-        <div className="mt-xxl flex flex-col gap-xxl">
-          {includedGroups.map((group, groupIndex) => (
-            <Reveal key={group.name} delay={groupIndex * 60}>
-              <div className="grid gap-lg desktop:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] desktop:gap-xxl">
-                <div className="desktop:sticky desktop:top-[calc(var(--spacing-header)+24px)] desktop:self-start">
-                  <div className="flex items-center gap-sm">
-                    <span
-                      aria-hidden="true"
-                      className="h-[7px] w-[7px] shrink-0 rounded-full bg-signal"
-                    />
-                    <p className="font-mono text-label uppercase text-ink-3">
-                      Group {String(groupIndex + 1).padStart(2, "0")}
+      <div className="mt-16 flex flex-col gap-16">
+        {includedGroups.map((group) => (
+          <div key={group.name}>
+            <h3 className="text-label text-ink-3">{group.name}</h3>
+
+            <div className="mt-6 grid gap-4 tablet:grid-cols-2 desktop:grid-cols-3 desktop:gap-6">
+              {group.items.map((item, index) => (
+                <Reveal key={item.title} delay={(index % 3) * 50}>
+                  <div className="h-full rounded-lg bg-surface p-7">
+                    <p className="text-heading">{item.title}</p>
+                    <p className="mt-2 text-small text-ink-2">
+                      <RichTextContent value={item.body} />
                     </p>
                   </div>
-                  <h3 className="mt-sm text-subtitle text-ink">{group.name}</h3>
-                </div>
-
-                <ul className="grid gap-px border-t border-rule bg-rule tablet:grid-cols-2">
-                  {group.items.map((item) => (
-                    <li key={item.title} className="bg-paper px-md py-md">
-                      <p className="text-card text-ink">{item.title}</p>
-                      <p className="mt-xxs text-small text-ink-2">
-                        <RichTextContent value={item.body} />
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

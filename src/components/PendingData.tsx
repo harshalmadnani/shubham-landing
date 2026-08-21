@@ -3,10 +3,10 @@ import { Fragment } from "react";
 import type { RichText } from "@/content/types";
 
 /**
- * A dashed chip standing in for a figure the business has not confirmed.
+ * A chip standing in for a figure the business has not confirmed.
  *
- * The site makes a point of not publishing invented statistics, so unknown
- * numbers render as a visible gap rather than a plausible-looking placeholder.
+ * The site makes a point of not publishing invented statistics, so an unknown
+ * number renders as a visible gap rather than as a plausible-looking figure.
  */
 export function PendingChip({
   token,
@@ -17,14 +17,14 @@ export function PendingChip({
 }) {
   const toneClasses =
     tone === "dark"
-      ? "border-night-rule text-night-ink-2"
-      : "border-rule-strong text-ink-3";
+      ? "bg-night-2 text-chalk-2"
+      : "bg-surface-2 text-ink-3";
 
   return (
     <span
-      className={`inline-flex items-center border border-dashed px-xs py-[1px] font-mono text-label ${toneClasses}`}
+      className={`mx-1 inline-flex items-center rounded-full px-2.5 py-0.5 align-baseline text-micro ${toneClasses}`}
     >
-      [{token} — pending real data]
+      {token} — pending
     </span>
   );
 }

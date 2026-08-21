@@ -1,4 +1,74 @@
-{
-  "note": "The nine specialisation photographs that lived here were licensed and generated stand-ins. The Signal redesign replaced them with typographic signage plates, so no raster imagery is used in the catalogue any more. If photography is added later, record its source here before it ships.",
-  "images": []
-}
+[
+  {
+    "file": "category-ai-careers.webp",
+    "source": "Unsplash",
+    "photoId": "photo-1655720828018-edd2daec9349",
+    "url": "https://unsplash.com/photos/photo-1655720828018-edd2daec9349",
+    "alt": "Abstract neural-network form",
+    "grade": "Colour-graded to a common target (L\u224870, cool cast) so the nine read as one set"
+  },
+  {
+    "file": "category-analyst-roles.webp",
+    "source": "Generated (Recraft V4.1)",
+    "photoId": null,
+    "url": null,
+    "alt": "Printed charts and a notebook on a desk",
+    "grade": "Colour-graded to a common target (L\u224870, cool cast) so the nine read as one set"
+  },
+  {
+    "file": "category-cloud.webp",
+    "source": "Unsplash",
+    "photoId": "photo-1558494949-ef010cbdcc31",
+    "url": "https://unsplash.com/photos/photo-1558494949-ef010cbdcc31",
+    "alt": "Server racks in a data centre",
+    "grade": "Colour-graded to a common target (L\u224870, cool cast) so the nine read as one set"
+  },
+  {
+    "file": "category-cybersecurity.webp",
+    "source": "Generated (Recraft V4.1)",
+    "photoId": null,
+    "url": null,
+    "alt": "Padlock on a server cabinet door",
+    "grade": "Colour-graded to a common target (L\u224870, cool cast) so the nine read as one set"
+  },
+  {
+    "file": "category-data-analytics.webp",
+    "source": "Unsplash",
+    "photoId": "photo-1551288049-bebda4e38f71",
+    "url": "https://unsplash.com/photos/photo-1551288049-bebda4e38f71",
+    "alt": "Analytics dashboard on a monitor",
+    "grade": "Colour-graded to a common target (L\u224870, cool cast) so the nine read as one set"
+  },
+  {
+    "file": "category-devops.webp",
+    "source": "Generated (Recraft V4.1)",
+    "photoId": null,
+    "url": null,
+    "alt": "Terminal output on a monitor in a dark room",
+    "grade": "Colour-graded to a common target (L\u224870, cool cast) so the nine read as one set"
+  },
+  {
+    "file": "category-enterprise.webp",
+    "source": "Unsplash",
+    "photoId": "photo-1497366216548-37526070297c",
+    "url": "https://unsplash.com/photos/photo-1497366216548-37526070297c",
+    "alt": "Empty modern office workspace",
+    "grade": "Colour-graded to a common target (L\u224870, cool cast) so the nine read as one set"
+  },
+  {
+    "file": "category-it-support.webp",
+    "source": "Generated (Recraft V4.1)",
+    "photoId": null,
+    "url": null,
+    "alt": "Patch cables routed into a network switch",
+    "grade": "Colour-graded to a common target (L\u224870, cool cast) so the nine read as one set"
+  },
+  {
+    "file": "category-web-development.webp",
+    "source": "Unsplash",
+    "photoId": "photo-1461749280684-dccba630e2f6",
+    "url": "https://unsplash.com/photos/photo-1461749280684-dccba630e2f6",
+    "alt": "Code on a laptop screen",
+    "grade": "Colour-graded to a common target (L\u224870, cool cast) so the nine read as one set"
+  }
+]

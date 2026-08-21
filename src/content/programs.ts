@@ -381,3 +381,27 @@ export const totalProgramCount = programCategories.reduce(
   0,
 );
 
+/**
+ * Photography for each specialization, keyed by category name.
+ *
+ * Provenance for every file is recorded in `public/images/CREDITS.json` —
+ * some are Unsplash photographs, some are generated. None contain people, by
+ * choice: stock faces presented alongside a training business imply students
+ * we cannot vouch for.
+ */
+const CATEGORY_IMAGES: Record<string, string> = {
+  "Web Development": "web-development",
+  "Data & Analytics": "data-analytics",
+  "AI Careers": "ai-careers",
+  Cloud: "cloud",
+  Cybersecurity: "cybersecurity",
+  DevOps: "devops",
+  "Analyst Roles": "analyst-roles",
+  "IT Support": "it-support",
+  "Enterprise Platforms": "enterprise",
+};
+
+export function categoryImage(categoryName: string): string | undefined {
+  const slug = CATEGORY_IMAGES[categoryName];
+  return slug ? `/images/category-${slug}.webp` : undefined;
+}

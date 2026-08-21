@@ -1,43 +1,30 @@
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Section, SectionHead } from "@/components/Section";
 import { struggles } from "@/content/sections";
 
-/**
- * The problem, as a numbered list on rules.
- *
- * Deliberately the quietest section on the page — it is the only one that
- * describes something going wrong, and giving it cards and colour would make
- * the page open on a note of alarm.
- */
+/** The six ways a search stalls, as a card each. */
 export function Struggles() {
   return (
-    <section id="struggles" className="mt-band">
-      <div className="mx-auto max-w-page px-gutter tablet:px-rail">
-        <SectionHeading
-          label="The gap"
-          title="Why the jump into tech work stalls"
-          lead="Not for lack of effort. These are the things that actually stall it, and none of them is solved by another course."
-        />
+    <Section id="why-job-seekers-struggle" label="The gap">
+      <SectionHead
+        title={
+          <>
+            Why job seekers <em>struggle</em>
+          </>
+        }
+        lead="Most candidates aren't short on effort — they're missing a few consistent factors."
+      />
 
-        <ol className="mt-xxl border-t border-ink">
-          {struggles.map((struggle, index) => (
-            <Reveal key={struggle.title} delay={index * 60}>
-              <li className="grid gap-sm border-b border-rule py-lg desktop:grid-cols-[4rem_minmax(0,20rem)_minmax(0,1fr)] desktop:gap-xl desktop:py-xl">
-                <span
-                  aria-hidden="true"
-                  className="font-mono text-label text-signal-text"
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-subtitle text-ink">{struggle.title}</h3>
-                <p className="max-w-[58ch] text-body text-ink-2">
-                  {struggle.body}
-                </p>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
+      <div className="mt-16 grid gap-4 tablet:grid-cols-2 desktop:grid-cols-3 desktop:gap-6">
+        {struggles.map((struggle, index) => (
+          <Reveal key={struggle.title} delay={(index % 3) * 60}>
+            <article className="h-full rounded-lg bg-surface p-8">
+              <h3 className="text-heading">{struggle.title}</h3>
+              <p className="mt-3 text-small text-ink-2">{struggle.body}</p>
+            </article>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }
