@@ -127,7 +127,7 @@ stranger, under pressure. So the site is built from signage panels, route
 lines, interchange nodes and timetable data rather than from cards and
 gradients.
 
-Three rules hold it together, and breaking any one of them is what will make
+Four rules hold it together, and breaking any one of them is what will make
 an addition look bolted on:
 
 - **Bone is the ground.** `--color-paper` (`#ededе7`), never pure white. White
@@ -138,6 +138,9 @@ an addition look bolted on:
   state, and the one action on the screen. When an accent phrase runs to three
   display lines it takes **pine**, not vermilion — three lines of signal colour
   stops being a signal.
+- **Nothing sits on the 4.5 line.** This is a site people read to decide
+  whether to spend money on training, often on a phone in daylight. Every text
+  pairing in the system clears AA with margin — see below.
 
 Four more things worth knowing before editing:
 
@@ -154,23 +157,47 @@ Four more things worth knowing before editing:
   all exist here, so **`max-w-xl` is 34px, not 36rem** — that bug has shipped
   once. Use `max-w-2xl`, `max-w-3xl`, or an arbitrary `max-w-[46ch]`.
 - **Heading accents take their colour at the usage.** `h1 em` only normalises
-  `font-style`; the colour is `text-pine` on bone and `text-signal` on pine.
-  Setting it globally made every accent invisible on the dark heroes.
+  `font-style`; the colour is `text-pine` on bone and `text-signal-on-pine` on
+  pine. Setting it globally made every accent invisible on the dark heroes.
 
 ### Contrast rules that are not negotiable
 
-Three tokens exist purely because the obvious colour failed a measurement:
+**Full-strength vermilion never carries type.** `--color-signal` is 2.8:1 on
+bone: it is a *graphic* colour for route lines, node dots and button grounds.
+Text takes one of the two derived tokens instead, and reaching for
+`text-signal` to colour a word is the single easiest way to break this system.
 
-- `--color-ink-3` is `#5f636b`, not a lighter grey. It carries every mono label
-  on the site; the previous value measured 3.5:1 on bone.
-- `--color-signal-text` (`#c33608`) is for vermilion *text on bone*. The
-  full-strength signal is 3.1:1 and fails.
-- `--color-signal-on-pine` (`#ff7a45`) is for vermilion *small text on pine*.
-  Full strength is 3.6:1 there — fine for a display accent, short of AA for a
-  13px label.
+Every text token in the palette was set by measurement, not by eye:
 
-The WhatsApp button carries **ink** on the brand green, not white. White on
-`#25d366` is 1.98:1; ink is 7.3:1 and it still reads unmistakably as WhatsApp.
+| Pairing | Ratio |
+| --- | --- |
+| `ink` on bone / sunk / white | 15.3 / 13.9 / 17.9 |
+| `ink-2` on bone / sunk / white | 8.6 / 7.8 / 10.1 |
+| `ink-3` (every mono label) on bone / sunk | 6.6 / 6.0 |
+| `signal-text` on bone / sunk / white | 6.6 / 6.0 / 7.8 |
+| `pine-ink` on pine / deep / raised | 10.2 / 13.1 / 8.2 |
+| `pine-ink-2` on pine / deep / raised | 7.4 / 9.5 / 5.9 |
+| `signal-on-pine` on pine / deep / raised | 6.0 / 7.7 / 4.8 |
+| Primary button label, rest / hover | 5.4 / 6.4 |
+| WhatsApp button label, rest / hover | 7.3 / 5.7 |
+
+Four of these were rebuilt because the obvious choice measured badly:
+
+- **The primary button carries `ink`, not white.** White on vermilion is 3.3:1
+  — the worst contrast on the site, on its most important element. Ink is
+  5.4:1, and it looks like a road sign, which is what the system imitates.
+- **Its hover lightens rather than deepens.** `--color-signal-hover` is a
+  *lighter* vermilion. Darkening is the instinct, but the label is ink, so the
+  old `#dd3a0b` dropped it to 4.0:1 while lightening lifts it to 6.4:1.
+- **`--color-ink-3`** carries every mono label on the site, so it is the tier
+  most worth over-building. It has been 3.5:1, then 5.1:1, now 6.6:1.
+- **`--color-signal-text`** was `#c33608`, which passed on bone at 4.6:1 but
+  fell to 4.2:1 on the sunk panels — failing precisely where the catalogue
+  labels sit. Now 6.6:1 and 6.0:1.
+
+The WhatsApp button carries **ink** on the brand green for the same reason.
+White on `#25d366` is 1.98:1; ink is 7.3:1 and it still reads unmistakably as
+WhatsApp.
 
 ### Motion
 

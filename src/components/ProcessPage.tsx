@@ -38,7 +38,8 @@ export function ProcessPage({ content }: { content: ProcessContent }) {
             </p>
 
             <h1 className="mt-lg max-w-[20ch] text-display text-pine-ink">
-              {content.headline} <em className="text-signal">{content.headlineAccent}</em>
+              {content.headline}{" "}
+              <em className="text-signal-on-pine">{content.headlineAccent}</em>
             </h1>
 
             <p className="mt-lg max-w-[52ch] text-lead text-pine-ink-2">

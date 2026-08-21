@@ -40,7 +40,8 @@ export default function AboutPage() {
               </p>
 
               <h1 className="mt-lg max-w-[20ch] text-display text-pine-ink">
-                {aboutHero.headline} <em className="text-signal">{aboutHero.headlineAccent}</em>
+                {aboutHero.headline}{" "}
+                <em className="text-signal-on-pine">{aboutHero.headlineAccent}</em>
               </h1>
 
               <p className="mt-lg max-w-[52ch] text-lead text-pine-ink-2">
@@ -50,7 +51,7 @@ export default function AboutPage() {
               <dl className="mt-xl grid gap-px bg-pine-rule tablet:grid-cols-3">
                 {aboutFacts.map((fact) => (
                   <div key={fact.label} className="bg-pine py-md pr-md">
-                    <dt className="font-mono text-figure text-signal">
+                    <dt className="font-mono text-figure text-signal-on-pine">
                       {fact.value}
                     </dt>
                     <dd className="mt-xs text-small text-pine-ink-2">

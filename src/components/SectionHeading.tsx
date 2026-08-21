@@ -30,9 +30,7 @@ export function SectionHeading({
           <div className="flex items-center gap-sm">
             <span
               aria-hidden="true"
-              className={`h-[7px] w-[7px] shrink-0 rounded-full ${
-                onPine ? "bg-signal" : "bg-signal"
-              }`}
+              className="h-[7px] w-[7px] shrink-0 rounded-full bg-signal"
             />
             <p
               className={`font-mono text-label uppercase ${

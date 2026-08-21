@@ -9,12 +9,18 @@
  * its grammar — signage panels, route lines, interchange nodes, timetable
  * data — rather than borrowing a template.
  *
- * Three rules hold it together:
+ * Four rules hold it together:
  *   1. Bone is the ground. Never pure white; white is a raised panel only.
  *   2. Corners are square. A radius appears only on a route node, which is a
  *      circle because it is a node.
  *   3. Vermilion is a signal, not a decoration. It marks direction, the live
  *      state, and the one action on the screen — nothing else.
+ *   4. Every text pairing clears WCAG AA with room to spare, and no token
+ *      lands on the 4.5 line. Full-strength vermilion is a *graphic* colour
+ *      (2.8:1 on bone) and never carries type: text uses --color-signal-text
+ *      on light grounds and --color-signal-on-pine on dark ones. That split is
+ *      the whole reason those two tokens exist — reaching for --color-signal
+ *      to colour a word is the one easy way to break this system.
  *
  * Components reference tokens and never raw values, so the whole identity is
  * this block.
@@ -32,11 +38,15 @@
   --color-paper-sunk: #e3e3da;
   --color-raised: #ffffff;
 
+  /* The ink tiers are deliberately dark. This is a site people read to decide
+     whether to spend money on a course, often on a phone in daylight, so every
+     text token clears AA with margin rather than landing on the 4.5 line:
+     ink 15.3:1, ink-2 8.6:1, ink-3 6.6:1 on bone. */
   --color-ink: #15171c;
-  --color-ink-2: #52555c;
-  /* 5.1:1 on bone. The previous value was 3.5:1, and this token carries
-     every mono label on the site. */
-  --color-ink-3: #5f636b;
+  --color-ink-2: #3f4249;
+  /* Carries every mono label on the site, so it is the tier most worth
+     over-building. It has been 3.5:1, then 5.1:1, and is now 6.6:1. */
+  --color-ink-3: #4f535a;
 
   --color-rule: #d2d2c7;
   --color-rule-strong: #b4b4a6;
@@ -47,18 +57,29 @@
   --color-pine-raised: #1f4d3f;
   --color-pine-rule: #2e5c4d;
   --color-pine-ink: #eaeee9;
-  --color-pine-ink-2: #a3b8ae;
+  /* 7.4:1 on pine and 5.9:1 on pine-raised. The older value fell to 4.6:1 on
+     raised panels, which is where most of the lead paragraphs actually sit. */
+  --color-pine-ink-2: #bdd0c6;
 
   /* Vermilion — direction, live state, the single action. */
   --color-signal: #ff4e1b;
-  --color-signal-deep: #dd3a0b;
+  /* The hover state goes *lighter*, not darker. Darkening vermilion is the
+     instinct, but the label on this button is ink: #dd3a0b drops it to 4.0:1
+     while a lighter tint lifts it to 6.4:1. The button also reads as
+     brightening under the cursor, which is the correct affordance. */
+  --color-signal-hover: #ff6d45;
   --color-signal-tint: #ffe5db;
-  --color-on-signal: #ffffff;
-  /* Legible as text on bone, where the full-strength signal is only 3.1:1. */
-  --color-signal-text: #c33608;
-  /* And on pine, where full-strength vermilion is 3.6:1 — fine for a display
-     accent, short of AA for a 13px label. */
-  --color-signal-on-pine: #ff7a45;
+  /* Ink, not white. White on vermilion is 3.3:1 — the worst contrast on the
+     site, on its single most important element. Ink is 5.4:1 and looks like a
+     road sign, which is what this system is imitating anyway. */
+  --color-on-signal: #15171c;
+  /* Legible as text on bone, where the full-strength signal is only 2.8:1.
+     6.6:1 on bone, 6.0:1 on the sunk panels — the previous value was 4.2:1 on
+     sunk, i.e. failing precisely where the catalogue labels sit. */
+  --color-signal-text: #9c2703;
+  /* And on pine, where full-strength vermilion is 3.6:1 — passable for a mega
+     headline, short of AA for a 13px label. 6.0:1 on pine. */
+  --color-signal-on-pine: #ffa07a;
 
   /* WhatsApp keeps its own green — the button reads as "this opens WhatsApp"
      only if it looks like WhatsApp. Ink label, not white: white on this green
