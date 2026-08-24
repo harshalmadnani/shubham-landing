@@ -16,3 +16,8 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "22"
+      # Analytics is off unless one of these is set here in the Render
+      # dashboard (Environment -> Add Environment Variable). Setting one also
+      # rewrites the privacy policy to declare it — see src/content/analytics.ts.
+      #   NEXT_PUBLIC_CF_BEACON_TOKEN   Cloudflare Web Analytics (free)
+      #   NEXT_PUBLIC_PLAUSIBLE_DOMAIN  Plausible (paid)

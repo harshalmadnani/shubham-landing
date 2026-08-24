@@ -1,3 +1,4 @@
+import { analyticsProvider } from "./analytics";
 import type { RichText } from "./types";
 
 /**
@@ -76,10 +77,21 @@ const privacy: LegalDocument = {
   sections: [
     {
       heading: "What this website collects",
-      paragraphs: [
-        "Nothing. This site is a set of static pages. It has no contact forms, no accounts, no analytics or tracking scripts, no advertising pixels, and it sets no cookies of its own. You can read every page here without giving us anything and without us building any record of your visit.",
-        "Our hosting provider keeps standard server logs, which include IP addresses, as almost all web hosting does. Those exist so the service can be run and secured, and we do not use them to identify or profile visitors.",
-      ],
+      /*
+       * Written from `analyticsProvider` rather than by hand, so this section
+       * cannot describe a site other than the one that shipped. If analytics is
+       * ever switched on, the wording below changes in the same build.
+       */
+      paragraphs: analyticsProvider
+        ? [
+            `Almost nothing, and nothing that identifies you. This site is a set of static pages: no contact forms, no accounts, no advertising pixels, and no cookies of its own.`,
+            `We do measure how many people visit, using ${analyticsProvider.name}, which is processed in ${analyticsProvider.processedIn}. It is deliberately a privacy-preserving choice: it sets no cookies, stores nothing on your device, and does not build a profile of you or follow you to any other website. What it tells us is aggregate — how many people read a page, which site linked them here, roughly which country they were in, and whether they were on a phone or a computer. None of that identifies an individual, which is also why this site shows you no cookie banner: there is nothing to ask your permission for.`,
+            "Our hosting provider keeps standard server logs, which include IP addresses, as almost all web hosting does. Those exist so the service can be run and secured, and we do not use them to identify or profile visitors.",
+          ]
+        : [
+            "Nothing. This site is a set of static pages. It has no contact forms, no accounts, no analytics or tracking scripts, no advertising pixels, and it sets no cookies of its own. You can read every page here without giving us anything and without us building any record of your visit.",
+            "Our hosting provider keeps standard server logs, which include IP addresses, as almost all web hosting does. Those exist so the service can be run and secured, and we do not use them to identify or profile visitors.",
+          ],
     },
     {
       heading: "When you contact us",

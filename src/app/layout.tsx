@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 
+import { Analytics } from "@/components/Analytics";
 import { ChatWithUs } from "@/components/ChatWithUs";
 import { site } from "@/content/site";
 
@@ -57,6 +58,8 @@ export default function RootLayout({
         {/* Every page gets the WhatsApp route, so it lives here rather than in
             each page's own composition. */}
         <ChatWithUs />
+        {/* Renders nothing unless an analytics provider is configured. */}
+        <Analytics />
       </body>
     </html>
   );
