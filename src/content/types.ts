@@ -64,8 +64,10 @@ export type Brand = {
   readonly label: string;
   readonly viewBox: string;
   readonly paths: readonly string[];
-  /** Official brand colour, `#rrggbb`. Set for the ticker, where the marks
-   *  render in their own colours; program cards ignore it and stay neutral. */
+  /** Official brand colour, `#rrggbb`. Used by the technologies row on the
+   *  home page, where the marks render in their own colours. Program cards
+   *  ignore it and stay neutral — a colour mark beside a headline competes
+   *  with it. */
   readonly color?: string;
 };
 
