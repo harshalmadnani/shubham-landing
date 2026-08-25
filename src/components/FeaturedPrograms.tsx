@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { ArrowRightIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
-import { ProgramStats } from "@/components/ProgramStats";
+import { MarketDataNote, ProgramStats } from "@/components/ProgramStats";
 import { Reveal } from "@/components/Reveal";
 import { Section, SectionHead } from "@/components/Section";
 import { detailForHref } from "@/content/programDetails";
@@ -78,6 +78,10 @@ export function FeaturedPrograms() {
           );
         })}
       </ul>
+
+      <Reveal>
+        <MarketDataNote className="mt-8 max-w-3xl" />
+      </Reveal>
 
       <Reveal>
         <div className="mt-10">

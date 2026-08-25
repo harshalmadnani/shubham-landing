@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { ArrowRightIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
-import { ProgramStats } from "@/components/ProgramStats";
+import { MarketDataNote, ProgramStats } from "@/components/ProgramStats";
 import { detailForHref } from "@/content/programDetails";
 import { programCategories, totalProgramCount } from "@/content/programs";
 import { programEnquiryMessage, whatsAppUrl } from "@/content/site";
@@ -143,6 +143,8 @@ export function Programs() {
             </div>
           ))}
         </div>
+
+        <MarketDataNote className="mt-16 max-w-3xl" />
       </div>
     </section>
   );

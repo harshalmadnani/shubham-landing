@@ -1,49 +1,42 @@
+import {
+  benchmarkForSlug,
+  formatSalary,
+  formatVacancies,
+} from "@/content/marketData";
 import { weeksForHours } from "@/content/programDetails";
 import { formatPrice } from "@/content/regions";
 import type { ProgramDetail } from "@/content/types";
 
 /**
- * The four facts a candidate weighs before opening a programme page.
+ * Four facts per programme: two about the market, two about the programme.
  *
- * Duration and hours are derived from the curriculum rather than stored, so a
- * card cannot advertise a figure the programme has moved away from.
+ * The market pair — median advertised salary and open UK vacancies — comes
+ * from `marketData.ts`, is attributed on the page, and carries the date of the
+ * window it was measured over. It describes the market a graduate enters, not
+ * anything this business has achieved, and the section footnote says so.
  *
- * Choosing these four took some care, because most of what could go here does
- * not actually vary: every programme in the catalogue has four modules and
- * twenty-four topics by design, and thirty-three of the thirty-seven run fifty
- * hours. A "Modules: 4" row repeated across thirty-seven cards tells a reader
- * nothing and makes the whole grid look generated. Level and fee genuinely
- * differ — the AI track is priced separately, and prerequisites range from
- * none to prior cloud experience — so those carry the weight here.
- *
- * Deliberately NOT the rows competitors use. "Average salary" and "jobs
- * available" are market statistics, publishable only with a cited source and a
- * date; "average time to get a job" is a placement outcome, and until real
- * placements exist there is no average, so printing one would be inventing the
- * result of a paid service. Add those when they are measured and attributable.
+ * There is no "average time to get a job" row, which competitors put here.
+ * That is an outcome claim about a paid service, and with no placements behind
+ * it there would be no average to state — only a number copied from somebody
+ * else's page. Course duration is likewise this programme's real length,
+ * derived from its hours, not the range a competitor advertises.
  */
 
-/** The prerequisite line, shortened to fit a right-aligned value. */
-function levelLabel(prerequisites: string): string {
-  const p = prerequisites.toLowerCase();
-  if (p.startsWith("beginner")) return "Beginner";
-  if (p.includes("cloud fundamentals")) return "Cloud basics first";
-  if (p.includes("technical background") || p.includes("professional background")) {
-    return "Some background";
-  }
-  return prerequisites;
-}
-
 export function ProgramStats({ detail }: { detail: ProgramDetail }) {
+  const market = benchmarkForSlug(detail.slug);
+
   const stats = [
+    ...(market
+      ? [
+          { label: "Avg. salary (UK)", value: formatSalary(market.medianSalary) },
+          { label: "UK jobs advertised", value: formatVacancies(market.vacancies) },
+        ]
+      : []),
     { label: "Course duration", value: `${weeksForHours(detail.hours)} weeks` },
-    { label: "Live training", value: `${detail.hours} hours` },
-    { label: "Level", value: levelLabel(detail.prerequisites) },
     {
-      // Both currencies, because the catalogue has no region switcher and a
-      // bare "£500" is the wrong number for half the audience. The Canadian
-      // figure is prefixed "CA" — a bare "$1,250" reads as US dollars, and
-      // this is the one row where a reader could be out by a third.
+      // Both currencies: the catalogue has no region switcher, and the
+      // Canadian figure is prefixed "CA" because a bare "$1,250" reads as US
+      // dollars — the one row where a misread costs the reader a third.
       label: "Training fee",
       value: `${formatPrice("uk", detail.priceKey)} · CA${formatPrice("ca", detail.priceKey)}`,
     },
@@ -65,5 +58,34 @@ export function ProgramStats({ detail }: { detail: ProgramDetail }) {
         </span>
       ))}
     </span>
+  );
+}
+
+/**
+ * The attribution for the market figures above.
+ *
+ * Rendered once under a grid of cards rather than on each card. Printing a
+ * salary without saying where it came from, over what period, and that it is
+ * the market rather than our own result is the difference between market data
+ * and a claim — so this is not optional decoration, and a grid of cards should
+ * not ship without it.
+ */
+export function MarketDataNote({ className }: { className?: string }) {
+  return (
+    <p className={`text-micro text-ink-3 ${className ?? ""}`}>
+      Salary and vacancy figures are the UK market for the closest matching job
+      title, from{" "}
+      <a
+        href="https://www.itjobswatch.co.uk/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline decoration-line-2 underline-offset-4 transition-colors hover:decoration-accent-ink"
+      >
+        IT Jobs Watch
+      </a>
+      , covering the six months to 25 August 2026. They describe the market you
+      would be entering — they are not our graduates&rsquo; results, and we do
+      not publish outcome figures we have not measured.
+    </p>
   );
 }
