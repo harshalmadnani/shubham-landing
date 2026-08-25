@@ -5,6 +5,8 @@ import { useState } from "react";
 
 import { ArrowRightIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
+import { ProgramStats } from "@/components/ProgramStats";
+import { detailForHref } from "@/content/programDetails";
 import { programCategories, totalProgramCount } from "@/content/programs";
 import { programEnquiryMessage, whatsAppUrl } from "@/content/site";
 import type { Program } from "@/content/types";
@@ -22,6 +24,7 @@ function ProgramCard({ program }: { program: Program }) {
   const href =
     program.href ?? whatsAppUrl(programEnquiryMessage(program.title));
   const isExternal = href.startsWith("http");
+  const detail = detailForHref(program.href);
 
   const body = (
     <>
@@ -44,10 +47,17 @@ function ProgramCard({ program }: { program: Program }) {
         )}
       </span>
 
-      <span className="mt-8 flex items-center justify-between gap-4">
-        <span className="text-micro text-ink-3">
+      {/* The stat block replaces the old single meta line: it carried the
+          same hours and level, run together in one grey sentence. */}
+      {detail ? (
+        <ProgramStats detail={detail} />
+      ) : (
+        <span className="mt-8 block text-micro text-ink-3">
           <RichTextContent value={program.meta} />
         </span>
+      )}
+
+      <span className="mt-5 flex items-center justify-end">
         <ArrowRightIcon className="h-4 w-4 shrink-0 text-ink-3 transition-transform duration-200 group-hover:translate-x-1" />
       </span>
     </>

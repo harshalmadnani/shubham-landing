@@ -2,8 +2,10 @@ import Link from "next/link";
 
 import { ArrowRightIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
+import { ProgramStats } from "@/components/ProgramStats";
 import { Reveal } from "@/components/Reveal";
 import { Section, SectionHead } from "@/components/Section";
+import { detailForHref } from "@/content/programDetails";
 import { featuredPrograms, totalProgramCount } from "@/content/programs";
 import { programEnquiryMessage, whatsAppUrl } from "@/content/site";
 
@@ -37,6 +39,7 @@ export function FeaturedPrograms() {
         {featuredPrograms.map(({ program, category }, index) => {
           const href =
             program.href ?? whatsAppUrl(programEnquiryMessage(program.title));
+          const detail = detailForHref(program.href);
 
           return (
             <Reveal
@@ -58,10 +61,15 @@ export function FeaturedPrograms() {
                     </span>
                   </span>
 
-                  <span className="mt-8 flex items-center justify-between gap-4">
-                    <span className="text-micro text-ink-3">
+                  {detail ? (
+                    <ProgramStats detail={detail} />
+                  ) : (
+                    <span className="mt-8 block text-micro text-ink-3">
                       <RichTextContent value={program.meta} />
                     </span>
+                  )}
+
+                  <span className="mt-5 flex items-center justify-end">
                     <ArrowRightIcon className="h-4 w-4 shrink-0 text-ink-3 transition-transform duration-200 group-hover:translate-x-1" />
                   </span>
                 </Link>

@@ -2377,3 +2377,15 @@ export function weeksForHours(hours: number): number {
   return Math.round(hours / SESSIONS_PER_WEEK);
 }
 
+/**
+ * The curriculum behind a catalogue card, looked up from its href.
+ *
+ * Returns undefined for a programme with no detail page, so a card can render
+ * its stat block conditionally rather than inventing values for a curriculum
+ * that does not exist yet.
+ */
+export function detailForHref(href?: string): ProgramDetail | undefined {
+  if (!href?.startsWith("/programs/")) return undefined;
+  return findProgramDetail(href.replace("/programs/", "").replace(/\/$/, ""));
+}
+
