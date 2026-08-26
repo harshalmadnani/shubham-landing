@@ -192,6 +192,11 @@ const BY_SLUG: Record<string, MarketBenchmark> = {
   "microsoft-365-it-support": BENCHMARKS.itSupport,
 };
 
+/** Every benchmark once, highest paid first — for the salary table in the blog. */
+export const allBenchmarks: readonly MarketBenchmark[] = Object.values(BENCHMARKS)
+  .slice()
+  .sort((a, b) => b.medianSalary - a.medianSalary);
+
 export function benchmarkForSlug(slug: string): MarketBenchmark | undefined {
   return BY_SLUG[slug];
 }

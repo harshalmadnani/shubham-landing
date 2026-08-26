@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { posts } from "@/content/blog";
 import { legalDocuments } from "@/content/legal";
 import { processes } from "@/content/processes";
 import { programDetails } from "@/content/programDetails";
@@ -27,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: `${BASE}/about/`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/contact/`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/blog/`, changeFrequency: "weekly", priority: 0.8 },
     {
       url: `${BASE}/how-it-works/`,
       changeFrequency: "monthly",
@@ -41,6 +43,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...pages,
+    // Posts are the only pages here that can rank for something other than the
+    // brand name, so they get a high priority and a frequent change hint.
+    ...posts.map((post) => ({
+      url: `${BASE}/blog/${post.slug}/`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     // The policies are low priority but they need to be indexable: a candidate
     // checking whether a training provider has published refund terms is
     // exactly the kind of visitor worth having.

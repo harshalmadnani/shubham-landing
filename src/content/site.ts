@@ -140,6 +140,7 @@ export const footerColumns = [
       { label: "About", href: "/about" },
       { label: "Training Structure", href: "/training-structure" },
       { label: "How It Works", href: "/how-it-works" },
+      { label: "Blog", href: "/blog" },
       { label: "Who We Help", href: "/#who-we-help" },
     ],
   },
