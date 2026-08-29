@@ -6,9 +6,9 @@ import { processIllustrations } from "@/components/Illustrations";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { Section, SectionHead } from "@/components/Section";
+import { bookingPath } from "@/content/booking";
 import type { ProcessPage as ProcessContent } from "@/content/processes";
 import { processes } from "@/content/processes";
-import { whatsAppUrl } from "@/content/site";
 
 /**
  * One process page: what happens during this part of the programme.
@@ -47,7 +47,7 @@ export function ProcessPage({ content }: { content: ProcessContent }) {
               </p>
 
               <div className="mt-10 flex flex-wrap gap-3">
-                <ButtonLink href={whatsAppUrl(content.enquiry)} variant="light">
+                <ButtonLink href={bookingPath} variant="light">
                   Book a free consultation
                 </ButtonLink>
                 <ButtonLink href="/training-structure" variant="onNight">

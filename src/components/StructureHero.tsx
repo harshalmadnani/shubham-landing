@@ -1,7 +1,7 @@
 import { ButtonLink } from "@/components/Button";
 import { ArrowRightIcon } from "@/components/icons";
 import { PageHero } from "@/components/PageHero";
-import { consultationMessage, whatsAppUrl } from "@/content/site";
+import { bookingPath } from "@/content/booking";
 import { structureHero } from "@/content/trainingStructure";
 
 export function StructureHero() {
@@ -16,7 +16,7 @@ export function StructureHero() {
       lead={structureHero.body}
       actions={
         <>
-          <ButtonLink href={whatsAppUrl(consultationMessage)}>
+          <ButtonLink href={bookingPath}>
             Book free consultation
           </ButtonLink>
           <ButtonLink href="/programs" variant="outline">

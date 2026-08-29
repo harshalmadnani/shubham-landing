@@ -28,6 +28,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: `${BASE}/about/`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/contact/`, changeFrequency: "monthly", priority: 0.7 },
+    // The consultation is the site's conversion point, so it ranks with the
+    // catalogue rather than with the secondary pages.
+    { url: `${BASE}/book/`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/blog/`, changeFrequency: "weekly", priority: 0.8 },
     {
       url: `${BASE}/how-it-works/`,

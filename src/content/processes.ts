@@ -58,7 +58,6 @@ export type ProcessPage = {
   readonly boundaries: readonly RichText[];
   /** Where this stage sits in the four pathways. */
   readonly pathwayNote: RichText;
-  readonly enquiry: string;
 };
 
 export const processIndex = {
@@ -162,7 +161,6 @@ export const processes: readonly ProcessPage[] = [
     ],
     pathwayNote:
       "Training opens pathways 1 and 2 — the regular track and the AI track — and both continue into the bootcamp and then marketing.",
-    enquiry: "Hi! I'd like to know more about how the training runs.",
   },
   {
     slug: "bootcamp",
@@ -248,7 +246,6 @@ export const processes: readonly ProcessPage[] = [
     ],
     pathwayNote:
       "The bootcamp is the middle stage of pathways 1 and 2, and the opening stage of pathway 3 for anyone who already holds the theory.",
-    enquiry: "Hi! I'd like to know more about how the bootcamp runs.",
   },
   {
     slug: "mentoring",
@@ -351,7 +348,6 @@ export const processes: readonly ProcessPage[] = [
     ],
     pathwayNote:
       "Mentoring runs through all four pathways rather than sitting inside any one of them.",
-    enquiry: "Hi! I'd like to know more about how mentoring works.",
   },
   {
     slug: "marketing",
@@ -439,7 +435,6 @@ export const processes: readonly ProcessPage[] = [
     ],
     pathwayNote:
       "Marketing closes pathways 1, 2 and 3, and is the whole of pathway 4 for anyone who can already do the work.",
-    enquiry: "Hi! I'd like to know more about how resume marketing works.",
   },
 ];
 

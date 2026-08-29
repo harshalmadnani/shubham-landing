@@ -1,8 +1,8 @@
 import { ButtonLink } from "@/components/Button";
 import { ArrowRightIcon } from "@/components/icons";
 import { PageHero } from "@/components/PageHero";
+import { bookingPath } from "@/content/booking";
 import { programCategories, totalProgramCount } from "@/content/programs";
-import { consultationMessage, whatsAppUrl } from "@/content/site";
 
 export function ProgramsHero() {
   return (
@@ -16,7 +16,7 @@ export function ProgramsHero() {
       lead="Every program runs through the same four pathways — instructor-led training, a hands-on bootcamp, then resume marketing until you are hired."
       actions={
         <>
-          <ButtonLink href={whatsAppUrl(consultationMessage)}>
+          <ButtonLink href={bookingPath}>
             Book free consultation
           </ButtonLink>
           <ButtonLink href="/training-structure" variant="outline">

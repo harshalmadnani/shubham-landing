@@ -12,7 +12,8 @@ import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { Section } from "@/components/Section";
 import { processIndex, processes } from "@/content/processes";
-import { consultationMessage, site, whatsAppUrl } from "@/content/site";
+import { bookingPath } from "@/content/booking";
+import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: `How It Works — ${site.name}`,
@@ -42,7 +43,7 @@ export default function HowItWorksPage() {
           lead={processIndex.body}
           actions={
             <>
-              <ButtonLink href={whatsAppUrl(consultationMessage)}>
+              <ButtonLink href={bookingPath}>
                 Book free consultation
               </ButtonLink>
               <ButtonLink href="/training-structure" variant="outline">

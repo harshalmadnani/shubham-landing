@@ -1,4 +1,5 @@
 import { analyticsProvider } from "./analytics";
+import { bookingProvider } from "./booking";
 import type { RichText } from "./types";
 
 /**
@@ -78,25 +79,41 @@ const privacy: LegalDocument = {
     {
       heading: "What this website collects",
       /*
-       * Written from `analyticsProvider` rather than by hand, so this section
-       * cannot describe a site other than the one that shipped. If analytics is
-       * ever switched on, the wording below changes in the same build.
+       * Written from `analyticsProvider` and `bookingProvider` rather than by
+       * hand, so this section cannot describe a site other than the one that
+       * shipped. Switching either of them on rewrites the wording below in the
+       * same build, which is the only way a policy and a codebase stay in
+       * agreement over years.
        */
-      paragraphs: analyticsProvider
-        ? [
-            `Almost nothing, and nothing that identifies you. This site is a set of static pages: no contact forms, no accounts, no advertising pixels, and no cookies of its own.`,
-            `We do measure how many people visit, using ${analyticsProvider.name}, which is processed in ${analyticsProvider.processedIn}. It is deliberately a privacy-preserving choice: it sets no cookies, stores nothing on your device, and does not build a profile of you or follow you to any other website. What it tells us is aggregate — how many people read a page, which site linked them here, roughly which country they were in, and whether they were on a phone or a computer. None of that identifies an individual, which is also why this site shows you no cookie banner: there is nothing to ask your permission for.`,
-            "Our hosting provider keeps standard server logs, which include IP addresses, as almost all web hosting does. Those exist so the service can be run and secured, and we do not use them to identify or profile visitors.",
-          ]
-        : [
-            "Nothing. This site is a set of static pages. It has no contact forms, no accounts, no analytics or tracking scripts, no advertising pixels, and it sets no cookies of its own. You can read every page here without giving us anything and without us building any record of your visit.",
-            "Our hosting provider keeps standard server logs, which include IP addresses, as almost all web hosting does. Those exist so the service can be run and secured, and we do not use them to identify or profile visitors.",
-          ],
+      paragraphs: [
+        analyticsProvider || bookingProvider
+          ? "Almost nothing, and nothing that identifies you unless you choose to hand it over. This site is a set of static pages: no accounts, no advertising pixels, and no cookies of its own."
+          : "Nothing. This site is a set of static pages. It has no contact forms, no accounts, no analytics or tracking scripts, no advertising pixels, and it sets no cookies of its own. You can read every page here without giving us anything and without us building any record of your visit.",
+
+        ...(analyticsProvider
+          ? [
+              `We do measure how many people visit, using ${analyticsProvider.name}, which is processed in ${analyticsProvider.processedIn}. It is deliberately a privacy-preserving choice: it sets no cookies, stores nothing on your device, and does not build a profile of you or follow you to any other website. What it tells us is aggregate — how many people read a page, which site linked them here, roughly which country they were in, and whether they were on a phone or a computer. None of that identifies an individual, which is also why this site shows you no cookie banner: there is nothing to ask your permission for.`,
+            ]
+          : []),
+
+        // The booking page is the one place on this site where a visitor can
+        // hand over personal data, and the one place a third party can store
+        // anything on their device. Both facts are stated rather than buried.
+        ...(bookingProvider
+          ? [
+              `The exception is the booking page, where you can pick a time for a consultation. That calendar is run by ${bookingProvider.name}, and it does not load until you press the button asking for it — so if you never open it, nothing of theirs runs and nothing is stored on your device. That is also why this site shows you no cookie banner. Once you do open it, ${bookingProvider.name} sets the cookies its calendar needs, and what you enter — your name, your email address, and anything you write in the notes — goes to them and then to us.`,
+            ]
+          : []),
+
+        "Our hosting provider keeps standard server logs, which include IP addresses, as almost all web hosting does. Those exist so the service can be run and secured, and we do not use them to identify or profile visitors.",
+      ],
     },
     {
       heading: "When you contact us",
       paragraphs: [
-        "Every enquiry button on this site opens WhatsApp or your email client. That means the message goes through WhatsApp or your email provider before it reaches us, and their handling of it is governed by their own privacy terms rather than ours. If you would rather not use WhatsApp, phone or email us instead.",
+        bookingProvider
+          ? `Most enquiry buttons on this site open WhatsApp or your email client, and the booking page opens a calendar run by ${bookingProvider.name}. Either way the details go through that company before they reach us, and their handling of them is governed by their own privacy terms rather than ours. If you would rather not use any of them, phone us instead — the number is below.`
+          : "Every enquiry button on this site opens WhatsApp or your email client. That means the message goes through WhatsApp or your email provider before it reaches us, and their handling of it is governed by their own privacy terms rather than ours. If you would rather not use WhatsApp, phone or email us instead.",
         [
           "Once a message reaches us we hold what you sent — typically your name, your contact details, and what you told us about your background and what you want to do — for as long as we are dealing with your enquiry, and afterwards while there is a reason to keep it, such as an ongoing programme or our accounting obligations. Our lawful basis is legitimate interest for answering an enquiry and contract for anyone who enrols. We do not sell it and we do not use it for advertising. Retention period: ",
           { token: "How long enquiry records are kept" },

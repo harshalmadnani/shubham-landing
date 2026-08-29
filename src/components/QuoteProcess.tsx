@@ -2,7 +2,7 @@ import { ButtonLink } from "@/components/Button";
 import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { Section, SectionHead } from "@/components/Section";
-import { consultationMessage, whatsAppUrl } from "@/content/site";
+import { bookingPath } from "@/content/booking";
 import { quotePanel, quoteSteps } from "@/content/trainingStructure";
 
 /**
@@ -33,7 +33,7 @@ export function QuoteProcess() {
         ))}
       </div>
 
-      <ButtonLink href={whatsAppUrl(consultationMessage)} className="mt-12">
+      <ButtonLink href={bookingPath} className="mt-12">
         Book a free consultation
       </ButtonLink>
     </Section>

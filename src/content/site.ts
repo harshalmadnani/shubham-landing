@@ -1,9 +1,10 @@
 /**
  * Site-wide identity and contact configuration.
  *
- * Every consultation button on the page routes through `whatsAppUrl`, so
+ * Every direct-contact button on the site routes through `whatsAppUrl`, so
  * swapping the number below is all it takes to point the whole site at a real
- * inbox.
+ * inbox. The consultation buttons are the exception: those go to the booking
+ * page, which is configured in `content/booking.ts`
  */
 
 export const site = {
@@ -148,7 +149,7 @@ export const footerColumns = [
     heading: "Get in touch",
     links: [
       { label: "Contact", href: "/contact" },
-      { label: "Book a consultation", href: "/training-structure#what-it-costs" },
+      { label: "Book a consultation", href: "/book" },
       { label: "info@avirowork.com", href: "mailto:info@avirowork.com" },
       { label: "FAQ", href: "/#faq" },
     ],

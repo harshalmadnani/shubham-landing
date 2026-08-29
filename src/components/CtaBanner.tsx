@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/Button";
-import { consultationMessage, ctaBanner, whatsAppUrl } from "@/content/site";
+import { bookingPath } from "@/content/booking";
+import { ctaBanner } from "@/content/site";
 
 /** The closing ask, given a full section of its own. */
 export function CtaBanner() {
@@ -20,7 +21,7 @@ export function CtaBanner() {
               {ctaBanner.body}
             </p>
             <ButtonLink
-              href={whatsAppUrl(consultationMessage)}
+              href={bookingPath}
               variant="light"
               className="mt-10"
             >

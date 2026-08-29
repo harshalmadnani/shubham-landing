@@ -11,12 +11,8 @@ import { RichTextContent } from "@/components/PendingData";
 import { Reveal } from "@/components/Reveal";
 import { Section, SectionHead } from "@/components/Section";
 import { aboutFacts, aboutHero, principles, reach, whatWeDo } from "@/content/about";
-import {
-  consultationMessage,
-  footerContacts,
-  site,
-  whatsAppUrl,
-} from "@/content/site";
+import { bookingPath } from "@/content/booking";
+import { footerContacts, site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: `About — ${site.name}`,
@@ -42,7 +38,7 @@ export default function AboutPage() {
           actions={
             <>
               <ButtonLink
-                href={whatsAppUrl(consultationMessage)}
+                href={bookingPath}
                 variant="light"
               >
                 Book a free consultation

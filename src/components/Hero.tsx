@@ -1,8 +1,9 @@
 import { ButtonLink } from "@/components/Button";
 import { ArrowRightIcon } from "@/components/icons";
 import { RichTextContent } from "@/components/PendingData";
+import { bookingPath } from "@/content/booking";
 import { proofPoints } from "@/content/sections";
-import { consultationMessage, hero, whatsAppUrl } from "@/content/site";
+import { hero } from "@/content/site";
 
 /**
  * The opening screen: a headline, a sentence, two actions.
@@ -38,7 +39,7 @@ export function Hero() {
             {hero.primaryCta.label}
             <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
           </ButtonLink>
-          <ButtonLink href={whatsAppUrl(consultationMessage)} variant="outline">
+          <ButtonLink href={bookingPath} variant="outline">
             {hero.secondaryCta.label}
           </ButtonLink>
         </div>

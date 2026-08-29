@@ -17,13 +17,14 @@ import {
   readingMinutes,
   sortedPosts,
 } from "@/content/blog";
+import { bookingPath } from "@/content/booking";
 import {
   allBenchmarks,
   formatSalary,
   formatVacancies,
   marketDataSource,
 } from "@/content/marketData";
-import { chatMessage, site, whatsAppUrl } from "@/content/site";
+import { site } from "@/content/site";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -228,12 +229,8 @@ export default async function BlogPostPage({ params }: PageProps) {
                 A free consultation, and an honest answer about whether we are
                 the right fit — including if we are not.
               </p>
-              <ButtonLink
-                href={whatsAppUrl(chatMessage)}
-                variant="light"
-                className="mt-10"
-              >
-                Message us on WhatsApp
+              <ButtonLink href={bookingPath} variant="light" className="mt-10">
+                Book a free consultation
               </ButtonLink>
             </div>
           </div>

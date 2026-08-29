@@ -8,7 +8,8 @@ import { ButtonLink } from "@/components/Button";
 import { Wordmark } from "@/components/Wordmark";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 import { NavMenu } from "@/components/NavMenu";
-import { consultationMessage, navLinks, site, whatsAppUrl } from "@/content/site";
+import { bookingPath } from "@/content/booking";
+import { navLinks, site } from "@/content/site";
 
 /**
  * Which nav entry, if any, describes the page you are on.
@@ -93,7 +94,7 @@ export function Header() {
           </nav>
 
           <div className="hidden desktop:block">
-            <ButtonLink href={whatsAppUrl(consultationMessage)}>
+            <ButtonLink href={bookingPath}>
               Book a call
             </ButtonLink>
           </div>
@@ -165,7 +166,7 @@ export function Header() {
             })}
 
             <ButtonLink
-              href={whatsAppUrl(consultationMessage)}
+              href={bookingPath}
               className="mt-6 w-full"
             >
               Book a free consultation
