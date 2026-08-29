@@ -69,7 +69,7 @@ export default function BookPage() {
           meta={
             <>
               {consultation.price} · {consultation.duration} ·{" "}
-              {consultation.format}
+              {consultation.format} · {consultation.seats} places per session
             </>
           }
         />
@@ -83,6 +83,12 @@ export default function BookPage() {
               {/* The calendar takes two thirds and comes first in the source, so
                 it is also what a screen reader and a phone reach first. */}
               <div className="desktop:col-span-2">
+                {/* Said once, above the calendar, rather than left for somebody
+                    to infer from a seat counter inside the scheduler. */}
+                <p className="mb-4 rounded-lg bg-accent-soft px-6 py-4 text-small text-accent-ink">
+                  {consultation.sessionsNote}
+                </p>
+
                 {bookingEnabled ? (
                   <BookingEmbed />
                 ) : (
@@ -92,9 +98,9 @@ export default function BookPage() {
                     </p>
                     <p className="mt-5 max-w-md text-body text-ink-2">
                       The self-service calendar is not switched on yet, so a
-                      consultation is booked the direct way — tell us roughly
-                      when suits you and we will confirm a slot the same working
-                      day.
+                      place is booked the direct way — tell us whether morning
+                      or evening suits you and we will confirm the next session
+                      with room in it, the same working day.
                     </p>
 
                     <ButtonLink
@@ -128,7 +134,7 @@ export default function BookPage() {
                 <Reveal>
                   <div className="rounded-lg bg-canvas p-7">
                     <p className="text-micro text-accent-ink">
-                      When we are here
+                      When a person answers
                     </p>
 
                     <dl className="mt-5 flex flex-col gap-3">
@@ -157,8 +163,8 @@ export default function BookPage() {
                       Rather not book ahead?
                     </p>
                     <p className="mt-4 text-small text-ink-2">
-                      A person answers all three of these,{" "}
-                      {company.responseTime}.
+                      {consultation.privateNote} A person answers all three of
+                      these, {company.responseTime}.
                     </p>
 
                     <ul className="mt-6 flex flex-col gap-4">

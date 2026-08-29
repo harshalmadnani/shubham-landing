@@ -65,14 +65,13 @@ export function BookingEmbed() {
             </p>
             <p className="mt-4 max-w-md text-body text-ink-2">
               {consultation.price} · {consultation.duration} ·{" "}
-              {consultation.format}. Times show in your own timezone, and you
-              get a confirmation and a calendar invite straight away.
+              {consultation.format}. The calendar shows how many of the{" "}
+              {consultation.seats} places are left in each session, in your own
+              timezone, and you get a confirmation and an invite straight away.
             </p>
           </div>
 
-          <Button onClick={() => setIsLoaded(true)}>
-            See available times
-          </Button>
+          <Button onClick={() => setIsLoaded(true)}>See available times</Button>
 
           <p className="max-w-md text-micro text-ink-3">
             The calendar is provided by {bookingProvider.name} and loads only

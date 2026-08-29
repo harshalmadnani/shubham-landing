@@ -26,9 +26,16 @@
  *   Calendly (free tier)          https://calendly.com/<you>/30min
  *   Google Appointment Schedule   https://calendar.app.google/<code>
  *
- * Set the event to 30 minutes and connect the calendar the consultant actually
- * uses — the whole point is that the page cannot offer a time that is already
- * taken.
+ * The event needs to be a SEATED one — ten places in a single slot, two slots a
+ * day. On Cal.com that is Event type → Advanced → "Offer seats" → 10, with
+ * "Share attendee information between guests" left off so the ten people do not
+ * see each other's names and email addresses. To get exactly two slots a day
+ * rather than a run of them, make each availability window the same length as
+ * the session: a 45-minute event with windows of 10:00–10:45 and 18:30–19:15
+ * offers precisely one slot in each.
+ *
+ * Connect the calendar the consultant actually uses, too — the whole point of a
+ * hosted scheduler is that it cannot offer a time that is already taken.
  *
  * UNTIL THEN. `/book` still works. With no link configured it shows the
  * consultation details and the three direct channels — WhatsApp, phone, email —
@@ -126,7 +133,12 @@ function readProvider(link: string): BookingProvider | undefined {
     };
   }
 
-  return { id: "other", name: "our scheduling provider", url: link, embedUrl: link };
+  return {
+    id: "other",
+    name: "our scheduling provider",
+    url: link,
+    embedUrl: link,
+  };
 }
 
 export const bookingProvider = readProvider(configured);
@@ -138,21 +150,36 @@ export const bookingEnabled = bookingProvider !== undefined;
 export const bookingPath = "/book";
 
 /**
- * What the call actually is.
+ * What the session actually is.
  *
- * Written as claims the business can keep. "A course recommendation" is
- * something a consultant can give in thirty minutes; an outcome is not, and
- * this page is the last thing somebody reads before they commit half an hour.
+ * IT IS A GROUP SESSION, AND THE PAGE SAYS SO. Two run each day — one in the
+ * morning, one in the evening — with ten places in each. That is a good deal
+ * more consultation capacity than one person can give privately, but it is not
+ * half an hour alone with a consultant, and a page that implies otherwise sets
+ * up ten people to feel short-changed in their first contact with the business.
+ * The word used throughout is "place", and the private alternative is offered
+ * in the same breath.
+ *
+ * Written as claims the business can keep. A course recommendation is something
+ * a consultant can give in a session; an outcome is not, and this page is the
+ * last thing somebody reads before they give up an evening.
  */
 export const consultation = {
-  duration: "30 minutes",
+  duration: "45 minutes",
   price: "Free",
-  format: "Video call or phone — whichever you prefer",
-  lead: "Half an hour with a consultant to work out which role is realistic from where you are standing, and which programme gets you there. If the answer is that we are not the right fit, you get told that on the call.",
+  format: "Online, on a video call",
+  /** Places in each session. Drives the wording, not just a number on a card. */
+  seats: 10,
+  sessionsNote:
+    "Two sessions a day — one in the morning, one in the evening. Ten places in each, so pick whichever suits and the calendar will show you what is left.",
+  lead: "A free group session with a consultant: which role is realistic from where you are standing, and which programme gets you there. Ten places, morning or evening. Bring your own situation — the questions are what the session is for.",
+  /** Offered in the same breath as the group session, never buried. */
+  privateNote:
+    "Would rather talk one to one? Message us and we will arrange a private call instead.",
   expect: [
     {
       title: "Where you are now",
-      body: "Your background, what you have already studied or worked on, and which of it counts towards a technical role.",
+      body: "How to read your own background — what you have studied or worked on, and which of it counts towards a technical role. Bring your situation and ask about it.",
     },
     {
       title: "Which role is realistic",
@@ -160,7 +187,7 @@ export const consultation = {
     },
     {
       title: "Which programme fits",
-      body: "A straight recommendation from the 37, including the pathway — training, bootcamp, mentoring or marketing — that matches what you already have.",
+      body: "How the 37 programmes map to roles, and which pathway — training, bootcamp, mentoring or marketing — matches what you already have.",
     },
     {
       title: "What it costs and what happens next",
@@ -168,14 +195,19 @@ export const consultation = {
     },
   ],
   /**
-   * Opening hours, stated in UK time because that is where the office is.
-   * The scheduler converts to the visitor's own timezone; this is here so
-   * somebody who would rather phone knows when a person is there.
+   * Office hours, stated in UK time because that is where the office is.
+   *
+   * These are NOT the session times — the sessions are two fixed slots a day
+   * and the calendar is the authority on when. This block exists so somebody
+   * who would rather phone than book knows when a person will pick up, which
+   * is why `hoursNote` says so out loud: a nine-to-six next to a booking
+   * calendar reads as availability unless it is told not to.
    */
   hours: [
     { days: "Monday – Friday", time: "9:00am – 6:00pm" },
     { days: "Saturday", time: "10:00am – 4:00pm" },
     { days: "Sunday", time: "Closed" },
   ],
-  hoursNote: "UK time (GMT/BST).",
+  hoursNote:
+    "UK time (GMT/BST). These are the hours the phone and WhatsApp are answered — the sessions themselves are the two the calendar shows.",
 } as const;
